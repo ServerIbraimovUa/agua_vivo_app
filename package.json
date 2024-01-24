@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://serveribraimovua.github.io/agua_vivo_app/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
