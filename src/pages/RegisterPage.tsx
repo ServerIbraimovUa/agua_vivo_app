@@ -1,8 +1,4 @@
-import React from "react";
-
-type Props = {};
-
-const RegisterPage = (props: Props) => {
+const RegisterPage = () => {
   return <div>RegisterPage</div>;
 };
 

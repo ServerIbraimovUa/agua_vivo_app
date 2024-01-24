@@ -13,18 +13,18 @@ const WelcomePage = lazy(() => import("./pages/WelcomePage.js"));
 const appRoutes = [
   {
     path: "/home",
-    element: <PrivateRoute redirectTo="/" component={<HomePage />} />,
+    element: <PrivateRoute redirectTo="/welcome" component={<HomePage />} />,
   },
   {
     path: "/welcome",
-    element: <PublicRoute redirectTo="/" component={<WelcomePage />} />,
+    element: <PublicRoute redirectTo="/home" component={<WelcomePage />} />,
   },
   {
-    path: "/sign-up",
+    path: "/signup",
     element: <PublicRoute redirectTo="/" component={<RegisterPage />} />,
   },
   {
-    path: "/sign-in",
+    path: "/signin",
     element: <PublicRoute redirectTo="/" component={<LoginPage />} />,
   },
 ];
