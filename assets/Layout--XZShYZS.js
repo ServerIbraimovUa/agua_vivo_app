@@ -1,1 +1,0 @@
-import{j as e,O as r}from"./index-ryx-TIdT.js";const s=()=>e.jsx("div",{children:"Header"}),n=()=>e.jsxs(e.Fragment,{children:[e.jsx(s,{}),e.jsx("main",{children:e.jsx(r,{})})]});export{n as default};
