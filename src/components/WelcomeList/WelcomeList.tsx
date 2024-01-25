@@ -1,4 +1,3 @@
-import React from "react";
 import { ListStyle } from "./WelcomeList.styled";
 
 const WelcomeList = () => {
