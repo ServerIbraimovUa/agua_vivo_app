@@ -2,17 +2,20 @@
 import Logo from "./Logo/Logo";
 import UserAuth from "./UserAuth/UserAuth";
 import UserLogo from "./UserLogo/UserLogo";
-import UserLogoModal from "./UserLogoModal/UserLogoModal";
+import {NavbarContainer} from "../Styles/Header.style.js"
 
 const Header = () => {
   // const isSignedIn = useSelector(selectAuthIsSignedIn);
   // const { pathname } = useLocation();
-  return <div>
-    <Logo/>
+  return <NavbarContainer>
+    
+    <Logo />
+    <p>if isSignedIn then</p>
     <UserAuth />
+    <p>else</p>
     <UserLogo />
-    <UserLogoModal/>
-  </div>;
+    
+  </NavbarContainer>;
 };
 
 export default Header;

@@ -2,8 +2,9 @@
 
 const UserLogo = () => {
   return (
-    <div>
-      User name + avatar
+      <div>
+          <button>User name + avatar</button>
+      
     </div>
   );
 }

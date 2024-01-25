@@ -3,7 +3,7 @@
 const Logo = () => {
   return (
     <div>
-      LOGO
+      <a href="/">LOGO</a>
     </div>
   );
 }
