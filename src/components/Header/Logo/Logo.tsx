@@ -9,16 +9,17 @@ const Logo = () => {
    <div>
       {/* {isSignedIn ? (
         <>
-         <a href="/">LOGO</a>
+         <NavLink to="/home"><img src={logo} alt="logo" width="102px" height="48px" />Home</NavLink>
         </>
       ) : (
         <>
-         <a href="/welcome">LOGO</a>
+         <NavLink to="/welcome">Welcome</NavLink>
         </>
       )} */}
       
       <NavLink to="/home"><img src={logo} alt="logo" width="102px" height="48px" />Home</NavLink>
-      <NavLink to="/welcome"><img src={logo} alt="logo" width="102px" height="48px" />Welcome</NavLink>
+      
+      <NavLink to="/welcome">Welcome</NavLink>
     </div>
   );
 }
