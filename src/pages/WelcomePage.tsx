@@ -1,8 +1,8 @@
 import React from "react";
 import { Navigate, redirect } from "react-router-dom";
+import WelcomeList from "../components/WelcomeList/WelcomeList";
 const WelcomePage = () => {
   const handleClick = () => {
-    console.log("hi");
     return <Navigate to="/signup" />;
   };
 
@@ -80,92 +80,7 @@ const WelcomePage = () => {
       </div>
       <div>
         <h3>WhyDrinkWater</h3>
-        <ul>
-          <li>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="8"
-              height="8"
-              viewBox="0 0 8 8"
-              fill="none"
-            >
-              <circle cx="4" cy="4" r="4" fill="#407BFF" />
-            </svg>
-          </li>
-          <p>Supply of nutrients to all organs</p>
-          <li>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="8"
-              height="8"
-              viewBox="0 0 8 8"
-              fill="none"
-            >
-              <circle cx="4" cy="4" r="4" fill="#407BFF" />
-            </svg>
-          </li>
-          <p>Providing oxygen to the lungs</p>
-          <li>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="8"
-              height="8"
-              viewBox="0 0 8 8"
-              fill="none"
-            >
-              <circle cx="4" cy="4" r="4" fill="#407BFF" />
-            </svg>
-          </li>
-          <p>Maintaining the work of the heart</p>
-          <li>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="8"
-              height="8"
-              viewBox="0 0 8 8"
-              fill="none"
-            >
-              <circle cx="4" cy="4" r="4" fill="#407BFF" />
-            </svg>
-          </li>
-          <p>Release of processed substances</p>
-          <li>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="8"
-              height="8"
-              viewBox="0 0 8 8"
-              fill="none"
-            >
-              <circle cx="4" cy="4" r="4" fill="#407BFF" />
-            </svg>
-          </li>
-          <p>Ensuring the stability of the internal environment</p>
-          <li>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="8"
-              height="8"
-              viewBox="0 0 8 8"
-              fill="none"
-            >
-              <circle cx="4" cy="4" r="4" fill="#407BFF" />
-            </svg>
-          </li>
-          <p>Maintaining within the normal temperature</p>
-          <li>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="8"
-              height="8"
-              viewBox="0 0 8 8"
-              fill="none"
-            >
-              <circle cx="4" cy="4" r="4" fill="#407BFF" />
-            </svg>
-          </li>
-          <p>Maintaining an immune system capable of resisting disease</p>
-        </ul>
+        <WelcomeList />
       </div>
     </section>
   );
