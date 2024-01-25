@@ -1,9 +1,12 @@
+
 import { useForm } from "react-hook-form";
+
 
 type Inputs = {
   email: string;
   password: string;
   repeatPassword?: string;
+
 };
 
 const AuthForm = () => {
@@ -12,6 +15,7 @@ const AuthForm = () => {
     handleSubmit,
     watch,
     // reset,
+
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -27,20 +31,24 @@ const AuthForm = () => {
           {...register("email", { required: true })}
           type="email"
           placeholder="E-mail"
+
         />
         {errors.email && <span>This field is required</span>}
       </label>
       <label>
         <span>Enter your password</span>
+
         <input
           {...register("password", { required: true })}
           type="password"
           placeholder="Password"
+
         />
         {errors.password && <span>This field is required</span>}
       </label>
       <label>
         <span>Repeat password</span>
+
         <input
           {...register("repeatPassword", {
             required: true,
@@ -53,6 +61,7 @@ const AuthForm = () => {
       </label>
 
       <button type="submit">Sign Up</button>
+
     </form>
   );
 };
