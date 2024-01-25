@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import WelcomeList from "../components/WelcomeList/WelcomeList";
 const WelcomePage = () => {
