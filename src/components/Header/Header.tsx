@@ -10,10 +10,11 @@ const Header = () => {
   return <NavbarContainer>
     
     <Logo />
+    
     <p>if isSignedIn then</p>
-    <UserAuth />
-    <p>else</p>
     <UserLogo />
+    <p>else</p>
+    <UserAuth />
     
   </NavbarContainer>;
 };
