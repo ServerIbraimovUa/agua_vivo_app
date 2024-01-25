@@ -11,9 +11,9 @@ const Header = () => {
     
     <Logo />
     
-    <p>if isSignedIn then</p>
+    
     <UserLogo />
-    <p>else</p>
+   
     <UserAuth />
     
   </NavbarContainer>;
