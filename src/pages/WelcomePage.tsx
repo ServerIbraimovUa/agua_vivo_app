@@ -1,9 +1,10 @@
 import React from "react";
-import { Navigate, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import WelcomeList from "../components/WelcomeList/WelcomeList";
 const WelcomePage = () => {
+  const navigate = useNavigate();
   const handleClick = () => {
-    return <Navigate to="/signup" />;
+    navigate("/signup");
   };
 
   return (
@@ -79,7 +80,7 @@ const WelcomePage = () => {
         </button>
       </div>
       <div>
-        <h3>WhyDrinkWater</h3>
+        <h3>Why Drink Water</h3>
         <WelcomeList />
       </div>
     </section>
