@@ -1,5 +1,7 @@
 // import { UseSelector } from "react-redux";
 // import { selectAuthIsSignedIn } from 'redux/auth.selectors';
+import { NavLink } from "react-router-dom";
+import logo from '../../../img/Logo.svg';
 
 const Logo = () => {
   // const isSignedIn = useSelector(selectAuthIsSignedIn);
@@ -7,14 +9,17 @@ const Logo = () => {
    <div>
       {/* {isSignedIn ? (
         <>
-         <a href="/">LOGO</a>
+         <NavLink to="/home"><img src={logo} alt="logo" width="102px" height="48px" />Home</NavLink>
         </>
       ) : (
         <>
-         <a href="/welcome">LOGO</a>
+         <NavLink to="/welcome">Welcome</NavLink>
         </>
       )} */}
-      LOGO TEMP
+      
+      <NavLink to="/home"><img src={logo} alt="logo" width="102px" height="48px" />Home</NavLink>
+      
+      <NavLink to="/welcome">Welcome</NavLink>
     </div>
   );
 }
