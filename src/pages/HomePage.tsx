@@ -1,27 +1,22 @@
-import { useDispatch } from 'react-redux';
-import {
-  getCurrentUserThunk,
-  getUserInfoByIdThunk,
-  logInThunk,
-  registerThunk,
-  updateAvatar,
-} from '../redux/auth/auth.operations';
-import { useAppDispatch } from '../redux/redux_ts/hook';
+import { useState } from "react";
+import Modal from "../components/Modal/Modal";
+import WaterList from "../components/WaterList/WaterList";
 
 const HomePage = () => {
-  const dispatch = useAppDispatch();
-
-  const handle = () => {
-    dispatch(logInThunk('1'));
-    console.log('55');
-  };
+  const [visible, setVisible] = useState(false);
   return (
-    <div>
-      HomePage
-      <button type="button" onClick={handle}>
-        Ok
-      </button>
-    </div>
+    <>
+      <div>HomePage</div>
+      <WaterList />
+      {visible && (
+        <Modal setVisible={setVisible} title="Sign up">
+          <div>content</div>
+        </Modal>
+      )}
+      <div>
+        <button onClick={() => setVisible(true)}>Open</button>
+      </div>
+    </>
   );
 };
 
