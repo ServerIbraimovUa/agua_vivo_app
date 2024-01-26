@@ -5,8 +5,8 @@ const RegisterPage = () => {
   return (
     <div>
       <div>
-        <h2>Sign In</h2>
-        <AuthForm />
+        <h2>Sign Up</h2>
+        <AuthForm repeat={true} />
         <NavLink to="/signin">Sign in</NavLink>
       </div>
     </div>
