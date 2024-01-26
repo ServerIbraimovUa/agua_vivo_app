@@ -11,7 +11,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter basename="/agua_vivo_app">
-      <PersistGate persistor={persistor}>
+      <PersistGate persistor={persistor} loading={<div>Loading...</div>}>
       <Provider store={store}>
         <App />
       </Provider>
