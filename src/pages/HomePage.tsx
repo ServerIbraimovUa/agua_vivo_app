@@ -6,7 +6,7 @@ import {
   registerThunk,
   updateAvatar,
 } from '../redux/auth/auth.operations';
-import { useAppDispatch } from '../redux/hook';
+import { useAppDispatch } from '../redux/redux_ts/hook';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();

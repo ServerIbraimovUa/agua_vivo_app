@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'http://localhost:5173/agua_vivo_app';
@@ -19,7 +19,7 @@ export const registerThunk = createAsyncThunk(
       setToken(response.data.token);
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -32,7 +32,7 @@ export const logInThunk = createAsyncThunk(
       setToken(response.data.token);
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -40,22 +40,20 @@ export const logInThunk = createAsyncThunk(
 export const getCurrentUserThunk = createAsyncThunk(
   'auth/current',
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    if (!state) return;
+    const state:any = thunkAPI.getState();
     const token = state.auth.token;
     try {
       setToken(token);
       const response = await axios.get('/current');
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
   },
   {
     condition: (_, thunkAPI) => {
-      const state = thunkAPI.getState();
+      const state:any = thunkAPI.getState();
       const token = state.auth.token;
-
       if (!token) {
         return false;
       }
@@ -71,19 +69,19 @@ export const getUserInfoByIdThunk = createAsyncThunk(
       const response = await axios.get(`/:${userID}`);
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
 
 export const updateUserInfoByIdThunk = createAsyncThunk(
   'auth/updateInfo',
-  async (userData, thunkAPI) => {
+  async ( { name, email, gender, avatar, id }:any , thunkAPI) => {
     try {
-      const response = await axios.patch(`/:${userData.id}`, userData);
+      const response = await axios.patch(`/:${id}`,  { name, email, gender, avatar });
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -95,7 +93,7 @@ export const updateAvatar = createAsyncThunk(
       const response = await axios.patch('/avatars', newAvatar);
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -108,7 +106,7 @@ export const updatePassword = createAsyncThunk(
       setToken(response.data.token);
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -120,7 +118,7 @@ export const logOutThunk = createAsyncThunk(
       axios.post('/logout');
       unsetToken();
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
   }
 );

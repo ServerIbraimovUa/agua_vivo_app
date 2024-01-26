@@ -12,7 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.0.1",
+    "@reduxjs/toolkit": "^2.1.0",
     "@types/react-redux": "^7.1.33",
     "axios": "^1.6.6",
     "formik": "^2.4.5",

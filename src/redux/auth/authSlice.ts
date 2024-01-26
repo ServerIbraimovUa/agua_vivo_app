@@ -9,14 +9,7 @@ import {
   updateUserInfoByIdThunk,
   updatePassword,
 } from './auth.operations';
-
-interface IAuthInit {
-  user: null | object;
-  token: null | string;
-  isAuthorized: boolean;
-  isLoading: boolean;
-  error: null | string;
-}
+import { IAuthInit } from '../redux_ts/interfaces';
 
 const authInitialState = {
   user: null,
