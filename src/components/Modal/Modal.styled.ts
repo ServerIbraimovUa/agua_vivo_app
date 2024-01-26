@@ -47,6 +47,11 @@ export const Overlay = styled.div`
       &:hover {
         transform: rotate(90deg);
       }
+      .modal-icon {
+        width: 24px;
+        height: 24px;
+        stroke: #407bff;
+      }
     }
   }
 `;
