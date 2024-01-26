@@ -1,5 +1,6 @@
 import { FC, ReactNode } from "react";
 import { Overlay } from "./Modal.styled";
+import Icon from "../Icon/Icon";
 
 interface Props {
   setVisible: (boolean: boolean) => void;
@@ -14,21 +15,7 @@ const Modal: FC<Props> = ({ setVisible, title, children }) => {
         <div className="header">
           <p>{title}</p>
           <button onClick={() => setVisible(false)}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M6 18L18 6M6 6L18 18"
-                stroke="#407BFF"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            <Icon className="modal-icon" id="close" />
           </button>
         </div>
         {children}
