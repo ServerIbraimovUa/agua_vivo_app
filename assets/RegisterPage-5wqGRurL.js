@@ -1,0 +1,1 @@
+import{j as i,N as r}from"./index-efbhVb_M.js";import{A as s}from"./AuthForm-JmhMIbgb.js";const t=()=>i.jsx("div",{children:i.jsxs("div",{children:[i.jsx("h2",{children:"Sign Up"}),i.jsx(s,{repeat:!0}),i.jsx(r,{to:"/signin",children:"Sign in"})]})});export{t as default};
