@@ -1,25 +1,34 @@
-
+import { FC } from "react";
 import { useForm } from "react-hook-form";
 
-
-type Inputs = {
+interface FormData {
   email: string;
   password: string;
+  gender?: "male" | "female";
   repeatPassword?: string;
+}
+interface Props {
+  repeat: boolean;
+}
 
-};
-
-const AuthForm = () => {
+const AuthForm: FC<Props> = ({ repeat }) => {
   const {
     register,
     handleSubmit,
     watch,
-    // reset,
+    reset,
 
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<FormData>();
 
-  const onSubmit = (data: Inputs) => console.log(data);
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+    // email: "serveribraimov7@gmail.com";
+    // password: "ssssssssss";
+    // repeatPassword: "ssssssssss";
+
+    reset();
+  };
 
   const password = watch("password", "");
 
@@ -31,7 +40,6 @@ const AuthForm = () => {
           {...register("email", { required: true })}
           type="email"
           placeholder="E-mail"
-
         />
         {errors.email && <span>This field is required</span>}
       </label>
@@ -42,26 +50,49 @@ const AuthForm = () => {
           {...register("password", { required: true })}
           type="password"
           placeholder="Password"
-
         />
         {errors.password && <span>This field is required</span>}
       </label>
-      <label>
-        <span>Repeat password</span>
+      {repeat && (
+        <>
+          <label>
+            <span>Repeat password</span>
 
-        <input
-          {...register("repeatPassword", {
-            required: true,
-            validate: (value) => value === password || "Passwords do not match",
-          })}
-          type="password"
-          placeholder="Repeat password"
-        />
-        {errors.repeatPassword && <span>This field is required</span>}
-      </label>
+            <input
+              {...register("repeatPassword", {
+                required: true,
+                validate: (value) =>
+                  value === password || "Passwords do not match",
+              })}
+              type="password"
+              placeholder="Repeat password"
+            />
+            {errors.repeatPassword && <span>This field is required</span>}
+          </label>
+          <label>
+            <span>Gender</span>
+            <input
+              {...register("gender", {
+                required: "Please select a gender",
+              })}
+              value="male"
+              type="radio"
+            />
+            Male
+            <input
+              {...register("gender", {
+                required: "Please select a gender",
+              })}
+              value="female"
+              type="radio"
+            />
+            Female
+            {errors.gender && <span>This field is required</span>}
+          </label>
+        </>
+      )}
 
-      <button type="submit">Sign Up</button>
-
+      <button type="submit">{repeat ? "Sign Up" : "Sign In"}</button>
     </form>
   );
 };
