@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRote.jsx";
 import { PublicRoute } from "./components/PublicRoute/PublicRoute";
 
@@ -12,6 +12,7 @@ const WelcomePage = lazy(() => import("./pages/WelcomePage.js"));
 export default function App() {
   return (
     <>
+    <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* Public Routers  */}
@@ -42,6 +43,7 @@ export default function App() {
           />
         </Route>
       </Routes>
+      </Suspense>
     </>
   );
 }
