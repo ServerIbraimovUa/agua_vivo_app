@@ -4,7 +4,7 @@ import SettingModal from "../SettingModal/SettingModal";
 import Modal from "../../Modal/Modal";
 import UserLogoutModal from "../UserLogoutModal/UserLogoutModal";
 import { LogoWrapper } from "./UserLogoModal.styled";
-import { useOutsideClick } from "../../hooks/useOutsideClick";
+import { useOutsideClick } from "../../../hooks/useOutsideClick";
 
 const UserLogoModal = () => {
   const [anchorEl, setAnchorEl] = useState(false);
