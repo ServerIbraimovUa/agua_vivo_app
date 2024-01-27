@@ -15,7 +15,7 @@ export const registerThunk = createAsyncThunk(
   "auth/register",
   async (userData, thunkAPI) => {
     try {
-      const response = await axios.post("/register", userData);
+      const response = await axios.post("/users/register", userData);
       setToken(response.data.token);
       return response.data;
     } catch (e) {
@@ -28,7 +28,7 @@ export const logInThunk = createAsyncThunk(
   "auth/login",
   async (userData, thunkAPI) => {
     try {
-      const response = await axios.post("/login", userData);
+      const response = await axios.post("/users/login", userData);
       setToken(response.data.token);
       return response.data;
     } catch (e) {
@@ -44,7 +44,7 @@ export const getCurrentUserThunk = createAsyncThunk(
     const token = state.auth.token;
     try {
       setToken(token);
-      const response = await axios.get("/current");
+      const response = await axios.get("/users/current");
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -66,7 +66,7 @@ export const getDailyWaterNorma = createAsyncThunk(
   "auth/getDailyWaterNorma",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get("/amountdaily");
+      const response = await axios.get("/users/amountdaily");
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -78,7 +78,7 @@ export const getUserInfoByIdThunk = createAsyncThunk(
   "auth/getInfo",
   async (userID, thunkAPI) => {
     try {
-      const response = await axios.get(`/:${userID}`);
+      const response = await axios.get(`/users/:${userID}`);
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -90,7 +90,7 @@ export const updateUserInfoByIdThunk = createAsyncThunk(
   "auth/updateInfo",
   async ({ name, email, gender, avatar, id }: any, thunkAPI) => {
     try {
-      const response = await axios.patch(`/:${id}`, {
+      const response = await axios.patch(`/users/:${id}`, {
         name,
         email,
         gender,
@@ -107,7 +107,7 @@ export const updateAvatar = createAsyncThunk(
   "auth/avatars",
   async (newAvatar, thunkAPI) => {
     try {
-      const response = await axios.patch("/avatars", newAvatar);
+      const response = await axios.patch("/users/avatars", newAvatar);
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -119,7 +119,7 @@ export const updatePassword = createAsyncThunk(
   "auth/updatepassword",
   async (newPassword, thunkAPI) => {
     try {
-      const response = await axios.patch("/updatepassword", newPassword);
+      const response = await axios.patch("/users/updatepassword", newPassword);
       setToken(response.data.token);
       return response.data;
     } catch (e) {
@@ -132,7 +132,7 @@ export const logOutThunk = createAsyncThunk(
   "auth/logout",
   async (_, thunkAPI) => {
     try {
-      axios.post("/logout");
+      axios.post("/users/logout");
       unsetToken();
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
