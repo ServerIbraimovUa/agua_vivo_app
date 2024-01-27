@@ -1,4 +1,4 @@
-import{u as s,j as e}from"./index-4zJCWV9o.js";const o=s.div`
+import{u as s,j as e}from"./index-H2oq1Ih4.js";const o=s.div`
   background: rgb(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
@@ -15,7 +15,7 @@ import{u as s,j as e}from"./index-4zJCWV9o.js";const o=s.div`
     max-width: 1008px;
     min-height: 208px;
     max-height: 592px;
-    background: var(--white);
+    background: var(--primary-white);
     border-radius: 8px;
     overflow: hidden;
     padding: 32px 24px;
