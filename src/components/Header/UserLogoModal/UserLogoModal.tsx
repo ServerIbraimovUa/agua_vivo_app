@@ -8,11 +8,14 @@ import Stack from '@mui/material/Stack';
 import arrow from "../../../img/arrow_down.svg"
 import SettingModal from '../SettingModal/SettingModal';
 import Modal from "../../Modal/Modal";
+import UserLogoutModal from '../UserLogoutModal/UserLogoutModal';
 
 
 const UserLogoModal = () => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-const [visible, setVisible] = useState(false);
+  const [settingsVisible, setsettingsVisible] = useState(false);
+  const [logoutVisible, setlogoutVisible] = useState(false);
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -45,15 +48,21 @@ const [visible, setVisible] = useState(false);
           horizontal: 'left',
         }}
       >
-        <Button onClick={() => setVisible(true)}>Settings</Button>
-        {visible && (
-        <Modal setVisible={setVisible} title="Setting">
-          <SettingModal />
-        </Modal>
-      )}
+        <div>
+          <Button onClick={() => setsettingsVisible(true)}>Settings</Button>
+        {settingsVisible && (
+          <Modal setVisible={setsettingsVisible} title="Setting">
+            <SettingModal />
+          </Modal>
+          )}
         <br />
-        <Button>Log out</Button>
-        
+        <Button onClick={() => setlogoutVisible(true)}>Log out</Button>
+         {logoutVisible && (
+          <Modal setVisible={setlogoutVisible} title="Log out">
+            <UserLogoutModal />
+          </Modal>
+          )}
+        </div>
       </Popover>
     </div>
   );
