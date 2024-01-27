@@ -1,5 +1,7 @@
 import { FC } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { registerThunk } from "../../redux/auth/auth.operations";
 
 interface FormData {
   email: string;
@@ -17,12 +19,14 @@ const AuthForm: FC<Props> = ({ repeat }) => {
     handleSubmit,
     watch,
     reset,
-
     formState: { errors },
   } = useForm<FormData>();
 
+  const dispatch = useDispatch();
+
   const onSubmit = (data: FormData) => {
     console.log(data);
+    repeat ? dispatch(registerThunk(data)) : dispatch(logInThunk(data));
     // email: "serveribraimov7@gmail.com";
     // password: "ssssssssss";
     // repeatPassword: "ssssssssss";
