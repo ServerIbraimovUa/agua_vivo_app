@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Overlay = styled.div`
-  font-family: "Roboto";
   background: rgb(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
@@ -18,7 +17,7 @@ export const Overlay = styled.div`
     max-width: 1008px;
     min-height: 208px;
     max-height: 592px;
-    background: white;
+    background: var(--white);
     border-radius: 8px;
     overflow: hidden;
     padding: 32px 24px;
@@ -30,7 +29,7 @@ export const Overlay = styled.div`
 
     color: #2f2f2f;
     font-size: 26px;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 24px;
 
     button {

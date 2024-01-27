@@ -2,10 +2,11 @@ import WaterList from "../components/WaterList/WaterList";
 
 const HomePage = () => {
   return (
-    <>
-      <div>HomePage</div>
-      <WaterList />
-    </>
+    <section>
+      <div className="container">
+        <WaterList />
+      </div>
+    </section>
   );
 };
 
