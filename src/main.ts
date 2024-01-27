@@ -64,7 +64,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-    body {
+  body {
       font-family: 'Roboto', sans-serif;
       font-weight: var(--regular-font-weight);
       font-style: normal;
@@ -75,7 +75,7 @@ export const GlobalStyle = createGlobalStyle`
       background-color: var(--primary-white);
     }
 
-    .is-hidden {
+  .is-hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -99,7 +99,7 @@ export const GlobalStyle = createGlobalStyle`
   overflow: hidden;
 }
 
-   button {
+  .btn {
     padding-left: 30px;
     padding-right: 30px;
     color: var(--primary-white);
@@ -114,7 +114,6 @@ export const GlobalStyle = createGlobalStyle`
   padding-left: 20px;
   padding-right: 20px;
   margin: 0 auto; 
- 
   
   @media ${device.mobile} {
         min-width: 280px;
