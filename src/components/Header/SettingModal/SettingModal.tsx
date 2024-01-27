@@ -28,13 +28,11 @@ const SettingModal = () => {
 
   return (
     <div>
-      <h2>Setting</h2>
-
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           {/* <label>
-            <img></img>
             <span>Your photo</span>
+            <img></img>
             <input type="file" name="remember" />
             <span>Upload a photo</span>
           </label> */}
