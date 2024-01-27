@@ -1,7 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { Data } from "../../components/AuthForm/AuthForm";
 
-axios.defaults.baseURL = "http://localhost:5173/agua_vivo_app";
+axios.defaults.baseURL = "http://localhost:8000";
 
 const setToken = (token: string) => {
   axios.defaults.headers.common.Authorization = token;
@@ -13,7 +14,7 @@ const unsetToken = () => {
 
 export const registerThunk = createAsyncThunk(
   "auth/register",
-  async (userData, thunkAPI) => {
+  async (data: Data, thunkAPI) => {
     try {
       const response = await axios.post("/users/register", userData);
       setToken(response.data.token);
@@ -26,7 +27,7 @@ export const registerThunk = createAsyncThunk(
 
 export const logInThunk = createAsyncThunk(
   "auth/login",
-  async (userData, thunkAPI) => {
+  async (data: Data, thunkAPI) => {
     try {
       const response = await axios.post("/users/login", userData);
       setToken(response.data.token);
