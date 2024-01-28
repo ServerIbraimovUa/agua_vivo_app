@@ -5,12 +5,16 @@ import Modal from "../../Modal/Modal";
 import UserLogoutModal from "../UserLogoutModal/UserLogoutModal";
 import { LogoWrapper } from "./UserLogoModal.styled";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../redux/auth/authSelectors";
 
 const UserLogoModal = () => {
   const [anchorEl, setAnchorEl] = useState(false);
   const [settingsVisible, setsettingsVisible] = useState(false);
   const [visible, setVisible] = useState(false);
   const menuRef = useRef(null);
+
+  const { email, avatar } = useSelector(selectUser);
 
   useOutsideClick(menuRef, () => {
     if (anchorEl) {
@@ -25,10 +29,10 @@ const UserLogoModal = () => {
   return (
     <LogoWrapper>
       <button className="open-btn" onClick={handleClick}>
-        User name
+        {email}
         <img
           className="user-photo"
-          src="/agua_vivo_app/src/img/Sign_in_def_logo.svg"
+          src={`${avatar}`}
           alt="default_logo"
           width="28"
           height="28"
@@ -52,7 +56,7 @@ const UserLogoModal = () => {
         <button onClick={() => setVisible(true)}>Log out</button>
         {visible && (
           <Modal setVisible={setVisible} title="Log out">
-            <UserLogoutModal />
+            <UserLogoutModal setVisible={setVisible} />
           </Modal>
         )}
       </div>

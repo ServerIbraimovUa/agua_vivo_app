@@ -6,8 +6,14 @@ export interface IWater {
 }
 
 export interface IAuthInit {
-  user: null | object;
-  token: null | string;
+  user: {
+    email: string;
+    avatar: string;
+    gender?: "women" | "man" | "";
+    dailyNorma?: string;
+    name?: string;
+  };
+  token: string;
   isAuthorized: boolean;
   isLoading: boolean;
   error: unknown | string;

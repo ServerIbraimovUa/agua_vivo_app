@@ -24,7 +24,12 @@ const AuthForm: FC<Props> = ({ repeat }) => {
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: Data) => {
-    repeat ? dispatch(registerThunk(data)) : dispatch(logInThunk(data));
+    const { email, password } = data;
+    const newData = {
+      email,
+      password,
+    };
+    repeat ? dispatch(registerThunk(newData)) : dispatch(logInThunk(newData));
 
     reset();
   };

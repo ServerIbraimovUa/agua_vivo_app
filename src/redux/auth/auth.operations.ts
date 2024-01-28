@@ -1,16 +1,31 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Data } from "../../components/AuthForm/AuthForm";
+import { IAuthInit } from "../redux_ts/interfaces";
 
-axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = "https://agua-vivo-app-backend.onrender.com";
 
 const setToken = (token: string) => {
-  axios.defaults.headers.common.Authorization = token;
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 const unsetToken = () => {
   axios.defaults.headers.common.Authorization = "";
 };
+
+interface CurrentData {
+  email: string;
+  avatar: string;
+}
+
+interface UpdateUser {
+  email?: string;
+  avatar?: string;
+  gender?: "women" | "man" | "";
+  dailyNorma?: string;
+  name?: string;
+  id: string;
+}
 
 export const registerThunk = createAsyncThunk(
   "auth/register",
@@ -38,30 +53,27 @@ export const logInThunk = createAsyncThunk(
   }
 );
 
-export const getCurrentUserThunk = createAsyncThunk(
-  "auth/current",
-  async (_, thunkAPI) => {
-    const state: any = thunkAPI.getState();
-    const token = state.auth.token;
-    try {
-      setToken(token);
-      const response = await axios.get("/users/current");
-      return response.data;
-    } catch (e) {
-      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+export const getCurrentUserThunk = createAsyncThunk<
+  CurrentData,
+  string,
+  { state: { auth: IAuthInit } }
+>("auth/current", async (_, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState();
+
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue("Unable to fetch user");
     }
-  },
-  {
-    condition: (_, thunkAPI) => {
-      const state: any = thunkAPI.getState();
-      const token = state.auth.token;
-      if (!token) {
-        return false;
-      }
-      return true;
-    },
+
+    setToken(persistedToken);
+    const response = await axios.get("/users/current");
+    return response.data;
+  } catch (e) {
+    if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
   }
-);
+});
 
 export const getDailyWaterNorma = createAsyncThunk(
   "auth/getDailyWaterNorma",
@@ -89,7 +101,7 @@ export const getUserInfoByIdThunk = createAsyncThunk(
 
 export const updateUserInfoByIdThunk = createAsyncThunk(
   "auth/updateInfo",
-  async ({ name, email, gender, avatar, id }: any, thunkAPI) => {
+  async ({ name, email, gender, avatar, id }: UpdateUser, thunkAPI) => {
     try {
       const response = await axios.patch(`/users/:${id}`, {
         name,
