@@ -1,4 +1,4 @@
-import{u as a,j as e,r as d}from"./index-gNnooVsu.js";const c=a.div`
+import{u as i,j as e,r as d}from"./index-Ch12otUw.js";const c=i.div`
   background: rgb(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
@@ -55,4 +55,4 @@ import{u as a,j as e,r as d}from"./index-gNnooVsu.js";const c=a.div`
       }
     }
   }
-`,l="/agua_vivo_app/assets/sprite--zZjbjsd.svg",p=({className:n,id:o})=>e.jsx("svg",{className:n,children:e.jsx("use",{href:`${l}#icon-${o}`})}),f=({setVisible:n,title:o,children:r})=>{d.useEffect(()=>{const t=i=>{i.code==="Escape"&&n(!1)};return window.addEventListener("keydown",t),()=>{window.removeEventListener("keydown",t)}},[n]);const s=t=>{t.currentTarget===t.target&&n(!1)};return e.jsx(c,{onClick:s,children:e.jsxs("div",{className:"modal",children:[e.jsxs("div",{className:"header",children:[e.jsx("p",{children:o}),e.jsx("button",{onClick:()=>n(!1),children:e.jsx(p,{className:"modal-icon",id:"close"})})]}),r]})})};export{f as M};
+`,l="/agua_vivo_app/assets/sprite--zZjbjsd.svg",p=({className:n,id:o})=>e.jsx("svg",{className:n,children:e.jsx("use",{href:`${l}#icon-${o}`})}),f=({setVisible:n,title:o,children:r})=>{d.useEffect(()=>{const t=a=>{a.code==="Escape"&&n(!1)};return window.addEventListener("keydown",t),()=>{window.removeEventListener("keydown",t)}},[n]);const s=t=>{t.currentTarget===t.target&&n(!1)};return e.jsx(c,{onClick:s,children:e.jsxs("div",{className:"modal",children:[e.jsxs("div",{className:"header",children:[e.jsx("p",{children:o}),e.jsx("button",{onClick:()=>n(!1),children:e.jsx(p,{className:"modal-icon",id:"close"})})]}),r]})})};export{p as I,f as M};
