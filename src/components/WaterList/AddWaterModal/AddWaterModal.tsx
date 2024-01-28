@@ -1,11 +1,20 @@
-import { ChangeEvent, FC, KeyboardEvent, useState } from "react";
+import { ChangeEvent, FC, FormEvent, KeyboardEvent, useState } from "react";
+import { IWaterData } from "../WaterList";
 
 interface Props {
   title: string;
   show: boolean;
+  handleAddWater?: (event: FormEvent<HTMLFormElement>) => void;
+  handleUpdateWater?: (waterData: IWaterData) => void;
+  closeModal: () => void;
 }
 
-const AddWaterModal: FC<Props> = ({ title, show }) => {
+const AddWaterModal: FC<Props> = ({
+  title,
+  show,
+  handleAddWater,
+  closeModal,
+}) => {
   const [state, setState] = useState({
     count: 0,
     inputValue: "0",
@@ -39,6 +48,15 @@ const AddWaterModal: FC<Props> = ({ title, show }) => {
     }
   };
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (handleAddWater) {
+      handleAddWater(event);
+    }
+
+    closeModal();
+  };
+
   return (
     <div>
       {show && (
@@ -49,7 +67,7 @@ const AddWaterModal: FC<Props> = ({ title, show }) => {
       )}
       <h2>{title}</h2>
       <p>Amount of water:</p>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="counter">
           <button
             onClick={() => handleCountChange(state.count - 50)}
@@ -67,7 +85,7 @@ const AddWaterModal: FC<Props> = ({ title, show }) => {
         </div>
         <label>
           <span>Recording time:</span>
-          <input type="time" />
+          <input type="time" name="waterVolume" />
         </label>
 
         <label>
@@ -77,6 +95,7 @@ const AddWaterModal: FC<Props> = ({ title, show }) => {
             min={0}
             max={5000}
             step={50}
+            name="waterVolume"
             value={state.inputValue}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
