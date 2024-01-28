@@ -1,6 +1,7 @@
 import DailyNorma from "../components/DailyNorma/DailyNorma";
 import WaterList from "../components/WaterList/WaterList";
 import Calendar from "../components/Calendar/Calendar";
+import WaterRatio from "../components/WaterRatio/WaterRatio";
 
 const HomePage = () => {
   return (
@@ -9,6 +10,7 @@ const HomePage = () => {
         <DailyNorma />
         <WaterList />
         <Calendar />
+        <WaterRatio />
       </div>
     </section>
   );
