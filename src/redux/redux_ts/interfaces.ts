@@ -18,3 +18,17 @@ export interface IAuthInit {
   isLoading: boolean;
   error: unknown | string;
 }
+
+export interface CurrentData {
+  email: string;
+  avatar: string;
+}
+
+export interface UpdateUser {
+  email?: string;
+  avatar?: string;
+  gender?: "women" | "man" | "";
+  dailyNorma?: string;
+  name?: string;
+  id: string;
+}

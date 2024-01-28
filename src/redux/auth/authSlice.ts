@@ -4,11 +4,12 @@ import {
   logInThunk,
   getCurrentUserThunk,
   updateAvatar,
-  logOutThunk,
+  updateDailyNorma,
   getUserInfoByIdThunk,
   updateUserInfoByIdThunk,
   updatePassword,
   getDailyWaterNorma,
+  logOutThunk,
 } from "./auth.operations";
 import { IAuthInit } from "../redux_ts/interfaces";
 
@@ -43,27 +44,32 @@ const authSlice = createSlice({
         state.isAuthorized = true;
         state.isLoading = false;
       })
+      .addCase(getDailyWaterNorma.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
       .addCase(getUserInfoByIdThunk.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuthorized = true;
         state.isLoading = false;
-      })
-      .addCase(getDailyWaterNorma.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.user = action.payload;
       })
       .addCase(updateUserInfoByIdThunk.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuthorized = true;
         state.isLoading = false;
       })
-      .addCase(updatePassword.fulfilled, (state, action) => {
-        state.token = action.payload;
+      .addCase(updateAvatar.fulfilled, (state, action) => {
+        state.user = action.payload;
         state.isAuthorized = true;
         state.isLoading = false;
       })
-      .addCase(updateAvatar.fulfilled, (state, action) => {
+      .addCase(updateDailyNorma.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.isAuthorized = true;
+        state.isLoading = false;
+      })
+      .addCase(updatePassword.fulfilled, (state, action) => {
+        state.token = action.payload;
         state.isAuthorized = true;
         state.isLoading = false;
       })
@@ -87,8 +93,9 @@ const authSlice = createSlice({
           getDailyWaterNorma.rejected,
           getUserInfoByIdThunk.rejected,
           updateUserInfoByIdThunk.rejected,
-          updatePassword.rejected,
           updateAvatar.rejected,
+          updateDailyNorma.rejected,
+          updatePassword.rejected,
           logOutThunk.rejected
         ),
         (state, action) => {
@@ -105,8 +112,9 @@ const authSlice = createSlice({
           getDailyWaterNorma.pending,
           getUserInfoByIdThunk.pending,
           updateUserInfoByIdThunk.pending,
-          updatePassword.pending,
           updateAvatar.pending,
+          updateDailyNorma.pending,
+          updatePassword.pending,
           logOutThunk.pending
         ),
         (state) => {

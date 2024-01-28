@@ -24,11 +24,9 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.waterList.unshift(action.payload);
       })
-      .addCase(deleteWater.fulfilled, (state, action) => {
+      .addCase(getMonthlyWaterNorma.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.waterList = state.waterList.filter(
-          (water) => !action.payload.includes(water.id)
-        );
+        state.monthlyNorma = action.payload;
       })
       .addCase(updateWaterVolume.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -37,16 +35,18 @@ const waterSlice = createSlice({
           return water;
         });
       })
-      .addCase(getMonthlyWaterNorma.fulfilled, (state, action) => {
+      .addCase(deleteWater.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.monthlyNorma = action.payload;
+        state.waterList = state.waterList.filter(
+          (water) => !action.payload.includes(water.id)
+        );
       })
       .addMatcher(
         isAnyOf(
           addWater.pending,
+          getMonthlyWaterNorma.pending,
           updateWaterVolume.pending,
-          deleteWater.pending,
-          getMonthlyWaterNorma.pending
+          deleteWater.pending
         ),
         (state) => {
           state.isLoading = true;
@@ -56,9 +56,9 @@ const waterSlice = createSlice({
       .addMatcher(
         isAnyOf(
           addWater.rejected,
+          getMonthlyWaterNorma.rejected,
           updateWaterVolume.rejected,
-          deleteWater.rejected,
-          getMonthlyWaterNorma.rejected
+          deleteWater.rejected
         ),
         (state, action) => {
           state.isLoading = false;

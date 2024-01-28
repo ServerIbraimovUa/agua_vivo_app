@@ -14,6 +14,18 @@ export const addWater = createAsyncThunk(
   }
 );
 
+export const getMonthlyWaterNorma = createAsyncThunk(
+  "water/getMonthlyWaterNorma",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get("/api/water/amoutmonth");
+      return response.data;
+    } catch (e) {
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
 export const updateWaterVolume = createAsyncThunk(
   "water/updateWaterVolume",
   async (waterData: IWaterData, thunkAPI) => {
@@ -30,20 +42,7 @@ export const deleteWater = createAsyncThunk(
   "water/deleteWater",
   async (waterID: number, thunkAPI) => {
     try {
- const response = await axios.delete(`/api/water/contacts/${waterID}`);
-      return response.data;
-    } catch (e) {
-      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
-
-export const getMonthlyWaterNorma = createAsyncThunk(
-  "water/getMonthlyWaterNorma",
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.get("/api/water/amoutmonth");
+      const response = await axios.delete(`/api/water/contacts/${waterID}`);
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
