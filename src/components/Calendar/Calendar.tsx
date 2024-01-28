@@ -1,4 +1,5 @@
 import React, { useState, useEffect, MouseEvent, KeyboardEvent } from 'react';
+import "./Calendar.css"
 
 interface Day {
   day: number;
