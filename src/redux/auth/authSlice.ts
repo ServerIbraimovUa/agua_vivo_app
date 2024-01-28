@@ -13,8 +13,8 @@ import {
 import { IAuthInit } from "../redux_ts/interfaces";
 
 const authInitialState = {
-  user: null,
-  token: null,
+  user: { email: "", avatar: "", gender: "", dailyNorma: "", name: "" },
+  token: "",
   isAuthorized: false,
   isLoading: false,
   error: null,
@@ -68,7 +68,13 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(logOutThunk.fulfilled, (state) => {
-        state.user = null;
+        state.user = {
+          email: "",
+          avatar: "",
+          gender: "",
+          dailyNorma: "",
+          name: "",
+        };
         state.token = "";
         state.isAuthorized = false;
         state.isLoading = false;
