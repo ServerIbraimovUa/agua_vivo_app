@@ -1,10 +1,11 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { INewPortion, IWaterData } from "../../components/WaterList/WaterList";
+import { IWaterData } from "../../components/WaterList/WaterList";
+import { IWaterPortion } from "../../components/WaterList/AddWaterModal/AddWaterModal";
 
 export const addWater = createAsyncThunk(
   "water/addWater",
-  async (waterVolume: INewPortion, thunkAPI) => {
+  async (waterVolume: IWaterPortion, thunkAPI) => {
     try {
       const response = await axios.post("/api/water/add", waterVolume);
       return response.data;
