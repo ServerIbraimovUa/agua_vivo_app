@@ -1,12 +1,67 @@
-
+import { useRef, useState } from "react";
+import arrow from "../../../img/arrow_down.svg";
+import SettingModal from "../SettingModal/SettingModal";
+import Modal from "../../Modal/Modal";
+import UserLogoutModal from "../UserLogoutModal/UserLogoutModal";
+import { LogoWrapper } from "./UserLogoModal.styled";
+import { useOutsideClick } from "../../../hooks/useOutsideClick";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../redux/auth/authSelectors";
 
 const UserLogoModal = () => {
+  const [anchorEl, setAnchorEl] = useState(false);
+  const [settingsVisible, setsettingsVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const menuRef = useRef(null);
+
+  const { email, avatar } = useSelector(selectUser);
+
+  useOutsideClick(menuRef, () => {
+    if (anchorEl) {
+      setTimeout(() => setAnchorEl(false), 100);
+    }
+  });
+
+  const handleClick = () => {
+    setAnchorEl(!anchorEl);
+  };
+
   return (
-    <div>
-          Settings
-          Log Out button
-    </div>
+    <LogoWrapper>
+      <button className="open-btn" onClick={handleClick}>
+        {email}
+        <img
+          className="user-photo"
+          src={`${avatar}`}
+          alt="default_logo"
+          width="28"
+          height="28"
+        ></img>
+        <img
+          className="arrow"
+          src={arrow}
+          alt="default_logo"
+          width="11"
+          height="6"
+        />
+      </button>
+      <div className={`btn-down ${anchorEl ? "open" : ""}`} ref={menuRef}>
+        <button onClick={() => setsettingsVisible(true)}>Settings</button>
+        {settingsVisible && (
+          <Modal setVisible={setsettingsVisible} title="Setting">
+            <SettingModal />
+          </Modal>
+        )}
+        <br />
+        <button onClick={() => setVisible(true)}>Log out</button>
+        {visible && (
+          <Modal setVisible={setVisible} title="Log out">
+            <UserLogoutModal setVisible={setVisible} />
+          </Modal>
+        )}
+      </div>
+    </LogoWrapper>
   );
-}
+};
 
 export default UserLogoModal;

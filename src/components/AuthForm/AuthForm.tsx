@@ -1,10 +1,11 @@
 import { FC } from "react";
 import { useForm } from "react-hook-form";
+import { logInThunk, registerThunk } from "../../redux/auth/auth.operations";
+import { useAppDispatch } from "../../redux/redux_ts/hook";
 
-interface FormData {
+export interface Data {
   email: string;
   password: string;
-  gender?: "male" | "female";
   repeatPassword?: string;
 }
 interface Props {
@@ -17,15 +18,18 @@ const AuthForm: FC<Props> = ({ repeat }) => {
     handleSubmit,
     watch,
     reset,
-
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<Data>();
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-    // email: "serveribraimov7@gmail.com";
-    // password: "ssssssssss";
-    // repeatPassword: "ssssssssss";
+  const dispatch = useAppDispatch();
+
+  const onSubmit = async (data: Data) => {
+    const { email, password } = data;
+    const newData = {
+      email,
+      password,
+    };
+    repeat ? dispatch(registerThunk(newData)) : dispatch(logInThunk(newData));
 
     reset();
   };
@@ -68,26 +72,6 @@ const AuthForm: FC<Props> = ({ repeat }) => {
               placeholder="Repeat password"
             />
             {errors.repeatPassword && <span>This field is required</span>}
-          </label>
-          <label>
-            <span>Gender</span>
-            <input
-              {...register("gender", {
-                required: "Please select a gender",
-              })}
-              value="male"
-              type="radio"
-            />
-            Male
-            <input
-              {...register("gender", {
-                required: "Please select a gender",
-              })}
-              value="female"
-              type="radio"
-            />
-            Female
-            {errors.gender && <span>This field is required</span>}
           </label>
         </>
       )}

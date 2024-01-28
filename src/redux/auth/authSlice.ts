@@ -1,4 +1,4 @@
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
   registerThunk,
   logInThunk,
@@ -8,22 +8,23 @@ import {
   getUserInfoByIdThunk,
   updateUserInfoByIdThunk,
   updatePassword,
-} from './auth.operations';
-import { IAuthInit } from '../redux_ts/interfaces';
+  getDailyWaterNorma,
+} from "./auth.operations";
+import { IAuthInit } from "../redux_ts/interfaces";
 
 const authInitialState = {
-  user: null,
-  token: null,
+  user: { email: "", avatar: "", gender: "", dailyNorma: "", name: "" },
+  token: "",
   isAuthorized: false,
   isLoading: false,
   error: null,
 } as IAuthInit;
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: authInitialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(registerThunk.fulfilled, (state, action) => {
         state.user = action.payload.user;
@@ -47,6 +48,10 @@ const authSlice = createSlice({
         state.isAuthorized = true;
         state.isLoading = false;
       })
+      .addCase(getDailyWaterNorma.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
       .addCase(updateUserInfoByIdThunk.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuthorized = true;
@@ -62,9 +67,15 @@ const authSlice = createSlice({
         state.isAuthorized = true;
         state.isLoading = false;
       })
-      .addCase(logOutThunk.fulfilled, state => {
-        state.user = null;
-        state.token = '';
+      .addCase(logOutThunk.fulfilled, (state) => {
+        state.user = {
+          email: "",
+          avatar: "",
+          gender: "",
+          dailyNorma: "",
+          name: "",
+        };
+        state.token = "";
         state.isAuthorized = false;
         state.isLoading = false;
       })
@@ -73,6 +84,7 @@ const authSlice = createSlice({
           registerThunk.rejected,
           logInThunk.rejected,
           getCurrentUserThunk.rejected,
+          getDailyWaterNorma.rejected,
           getUserInfoByIdThunk.rejected,
           updateUserInfoByIdThunk.rejected,
           updatePassword.rejected,
@@ -90,13 +102,14 @@ const authSlice = createSlice({
           registerThunk.pending,
           logInThunk.pending,
           getCurrentUserThunk.pending,
+          getDailyWaterNorma.pending,
           getUserInfoByIdThunk.pending,
           updateUserInfoByIdThunk.pending,
           updatePassword.pending,
           updateAvatar.pending,
           logOutThunk.pending
         ),
-        state => {
+        (state) => {
           state.isLoading = true;
           state.error = null;
         }
