@@ -8,7 +8,6 @@ import {
   getUserInfoByIdThunk,
   updateUserInfoByIdThunk,
   updatePassword,
-  getDailyWaterNorma,
   logOutThunk,
 } from "./auth.operations";
 import { IAuthInit } from "../redux_ts/interfaces";
@@ -43,10 +42,6 @@ const authSlice = createSlice({
         state.user = action.payload;
         state.isAuthorized = true;
         state.isLoading = false;
-      })
-      .addCase(getDailyWaterNorma.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.user = action.payload;
       })
       .addCase(getUserInfoByIdThunk.fulfilled, (state, action) => {
         state.user = action.payload;
@@ -90,7 +85,6 @@ const authSlice = createSlice({
           registerThunk.rejected,
           logInThunk.rejected,
           getCurrentUserThunk.rejected,
-          getDailyWaterNorma.rejected,
           getUserInfoByIdThunk.rejected,
           updateUserInfoByIdThunk.rejected,
           updateAvatar.rejected,
@@ -109,7 +103,6 @@ const authSlice = createSlice({
           registerThunk.pending,
           logInThunk.pending,
           getCurrentUserThunk.pending,
-          getDailyWaterNorma.pending,
           getUserInfoByIdThunk.pending,
           updateUserInfoByIdThunk.pending,
           updateAvatar.pending,

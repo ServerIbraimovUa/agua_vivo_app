@@ -2,14 +2,16 @@ import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
   addWater,
   deleteWater,
-  getMonthlyWaterNorma,
+  getAmountDaily,
+  getAmountMonthly,
   updateWaterVolume,
 } from "./water.operations";
 import { IWater } from "../redux_ts/interfaces";
 
 const waterInitState: IWater = {
   waterList: [],
-  monthlyNorma: null,
+  amountDaily: null,
+  amountMonthly: null,
   isLoading: false,
   error: null,
 };
@@ -24,9 +26,13 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.waterList.unshift(action.payload);
       })
-      .addCase(getMonthlyWaterNorma.fulfilled, (state, action) => {
+      .addCase(getAmountDaily.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.monthlyNorma = action.payload;
+        state.amountDaily = action.payload;
+      })
+      .addCase(getAmountMonthly.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.amountMonthly = action.payload;
       })
       .addCase(updateWaterVolume.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -44,7 +50,8 @@ const waterSlice = createSlice({
       .addMatcher(
         isAnyOf(
           addWater.pending,
-          getMonthlyWaterNorma.pending,
+          getAmountDaily.pending,
+          getAmountMonthly.pending,
           updateWaterVolume.pending,
           deleteWater.pending
         ),
@@ -56,7 +63,8 @@ const waterSlice = createSlice({
       .addMatcher(
         isAnyOf(
           addWater.rejected,
-          getMonthlyWaterNorma.rejected,
+          getAmountDaily.rejected,
+          getAmountMonthly.rejected,
           updateWaterVolume.rejected,
           deleteWater.rejected
         ),

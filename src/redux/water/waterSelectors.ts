@@ -8,9 +8,14 @@ export const selectAllWater = createSelector(
   (water) => water.waterList
 );
 
+export const selectDailyNorma = createSelector(
+  selectWater,
+  (water) => water.amountDaily
+);
+
 export const selectMonthlyNorma = createSelector(
   selectWater,
-  (water) => water.monthlyNorma
+  (water) => water.amountMonthly
 );
 
 export const selectIsLoading = createSelector(

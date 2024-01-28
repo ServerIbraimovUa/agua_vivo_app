@@ -2,7 +2,6 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Data } from "../../components/AuthForm/AuthForm";
 import { CurrentData, IAuthInit, UpdateUser } from "../redux_ts/interfaces";
-import { createGlobalStyle } from "styled-components";
 
 axios.defaults.baseURL = "https://agua-vivo-app-backend.onrender.com";
 
@@ -62,23 +61,11 @@ export const getCurrentUserThunk = createAsyncThunk<
   }
 });
 
-export const getDailyWaterNorma = createAsyncThunk(
-  "auth/getDailyWaterNorma",
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.get("/users/amountdaily");
-      return response.data;
-    } catch (e) {
-      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
 export const getUserInfoByIdThunk = createAsyncThunk(
   "auth/getInfo",
   async (userID, thunkAPI) => {
     try {
-      const response = await axios.get(`/users/:${userID}`);
+      const response = await axios.get(`/users/info/:${userID}`);
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -91,7 +78,7 @@ export const updateUserInfoByIdThunk = createAsyncThunk(
   async (newUserData: UpdateUser, thunkAPI) => {
     try {
       const response = await axios.patch(
-        `/users/:${newUserData.id}`,
+        `/users/update-user/:${newUserData.id}`,
         newUserData
       );
       return response.data;
@@ -117,7 +104,7 @@ export const updateDailyNorma = createAsyncThunk(
   "auth/updateDailyNorma",
   async (newDailyNorma, thunkAPI) => {
     try {
-      const response = await axios.patch("/users/amountdaily", newDailyNorma);
+      const response = await axios.patch("/users/water-rate", newDailyNorma);
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -129,7 +116,7 @@ export const updatePassword = createAsyncThunk(
   "auth/updatePassword",
   async (newPassword, thunkAPI) => {
     try {
-      const response = await axios.patch("/users/updatepassword", newPassword);
+      const response = await axios.patch("/users/update-password", newPassword);
       setToken(response.data.token);
       return response.data;
     } catch (e) {

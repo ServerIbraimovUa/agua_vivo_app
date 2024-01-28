@@ -1,6 +1,7 @@
 export interface IWater {
   waterList: any[];
-  monthlyNorma: null | [];
+  amountDaily: null | [];
+  amountMonthly: null | [];
   isLoading: boolean;
   error: unknown | string;
 }
