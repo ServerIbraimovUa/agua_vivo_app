@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Data } from "../../components/AuthForm/AuthForm";
-import { IAuthInit } from "../redux_ts/interfaces";
+import { CurrentData, IAuthInit, UpdateUser } from "../redux_ts/interfaces";
 
 axios.defaults.baseURL = "https://agua-vivo-app-backend.onrender.com";
 
@@ -12,20 +12,6 @@ const setToken = (token: string) => {
 const unsetToken = () => {
   axios.defaults.headers.common.Authorization = "";
 };
-
-interface CurrentData {
-  email: string;
-  avatar: string;
-}
-
-interface UpdateUser {
-  email?: string;
-  avatar?: string;
-  gender?: "women" | "man" | "";
-  dailyNorma?: string;
-  name?: string;
-  id: string;
-}
 
 export const registerThunk = createAsyncThunk(
   "auth/register",
@@ -75,23 +61,11 @@ export const getCurrentUserThunk = createAsyncThunk<
   }
 });
 
-export const getDailyWaterNorma = createAsyncThunk(
-  "auth/getDailyWaterNorma",
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.get("/users/amountdaily");
-      return response.data;
-    } catch (e) {
-      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
 export const getUserInfoByIdThunk = createAsyncThunk(
   "auth/getInfo",
   async (userID, thunkAPI) => {
     try {
-      const response = await axios.get(`/users/:${userID}`);
+      const response = await axios.get(`/users/info/:${userID}`);
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -101,14 +75,12 @@ export const getUserInfoByIdThunk = createAsyncThunk(
 
 export const updateUserInfoByIdThunk = createAsyncThunk(
   "auth/updateInfo",
-  async ({ name, email, gender, avatar, id }: UpdateUser, thunkAPI) => {
+  async (newUserData: UpdateUser, thunkAPI) => {
     try {
-      const response = await axios.patch(`/users/:${id}`, {
-        name,
-        email,
-        gender,
-        avatar,
-      });
+      const response = await axios.patch(
+        `/users/update-user/:${newUserData.id}`,
+        newUserData
+      );
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -128,11 +100,23 @@ export const updateAvatar = createAsyncThunk(
   }
 );
 
+export const updateDailyNorma = createAsyncThunk(
+  "auth/updateDailyNorma",
+  async (newDailyNorma, thunkAPI) => {
+    try {
+      const response = await axios.patch("/users/water-rate", newDailyNorma);
+      return response.data;
+    } catch (e) {
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
 export const updatePassword = createAsyncThunk(
-  "auth/updatepassword",
+  "auth/updatePassword",
   async (newPassword, thunkAPI) => {
     try {
-      const response = await axios.patch("/users/updatepassword", newPassword);
+      const response = await axios.patch("/users/update-password", newPassword);
       setToken(response.data.token);
       return response.data;
     } catch (e) {

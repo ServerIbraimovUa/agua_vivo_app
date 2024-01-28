@@ -1,6 +1,7 @@
 export interface IWater {
   waterList: any[];
-  monthlyNorma: null | [];
+  amountDaily: null | [];
+  amountMonthly: null | [];
   isLoading: boolean;
   error: unknown | string;
 }
@@ -17,4 +18,18 @@ export interface IAuthInit {
   isAuthorized: boolean;
   isLoading: boolean;
   error: unknown | string;
+}
+
+export interface CurrentData {
+  email: string;
+  avatar: string;
+}
+
+export interface UpdateUser {
+  email?: string;
+  avatar?: string;
+  gender?: "women" | "man" | "";
+  dailyNorma?: string;
+  name?: string;
+  id: string;
 }
