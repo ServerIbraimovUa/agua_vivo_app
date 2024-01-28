@@ -1,9 +1,10 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { INewPortion, IWaterData } from "../../components/WaterList/WaterList";
 
 export const addWater = createAsyncThunk(
   "water/addWater",
-  async (waterVolume, thunkAPI) => {
+  async (waterVolume: INewPortion, thunkAPI) => {
     try {
       const response = await axios.post("/api/water/add", waterVolume);
       return response.data;
@@ -15,7 +16,7 @@ export const addWater = createAsyncThunk(
 
 export const updateWaterVolume = createAsyncThunk(
   "water/updateWaterVolume",
-  async (waterData, thunkAPI) => {
+  async (waterData: IWaterData, thunkAPI) => {
     try {
       const response = await axios.post(`/api/water/update`, waterData);
       return response.data;
@@ -27,15 +28,16 @@ export const updateWaterVolume = createAsyncThunk(
 
 export const deleteWater = createAsyncThunk(
   "water/deleteWater",
-  async (waterID, thunkAPI) => {
+  async (waterID: number, thunkAPI) => {
     try {
-      const response = await axios.delete(`/api/water/contacts/${waterID}`);
+ const response = await axios.delete(`/api/water/contacts/${waterID}`);
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
+
 
 export const getMonthlyWaterNorma = createAsyncThunk(
   "water/getMonthlyWaterNorma",
