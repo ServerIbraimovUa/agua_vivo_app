@@ -4,9 +4,9 @@ import Calendar from "../components/Calendar/Calendar";
 const HomePage = () => {
   return (
     <section>
-      <div className="container">
-        <Calendar></Calendar>
+      <div className="container">    
         <WaterList />
+        <Calendar />
       </div>
     </section>
   );

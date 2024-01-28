@@ -1,5 +1,6 @@
-import React, { useState, useEffect, MouseEvent, KeyboardEvent } from 'react';
-import "./Calendar.css"
+// Calendar.tsx
+import React, { useState, useEffect, MouseEvent } from 'react';
+import * as Styled from './Calendar.styled';
 
 interface Day {
   day: number;
@@ -8,7 +9,6 @@ interface Day {
 
 const Calendar: React.FC = () => {
   const getCurrentDate = (): Date => new Date();
-
   const [currentDate, setCurrentDate] = useState<Date>(getCurrentDate());
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -65,49 +65,44 @@ const Calendar: React.FC = () => {
 
   const handleDayClick = (day: Day): void => {
     const dayElement = document.getElementById(`day-${day.day}`);
-
+  
     if (!dayElement) {
       console.error(`Element with id 'day-${day.day}' not found.`);
       return;
     }
-
+  
     const dayElementRect = dayElement.getBoundingClientRect();
     const modalWidth = 292;
     const modalHeight = 188;
-
+  
     const modalTop = dayElementRect.top - modalHeight - 40;
     const modalLeft = dayElementRect.left + dayElementRect.width / 2 - modalWidth / 2;
-
+  
     if (selectedDay === day.day) {
       closeAndReopenModal();
     } else {
       setSelectedDay(day.day);
       setModalContent(day);
-
+  
       document.documentElement.style.setProperty('--modal-top', `${modalTop}px`);
       document.documentElement.style.setProperty('--modal-left', `${modalLeft}px`);
-
+  
       setIsModalOpen(true);
     }
   };
-
+  
   const closeModal = (): void => {
     setIsModalOpen(false);
   };
 
-  const handleEscapeKey = (event: KeyboardEvent): void => {
-    if (event.key === 'Escape') {
-      closeModal();
-    }
-  };
-
   const handleOutsideClick = (event: MouseEvent): void => {
     const isDayClicked = (event.target as HTMLElement).classList.contains('day');
-
-    if (!isDayClicked) {
-      closeModal();
+  
+    if (!isDayClicked && selectedDay !== null) {
+      closeAndReopenModal();
     }
   };
+  
 
   useEffect(() => {
     const handleEscapeKey = (event: Event): void => {
@@ -125,10 +120,8 @@ const Calendar: React.FC = () => {
 
   useEffect(() => {
     const handleOutsideClick = (event: Event): void => {
-      const isDayClicked =
-        event instanceof MouseEvent &&
-        (event.target as HTMLElement).classList.contains('day');
-
+      const isDayClicked: boolean = (event.target as HTMLElement).classList.contains('day');
+    
       if (!isDayClicked) {
         closeModal();
       }
@@ -141,70 +134,78 @@ const Calendar: React.FC = () => {
     };
   }, []);
 
-const calculatePercentage = (day: Day): number => {
-  const percentage = 100;
-  return percentage;
-};
+  const calculatePercentage = (): number => {
+    const percentage = 100 ;
+    return percentage;
+  };
+
   return (
-    <div className="calendar">
-      <div className="header">
-        <div className="right-align">
-          <button onClick={handlePrevMonth} className="button">
+    <Styled.CalendarContainer>
+      <Styled.Header>
+        <Styled.RightAlign>
+          <Styled.Button onClick={handlePrevMonth}>
             &lt;
-          </button>
-          <h2 className="month-title">
+          </Styled.Button>
+          <Styled.MonthTitle>
             {currentDate.toLocaleString('en-US', { month: 'long' })}, {currentDate.getFullYear()}
-          </h2>
+          </Styled.MonthTitle>
           {!isCurrentMonth() && (
-            <button onClick={handleNextMonth} className="button">
+            <Styled.Button onClick={handleNextMonth}>
               &gt;
-            </button>
+            </Styled.Button>
           )}
-        </div>
-      </div>
-      <div className="days">
-        {getDaysInMonth(currentDate).map((day) => (
-          <div key={day.day} id={`day-${day.day}`}>
-            <div
-              className={`day ${selectedDay === day.day ? 'selected' : ''} ${
-                calculatePercentage(day) < 100 ? 'lowPercentage' : ''
-              }`}
-              onClick={() => handleDayClick(day)}
-            >
-              {day.day}
-            </div>
-            <h1
-              className={`procent ${
-                calculatePercentage(day) < 100 ? 'lowPercentage' : ''
-              }`}
-            >{`${calculatePercentage(day)}%`}</h1>
-          </div>
-        ))}
-      </div>
-      {isModalOpen && (
-        <div className="modal" onClick={handleOutsideClick}>
-          <div className="modal-content">
-            <div className="container">
-              <span className="close" onClick={closeModal}>
-                &times;
-              </span>
-              <h1 className="title-modal">{`${modalContent?.day}, ${modalContent?.month}`}</h1>
-              <p className="modal-paragraf">
-                Daily norm: <span className="span-modal">1.5L</span>
-              </p>
-              <p className="modal-paragraf">
-                Fulfillment of the daily norm:{' '}
-                <span className="span-modal">100%</span>
-              </p>
-              <p className="modal-paragraf">
-                How many servings of water:{' '}
-                <span className="span-modal">6</span>
-              </p>
-            </div>
-          </div>
-        </div>
+        </Styled.RightAlign>
+      </Styled.Header>
+
+      <Styled.Days>
+  {getDaysInMonth(currentDate).map((day) => (
+    <div key={day.day} id={`day-${day.day}`}>
+      {calculatePercentage() < 100 ? (
+        <Styled.LowPercentageDay
+          className={`day ${selectedDay === day.day ? 'selected' : ''}`}
+          onClick={() => handleDayClick(day)}
+        >
+          {day.day}
+        </Styled.LowPercentageDay>
+      ) : (
+        <Styled.Day
+          className={`day ${selectedDay === day.day ? 'selected' : ''}`}
+          onClick={() => handleDayClick(day)}
+        >
+          {day.day}
+        </Styled.Day>
       )}
+      <Styled.Procent
+        className={`procent ${calculatePercentage() < 100 ? 'lowPercentage' : ''}`}
+      >{`${calculatePercentage()}%`}</Styled.Procent>
     </div>
+  ))}
+</Styled.Days>
+
+      {isModalOpen && (
+        <Styled.Modal onClick={handleOutsideClick}>
+          <Styled.ModalContent>
+            <Styled.Container>
+              <Styled.CloseButton onClick={closeModal}>
+                &times;
+              </Styled.CloseButton>
+              <Styled.TitleModal>{`${modalContent?.day}, ${modalContent?.month}`}</Styled.TitleModal>
+              <Styled.ModalParagraf>
+                Daily norm: <Styled.SpanModal>1.5L</Styled.SpanModal>
+              </Styled.ModalParagraf>
+              <Styled.ModalParagraf>
+                Fulfillment of the daily norm:{' '}
+                <Styled.SpanModal>100%</Styled.SpanModal>
+              </Styled.ModalParagraf>
+              <Styled.ModalParagraf>
+                How many servings of water:{' '}
+                <Styled.SpanModal>6</Styled.SpanModal>
+              </Styled.ModalParagraf>
+            </Styled.Container>
+          </Styled.ModalContent>
+        </Styled.Modal>
+      )}
+    </Styled.CalendarContainer>
   );
 };
 
