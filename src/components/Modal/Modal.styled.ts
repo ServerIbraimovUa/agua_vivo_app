@@ -16,8 +16,12 @@ export const Overlay = styled.div`
     min-width: 592px;
     max-width: 1008px;
     min-height: 208px;
+
     /* max-height: 592px; */
     background: var( --secondary-white);
+
+   
+
     border-radius: 8px;
     overflow: hidden;
     padding: 32px 24px;
