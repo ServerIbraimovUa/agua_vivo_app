@@ -12,8 +12,6 @@ type Inputs = {
   time: string
   gender?: "male" | "female"
   quantity:string
-  dailyNorma:string
-
 }
 
 const DailyNormaModal: FC<Props>= ({onClose}) => {
