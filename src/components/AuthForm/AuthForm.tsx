@@ -2,6 +2,8 @@ import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { logInThunk, registerThunk } from "../../redux/auth/auth.operations";
 import { useAppDispatch } from "../../redux/redux_ts/hook";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export interface Data {
   email: string;
@@ -12,14 +14,26 @@ interface Props {
   repeat: boolean;
 }
 
+const schema = yup
+  .object({
+    email: yup.string().min(6).max(60).required(),
+    password: yup.string().min(8).max(64).required(),
+    repeatPassword: yup
+      .string()
+      .oneOf([yup.ref("password"), null], "Passwords must match"),
+  })
+  .required();
+
 const AuthForm: FC<Props> = ({ repeat }) => {
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     reset,
     formState: { errors },
-  } = useForm<Data>();
+  } = useForm<Data>({
+    resolver: yupResolver(schema),
+  });
 
   const dispatch = useAppDispatch();
 
@@ -34,7 +48,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
     reset();
   };
 
-  const password = watch("password", "");
+  // const password = watch("password", "");
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -55,7 +69,9 @@ const AuthForm: FC<Props> = ({ repeat }) => {
           type="password"
           placeholder="Password"
         />
-        {errors.password && <span>This field is required</span>}
+        {errors.password && (
+          <span>This field is required with minimum 8 characters</span>
+        )}
       </label>
       {repeat && (
         <>
@@ -65,13 +81,15 @@ const AuthForm: FC<Props> = ({ repeat }) => {
             <input
               {...register("repeatPassword", {
                 required: true,
-                validate: (value) =>
-                  value === password || "Passwords do not match",
+                // validate: (value) =>
+                //   value === password || "Passwords do not match",
               })}
               type="password"
               placeholder="Repeat password"
             />
-            {errors.repeatPassword && <span>This field is required</span>}
+            {errors.repeatPassword && (
+              <span>{errors.repeatPassword?.message}</span>
+            )}
           </label>
         </>
       )}
