@@ -10,7 +10,7 @@ export const selectAllWater = createSelector(
 
   export const selectDailyNorma = createSelector(
     selectWater,
-    water => water.dailyNorma
+    water => water
   );
 
   export const selectMonthlyNorma = createSelector(
