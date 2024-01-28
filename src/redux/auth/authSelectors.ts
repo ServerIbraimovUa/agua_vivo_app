@@ -1,29 +1,34 @@
-import { createSelector } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { createSelector } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 const selectAuthorization = (state: RootState) => state.auth;
 
 export const selectUser = createSelector(
   selectAuthorization,
-  auth => auth.user
+  (auth) => auth.user
+);
+
+export const selectDailyNorma = createSelector(
+  selectAuthorization,
+  (auth) => auth.user.dailyNorma
 );
 
 export const selectToken = createSelector(
   selectAuthorization,
-  auth => auth.token
+  (auth) => auth.token
 );
 
 export const selectIsAuthorized = createSelector(
   selectAuthorization,
-  auth => auth.isAuthorized
+  (auth) => auth.isAuthorized
 );
 
 export const selectIsLoading = createSelector(
   selectAuthorization,
-  auth => auth.isLoading
+  (auth) => auth.isLoading
 );
 
 export const selectError = createSelector(
   selectAuthorization,
-  auth => auth.error
+  (auth) => auth.error
 );

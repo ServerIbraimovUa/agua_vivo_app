@@ -2,14 +2,16 @@ import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
   addWater,
   deleteWater,
-  getMonthlyWaterNorma,
+  getAmountDaily,
+  getAmountMonthly,
   updateWaterVolume,
 } from "./water.operations";
 import { IWater } from "../redux_ts/interfaces";
 
 const waterInitState: IWater = {
   waterList: [],
-  monthlyNorma: null,
+  amountDaily: null,
+  amountMonthly: null,
   isLoading: false,
   error: null,
 };
@@ -24,11 +26,13 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.waterList.unshift(action.payload);
       })
-      .addCase(deleteWater.fulfilled, (state, action) => {
+      .addCase(getAmountDaily.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.waterList = state.waterList.filter(
-          (water) => !action.payload.includes(water.id)
-        );
+        state.amountDaily = action.payload;
+      })
+      .addCase(getAmountMonthly.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.amountMonthly = action.payload;
       })
       .addCase(updateWaterVolume.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -37,16 +41,19 @@ const waterSlice = createSlice({
           return water;
         });
       })
-      .addCase(getMonthlyWaterNorma.fulfilled, (state, action) => {
+      .addCase(deleteWater.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.monthlyNorma = action.payload;
+        state.waterList = state.waterList.filter(
+          (water) => !action.payload.includes(water.id)
+        );
       })
       .addMatcher(
         isAnyOf(
           addWater.pending,
+          getAmountDaily.pending,
+          getAmountMonthly.pending,
           updateWaterVolume.pending,
-          deleteWater.pending,
-          getMonthlyWaterNorma.pending
+          deleteWater.pending
         ),
         (state) => {
           state.isLoading = true;
@@ -56,9 +63,10 @@ const waterSlice = createSlice({
       .addMatcher(
         isAnyOf(
           addWater.rejected,
+          getAmountDaily.rejected,
+          getAmountMonthly.rejected,
           updateWaterVolume.rejected,
-          deleteWater.rejected,
-          getMonthlyWaterNorma.rejected
+          deleteWater.rejected
         ),
         (state, action) => {
           state.isLoading = false;
