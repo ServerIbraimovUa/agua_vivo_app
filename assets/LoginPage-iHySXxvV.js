@@ -1,1 +1,0 @@
-import{j as r,N as i}from"./index-Ch12otUw.js";import{A as s}from"./AuthForm-2NbKhH2s.js";import"./index.esm-0JV8Qlv2.js";import"./hook-BbwAfvej.js";const a=()=>r.jsxs("div",{children:[r.jsx("h2",{children:"Sign In"}),r.jsx(s,{repeat:!1}),r.jsx(i,{to:"/signup",children:"Sign up"})]});export{a as default};
