@@ -1,20 +1,35 @@
-import { ChangeEvent, FC, FormEvent, KeyboardEvent, useState } from "react";
+import { ChangeEvent, FC, KeyboardEvent, useState } from "react";
 import { IWaterData } from "../WaterList";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { addWater } from "../../../redux/water/water.operations";
+import { useAppDispatch } from "../../../redux/redux_ts/hook";
 
-interface Props {
+interface IProps {
   title: string;
   show: boolean;
-  handleAddWater?: (event: FormEvent<HTMLFormElement>) => void;
   handleUpdateWater?: (waterData: IWaterData) => void;
   closeModal: () => void;
 }
 
-const AddWaterModal: FC<Props> = ({
+export type IWaterPortion = {
+  date: string;
+  waterVolume: number;
+};
+
+const AddWaterModal: FC<IProps> = ({
   title,
   show,
-  handleAddWater,
+
   closeModal,
 }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IWaterPortion>();
+
+  const dispatch = useAppDispatch();
+
   const [state, setState] = useState({
     count: 0,
     inputValue: "0",
@@ -39,7 +54,7 @@ const AddWaterModal: FC<Props> = ({
   };
 
   const handleInputBlur = () => {
-    handleCountChange(+state.inputValue);
+    handleCountChange(Number(state.inputValue));
   };
 
   const handleInputKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -48,11 +63,13 @@ const AddWaterModal: FC<Props> = ({
     }
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (handleAddWater) {
-      handleAddWater(event);
-    }
+  const onSubmit: SubmitHandler<IWaterPortion> = (data) => {
+    const newData = {
+      date: data.date,
+      waterVolume: Number(state.inputValue),
+    };
+
+    dispatch(addWater(newData));
 
     closeModal();
   };
@@ -67,7 +84,7 @@ const AddWaterModal: FC<Props> = ({
       )}
       <h2>{title}</h2>
       <p>Amount of water:</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="counter">
           <button
             onClick={() => handleCountChange(state.count - 50)}
@@ -85,12 +102,19 @@ const AddWaterModal: FC<Props> = ({
         </div>
         <label>
           <span>Recording time:</span>
-          <input type="time" name="waterVolume" />
+          <input
+            {...register("date", { required: true })}
+            type="time"
+            name="date"
+            step={300}
+          />
+          {errors.date && <span>This field is required</span>}
         </label>
 
         <label>
           <span>Enter the value of water used:</span>
           <input
+            {...register("waterVolume", { required: true })}
             type="number"
             min={0}
             max={5000}
@@ -101,6 +125,7 @@ const AddWaterModal: FC<Props> = ({
             onBlur={handleInputBlur}
             onKeyPress={handleInputKeyPress}
           />
+          {errors.waterVolume && <span>This field is required</span>}
         </label>
 
         <div>
