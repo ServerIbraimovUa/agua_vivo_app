@@ -2,9 +2,9 @@ import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { logInThunk, registerThunk } from "../../redux/auth/auth.operations";
 import { useAppDispatch } from "../../redux/redux_ts/hook";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+import { authSchemas } from "../../schemas/authSchemas";
 export interface Data {
   email: string;
   password: string;
@@ -14,25 +14,14 @@ interface Props {
   repeat: boolean;
 }
 
-const schema = yup
-  .object({
-    email: yup.string().min(6).max(60).required(),
-    password: yup.string().min(8).max(64).required(),
-    repeatPassword: yup
-      .string()
-      .oneOf([yup.ref("password"), null], "Passwords must match"),
-  })
-  .required();
-
 const AuthForm: FC<Props> = ({ repeat }) => {
   const {
     register,
     handleSubmit,
-    // watch,
     reset,
     formState: { errors },
   } = useForm<Data>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(authSchemas(repeat)),
   });
 
   const dispatch = useAppDispatch();
@@ -48,10 +37,11 @@ const AuthForm: FC<Props> = ({ repeat }) => {
     reset();
   };
 
-  // const password = watch("password", "");
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      style={{ display: "flex", flexDirection: "column" }}
+    >
       <label>
         <span>Enter your email</span>
         <input
@@ -69,9 +59,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
           type="password"
           placeholder="Password"
         />
-        {errors.password && (
-          <span>This field is required with minimum 8 characters</span>
-        )}
+        {errors.password?.message}
       </label>
       {repeat && (
         <>
@@ -81,15 +69,11 @@ const AuthForm: FC<Props> = ({ repeat }) => {
             <input
               {...register("repeatPassword", {
                 required: true,
-                // validate: (value) =>
-                //   value === password || "Passwords do not match",
               })}
               type="password"
               placeholder="Repeat password"
             />
-            {errors.repeatPassword && (
-              <span>{errors.repeatPassword?.message}</span>
-            )}
+            {errors.repeatPassword?.message}
           </label>
         </>
       )}

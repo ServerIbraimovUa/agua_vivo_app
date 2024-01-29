@@ -8,11 +8,15 @@ import { selectIsAuthorized } from "../../redux/auth/authSelectors.js";
 const Header = () => {
   const isAuthorized = useSelector(selectIsAuthorized);
   return (
-    <NavbarContainer>
-      <Logo />
+    <header>
+      <div className="container">
+        <NavbarContainer>
+          <Logo />
 
-      {isAuthorized ? <UserLogo /> : <UserAuth />}
-    </NavbarContainer>
+          {isAuthorized ? <UserLogo /> : <UserAuth />}
+        </NavbarContainer>
+      </div>
+    </header>
   );
 };
 
