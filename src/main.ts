@@ -1,12 +1,11 @@
-import "./index.css";
 import { createGlobalStyle } from "styled-components";
 import Regular from "./assets/fonts/Roboto-Regular.ttf";
 import Medium from "./assets/fonts/Roboto-Medium.ttf";
 import Bold from "./assets/fonts/Roboto-Bold.ttf";
 import { device } from "./css/deviceSize";
-
+import "modern-normalize/modern-normalize.css";
+import "./index.css";
 export const GlobalStyle = createGlobalStyle`
-// VAR
 
 :root{
   // COLORS
@@ -60,20 +59,21 @@ export const GlobalStyle = createGlobalStyle`
 
   // STYLES
 
-  *{
-    box-sizing: border-box;
-  }
-
+  #root,
   body {
-      font-family: 'Roboto', sans-serif;
-      font-weight: var(--regular-font-weight);
-      font-style: normal;
-      font-size: var(--standart-font-size);
-      line-height: var(--standart-line-height);
-      
-      color: var(--primary-black);
-      background-color: var(--primary-white);
-    }
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+    font-weight: var(--regular-font-weight);
+    font-style: normal;
+    font-size: var(--standart-font-size);
+    line-height: var(--standart-line-height);
+    
+    color: var(--primary-black);
+    background-color: var(--primary-white);
+}
 
   .is-hidden {
   opacity: 0;
@@ -109,6 +109,16 @@ export const GlobalStyle = createGlobalStyle`
  
 // CONTAINER
 
+section{
+  padding-top: 24px;
+  @media ${device.tablet} {
+    padding-top: 40px;
+  }
+  @media ${device.desktop} {
+    padding-top: 80px;
+  }
+}
+
 .container {
   width: 100%;
   padding-left: 20px;
@@ -117,15 +127,15 @@ export const GlobalStyle = createGlobalStyle`
   outline: 1px solid black;
   
   @media ${device.mobile} {
-        max-width: 320px;
+        max-width: 360px;
         }
   
   @media ${device.tablet} {
-        max-width: 704px;
+        max-width: 744px;
         }
 
     @media ${device.desktop} {
-        max-width: 1216px;
+        max-width: 1264px;
         padding-left: 24px;
         padding-right: 24px;
     }

@@ -13,19 +13,18 @@ const Logo = () => {
           <NavLink to="/home">
             <LogoContainer>
               <Icon className="icon" id="logo" />
-              <p className="logotext">Tracker<br /> of water</p>
+              <span className="logo-text">Tracker of water</span>
             </LogoContainer>
           </NavLink>
         </>
       ) : (
         <>
-            <NavLink to="/welcome">
-              <LogoContainer>
+          <NavLink to="/welcome">
+            <LogoContainer>
               <Icon className="icon" id="logo" />
-              
-              <p className="logotext">Tracker<br /> of water</p>
-              </LogoContainer>
-           
+
+              <span className="logo-text">Tracker of water</span>
+            </LogoContainer>
           </NavLink>
         </>
       )}
