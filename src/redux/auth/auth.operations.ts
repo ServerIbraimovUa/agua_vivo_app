@@ -93,14 +93,16 @@ export const updateUserInfoByIdThunk = createAsyncThunk(
 
 export const updateAvatar = createAsyncThunk(
   "auth/avatars",
-  async (newAvatar: string, thunkAPI) => {
+  async (newAvatar: File, thunkAPI) => {
     try {
-      const response = await axios.patch("/users/avatars", newAvatar, {
+      const formData = new FormData();
+      formData.append("avatar", newAvatar);
+      const response = await axios.patch("/users/avatars", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      return response.data;
+      return response.data.avatar;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
