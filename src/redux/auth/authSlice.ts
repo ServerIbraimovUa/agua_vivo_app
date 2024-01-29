@@ -54,13 +54,11 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateAvatar.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isAuthorized = true;
+        state.user.avatar = action.payload;
         state.isLoading = false;
       })
       .addCase(updateDailyNorma.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isAuthorized = true;
+        state.user.dailyNorma = action.payload;
         state.isLoading = false;
       })
       .addCase(updatePassword.fulfilled, (state, action) => {
