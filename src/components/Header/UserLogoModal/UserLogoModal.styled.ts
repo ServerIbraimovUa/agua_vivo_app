@@ -2,21 +2,33 @@ import styled from "styled-components";
 
 export const LogoWrapper = styled.div`
   position: relative;
-  min-width: 122px;
   height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   .open-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-
     font-size: 18px;
     cursor: pointer;
 
     border: none;
     background-color: transparent;
 
+    .name::first-letter {
+      text-transform: uppercase;
+    }
+    .arrow-down {
+      width: 16px;
+      height: 16px;
+    }
+
     .user-photo {
+      border-radius: 28px;
+      margin-left: 8px;
+      margin-right: 4px;
+
       width: 28px;
       height: 28px;
     }
@@ -24,6 +36,7 @@ export const LogoWrapper = styled.div`
 
   .btn-down {
     position: absolute;
+    top: 34px;
     right: 0;
     display: flex;
     flex-direction: column;

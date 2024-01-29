@@ -1,12 +1,11 @@
-import "./index.css";
 import { createGlobalStyle } from "styled-components";
 import Regular from "./assets/fonts/Roboto-Regular.ttf";
 import Medium from "./assets/fonts/Roboto-Medium.ttf";
 import Bold from "./assets/fonts/Roboto-Bold.ttf";
 import { device } from "./css/deviceSize";
-
+import "modern-normalize/modern-normalize.css";
+import "./index.css";
 export const GlobalStyle = createGlobalStyle`
-// VAR
 
 :root{
   // COLORS
@@ -62,9 +61,8 @@ export const GlobalStyle = createGlobalStyle`
 
   // STYLES
 
-  *{
-    box-sizing: border-box;
-  }
+
+  #root,
 
   html{
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" height="72px" width="72px" stroke="black" fill="transparent" stroke-width="3"><g><path d="M10.756 29.167l-2.897-10.82M7.859 18.347l-5.355 4.747 1.214-20.203 11.151 16.89-7.010-1.434z"/></g></svg>')
@@ -72,16 +70,21 @@ export const GlobalStyle = createGlobalStyle`
       pointer;
   }
 
+
   body {
-      font-family: 'Roboto', sans-serif;
-      font-weight: var(--regular-font-weight);
-      font-style: normal;
-      font-size: var(--standart-font-size);
-      line-height: var(--standart-line-height);
-      
-      color: var(--primary-black);
-      background-color: var(--primary-white);
-    }
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+    font-weight: var(--regular-font-weight);
+    font-style: normal;
+    font-size: var(--standart-font-size);
+    line-height: var(--standart-line-height);
+    
+    color: var(--primary-black);
+    background-color: var(--primary-white);
+}
 
   .is-hidden {
   opacity: 0;
@@ -125,6 +128,16 @@ export const GlobalStyle = createGlobalStyle`
     
 // CONTAINER
 
+section{
+  padding-top: 24px;
+  @media ${device.tablet} {
+    padding-top: 40px;
+  }
+  @media ${device.desktop} {
+    padding-top: 80px;
+  }
+}
+
 .container {
   width: 100%;
   padding-left: 20px;
@@ -133,15 +146,15 @@ export const GlobalStyle = createGlobalStyle`
   outline: 1px solid black;
   
   @media ${device.mobile} {
-        max-width: 320px;
+        max-width: 360px;
         }
   
   @media ${device.tablet} {
-        max-width: 704px;
+        max-width: 744px;
         }
 
     @media ${device.desktop} {
-        max-width: 1216px;
+        max-width: 1264px;
         padding-left: 24px;
         padding-right: 24px;
     }
