@@ -9,7 +9,6 @@ interface Props {
 }
 
 
-
 const Modal: FC<Props> = ({ setVisible, title, children }) => {
 
   useEffect(() => {

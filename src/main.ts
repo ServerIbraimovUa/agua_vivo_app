@@ -65,9 +65,9 @@ export const GlobalStyle = createGlobalStyle`
   #root,
 
   html{
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" height="72px" width="72px" stroke="black" fill="transparent" stroke-width="3"><g><path d="M10.756 29.167l-2.897-10.82M7.859 18.347l-5.355 4.747 1.214-20.203 11.151 16.89-7.010-1.434z"/></g></svg>')
+    /* cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" height="72px" width="72px" stroke="black" fill="transparent" stroke-width="3"><g><path d="M10.756 29.167l-2.897-10.82M7.859 18.347l-5.355 4.747 1.214-20.203 11.151 16.89-7.010-1.434z"/></g></svg>')
       24 24,
-      pointer;
+      pointer; */
   }
 
 
