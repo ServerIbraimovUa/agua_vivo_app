@@ -6,6 +6,7 @@ import Icon from "../Icon/Icon";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authSchemas } from "../../schemas/authSchemas";
 import togglePassword from "../../utils/togglePassword";
+import { AuthFormButton, StyledAuthFormSpan } from "./AuthForm.styled";
 export interface Data {
   email: string;
   password: string;
@@ -63,7 +64,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
           type={toggleInput}
           placeholder="Password"
         />
-        <span
+        <StyledAuthFormSpan
           onClick={() =>
             togglePassword(toggleInput, setToggleInput, setToggleIcon)
           }
@@ -71,9 +72,9 @@ const AuthForm: FC<Props> = ({ repeat }) => {
           {toggleIcon ? (
             <Icon className="eye-icon" id="eye" />
           ) : (
-            <Icon className="eyeoff-icon" id="eye-outline" />
+            <Icon className="eye-outline-icon" id="eye-outline" />
           )}
-        </span>
+        </StyledAuthFormSpan>
         {errors.password?.message}
       </label>
       {repeat && (
@@ -88,7 +89,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
               type={toggleInput}
               placeholder="Repeat password"
             />
-            <span
+            <StyledAuthFormSpan
               onClick={() =>
                 togglePassword(toggleInput, setToggleInput, setToggleIcon)
               }
@@ -96,15 +97,17 @@ const AuthForm: FC<Props> = ({ repeat }) => {
               {toggleIcon ? (
                 <Icon className="eye-icon" id="eye" />
               ) : (
-                <Icon className="eyeoff-icon" id="eye-outline" />
+                <Icon className="eye-outline-icon" id="eye-outline" />
               )}
-            </span>
+            </StyledAuthFormSpan>
             {errors.repeatPassword?.message}
           </label>
         </>
       )}
 
-      <button type="submit">{repeat ? "Sign Up" : "Sign In"}</button>
+      <AuthFormButton type="submit">
+        {repeat ? "Sign Up" : "Sign In"}
+      </AuthFormButton>
     </form>
   );
 };
