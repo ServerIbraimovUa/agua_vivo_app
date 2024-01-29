@@ -1,10 +1,11 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { logInThunk, registerThunk } from "../../redux/auth/auth.operations";
 import { useAppDispatch } from "../../redux/redux_ts/hook";
-
+import Icon from "../Icon/Icon";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authSchemas } from "../../schemas/authSchemas";
+import togglePassword from "../../utils/togglePassword";
 export interface Data {
   email: string;
   password: string;
@@ -15,6 +16,9 @@ interface Props {
 }
 
 const AuthForm: FC<Props> = ({ repeat }) => {
+  const [toggleInput, setToggleInput] = useState("password");
+  const [toggleIcon, setToggleIcon] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -56,9 +60,20 @@ const AuthForm: FC<Props> = ({ repeat }) => {
 
         <input
           {...register("password", { required: true })}
-          type="password"
+          type={toggleInput}
           placeholder="Password"
         />
+        <span
+          onClick={() =>
+            togglePassword(toggleInput, setToggleInput, setToggleIcon)
+          }
+        >
+          {toggleIcon ? (
+            <Icon className="eye-icon" id="eye" />
+          ) : (
+            <Icon className="eyeoff-icon" id="eye-outline" />
+          )}
+        </span>
         {errors.password?.message}
       </label>
       {repeat && (
@@ -70,9 +85,20 @@ const AuthForm: FC<Props> = ({ repeat }) => {
               {...register("repeatPassword", {
                 required: true,
               })}
-              type="password"
+              type={toggleInput}
               placeholder="Repeat password"
             />
+            <span
+              onClick={() =>
+                togglePassword(toggleInput, setToggleInput, setToggleIcon)
+              }
+            >
+              {toggleIcon ? (
+                <Icon className="eye-icon" id="eye" />
+              ) : (
+                <Icon className="eyeoff-icon" id="eye-outline" />
+              )}
+            </span>
             {errors.repeatPassword?.message}
           </label>
         </>
