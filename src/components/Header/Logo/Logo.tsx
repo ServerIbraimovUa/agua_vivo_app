@@ -1,26 +1,35 @@
 import { NavLink } from "react-router-dom";
-import logo from "../../../img/Logo.svg";
+import Icon from "../../Icon/Icon";
 import { useSelector } from "react-redux";
 import { selectIsAuthorized } from "../../../redux/auth/authSelectors";
+import { LogoContainer } from "./Logo.Styled";
 
 const Logo = () => {
   const isAuthorized = useSelector(selectIsAuthorized);
   return (
-    <div>
+    <>
       {isAuthorized ? (
         <>
           <NavLink to="/home">
-            <img src={logo} alt="logo" width="102px" height="48px" />
+            <LogoContainer>
+              <Icon className="icon" id="logo" />
+              <p className="logotext">Tracker of water</p>
+            </LogoContainer>
           </NavLink>
         </>
       ) : (
         <>
-          <NavLink to="/welcome">
-            <img src={logo} alt="logo" width="102px" height="48px" />
+            <NavLink to="/welcome">
+              <LogoContainer>
+              <Icon className="icon" id="logo" />
+              
+              <p className="logotext">Tracker of water</p>
+              </LogoContainer>
+           
           </NavLink>
         </>
       )}
-    </div>
+    </>
   );
 };
 
