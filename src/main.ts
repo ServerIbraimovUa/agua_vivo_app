@@ -114,6 +114,7 @@ export const GlobalStyle = createGlobalStyle`
   padding-left: 20px;
   padding-right: 20px;
   margin: 0 auto; 
+  outline: 1px solid black;
   
   @media ${device.mobile} {
         max-width: 320px;
