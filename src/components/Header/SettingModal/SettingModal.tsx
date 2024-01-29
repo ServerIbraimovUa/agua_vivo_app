@@ -1,26 +1,57 @@
-import { useForm } from "react-hook-form";
-// import { FC } from "react";
+import React, { ChangeEvent, useState } from "react";
 
-interface SettingForm {
-  // photo:
-  gender?: "woman" | "man";
+import { useSelector } from "react-redux";
+import { SubmitHandler, useForm } from "react-hook-form";
+// import Icon from "../../Icon/Icon";
+import { selectUser } from "../../../redux/auth/authSelectors";
+import { useAppDispatch } from "../../../redux/redux_ts/hook";
+import { updateAvatar } from "../../../redux/auth/auth.operations";
+import { FormSettingStyled } from "./SettingModal.styled";
+
+type SettingForm = {
+  avatar: string;
+  gender?: "male" | "female" | "other";
   name: string;
   email: string;
-  outdatedPassword: string;
-  newPassword: string;
-  repeatNewPassword: string;
-}
+  outdatedPassword?: string;
+  newPassword?: string;
+  repeatNewPassword?: string;
+};
 
-const SettingModal = () => {
+const SettingModal: React.FC = () => {
+  const [file, setFile] = useState("");
+  const data = useSelector(selectUser);
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
+    getValues,
     reset,
 
-    formState: { errors },
-  } = useForm<SettingForm>();
+    formState: { errors, isSubmitting },
+  } = useForm<SettingForm>({
+    defaultValues: {
+      gender: "other",
+      name: data.name || "",
+      email: data.email,
+      outdatedPassword: "",
+      newPassword: "",
+      repeatNewPassword: "",
+    },
+  });
 
-  const onSubmit = (data: SettingForm) => {
+  const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const selectedFile = files[0];
+      setFile(selectedFile.name);
+    } // console.dir(e.target);
+  };
+
+  const onSubmit: SubmitHandler<SettingForm> = async (data) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    dispatch(updateAvatar(file));
     console.log(data);
 
     reset();
@@ -28,54 +59,60 @@ const SettingModal = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <FormSettingStyled onSubmit={handleSubmit(onSubmit)}>
         <div>
-          {/* <label>
+          <label>
             <span>Your photo</span>
-            <img></img>
-            <input type="file" name="remember" />
+            <img className="avatar" src={data.avatar} alt="User avatar" />
+            <input type="file" onChange={onChangeFile} />
+            {/* <Icon className="modal-icon" id="arow-up" /> */}
             <span>Upload a photo</span>
-          </label> */}
+          </label>
 
           <span>Your gender identity</span>
 
           <div>
             <label>
               <input
-                {...register("gender", { required: true })}
-                value="woman"
+                {...register("gender", { required: "Please select a gender" })}
+                value="female"
                 type="radio"
               />
               <span>Woman</span>
             </label>
             <label>
               <input
-                {...register("gender", { required: true })}
-                value="man"
+                {...register("gender", { required: "Please select a gender" })}
+                value="male"
                 type="radio"
               />
               <span>Man</span>
+            </label>
+            <label>
+              <input
+                {...register("gender", { required: "Please select a gender" })}
+                value="other"
+                type="radio"
+              />
+              <span>Other</span>
             </label>
           </div>
 
           <label>
             <span>Your name</span>
-            <input
-              {...register("name", { required: true })}
-              type="text"
-              placeholder="name"
-            />
-            {errors.name && <span>This field is required</span>}
+            <input {...register("name")} type="text" placeholder="name" />
           </label>
 
           <label>
             <span>E-mail</span>
             <input
-              {...register("email", { required: true })}
+              {...register("email", {
+                required: "This field is required",
+              })}
               type="email"
               placeholder="email"
             />
-            {errors.email && <span>This field is required</span>}
+            {errors.email && <p>{`${errors.email.message}`}</p>}
           </label>
         </div>
 
@@ -86,47 +123,74 @@ const SettingModal = () => {
             <span>Outdated password:</span>
             <input
               {...register("outdatedPassword", {
-                required: true,
-                minLength: 8,
-                maxLength: 64,
+                validate: (value, { newPassword }) => {
+                  if (newPassword) {
+                    return !!value || "This field is required";
+                  }
+                  return true;
+                },
               })}
               type="password"
               placeholder="Password"
             />
-            {errors.outdatedPassword && <span>This field is required</span>}
+            {errors.outdatedPassword && (
+              <p>{`${errors.outdatedPassword.message}`}</p>
+            )}
           </label>
 
           <label>
             <span>New Password:</span>
             <input
               {...register("newPassword", {
-                required: true,
-                minLength: 8,
-                maxLength: 64,
+                validate: (value, { outdatedPassword }) => {
+                  if (outdatedPassword) {
+                    return !!value || "This field is required";
+                  }
+                  return true;
+                },
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+                maxLength: {
+                  value: 64,
+                  message: "Password must be at most 64 characters",
+                },
               })}
               type="password"
               placeholder="Password"
             />
-            {errors.newPassword && <span>This field is required</span>}
+            {errors.newPassword && <p>{`${errors.newPassword.message}`}</p>}
           </label>
 
           <label>
             <span>Repeat new password:</span>
             <input
               {...register("repeatNewPassword", {
-                required: true,
-                minLength: 8,
-                maxLength: 64,
+                validate: (value) =>
+                  value === getValues("newPassword") || "Passwords must match",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+                maxLength: {
+                  value: 64,
+                  message: "Password must be at most 64 characters",
+                },
               })}
               type="password"
               placeholder="Password"
             />
-            {errors.repeatNewPassword && <span>This field is required</span>}
+            {errors.repeatNewPassword && (
+              <p>{`${errors.repeatNewPassword.message}`}</p>
+            )}
           </label>
         </div>
 
-        <button type="submit">Save</button>
-      </form>
+        <button disabled={isSubmitting} type="submit">
+          {isSubmitting ? "Saving..." : "Save"}
+        </button>
+      </FormSettingStyled>
     </div>
   );
 };
