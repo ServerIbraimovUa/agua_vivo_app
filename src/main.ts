@@ -116,16 +116,14 @@ export const GlobalStyle = createGlobalStyle`
   margin: 0 auto; 
   
   @media ${device.mobile} {
-        min-width: 280px;
-        max-width: 300px;
+        max-width: 320px;
         }
   
   @media ${device.tablet} {
-        min-width: 704px;
-        max-width: 1216px;
+        max-width: 704px;
         }
 
-    @media ${device.laptop} {
+    @media ${device.desktop} {
         max-width: 1216px;
         padding-left: 24px;
         padding-right: 24px;

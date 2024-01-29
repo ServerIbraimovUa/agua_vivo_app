@@ -1,10 +1,13 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Data } from "../../components/AuthForm/AuthForm";
+
 import { CurrentData, IAuthInit, UpdateUser } from "../redux_ts/interfaces";
 
 axios.defaults.baseURL = "https://agua-vivo-app-backend.onrender.com";
-
+export interface Data {
+  email: string;
+  password: string;
+}
 const setToken = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
@@ -41,7 +44,7 @@ export const logInThunk = createAsyncThunk(
 
 export const getCurrentUserThunk = createAsyncThunk<
   CurrentData,
-  string,
+  undefined,
   { state: { auth: IAuthInit } }
 >("auth/current", async (_, thunkAPI) => {
   try {

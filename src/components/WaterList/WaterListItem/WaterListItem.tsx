@@ -25,7 +25,7 @@ const WaterListItem: FC<IProps> = ({
 
   return (
     <>
-      {waterList.map(({ waterVolume, date, waterId, waterData }) => {
+      {waterList.map(({ waterVolume, date, waterId }) => {
         return (
           <li key={waterId}>
             <span>
@@ -36,7 +36,7 @@ const WaterListItem: FC<IProps> = ({
             <button
               type="button"
               className="edit-btn"
-              onClick={() => handleUpdateWater(waterData)}
+              // onClick={() => handleUpdateWater(waterData)}
             >
               <Icon className="edit-water-icon" id="icon-pencil"></Icon>
             </button>
