@@ -7,6 +7,7 @@ import { LogoWrapper } from "./UserLogoModal.styled";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../redux/auth/authSelectors";
+import PrifileImageEmail from "./PrifileImageEmail";
 
 const UserLogoModal = () => {
   const [anchorEl, setAnchorEl] = useState(false);
@@ -30,13 +31,14 @@ const UserLogoModal = () => {
     <LogoWrapper>
       <button className="open-btn" onClick={handleClick}>
         {email}
-        <img
+        {/* <img
           className="user-photo"
           src={`${avatar}`}
           alt="default_logo"
           width="28"
           height="28"
-        ></img>
+        ></img> */}
+        <PrifileImageEmail/>
         <img
           className="arrow"
           src={arrow}
