@@ -26,4 +26,8 @@ export const Ul = styled.ul`
     gap: 8px;
     align-items: center;
   }
+  .welcome-icon {
+    height: 40px;
+    width: 40px;
+  }
 `;
