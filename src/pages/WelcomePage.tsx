@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+
 import WhyDrinkWater from "../components/WhyDrinkWater/WhyDrinkWater";
 import WaterConsumptionTracker from "../components/WaterConsumptionTracker/WaterConsumptionTracker";
 
