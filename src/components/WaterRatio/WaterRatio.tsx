@@ -15,11 +15,9 @@ import {
   WaterRatioTitle,
 } from "./WaterRatio.styled";
 import Icon from "../Icon/Icon";
-import { nanoid } from "@reduxjs/toolkit";
 
 const WaterRatio = () => {
   const [value, setValue] = useState([67]);
-  const keyId = nanoid();
 
   return (
     <WaterRatioContainer>
