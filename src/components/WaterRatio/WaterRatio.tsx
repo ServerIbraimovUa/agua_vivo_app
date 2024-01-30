@@ -15,60 +15,78 @@ import {
   WaterRatioTitle,
 } from "./WaterRatio.styled";
 import Icon from "../Icon/Icon";
+import Modal from "../Modal/Modal";
+import AddWaterModal from "../WaterList/AddWaterModal/AddWaterModal";
 
 const WaterRatio = () => {
-  const [value] = useState([67]);
+  const value = [5];
+  const [visible, setVisible] = useState(false);
+
+  const closeModal = () => {
+    setVisible(false);
+  };
 
   return (
-    <WaterRatioContainer>
-      <WaterRatioThumb>
-        <div>
-          <WaterRatioTitle>Today</WaterRatioTitle>
-          <WaterRatioRangeThumb>
-            <Range
-              disabled
-              min={0}
-              max={100}
-              values={value}
-              onChange={() => {}}
-              renderTrack={({ props, children }) => (
-                <RenderTrack
-                  {...props}
-                  style={{
-                    ...props.style,
-                    background: getTrackBackground({
-                      values: value,
-                      colors: ["#9EBBFF", "#D7E3FF"],
-                      min: 0,
-                      max: 100,
-                    }),
-                  }}
-                >
-                  {children}
-                </RenderTrack>
-              )}
-              renderThumb={({ props }) => (
-                <RenderThumb {...props} key={props.key}>
-                  <OutputThumb>
-                    <Output>{value[0]}%</Output>
-                  </OutputThumb>
-                </RenderThumb>
-              )}
-            />
-          </WaterRatioRangeThumb>
-          <PointsThumb>
-            {value[0] <= 6 ? <span> </span> : <PointsSpan>0%</PointsSpan>}
-            {value[0] >= 91 ? <span> </span> : <PointsSpan>100%</PointsSpan>}
-          </PointsThumb>
-        </div>
-        <WaterRatioBtnThumb>
-          <WaterRatioBtn className="btn">
-            <Icon className="water-ratio-plus" id="plus-circle" />
-            Add Water
-          </WaterRatioBtn>
-        </WaterRatioBtnThumb>
-      </WaterRatioThumb>
-    </WaterRatioContainer>
+    <>
+      <WaterRatioContainer>
+        <WaterRatioThumb>
+          <div>
+            <WaterRatioTitle>Today</WaterRatioTitle>
+            <WaterRatioRangeThumb>
+              <Range
+                disabled
+                min={0}
+                max={100}
+                values={value}
+                onChange={() => {}}
+                renderTrack={({ props, children }) => (
+                  <RenderTrack
+                    {...props}
+                    style={{
+                      ...props.style,
+                      background: getTrackBackground({
+                        values: value,
+                        colors: ["#9EBBFF", "#D7E3FF"],
+                        min: 0,
+                        max: 100,
+                      }),
+                    }}
+                  >
+                    {children}
+                  </RenderTrack>
+                )}
+                renderThumb={({ props }) => (
+                  <RenderThumb {...props} key={props.key}>
+                    <OutputThumb>
+                      <Output>{value[0]}%</Output>
+                    </OutputThumb>
+                  </RenderThumb>
+                )}
+              />
+            </WaterRatioRangeThumb>
+            <PointsThumb>
+              {value[0] <= 6 ? <span> </span> : <PointsSpan>0%</PointsSpan>}
+              {value[0] >= 91 ? <span> </span> : <PointsSpan>100%</PointsSpan>}
+            </PointsThumb>
+          </div>
+          <WaterRatioBtnThumb className="hover">
+            <WaterRatioBtn className="btn" onClick={() => setVisible(true)}>
+              <Icon className="water-ratio-plus" id="plus-circle" />
+              Add Water
+            </WaterRatioBtn>
+          </WaterRatioBtnThumb>
+        </WaterRatioThumb>
+      </WaterRatioContainer>
+      {visible && (
+        <Modal setVisible={setVisible} title="Add water">
+          <AddWaterModal
+            title="Choose a value"
+            show={false}
+            closeModal={closeModal}
+          />
+        </Modal>
+      )}
+    </>
   );
 };
 

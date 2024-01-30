@@ -4,7 +4,8 @@ a {
 }
 
 *:hover,
-*:focus {
+*:focus,
+*:active {
   cursor: inherit;
 }
 

@@ -161,7 +161,7 @@ const Calendar: React.FC = () => {
 
       <Styled.Days>
         {getDaysInMonth(currentDate).map((day) => (
-          <div key={day.day} id={`day-${day.day}`}>
+          <div key={day.day} id={`day-${day.day}`} className="hover active">
             {calculatePercentage() < 100 ? (
               <Styled.LowPercentageDay
                 className={`day ${selectedDay === day.day ? "selected" : ""}`}
@@ -190,7 +190,7 @@ const Calendar: React.FC = () => {
         <Styled.Modal ref={menuRef}>
           <Styled.ModalContent>
             <Styled.Container>
-              <Styled.CloseButton onClick={closeModal}>
+              <Styled.CloseButton onClick={closeModal} className="hover active">
                 &times;
               </Styled.CloseButton>
               <Styled.TitleModal>{`${modalContent?.day}, ${modalContent?.month}`}</Styled.TitleModal>
