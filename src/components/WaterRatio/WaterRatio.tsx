@@ -17,7 +17,7 @@ import {
 import Icon from "../Icon/Icon";
 
 const WaterRatio = () => {
-  const [value, setValue] = useState([67]);
+  const [value] = useState([67]);
 
   return (
     <WaterRatioContainer>

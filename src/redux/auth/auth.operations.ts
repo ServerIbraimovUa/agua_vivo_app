@@ -93,15 +93,18 @@ export const updateUserInfoByIdThunk = createAsyncThunk(
 
 export const updateAvatar = createAsyncThunk(
   "auth/avatars",
-  async (newAvatar: File, thunkAPI) => {
+  async (newAvatar: File | null, thunkAPI) => {
     try {
       const formData = new FormData();
-      formData.append("avatar", newAvatar);
+      if (newAvatar) {
+        formData.append("avatar", newAvatar);
+      }
       const response = await axios.patch("/users/avatars", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+      console.log(response.data);
       return response.data.avatar;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -111,7 +114,7 @@ export const updateAvatar = createAsyncThunk(
 
 export const updateDailyNorma = createAsyncThunk(
   "auth/updateDailyNorma",
-  async (newDailyNorma:string, thunkAPI) => {
+  async (newDailyNorma: string, thunkAPI) => {
     try {
       const response = await axios.patch("/users/water-rate", newDailyNorma);
       return response.data;

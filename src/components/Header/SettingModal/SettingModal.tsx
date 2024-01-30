@@ -34,7 +34,7 @@ type SettingForm = {
 };
 
 const SettingModal: React.FC = () => {
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState<File | null>(null);
   const data = useSelector(selectUser);
   const dispatch = useAppDispatch();
 
@@ -58,14 +58,12 @@ const SettingModal: React.FC = () => {
 
   const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files && files.length > 0) {
-      const selectedFile = files[0];
-      setFile(selectedFile.name);
-    } // console.dir(e.target);
+    if (files) {
+      setFile(files[0]);
+    }
   };
 
   const onSubmit: SubmitHandler<SettingForm> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
     dispatch(updateAvatar(file));
     console.log(data);
 

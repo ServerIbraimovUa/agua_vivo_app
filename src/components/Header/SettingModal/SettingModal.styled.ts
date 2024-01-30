@@ -91,7 +91,7 @@ export const FormGenderWrap = styled.div`
 
 export const FormGenderContair = styled.div`
   display: flex;
-  align-item: flex-start;
+  align-items: flex-start;
   gap: 24px;
   width: 100%;
 
