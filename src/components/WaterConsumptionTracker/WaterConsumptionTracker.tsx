@@ -8,10 +8,8 @@ interface IComponent {
 const WaterConsumptionTracker: FC<IComponent> = ({ handleClick }) => {
   return (
     <Div>
-      <div className="headers">
-        <h1 className="title">Water consumption tracker</h1>
-        <h2>Record daily water intake and track</h2>
-      </div>
+      <h1 className="title">Water consumption tracker</h1>
+      <h2>Record daily water intake and track</h2>
       <div className="tracker">
         <h3>Tracker Benefits</h3>
         <Ul>

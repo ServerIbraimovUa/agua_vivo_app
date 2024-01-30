@@ -24,12 +24,8 @@ export const StyledAuthFormSpan = styled.span`
 
 export const AuthFormButton = styled.button`
   width: 100%;
+  height: 36px;
   border-radius: 10px;
-  margin-left: auto;
-  font-size: 18px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  color: var(--primary-white);
-  background-color: var(--primary-blue);
-  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+  padding: 8px 30px;
+  font-size: 16px;
 `;

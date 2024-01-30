@@ -114,7 +114,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
         </>
       )}
 
-      <AuthFormButton type="submit">
+      <AuthFormButton className="btn" type="submit">
         {repeat ? "Sign Up" : "Sign In"}
       </AuthFormButton>
     </form>

@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { logOutThunk } from "../../../redux/auth/auth.operations";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
+import { BtnCancel, BtnLogout, BtnWrapper, TextModal } from "./UserLogautModal.styled";
 
 interface Props {
   setVisible: (b: boolean) => void;
@@ -10,18 +11,18 @@ const UserLogoutModal: FC<Props> = ({ setVisible }) => {
   const dispatch = useAppDispatch();
   return (
     <div>
-      <h2>Log out</h2>
+      
 
-      <p>Do you really want to leave?</p>
+      <TextModal>Do you really want to leave?</TextModal>
 
-      <div>
-        <button type="button" onClick={() => setVisible(false)}>
+      <BtnWrapper>
+        <BtnCancel type="button" onClick={() => setVisible(false)}>
           Cancel
-        </button>
-        <button type="button" onClick={() => dispatch(logOutThunk())}>
+        </BtnCancel>
+        <BtnLogout type="button" onClick={() => dispatch(logOutThunk())}>
           Log out
-        </button>
-      </div>
+        </BtnLogout>
+      </BtnWrapper>
     </div>
   );
 };
