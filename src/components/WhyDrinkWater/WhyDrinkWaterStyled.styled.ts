@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../css/deviceSize";
 
 export const Ul = styled.ul`
   list-style: none;
@@ -23,20 +24,25 @@ export const Ul = styled.ul`
 `;
 export const Div = styled.div`
   padding: 24px 16px;
-  background-color: var(--Secondary-color-2);
+  background-color: var(--secondary-white);
   border-radius: 10px;
   box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
-  width: 494px;
-  height: 332px;
+  @media ${device.tablet} {
+    width: 494px;
+    padding: 32px 24px;
+  }
+  @media ${device.desktop} {
+    height: 332px;
+  }
+
   h3 {
     margin-bottom: 12px;
     font-size: 18px;
-    font-weight: var(--bold-font-weight);
+    font-weight: var(--medium-font-weight);
     line-height: 1.11;
   }
 `;
 export const Section = styled.section`
-  background-image: url(src/img/Background_Main_Page.svg);
   position: fixed;
   bottom: 0;
 `;

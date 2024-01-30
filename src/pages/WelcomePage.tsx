@@ -8,17 +8,11 @@ const DivStyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
-  background-image: url(src/assets/images/Back_Main_Mob1.png);
-  background-size: cover;
-  @media ${device.tablet} {
-    background-image: url(src/assets/images/Back_Main_Tab1.png);
-  }
   @media ${device.desktop} {
     flex-direction: row;
     justify-content: center;
-    background-image: url(src/assets/images/Back_Main_Desc2.png),
-      url(src/assets/images/Back_Main_Desc1.png);
-    background-position: center, center 228px;
+    gap: 81px;
+    align-items: flex-end;
   }
 `;
 
@@ -29,7 +23,7 @@ const WelcomePage = () => {
   };
 
   return (
-    <section>
+    <section className="welcome-section">
       <DivStyled className="container">
         <WaterConsumptionTracker handleClick={handleClick} />
         <WhyDrinkWater />
