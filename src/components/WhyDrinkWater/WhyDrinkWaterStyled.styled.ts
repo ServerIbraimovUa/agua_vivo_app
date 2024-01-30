@@ -27,8 +27,13 @@ export const Div = styled.div`
   border-radius: 10px;
   /* background: var(--Secondary-color-2, #ecf2ff); */
   box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
+  width: 494px;
+  height: 332px;
   h3 {
     margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: var(--bold-font-weight);
+    line-height: 1.11;
   }
 `;
 export const Section = styled.section`

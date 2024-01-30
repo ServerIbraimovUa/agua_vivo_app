@@ -1,15 +1,18 @@
 import { FC } from "react";
 import { Div, Ul } from "./WaterConsumptionTrackerStyled.styled";
 import Icon from "../Icon/Icon";
+
 interface IComponent {
   handleClick: () => void;
 }
 const WaterConsumptionTracker: FC<IComponent> = ({ handleClick }) => {
   return (
     <Div>
-      <h1 className="title">Water consumption tracker</h1>
-      <h2>Record daily water intake and track</h2>
-      <div>
+      <div className="headers">
+        <h1 className="title">Water consumption tracker</h1>
+        <h2>Record daily water intake and track</h2>
+      </div>
+      <div className="tracker">
         <h3>Tracker Benefits</h3>
         <Ul>
           <li>

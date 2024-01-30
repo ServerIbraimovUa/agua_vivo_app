@@ -18,6 +18,7 @@ const DivStyled = styled.div`
     justify-content: center;
     background-image: url(src/assets/images/Back_Main_Desc2.png),
       url(src/assets/images/Back_Main_Desc1.png);
+    background-position: center, center 228px;
   }
 `;
 
