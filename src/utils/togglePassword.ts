@@ -1,10 +1,8 @@
-// interface IconToggle {
-//   toggle: string;
-//   setInput: (value: string) => void;
-//   setIcon: (value: boolean) => void;
-// }
-
-const togglePassword = (toggle, setInput, setIcon) => {
+const togglePassword = (
+  toggle: string,
+  setInput: (value: string) => void,
+  setIcon: (value: boolean) => void
+) => {
   if (toggle === "password") {
     setIcon(true);
     setInput("text");

@@ -6,22 +6,23 @@ interface Props {
   setVisible: (boolean: boolean) => void;
   title: string;
   children: ReactNode;
+  setting?: boolean;
+  logout?: boolean;
+  daily?: boolean;
+  delete?: boolean;
 }
 
-
-
-const Modal: FC<Props> = ({ setVisible, title, children }) => {
-
+const Modal: FC<Props> = ({ setVisible, title, children, ...arg }) => {
   useEffect(() => {
-    const handleKeyDown = (e:KeyboardEvent) => {
-      if (e.code === 'Escape') {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === "Escape") {
         setVisible(false);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [setVisible]);
 
@@ -32,7 +33,13 @@ const Modal: FC<Props> = ({ setVisible, title, children }) => {
   };
 
   return (
-    <Overlay onClick={handleBackdropClick}>
+    <Overlay
+      onClick={handleBackdropClick}
+      $setting={arg.setting}
+      $daily={arg.daily}
+      $logout={arg.logout}
+      $delete={arg.delete}
+    >
       <div className="modal">
         <div className="header">
           <p>{title}</p>

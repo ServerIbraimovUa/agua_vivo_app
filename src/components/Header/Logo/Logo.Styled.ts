@@ -1,27 +1,22 @@
 import styled from "styled-components";
 
-
 export const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
 
-display: flex;
-align-items: center;
-
-
-
-.icon {
+  .icon {
     width: 40px;
     height: 48px;
-    
-}
+  }
 
-.logotext {
-    /* font-family: Roboto; */
+  .logo-text {
+    width: 55px;
     font-size: 12px;
     font-weight: 700;
     line-height: 14px;
     letter-spacing: 0em;
     text-align: left;
-    color: rgba(64, 123, 255, 1);
-
-}
-`
+    color: var(--primary-blue);
+  }
+`;

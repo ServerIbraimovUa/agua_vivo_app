@@ -2,11 +2,26 @@ import React, { ChangeEvent, useState } from "react";
 
 import { useSelector } from "react-redux";
 import { SubmitHandler, useForm } from "react-hook-form";
-// import Icon from "../../Icon/Icon";
+import Icon from "../../Icon/Icon";
 import { selectUser } from "../../../redux/auth/authSelectors";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
 import { updateAvatar } from "../../../redux/auth/auth.operations";
-import { FormSettingStyled } from "./SettingModal.styled";
+import {
+  FormAvatar,
+  FormGenderWrap,
+  FormSettingStyled,
+  FormUserPassword,
+  FormAvatarTitle,
+  FormAvatarLabel,
+  FormGenderContair,
+  FormPasswordInput,
+  FormNameInput,
+  FormEmailInput,
+  UserInfoWrap,
+  BtnSubmit,
+  FormUserWrap,
+  MainInfoWrap,
+} from "./SettingModal.styled";
 
 type SettingForm = {
   avatar: string;
@@ -19,7 +34,7 @@ type SettingForm = {
 };
 
 const SettingModal: React.FC = () => {
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState<File | null>(null);
   const data = useSelector(selectUser);
   const dispatch = useAppDispatch();
 
@@ -43,14 +58,12 @@ const SettingModal: React.FC = () => {
 
   const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files && files.length > 0) {
-      const selectedFile = files[0];
-      setFile(selectedFile.name);
-    } // console.dir(e.target);
+    if (files) {
+      setFile(files[0]);
+    }
   };
 
   const onSubmit: SubmitHandler<SettingForm> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
     dispatch(updateAvatar(file));
     console.log(data);
 
@@ -58,70 +71,82 @@ const SettingModal: React.FC = () => {
   };
 
   return (
-    <div>
-      <FormSettingStyled onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>
-            <span>Your photo</span>
-            <img className="avatar" src={data.avatar} alt="User avatar" />
-            <input type="file" onChange={onChangeFile} />
-            {/* <Icon className="modal-icon" id="arow-up" /> */}
-            <span>Upload a photo</span>
-          </label>
-
-          <span>Your gender identity</span>
-
-          <div>
-            <label>
-              <input
-                {...register("gender", { required: "Please select a gender" })}
-                value="female"
-                type="radio"
+    <FormSettingStyled onSubmit={handleSubmit(onSubmit)}>
+      <FormAvatar>
+        <FormAvatarTitle>Your photo</FormAvatarTitle>
+        <FormAvatarLabel>
+          <img className="avatar-setting" src={data.avatar} alt="User avatar" />
+          <input className="input-avatar" type="file" onChange={onChangeFile} />
+          <Icon className="setting-modal-icon" id="arow-up" />
+          <span className="text-loading">Upload a photo</span>
+        </FormAvatarLabel>
+      </FormAvatar>
+      <FormUserWrap>
+        <MainInfoWrap>
+          <FormGenderWrap>
+            <span className="user-gender-title">Your gender identity</span>
+            <FormGenderContair>
+              <label className="gender-label">
+                <input
+                  {...register("gender", {
+                    required: "Please select a gender",
+                  })}
+                  value="female"
+                  type="radio"
+                />
+                <span className="gender-sub-title">Woman</span>
+              </label>
+              <label className="gender-label">
+                <input
+                  {...register("gender", {
+                    required: "Please select a gender",
+                  })}
+                  value="male"
+                  type="radio"
+                />
+                <span className="gender-sub-title">Man</span>
+              </label>
+              <label className="gender-label">
+                <input
+                  {...register("gender", {
+                    required: "Please select a gender",
+                  })}
+                  value="other"
+                  type="radio"
+                />
+                <span>Other</span>
+              </label>
+            </FormGenderContair>
+          </FormGenderWrap>
+          <UserInfoWrap>
+            <label className="label-name">
+              <span className="user-info-title">Your name</span>
+              <FormNameInput
+                {...register("name")}
+                type="text"
+                placeholder="your name"
               />
-              <span>Woman</span>
             </label>
-            <label>
-              <input
-                {...register("gender", { required: "Please select a gender" })}
-                value="male"
-                type="radio"
+
+            <label className="label-email">
+              <span className="user-info-title">E-mail</span>
+              <FormEmailInput
+                {...register("email", {
+                  required: "This field is required",
+                })}
+                type="email"
+                placeholder="your e-mail"
               />
-              <span>Man</span>
+              {errors.email && <p>{`${errors.email.message}`}</p>}
             </label>
-            <label>
-              <input
-                {...register("gender", { required: "Please select a gender" })}
-                value="other"
-                type="radio"
-              />
-              <span>Other</span>
-            </label>
-          </div>
+          </UserInfoWrap>
+        </MainInfoWrap>
+        <FormUserPassword>
+          <span className="password-title">Password</span>
 
-          <label>
-            <span>Your name</span>
-            <input {...register("name")} type="text" placeholder="name" />
-          </label>
-
-          <label>
-            <span>E-mail</span>
-            <input
-              {...register("email", {
-                required: "This field is required",
-              })}
-              type="email"
-              placeholder="email"
-            />
-            {errors.email && <p>{`${errors.email.message}`}</p>}
-          </label>
-        </div>
-
-        <div>
-          <span>Password</span>
-
-          <label>
-            <span>Outdated password:</span>
-            <input
+          <label className="password-label">
+            <span className="password-sub-title">Outdated password:</span>
+            <FormPasswordInput
               {...register("outdatedPassword", {
                 validate: (value, { newPassword }) => {
                   if (newPassword) {
@@ -138,9 +163,9 @@ const SettingModal: React.FC = () => {
             )}
           </label>
 
-          <label>
-            <span>New Password:</span>
-            <input
+          <label className="password-label">
+            <span className="password-sub-title">New Password:</span>
+            <FormPasswordInput
               {...register("newPassword", {
                 validate: (value, { outdatedPassword }) => {
                   if (outdatedPassword) {
@@ -163,9 +188,9 @@ const SettingModal: React.FC = () => {
             {errors.newPassword && <p>{`${errors.newPassword.message}`}</p>}
           </label>
 
-          <label>
-            <span>Repeat new password:</span>
-            <input
+          <label className="password-label">
+            <span className="password-sub-title">Repeat new password:</span>
+            <FormPasswordInput
               {...register("repeatNewPassword", {
                 validate: (value) =>
                   value === getValues("newPassword") || "Passwords must match",
@@ -185,13 +210,12 @@ const SettingModal: React.FC = () => {
               <p>{`${errors.repeatNewPassword.message}`}</p>
             )}
           </label>
-        </div>
-
-        <button disabled={isSubmitting} type="submit">
-          {isSubmitting ? "Saving..." : "Save"}
-        </button>
-      </FormSettingStyled>
-    </div>
+        </FormUserPassword>
+      </FormUserWrap>
+      <BtnSubmit disabled={isSubmitting} type="submit">
+        {isSubmitting ? "Saving..." : "Save"}
+      </BtnSubmit>
+    </FormSettingStyled>
   );
 };
 

@@ -2,19 +2,31 @@ import styled from "styled-components";
 
 export const LogoWrapper = styled.div`
   position: relative;
-  min-width: 122px;
   height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   .open-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-
     font-size: 18px;
     border: none;
     background-color: transparent;
 
+    .name::first-letter {
+      text-transform: uppercase;
+    }
+    .arrow-down {
+      width: 16px;
+      height: 16px;
+    }
+
     .user-photo {
+      border-radius: 28px;
+      margin-left: 8px;
+      margin-right: 4px;
+
       width: 28px;
       height: 28px;
     }
@@ -22,6 +34,7 @@ export const LogoWrapper = styled.div`
 
   .btn-down {
     position: absolute;
+    top: 34px;
     right: 0;
     display: flex;
     flex-direction: column;
@@ -40,6 +53,26 @@ export const LogoWrapper = styled.div`
     button {
       border: none;
       background-color: transparent;
+    }
+    .gear_settings {
+      width: 16px;
+      height: 16px;
+    }
+     .logout {
+      width: 16px;
+      height: 16px;
+    }
+
+    .button-popover-name {
+      font-size: 16px;
+      margin-left: 8px;
+      color: var(--primary-blue);
+      font-family: 'Roboto-Regular',sans-serif;
+    }
+
+    .button-popover{
+      display: flex;
+      align-items: center;
     }
   }
 `;
