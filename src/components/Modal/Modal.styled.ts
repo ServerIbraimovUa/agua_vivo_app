@@ -18,9 +18,7 @@ export const Overlay = styled.div`
     min-height: 208px;
 
     /* max-height: 592px; */
-    background: var( --secondary-white);
-
-   
+    background: var(--secondary-white);
 
     border-radius: 8px;
     overflow: hidden;
@@ -43,7 +41,6 @@ export const Overlay = styled.div`
       padding: 0;
       background-color: transparent;
       border: none;
-      cursor: pointer;
 
       transition: transform 350ms ease-in-out;
 

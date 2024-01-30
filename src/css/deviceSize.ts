@@ -5,7 +5,7 @@ const size = {
 };
 
 export const device = {
-  mobile: `screen and (min-width: ${size.mobile}) `,
+  mobile: `screen and (min-width: ${size.mobile})`,
   tablet: `screen and (min-width: ${size.tablet})`,
   desktop: `screen and (min-width: ${size.desktop})`,
 };

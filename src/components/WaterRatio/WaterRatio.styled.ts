@@ -6,7 +6,7 @@ export const WaterRatioContainer = styled.div`
   @media ${device.tablet} {
     width: 704px;
   }
-  @media ${device.laptop} {
+  @media ${device.desktop} {
     width: 592px;
   }
   .water-ratio-plus {
@@ -20,7 +20,7 @@ export const WaterRatioThumb = styled.div`
     display: flex;
     gap: 30px;
   }
-  @media ${device.laptop} {
+  @media ${device.desktop} {
     display: flex;
     gap: 24px;
   }
@@ -51,7 +51,7 @@ export const RenderTrack = styled.div`
   @media ${device.tablet} {
     width: 325px;
   }
-  @media ${device.laptop} {
+  @media ${device.desktop} {
     width: 360px;
   }
 `;
@@ -97,7 +97,7 @@ export const WaterRatioBtnThumb = styled.div`
   @media ${device.tablet} {
     width: 400px;
   }
-  @media ${device.laptop} {
+  @media ${device.desktop} {
     width: 592px;
   }
 `;
@@ -116,7 +116,7 @@ export const WaterRatioBtn = styled.button`
     width: 336px;
     height: 44px;
   }
-  @media ${device.laptop} {
+  @media ${device.desktop} {
     width: 178px;
   }
 `;

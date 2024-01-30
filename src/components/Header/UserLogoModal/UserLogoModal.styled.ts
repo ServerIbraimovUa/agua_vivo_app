@@ -11,8 +11,6 @@ export const LogoWrapper = styled.div`
     gap: 8px;
 
     font-size: 18px;
-    cursor: pointer;
-
     border: none;
     background-color: transparent;
 
@@ -42,7 +40,6 @@ export const LogoWrapper = styled.div`
     button {
       border: none;
       background-color: transparent;
-      cursor: pointer;
     }
   }
 `;
