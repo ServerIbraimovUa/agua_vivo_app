@@ -25,7 +25,7 @@ import {
 
 type SettingForm = {
   avatar: string;
-  gender?: "male" | "female" | "other";
+  gender?: "women" | "man" | "other";
   name: string;
   email: string;
   outdatedPassword?: string;
@@ -35,6 +35,8 @@ type SettingForm = {
 
 const SettingModal: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
+  const [previewURL, setpreviewURL] = useState<string | null>(null);
+
   const data = useSelector(selectUser);
   const dispatch = useAppDispatch();
 
@@ -47,7 +49,7 @@ const SettingModal: React.FC = () => {
     formState: { errors, isSubmitting },
   } = useForm<SettingForm>({
     defaultValues: {
-      gender: "other",
+      gender: data.gender || "other",
       name: data.name || "",
       email: data.email,
       outdatedPassword: "",
@@ -58,8 +60,18 @@ const SettingModal: React.FC = () => {
 
   const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files) {
-      setFile(files[0]);
+
+    if (files && files.length > 0) {
+      const selectedFile = files[0];
+      setFile(selectedFile);
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setpreviewURL(reader.result as string);
+        }
+      };
+      reader.readAsDataURL(selectedFile);
     }
   };
 
@@ -75,8 +87,25 @@ const SettingModal: React.FC = () => {
       <FormAvatar>
         <FormAvatarTitle>Your photo</FormAvatarTitle>
         <FormAvatarLabel>
-          <img className="avatar-setting" src={data.avatar} alt="User avatar" />
-          <input className="input-avatar" type="file" onChange={onChangeFile} />
+          {previewURL ? (
+            <img
+              className="avatar-setting"
+              src={previewURL}
+              alt="User avatar"
+            />
+          ) : (
+            <img
+              className="avatar-setting"
+              src={data.avatar}
+              alt="User avatar"
+            />
+          )}{" "}
+          <input
+            id="fileElem"
+            className="input-avatar"
+            type="file"
+            onChange={onChangeFile}
+          />
           <Icon className="setting-modal-icon" id="arow-up" />
           <span className="text-loading">Upload a photo</span>
         </FormAvatarLabel>
@@ -91,7 +120,7 @@ const SettingModal: React.FC = () => {
                   {...register("gender", {
                     required: "Please select a gender",
                   })}
-                  value="female"
+                  value="woman"
                   type="radio"
                 />
                 <span className="gender-sub-title">Woman</span>
@@ -101,7 +130,7 @@ const SettingModal: React.FC = () => {
                   {...register("gender", {
                     required: "Please select a gender",
                   })}
-                  value="male"
+                  value="man"
                   type="radio"
                 />
                 <span className="gender-sub-title">Man</span>
