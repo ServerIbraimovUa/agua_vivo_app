@@ -23,9 +23,8 @@ export const Ul = styled.ul`
 `;
 export const Div = styled.div`
   padding: 24px 16px;
-  background-color: #ecf2ff;
+  background-color: var(--Secondary-color-2);
   border-radius: 10px;
-  /* background: var(--Secondary-color-2, #ecf2ff); */
   box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
   width: 494px;
   height: 332px;

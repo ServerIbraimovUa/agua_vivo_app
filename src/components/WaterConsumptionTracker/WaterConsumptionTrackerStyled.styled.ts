@@ -3,7 +3,6 @@ import { device } from "../../css/deviceSize";
 
 export const Div = styled.div`
   h1 {
-    /* margin-bottom: 16px; */
     font-weight: var(--bold-font-weight);
     font-size: 28px;
     line-height: 1.14;
@@ -63,7 +62,6 @@ export const Div = styled.div`
       height: 44px;
     }
 
-    /* font-size: var(--standart-font-size); */
     line-height: 1.25;
     @media ${device.tablet} {
       font-size: 18px;

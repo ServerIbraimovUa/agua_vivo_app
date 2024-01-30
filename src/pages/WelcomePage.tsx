@@ -22,11 +22,6 @@ const DivStyled = styled.div`
   }
 `;
 
-// const SectionStyled = styled.section`
-
-//   background-image: url(src/assets/images/Back_Main_Mob1.png);
-// `;
-
 const WelcomePage = () => {
   const navigate = useNavigate();
   const handleClick = () => {
