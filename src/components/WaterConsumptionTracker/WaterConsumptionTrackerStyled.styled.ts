@@ -6,7 +6,11 @@ export const Div = styled.div`
     font-weight: var(--bold-font-weight);
     font-size: 28px;
     line-height: 1.14;
+    margin-bottom: 16px;
+    width: 280px;
+
     @media ${device.tablet} {
+      width: auto;
       font-size: 36px;
       line-height: 1.16;
     }
@@ -14,27 +18,24 @@ export const Div = styled.div`
   h2 {
     font-size: 24px;
     line-height: 1.25;
+    width: 199px;
+    margin-bottom: 24px;
+
     @media ${device.tablet} {
+      width: auto;
       font-size: 26px;
       line-height: 1.23;
     }
   }
 
-  .headers {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
   h3 {
     margin-bottom: 12px;
     font-size: 18px;
-    font-weight: var(--bold-font-weight);
+    font-weight: var(--medium-font-weight);
     line-height: 1.11;
   }
   .tracker {
-    padding-bottom: 24px;
-    padding-top: 24px;
+    margin-bottom: 24px;    
   }
   .welcome-icon {
     width: 32px;

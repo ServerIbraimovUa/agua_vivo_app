@@ -130,6 +130,7 @@ export const GlobalStyle = createGlobalStyle`
 
 section{
   padding-top: 24px;
+  min-height: 100vh;
   @media ${device.tablet} {
     padding-top: 40px;
   }
@@ -137,7 +138,20 @@ section{
     padding-top: 80px;
   }
 }
+.welcome-section{
+  background-image: url(src/assets/images/Back_Main_Mob1.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  @media ${device.tablet} {
+    background-image: url(src/assets/images/Back_Main_Tab1.png);
+  }
+  @media ${device.desktop} {
 
+    background-image: url(src/assets/images/Back_Main_Desc2.png),
+      url(src/assets/images/Back_Main_Desc1.png);
+    /* background-position: center, center 228px; */
+  }
+}
 .container {
   width: 100%;
   padding-left: 20px;
