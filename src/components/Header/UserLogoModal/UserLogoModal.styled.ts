@@ -58,12 +58,24 @@ export const LogoWrapper = styled.div`
       cursor: pointer;
     }
     .gear_settings {
-      width: 24px;
-      height: 24px;
+      width: 16px;
+      height: 16px;
     }
      .logout {
-      width: 24px;
-      height: 24px;
+      width: 16px;
+      height: 16px;
+    }
+
+    .button-popover-name {
+      font-size: 16px;
+      margin-left: 8px;
+      color: var(--primary-blue);
+      font-family: 'Roboto-Regular',sans-serif;
+    }
+
+    .button-popover{
+      display: flex;
+      align-items: center;
     }
   }
 `;
