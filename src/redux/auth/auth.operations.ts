@@ -111,7 +111,7 @@ export const updateAvatar = createAsyncThunk(
 
 export const updateDailyNorma = createAsyncThunk(
   "auth/updateDailyNorma",
-  async (newDailyNorma, thunkAPI) => {
+  async (newDailyNorma:string, thunkAPI) => {
     try {
       const response = await axios.patch("/users/water-rate", newDailyNorma);
       return response.data;
