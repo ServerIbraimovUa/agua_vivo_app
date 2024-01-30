@@ -6,6 +6,14 @@ export const FormSettingStyled = styled.form`
   flex-direction: column;
   justify-content: center;
   gap: 24px;
+
+  @media ${device.tablet} {
+    width: 656px;
+  }
+
+  @media ${device.desktop} {
+    width: 960px;
+  }
 `;
 
 export const FormAvatar = styled.div`

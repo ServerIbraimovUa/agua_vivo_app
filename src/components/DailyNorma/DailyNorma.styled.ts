@@ -6,7 +6,7 @@ export const FormContainer = styled.div`
     @media ${device.tablet} {
        width: 656px;
     }
-    @media ${device.tablet} {
+    @media ${device.desktop} {
        width: 544px;
     }
 `

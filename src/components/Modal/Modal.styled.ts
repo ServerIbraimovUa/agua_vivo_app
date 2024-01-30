@@ -14,14 +14,8 @@ export const Overlay = styled.div`
   z-index: 9999;
 
   .modal {
-   // min-width: 592px;
-    min-width: 280px;
-    max-width: 1008px;
-    min-height: 208px;
-
-    /* max-height: 592px; */
-    background: var( --secondary-white);  
-    height: 90%;
+    background: var(--primary-white);
+    max-height: 90%;
     
     border-radius: 8px;
     overflow: hidden;
@@ -29,7 +23,7 @@ export const Overlay = styled.div`
     overflow: auto;
 
     @media ${device.tablet} {
-      padding: 32px 24px;      
+      padding: 32px 24px;
     }
   }
   .header {
