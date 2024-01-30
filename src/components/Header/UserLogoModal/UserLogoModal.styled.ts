@@ -57,5 +57,25 @@ export const LogoWrapper = styled.div`
       background-color: transparent;
       cursor: pointer;
     }
+    .gear_settings {
+      width: 16px;
+      height: 16px;
+    }
+     .logout {
+      width: 16px;
+      height: 16px;
+    }
+
+    .button-popover-name {
+      font-size: 16px;
+      margin-left: 8px;
+      color: var(--primary-blue);
+      font-family: 'Roboto-Regular',sans-serif;
+    }
+
+    .button-popover{
+      display: flex;
+      align-items: center;
+    }
   }
 `;

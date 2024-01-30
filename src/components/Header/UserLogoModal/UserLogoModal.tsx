@@ -41,14 +41,21 @@ const UserLogoModal = () => {
         <Icon className="arrow-down" id="arrow-down" />
       </button>
       <div className={`btn-down ${anchorEl ? "open" : ""}`} ref={menuRef}>
-        <button onClick={() => setSettingsVisible(true)}>Settings</button>
+        <button className="button-popover" onClick={() => setSettingsVisible(true)}>
+          <Icon className="gear_settings" id="gear_settings" />
+          <span className="button-popover-name">Settings</span>
+        </button>
         {settingsVisible && (
           <Modal setVisible={setSettingsVisible} title="Setting">
             <SettingModal />
           </Modal>
         )}
         <br />
-        <button onClick={() => setVisible(true)}>Log out</button>
+        <button onClick={() => setVisible(true)}>
+          <Icon className="logout" id="logout" />
+          <span className="button-popover-name">Log out</span>
+          
+        </button>
         {visible && (
           <Modal setVisible={setVisible} title="Log out">
             <UserLogoutModal setVisible={setVisible} />
