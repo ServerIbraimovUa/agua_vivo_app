@@ -1,4 +1,3 @@
-// Calendar.tsx
 import React, { useState, useEffect, useRef } from "react";
 import * as Styled from "./Calendar.styled";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
@@ -146,18 +145,18 @@ const Calendar: React.FC = () => {
 
   return (
     <Styled.CalendarContainer>
-      <Styled.Header>
-        <Styled.RightAlign>
-          <Styled.Button onClick={handlePrevMonth}>&lt;</Styled.Button>
-          <Styled.MonthTitle>
+      <header className="header">
+        <div className="RightAlign">
+          <button className="Button" onClick={handlePrevMonth}>&lt;</button>
+          <div className="MonthTitle">
             {currentDate.toLocaleString("en-US", { month: "long" })},{" "}
             {currentDate.getFullYear()}
-          </Styled.MonthTitle>
+          </div>
           {!isCurrentMonth() && (
-            <Styled.Button onClick={handleNextMonth}>&gt;</Styled.Button>
+            <button className="Button" onClick={handleNextMonth}>&gt;</button>
           )}
-        </Styled.RightAlign>
-      </Styled.Header>
+        </div>
+      </header>
 
       <Styled.Days>
         {getDaysInMonth(currentDate).map((day) => (
@@ -177,11 +176,11 @@ const Calendar: React.FC = () => {
                 {day.day}
               </Styled.Day>
             )}
-            <Styled.Procent
+            <p
               className={`procent ${
                 calculatePercentage() < 100 ? "lowPercentage" : ""
               }`}
-            >{`${calculatePercentage()}%`}</Styled.Procent>
+            >{`${calculatePercentage()}%`}</p>
           </div>
         ))}
       </Styled.Days>
@@ -190,21 +189,21 @@ const Calendar: React.FC = () => {
         <Styled.Modal ref={menuRef}>
           <Styled.ModalContent>
             <Styled.Container>
-              <Styled.CloseButton onClick={closeModal}>
+              <button className="close" onClick={closeModal}>
                 &times;
-              </Styled.CloseButton>
-              <Styled.TitleModal>{`${modalContent?.day}, ${modalContent?.month}`}</Styled.TitleModal>
-              <Styled.ModalParagraf>
-                Daily norm: <Styled.SpanModal>1.5L</Styled.SpanModal>
-              </Styled.ModalParagraf>
-              <Styled.ModalParagraf>
+              </button>
+              <h1 className="TitleModal">{`${modalContent?.day}, ${modalContent?.month}`}</h1>
+              <p className="ModalParagraf">
+                Daily norm: <span className="SpanModal">1.5L</span>
+              </p>
+              <p className="ModalParagraf">
                 Fulfillment of the daily norm:{" "}
-                <Styled.SpanModal>100%</Styled.SpanModal>
-              </Styled.ModalParagraf>
-              <Styled.ModalParagraf>
+                <span className="SpanModal">100%</span>
+              </p>
+              <p className="ModalParagraf">
                 How many servings of water:{" "}
-                <Styled.SpanModal>6</Styled.SpanModal>
-              </Styled.ModalParagraf>
+                <span className="SpanModal">6</span>
+              </p>
             </Styled.Container>
           </Styled.ModalContent>
         </Styled.Modal>
