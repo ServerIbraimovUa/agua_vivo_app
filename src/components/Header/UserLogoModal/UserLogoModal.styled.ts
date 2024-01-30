@@ -54,7 +54,7 @@ export const LogoWrapper = styled.div`
     }
     button {
       border: none;
-      background-color: transparent;
+      /* background-color: transparent; */
       cursor: pointer;
     }
     .gear_settings {
