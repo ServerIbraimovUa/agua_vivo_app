@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../css/deviceSize";
 
 export const Overlay = styled.div`
   background: rgb(0, 0, 0, 0.5);
@@ -13,18 +14,23 @@ export const Overlay = styled.div`
   z-index: 9999;
 
   .modal {
-    min-width: 592px;
+   // min-width: 592px;
+    min-width: 280px;
     max-width: 1008px;
     min-height: 208px;
 
     /* max-height: 592px; */
-    background: var( --secondary-white);
-
-   
-
+    background: var( --secondary-white);  
+    height: 90%;
+    
     border-radius: 8px;
     overflow: hidden;
-    padding: 32px 24px;
+    padding: 24px 12px;
+    overflow: auto;
+
+    @media ${device.tablet} {
+      padding: 32px 24px;      
+    }
   }
   .header {
     display: flex;

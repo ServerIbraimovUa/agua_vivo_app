@@ -11,6 +11,7 @@ export interface Data {
   email: string;
   password: string;
   repeatPassword?: string;
+  name: string;
 }
 interface Props {
   repeat: boolean;
@@ -37,9 +38,16 @@ const AuthForm: FC<Props> = ({ repeat }) => {
       email,
       password,
     };
-    repeat ? dispatch(registerThunk(newData)) : dispatch(logInThunk(newData));
 
-    reset();
+    repeat
+      ? dispatch(registerThunk(newData))
+      : dispatch(logInThunk(newData))
+          .unwrap()
+          .then(() => alert(`Welcome to your account!`), reset())
+          .catch((err) => {
+            console.log(err);
+            alert(`Please write the correct Email or Password`);
+          });
   };
 
   return (
@@ -90,6 +98,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
               placeholder="Repeat password"
             />
             <StyledAuthFormSpan
+
               onClick={() =>
                 togglePassword(toggleInput, setToggleInput, setToggleIcon)
               }
@@ -97,7 +106,9 @@ const AuthForm: FC<Props> = ({ repeat }) => {
               {toggleIcon ? (
                 <Icon className="eye-icon" id="eye" />
               ) : (
+
                 <Icon className="eye-outline-icon" id="eye-outline" />
+
               )}
             </StyledAuthFormSpan>
             {errors.repeatPassword?.message}
