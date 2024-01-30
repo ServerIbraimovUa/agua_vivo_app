@@ -57,5 +57,13 @@ export const LogoWrapper = styled.div`
       background-color: transparent;
       cursor: pointer;
     }
+    .gear_settings {
+      width: 24px;
+      height: 24px;
+    }
+     .logout {
+      width: 24px;
+      height: 24px;
+    }
   }
 `;
