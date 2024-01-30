@@ -20,10 +20,10 @@ export const StyledAuthForm = styled.form`
   input {
     width: 100%;
     height: 44px;
-    border: 1px solid #d7e3ff;
+    border: 1px solid var(--secondary-light-blue);
     border-radius: 6px;
     padding: 12px 36px 12px 10px;
-    color: var(--secondary-light-blue);
+    color: var(--primary-blue);
     background-color: var(--primary-white);
 
     &::placeholder {
