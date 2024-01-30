@@ -146,7 +146,7 @@ section{
   outline: 1px solid black;
   
   @media ${device.mobile} {
-        max-width: 360px;
+        max-width: 320px;
         }
   
   @media ${device.tablet} {

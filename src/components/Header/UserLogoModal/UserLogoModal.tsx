@@ -43,14 +43,14 @@ const UserLogoModal = () => {
       <div className={`btn-down ${anchorEl ? "open" : ""}`} ref={menuRef}>
         <button onClick={() => setSettingsVisible(true)}>Settings</button>
         {settingsVisible && (
-          <Modal setVisible={setSettingsVisible} title="Setting">
+          <Modal setVisible={setSettingsVisible} title="Setting" setting={true}>
             <SettingModal />
           </Modal>
         )}
         <br />
         <button onClick={() => setVisible(true)}>Log out</button>
         {visible && (
-          <Modal setVisible={setVisible} title="Log out">
+          <Modal setVisible={setVisible} title="Log out" logout={true}>
             <UserLogoutModal setVisible={setVisible} />
           </Modal>
         )}

@@ -1,35 +1,50 @@
 import styled from "styled-components";
 import { device } from "../../css/deviceSize";
-
-export const Overlay = styled.div`
+interface Props {
+  $setting: boolean | undefined;
+  $daily: boolean | undefined;
+  $logout: boolean | undefined;
+  $delete: boolean | undefined;
+}
+export const Overlay = styled.div<Props>`
   background: rgb(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
   position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   top: 0;
   left: 0;
   z-index: 9999;
 
   .modal {
-   // min-width: 592px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     min-width: 280px;
-    max-width: 1008px;
-    min-height: 208px;
+    height: auto;
+    max-height: 90%;
+    @media screen and (max-width: 767px) {
+      top: ${(props) => (props.$logout || props.$delete ? "10%" : "6%")};
+      transform: translateX(-50%);
+    }
+    @media screen and (max-width: 1440px) {
+      top: ${(props) => (props.$logout || props.$delete ? "30%" : "9%")};
+      transform: translateX(-50%);
+    }
 
-    /* max-height: 592px; */
-    background: var( --secondary-white);  
-    height: 90%;
-    
+    background: var(--secondary-white);
     border-radius: 8px;
     overflow: hidden;
     padding: 24px 12px;
     overflow: auto;
 
     @media ${device.tablet} {
-      padding: 32px 24px;      
+      width: ${(props) => (props.$logout || props.$delete ? "592px" : "704px")};
+
+      padding: 32px 24px;
+    }
+    @media ${device.desktop} {
+      width: ${(props) => (props.$setting ? " 1008px" : "592px")};
     }
   }
   .header {
