@@ -46,7 +46,7 @@ const UserLogoModal = () => {
           <span className="button-popover-name">Settings</span>
         </button>
         {settingsVisible && (
-          <Modal setVisible={setSettingsVisible} title="Setting">
+          <Modal setVisible={setSettingsVisible} title="Setting" setting={true}>
             <SettingModal />
           </Modal>
         )}
@@ -57,7 +57,7 @@ const UserLogoModal = () => {
           
         </button>
         {visible && (
-          <Modal setVisible={setVisible} title="Log out">
+          <Modal setVisible={setVisible} title="Log out" logout={true}>
             <UserLogoutModal setVisible={setVisible} />
           </Modal>
         )}
