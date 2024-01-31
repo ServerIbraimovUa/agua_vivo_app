@@ -4,8 +4,8 @@ import AddWaterModal from "./AddWaterModal/AddWaterModal";
 import { selectAllWater } from "../../redux/water/waterSelectors";
 import { useSelector } from "react-redux";
 import {
-  deleteWater,
-  updateWaterVolume,
+  deleteWaterThunk,
+  updateWaterVolumeThunk,
 } from "../../redux/water/water.operations";
 import { useAppDispatch } from "../../redux/redux_ts/hook";
 import WaterListItem from "./WaterListItem/WaterListItem";
@@ -16,11 +16,9 @@ import WaterListItem from "./WaterListItem/WaterListItem";
 // }
 
 export interface IWaterData {
-  waterList: {
-    waterVolume: number;
-    date: number;
-    waterId: number;
-  };
+  waterVolume: number;
+  time: string;
+  id: string;
 }
 
 const WaterList = () => {
@@ -28,12 +26,12 @@ const WaterList = () => {
   const dispatch = useAppDispatch();
   const waterList = useSelector(selectAllWater);
 
-  const handleDeleteWater = (waterID: number) => {
-    dispatch(deleteWater(waterID));
+  const handleDeleteWater = (waterID: string) => {
+    dispatch(deleteWaterThunk(waterID));
   };
 
   const handleUpdateWater = (waterData: IWaterData) => {
-    dispatch(updateWaterVolume(waterData));
+    dispatch(updateWaterVolumeThunk(waterData));
   };
 
   const closeModal = () => {

@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, KeyboardEvent, useState } from "react";
 import { IWaterData } from "../WaterList";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { addWater } from "../../../redux/water/water.operations";
+import { addWaterThunk } from "../../../redux/water/water.operations";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
 
 interface IProps {
@@ -69,7 +69,7 @@ const AddWaterModal: FC<IProps> = ({
       waterVolume: Number(state.inputValue),
     };
 
-    dispatch(addWater(newData));
+    dispatch(addWaterThunk(newData));
 
     closeModal();
   };

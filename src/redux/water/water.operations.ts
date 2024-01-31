@@ -1,64 +1,85 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IWaterData } from "../../components/WaterList/WaterList";
-import { IWaterPortion } from "../../components/WaterList/AddWaterModal/AddWaterModal";
+import { handleToken } from "../services/handleToken";
+import {
+  IAddWaterPortion,
+  IAmountDaily,
+  IAmountMonthly,
+  IAuthInitInfo,
+  IWaterPayload,
+} from "../redux_ts/interfaces";
 
-export const addWater = createAsyncThunk(
-  "water/addWater",
-  async (waterVolume: IWaterPortion, thunkAPI) => {
-    try {
-      const response = await axios.post("/api/water/add", waterVolume);
-      return response.data;
-    } catch (e) {
-      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
-    }
+export const addWaterThunk = createAsyncThunk<
+  IWaterPayload,
+  IAddWaterPortion,
+  { state: { auth: IAuthInitInfo } }
+>("water/addWater", async (waterData, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState();
+    handleToken(state.auth.token);
+    const response = await axios.post("/api/water/add", waterData);
+    return response.data;
+  } catch (e) {
+    if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
   }
-);
+});
 
-export const getAmountDaily = createAsyncThunk(
-  "water/getAmountDaily",
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.get("/api/water/amountdaily");
-      return response.data;
-    } catch (e) {
-      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
-    }
+export const updateWaterVolumeThunk = createAsyncThunk<
+  IWaterPayload,
+  IWaterPayload,
+  { state: { auth: IAuthInitInfo } }
+>("water/updateWaterVolume", async (waterData, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState();
+    handleToken(state.auth.token);
+    const response = await axios.put(`/api/water/update`, waterData);
+    return response.data;
+  } catch (e) {
+    if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
   }
-);
+});
 
-export const getAmountMonthly = createAsyncThunk(
-  "water/getAmountMonthly",
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.get("/api/water/amoutmonth");
-      return response.data;
-    } catch (e) {
-      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
-    }
+export const deleteWaterThunk = createAsyncThunk<
+  string,
+  string,
+  { state: { auth: IAuthInitInfo } }
+>("water/deleteWater", async (waterID, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState();
+    handleToken(state.auth.token);
+    const response = await axios.delete(`/api/water/delete/:${waterID}`);
+    return response.data;
+  } catch (e) {
+    if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
   }
-);
+});
 
-export const updateWaterVolume = createAsyncThunk(
-  "water/updateWaterVolume",
-  async (waterData: IWaterData, thunkAPI) => {
-    try {
-      const response = await axios.post(`/api/water/update`, waterData);
-      return response.data;
-    } catch (e) {
-      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
-    }
+export const getAmountDailyThunk = createAsyncThunk<
+  IAmountDaily,
+  unknown,
+  { state: { auth: IAuthInitInfo } }
+>("water/getAmountDaily", async (_, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState();
+    handleToken(state.auth.token);
+    const response = await axios.get("/api/water/today/");
+    return response.data;
+  } catch (e) {
+    if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
   }
-);
+});
 
-export const deleteWater = createAsyncThunk(
-  "water/deleteWater",
-  async (waterID: number, thunkAPI) => {
-    try {
-      const response = await axios.delete(`/api/water/delete/${waterID}`);
-      return response.data;
-    } catch (e) {
-      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
-    }
+export const getAmountMonthlyThunk = createAsyncThunk<
+  IAmountMonthly,
+  string,
+  { state: { auth: IAuthInitInfo } }
+>("water/getAmountMonthly", async (date, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState();
+    handleToken(state.auth.token);
+    const response = await axios.get(`/api/water/month/:${date}`);
+    return response.data;
+  } catch (e) {
+    if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
   }
-);
+});
