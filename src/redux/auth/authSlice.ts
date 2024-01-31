@@ -64,7 +64,7 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateUserDailyNormaThunk.fulfilled, (state, action) => {
-        state.user.dailyNorma = action.payload.dailyNorma;
+        state.user.dailyNorma = action.payload;
         state.isAuthorized = true;
         state.isLoading = false;
       })
