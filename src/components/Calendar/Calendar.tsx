@@ -126,20 +126,20 @@ const Calendar: React.FC = () => {
     <Styled.CalendarContainer>
       <div className="right-align">
         <h1 className="month">Month</h1>
-<div className="header">
-<button className="button" onClick={handlePrevMonth}>
-    &lt;
-  </button>
-  <div className="month-title">
-    {currentDate.toLocaleString("en-US", { month: "long" })},{" "}
-    {currentDate.getFullYear()}
-  </div>
-  {currentDate.getMonth() === new Date().getMonth() &&
-    currentDate.getFullYear() === new Date().getFullYear() ? null : (
-      <button className="button" onClick={handleNextMonth}>
-        &gt;
-      </button>
-    )}
+        <div className="header">
+          <button className="button" onClick={handlePrevMonth}>
+            &lt;
+          </button>
+          <div className="month-title">
+            {currentDate.toLocaleString("en-US", { month: "long" })},{" "}
+            {currentDate.getFullYear()}
+          </div>
+          {currentDate.getMonth() === new Date().getMonth() &&
+          currentDate.getFullYear() === new Date().getFullYear() ? null : (
+            <button className="button" onClick={handleNextMonth}>
+              &gt;
+            </button>
+          )}
         </div>
       </div>
 
