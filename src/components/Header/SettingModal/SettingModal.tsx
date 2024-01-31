@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Icon from "../../Icon/Icon";
 import { selectUser } from "../../../redux/auth/authSelectors";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
-import { updateAvatar } from "../../../redux/auth/auth.operations";
+import { updateUserAvatarThunk } from "../../../redux/auth/auth.operations";
 import {
   FormAvatar,
   FormGenderWrap,
@@ -99,9 +99,9 @@ const SettingModal: React.FC = () => {
   };
 
   const onSubmit: SubmitHandler<SettingForm> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    dispatch(updateAvatar(file));
-    console.log(data);
+
+    dispatch(updateUserAvatarThunk(file));
+
 
     reset();
   };

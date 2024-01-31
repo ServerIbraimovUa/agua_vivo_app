@@ -13,6 +13,26 @@ export const selectDailyNorma = createSelector(
   (auth) => auth.user.dailyNorma
 );
 
+export const selectAvatar = createSelector(
+  selectAuthorization,
+  (auth) => auth.user.avatar
+);
+
+export const selectName = createSelector(
+  selectAuthorization,
+  (auth) => auth.user.name
+);
+
+export const selectGender = createSelector(
+  selectAuthorization,
+  (auth) => auth.user.gender
+);
+
+export const selectEmail = createSelector(
+  selectAuthorization,
+  (auth) => auth.user.email
+);
+
 export const selectToken = createSelector(
   selectAuthorization,
   (auth) => auth.token

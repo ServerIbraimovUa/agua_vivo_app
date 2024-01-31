@@ -1,11 +1,19 @@
 import styled from "styled-components";
 import { device } from "../../css/deviceSize";
 
+export const StyledAuthSection = styled.section`
+  display: flex;
+  @media ${device.tablet} {
+  }
+  @media ${device.desktop} {
+  }
+`;
+
 export const StyledAuthForm = styled.form`
   display: flex;
   flex-direction: column;
   max-width: 280px;
-  gap: 10px;
+  gap: 16px;
 
   label {
     display: flex;
@@ -17,7 +25,17 @@ export const StyledAuthForm = styled.form`
       position: relative;
     }
   }
-  input {
+  .gap-error {
+    gap: 4px;
+  }
+
+  .error {
+    color: var(--secondary-red);
+    font-size: 14px;
+
+    /* border: 1px solid var(--secondary-red); */
+  }
+  .input {
     width: 100%;
     height: 44px;
     border: 1px solid var(--secondary-light-blue);
@@ -25,6 +43,10 @@ export const StyledAuthForm = styled.form`
     padding: 12px 36px 12px 10px;
     color: var(--primary-blue);
     background-color: var(--primary-white);
+    &:hover,
+    &:focus {
+      outline: none;
+    }
 
     &::placeholder {
       font-size: 16px;
@@ -33,11 +55,19 @@ export const StyledAuthForm = styled.form`
     }
   }
 
-  /* min-height: 396px; */
+  .input-red {
+    border: 1px solid var(--secondary-red);
+    color: var(--secondary-red);
+    gap: 4px;
+  }
+  .input-blue {
+    border: 1px solid var(--secondary-light-blue);
+    color: var(--primary-blue);
+    gap: 8px;
+  }
 
   @media ${device.tablet} {
     max-width: 336px;
-    max-height: 404px;
   }
   @media ${device.desktop} {
     max-width: 384px;
@@ -48,7 +78,7 @@ export const StyledLoginDiv = styled.div`
   flex-direction: column;
   max-width: 280px;
   min-height: 396px;
-  gap: 10px;
+  gap: 16px;
   .title {
     font-family: "Roboto-Medium", sans-serif;
     font-size: 26px;
@@ -59,13 +89,16 @@ export const StyledLoginDiv = styled.div`
     font-size: 16px;
     line-height: 1.25;
     color: var(--primary-blue);
+    &:hover {
+      color: var(--secondary-orange);
+    }
   }
   @media ${device.tablet} {
     max-width: 336px;
-    max-height: 404px;
   }
   @media ${device.desktop} {
     max-width: 384px;
+    margin-left: 728px;
   }
 `;
 
