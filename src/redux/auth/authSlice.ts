@@ -15,7 +15,7 @@ const authInitialState = {
   user: {
     name: "",
     email: "",
-    avatar: "",
+    avatar: null,
     gender: "",
     dailyNorma: 0,
   },
@@ -71,7 +71,7 @@ const authSlice = createSlice({
       .addCase(logOutThunk.fulfilled, (state) => {
         state.user = {
           email: "",
-          avatar: "",
+          avatar: null,
           gender: "",
           dailyNorma: 0,
           name: "",

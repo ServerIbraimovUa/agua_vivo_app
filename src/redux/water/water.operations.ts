@@ -43,7 +43,7 @@ export const deleteWaterThunk = createAsyncThunk<string, string>(
   }
 );
 
-export const getAmountDailyThunk = createAsyncThunk<IAmountDaily, unknown>(
+export const getAmountDailyThunk = createAsyncThunk<IAmountDaily>(
   "water/getAmountDaily",
   async (_, thunkAPI) => {
     try {

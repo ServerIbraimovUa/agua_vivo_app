@@ -109,7 +109,7 @@ export const updateUserDailyNormaThunk = createAsyncThunk<
   }
 });
 
-export const logOutThunk = createAsyncThunk<unknown, unknown>(
+export const logOutThunk = createAsyncThunk(
   "auth/logout",
   async (_, thunkAPI) => {
     try {
