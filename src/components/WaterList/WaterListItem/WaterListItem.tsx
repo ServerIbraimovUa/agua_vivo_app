@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { selectAllWater } from "../../../redux/water/waterSelectors";
+// import { useSelector } from "react-redux";
+// import { selectAllWater } from "../../../redux/water/waterSelectors";
 import { IWaterData } from "../WaterList";
 import { FC, useState } from "react";
 import Icon from "../../Icon/Icon";
@@ -12,6 +12,7 @@ interface IProps {
   handleDeleteWater: (waterId: number) => void;
   handleUpdateWater?: (waterData: IWaterData) => void;
   closeModal: () => void;
+  waterList: IWaterData[];
 }
 
 const WaterListItem: FC<IProps> = ({
@@ -19,26 +20,27 @@ const WaterListItem: FC<IProps> = ({
   handleDeleteWater,
   handleUpdateWater,
   closeModal,
+  waterList,
 }) => {
   const [visible, setVisible] = useState(false);
-  const waterList = useSelector(selectAllWater);
+  // const waterList = useSelector(selectAllWater);
 
   return (
     <>
-      {waterList.map(({ waterVolume, date, waterId }) => {
+      {waterList.map((item) => {
         return (
-          <li key={waterId}>
+          <li key={item.waterList.waterId}>
             <span>
-              <Icon className="water-glass-icon" id="icon-water"></Icon>
+              <Icon className="water-glass-icon" id="water"></Icon>
             </span>
-            <p>{waterVolume}</p>
-            <p>{date}</p>
+            <p>{item.waterList.waterVolume}</p>
+            {/* <p>{item.waterList.date}</p> */}
             <button
               type="button"
               className="edit-btn"
               // onClick={() => handleUpdateWater(waterData)}
             >
-              <Icon className="edit-water-icon" id="icon-pencil"></Icon>
+              <Icon className="edit-water-icon" id="pencil"></Icon>
             </button>
             {visible && (
               <Modal
@@ -56,17 +58,17 @@ const WaterListItem: FC<IProps> = ({
             <button
               type="button"
               className="delete-btn"
-              onClick={() => handleDeleteWater(waterId)}
+              onClick={() => handleDeleteWater(item.waterList.waterId)}
             >
-              <Icon className="delete-water-icon" id="icon-delete"></Icon>
+              <Icon className="delete-water-icon" id="delete"></Icon>
             </button>
             {visible && (
               <Modal setVisible={setVisible} title="Delete water">
                 <DeleteWaterModal
-                  waterId={waterId}
+                  waterId={item.waterList.waterId}
                   handleDeleteWater={handleDeleteWater}
                   closeModal={closeModal}
-                  //   title="Are you sure you want to delete the entry?"
+                  title="Delete entry?"
                   //   show={false}
                 />
               </Modal>
