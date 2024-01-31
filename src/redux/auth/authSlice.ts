@@ -3,22 +3,27 @@ import {
   registerThunk,
   logInThunk,
   getCurrentUserThunk,
-  updateAvatar,
-  updateDailyNorma,
-  getUserInfoByIdThunk,
-  updateUserInfoByIdThunk,
-  updatePassword,
   logOutThunk,
+  getUserInfoThunk,
+  updateUserInfoThunk,
+  updateUserAvatarThunk,
+  updateUserDailyNormaThunk,
 } from "./auth.operations";
-import { IAuthInit } from "../redux_ts/interfaces";
+import { IAuthInitInfo } from "../redux_ts/interfaces";
 
 const authInitialState = {
-  user: { email: "", avatar: "", gender: "", dailyNorma: "", name: "" },
+  user: {
+    name: "",
+    email: "",
+    avatar: null,
+    gender: "",
+    dailyNorma: null,
+  },
   token: "",
   isAuthorized: false,
   isLoading: false,
   error: null,
-} as IAuthInit;
+} as IAuthInitInfo;
 
 const authSlice = createSlice({
   name: "auth",
@@ -43,37 +48,32 @@ const authSlice = createSlice({
         state.isAuthorized = true;
         state.isLoading = false;
       })
-      .addCase(getUserInfoByIdThunk.fulfilled, (state, action) => {
-        state.user = action.payload;
+      .addCase(getUserInfoThunk.fulfilled, (state, action) => {
+        state.user = action.payload.user;
         state.isAuthorized = true;
         state.isLoading = false;
       })
-      .addCase(updateUserInfoByIdThunk.fulfilled, (state, action) => {
-        state.user = action.payload;
+      .addCase(updateUserInfoThunk.fulfilled, (state, action) => {
+        state.user = { ...state.user, ...action.payload };
         state.isAuthorized = true;
         state.isLoading = false;
       })
-      .addCase(updateAvatar.fulfilled, (state, action) => {
-        state.user.avatar = action.payload;
+      .addCase(updateUserAvatarThunk.fulfilled, (state, action) => {
+        state.user.avatar = action.payload.avatar;
         state.isAuthorized = true;
         state.isLoading = false;
       })
-      .addCase(updateDailyNorma.fulfilled, (state, action) => {
-        state.user.dailyNorma = action.payload;
-        state.isAuthorized = true;
-        state.isLoading = false;
-      })
-      .addCase(updatePassword.fulfilled, (state, action) => {
-        state.token = action.payload;
+      .addCase(updateUserDailyNormaThunk.fulfilled, (state, action) => {
+        state.user.dailyNorma = action.payload.dailyNorma;
         state.isAuthorized = true;
         state.isLoading = false;
       })
       .addCase(logOutThunk.fulfilled, (state) => {
         state.user = {
           email: "",
-          avatar: "",
+          avatar: null,
           gender: "",
-          dailyNorma: "",
+          dailyNorma: 0,
           name: "",
         };
         state.token = "";
@@ -85,11 +85,10 @@ const authSlice = createSlice({
           registerThunk.rejected,
           logInThunk.rejected,
           getCurrentUserThunk.rejected,
-          getUserInfoByIdThunk.rejected,
-          updateUserInfoByIdThunk.rejected,
-          updateAvatar.rejected,
-          updateDailyNorma.rejected,
-          updatePassword.rejected,
+          getUserInfoThunk.rejected,
+          updateUserInfoThunk.rejected,
+          updateUserAvatarThunk.rejected,
+          updateUserDailyNormaThunk.rejected,
           logOutThunk.rejected
         ),
         (state, action) => {
@@ -103,11 +102,10 @@ const authSlice = createSlice({
           registerThunk.pending,
           logInThunk.pending,
           getCurrentUserThunk.pending,
-          getUserInfoByIdThunk.pending,
-          updateUserInfoByIdThunk.pending,
-          updateAvatar.pending,
-          updateDailyNorma.pending,
-          updatePassword.pending,
+          getUserInfoThunk.pending,
+          updateUserInfoThunk.pending,
+          updateUserAvatarThunk.pending,
+          updateUserDailyNormaThunk.pending,
           logOutThunk.pending
         ),
         (state) => {

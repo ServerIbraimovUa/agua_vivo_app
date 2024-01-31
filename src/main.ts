@@ -38,8 +38,8 @@ export const GlobalStyle = createGlobalStyle`
   --high-index: 100;
 
 // SHADOW
---btn-box-shadow: 0 4px 8px #407bff;
---btn-box-shadow-hover: 0 4px 14px #407bff;
+--btn-box-shadow: 0 4px 8px #407BFF57;
+--btn-box-shadow-hover: 0 4px 14px #407BFF8A;
  
 }
 

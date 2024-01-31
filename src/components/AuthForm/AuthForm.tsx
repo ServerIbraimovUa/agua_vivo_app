@@ -57,19 +57,24 @@ const AuthForm: FC<Props> = ({ repeat }) => {
 
   return (
     <StyledAuthForm onSubmit={handleSubmit(onSubmit)}>
-      <label>
+      <label className={errors.email ? "gap-error" : ""}>
         <span>Enter your email</span>
         <input
+          className={errors.email ? "input-red input" : "input-blue input"}
           {...register("email", { required: true })}
           type="email"
           placeholder="E-mail"
         />
-        {errors.email && <span>This field is required</span>}
+        <span className="error">
+          {errors.email && <span>This field is required</span>}
+        </span>
       </label>
-      <label>
+
+      <label className={errors.email ? "gap-error" : ""}>
         <span>Enter your password</span>
         <div className="eye-input">
           <input
+            className={errors.password ? "input-red input" : "input-blue input"}
             {...register("password", { required: true })}
             type={toggleInput}
             placeholder="Password"
@@ -86,15 +91,19 @@ const AuthForm: FC<Props> = ({ repeat }) => {
             )}
           </StyledAuthFormSpan>
         </div>
-
-        {errors.password?.message}
+        <span className="error">{errors.password?.message}</span>
       </label>
+
       {repeat && (
         <>
-          <label>
+          <label className={errors.email ? "gap-error" : ""}>
             <span>Repeat password</span>
+
             <div className="eye-input">
               <input
+                className={
+                  errors.password ? "input-red input" : "input-blue input"
+                }
                 {...register("repeatPassword", {
                   required: true,
                 })}
@@ -113,8 +122,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
                 )}
               </StyledAuthFormSpan>
             </div>
-
-            {errors.repeatPassword?.message}
+            <span className="error">{errors.repeatPassword?.message}</span>
           </label>
         </>
       )}

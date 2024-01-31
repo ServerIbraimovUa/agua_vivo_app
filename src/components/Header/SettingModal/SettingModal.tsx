@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Icon from "../../Icon/Icon";
 import { selectUser } from "../../../redux/auth/authSelectors";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
-import { updateAvatar } from "../../../redux/auth/auth.operations";
+import { updateUserAvatarThunk } from "../../../redux/auth/auth.operations";
 import {
   FormAvatar,
   FormGenderWrap,
@@ -24,7 +24,7 @@ import {
 } from "./SettingModal.styled";
 
 type SettingForm = {
-  avatar: string;
+  avatar: File | null;
   gender?: "woman" | "man";
   name: string;
   email: string;
@@ -99,10 +99,8 @@ const SettingModal: React.FC = () => {
   };
 
   const onSubmit: SubmitHandler<SettingForm> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    dispatch(updateAvatar(file));
+    dispatch(updateUserAvatarThunk(file));
     console.log(data);
-
     reset();
   };
 
@@ -120,7 +118,7 @@ const SettingModal: React.FC = () => {
           ) : (
             <img
               className="avatar-setting"
-              src={data.avatar}
+              // src={data.avatar}
               alt="User avatar"
             />
           )}{" "}

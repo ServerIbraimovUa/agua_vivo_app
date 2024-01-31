@@ -3,22 +3,22 @@ import { FC } from "react";
 interface IProps {
   title: string;
   //   show: boolean;
-  handleDeleteWater: (waterId: number) => void;
+  handleDeleteWater: (id: string) => void;
   closeModal: () => void;
-  waterId: number;
+  id: string;
 }
 
 const DeleteWaterModal: FC<IProps> = ({
   handleDeleteWater,
   closeModal,
-  waterId,
+  id,
 }) => {
   const handleCancel = () => {
     closeModal();
   };
 
   const handleDelete = () => {
-    handleDeleteWater(waterId);
+    handleDeleteWater(id);
     closeModal();
   };
 

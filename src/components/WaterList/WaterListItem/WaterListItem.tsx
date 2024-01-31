@@ -9,7 +9,7 @@ import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 
 interface IProps {
   show: boolean;
-  handleDeleteWater: (waterId: number) => void;
+  handleDeleteWater: (waterId: string) => void;
   handleUpdateWater?: (waterData: IWaterData) => void;
   closeModal: () => void;
   waterList: IWaterData[];
@@ -29,11 +29,11 @@ const WaterListItem: FC<IProps> = ({
     <>
       {waterList.map((item) => {
         return (
-          <li key={item.waterList.waterId}>
+          <li key={item.id}>
             <span>
               <Icon className="water-glass-icon" id="water"></Icon>
             </span>
-            <p>{item.waterList.waterVolume}</p>
+            <p>{item.waterVolume}</p>
             {/* <p>{item.waterList.date}</p> */}
             <button
               type="button"
@@ -58,14 +58,14 @@ const WaterListItem: FC<IProps> = ({
             <button
               type="button"
               className="delete-btn"
-              onClick={() => handleDeleteWater(item.waterList.waterId)}
+              onClick={() => handleDeleteWater(item.id)}
             >
               <Icon className="delete-water-icon" id="delete"></Icon>
             </button>
             {visible && (
               <Modal setVisible={setVisible} title="Delete water">
                 <DeleteWaterModal
-                  waterId={item.waterList.waterId}
+                  id={item.id}
                   handleDeleteWater={handleDeleteWater}
                   closeModal={closeModal}
                   title="Delete entry?"
