@@ -9,7 +9,7 @@ import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 
 interface IProps {
   show: boolean;
-  handleDeleteWater: (waterId: number) => void;
+  handleDeleteWater: (waterId: string) => void;
   handleUpdateWater?: (waterData: IWaterData) => void;
   closeModal: () => void;
   waterList: IWaterData[];

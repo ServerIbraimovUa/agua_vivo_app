@@ -1,17 +1,17 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
-  addWater,
-  deleteWater,
-  getAmountDaily,
-  getAmountMonthly,
-  updateWaterVolume,
+  addWaterThunk,
+  deleteWaterThunk,
+  getAmountDailyThunk,
+  getAmountMonthlyThunk,
+  updateWaterVolumeThunk,
 } from "./water.operations";
 import { IWater } from "../redux_ts/interfaces";
 
 const waterInitState: IWater = {
   waterList: [],
   amountDaily: {},
-  amountMonthly: [],
+  amountMonthly: {},
   isLoading: false,
   error: null,
 };
@@ -22,38 +22,38 @@ const waterSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(addWater.fulfilled, (state, action) => {
-        state.isLoading = false;
+      .addCase(addWaterThunk.fulfilled, (state, action) => {
         state.waterList.unshift(action.payload);
-      })
-      .addCase(getAmountDaily.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.amountDaily = action.payload;
       })
-      .addCase(getAmountMonthly.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.amountMonthly = action.payload;
-      })
-      .addCase(updateWaterVolume.fulfilled, (state, action) => {
-        state.isLoading = false;
+      .addCase(updateWaterVolumeThunk.fulfilled, (state, action) => {
         state.waterList = state.waterList.map((water) => {
           if (water.id === action.payload.id) return action.payload;
           return water;
         });
-      })
-      .addCase(deleteWater.fulfilled, (state, action) => {
         state.isLoading = false;
+      })
+      .addCase(deleteWaterThunk.fulfilled, (state, action) => {
         state.waterList = state.waterList.filter(
           (water) => !action.payload.includes(water.id)
         );
+        state.isLoading = false;
+      })
+      .addCase(getAmountDailyThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.amountDaily = action.payload;
+      })
+      .addCase(getAmountMonthlyThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.amountMonthly = action.payload;
       })
       .addMatcher(
         isAnyOf(
-          addWater.pending,
-          getAmountDaily.pending,
-          getAmountMonthly.pending,
-          updateWaterVolume.pending,
-          deleteWater.pending
+          addWaterThunk.pending,
+          getAmountDailyThunk.pending,
+          getAmountMonthlyThunk.pending,
+          updateWaterVolumeThunk.pending,
+          deleteWaterThunk.pending
         ),
         (state) => {
           state.isLoading = true;
@@ -62,11 +62,11 @@ const waterSlice = createSlice({
       )
       .addMatcher(
         isAnyOf(
-          addWater.rejected,
-          getAmountDaily.rejected,
-          getAmountMonthly.rejected,
-          updateWaterVolume.rejected,
-          deleteWater.rejected
+          addWaterThunk.rejected,
+          getAmountDailyThunk.rejected,
+          getAmountMonthlyThunk.rejected,
+          updateWaterVolumeThunk.rejected,
+          deleteWaterThunk.rejected
         ),
         (state, action) => {
           state.isLoading = false;
