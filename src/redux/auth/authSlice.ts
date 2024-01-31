@@ -17,7 +17,7 @@ const authInitialState = {
     email: "",
     avatar: null,
     gender: "",
-    dailyNorma: 0,
+    dailyNorma: null,
   },
   token: "",
   isAuthorized: false,
