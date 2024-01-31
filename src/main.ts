@@ -161,6 +161,7 @@ section{
 
   }
 }
+
 .container {
   width: 100%;
   padding-left: 20px;

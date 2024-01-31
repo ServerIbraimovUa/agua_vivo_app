@@ -1,10 +1,13 @@
 import { NavLink } from "react-router-dom";
 import AuthForm from "../components/AuthForm/AuthForm";
-import { StyledLoginDiv } from "../components/AuthForm/AuthForm.styled";
+import {
+  StyledAuthSection,
+  StyledLoginDiv,
+} from "../components/AuthForm/AuthForm.styled";
 
 const RegisterPage = () => {
   return (
-    <section>
+    <StyledAuthSection className="auth-section">
       <div className="container">
         <StyledLoginDiv>
           <h2 className="title">Sign Up</h2>
@@ -14,7 +17,7 @@ const RegisterPage = () => {
           </NavLink>
         </StyledLoginDiv>
       </div>
-    </section>
+    </StyledAuthSection>
   );
 };
 
