@@ -8,6 +8,7 @@ import {
   IUpdateUserinfo,
   IUpdateUserAvatar,
   IUpdateUserDailyNorma,
+  IDailyNorma,
 } from "../redux_ts/interfaces";
 import { handleToken, setToken, unsetToken } from "../services/handleToken";
 
@@ -99,8 +100,8 @@ export const updateUserAvatarThunk = createAsyncThunk<
 
 export const updateUserDailyNormaThunk = createAsyncThunk<
   IUpdateUserDailyNorma,
-  number
->("auth/users/updateDailyNorma", async (newDailyNorma: number, thunkAPI) => {
+  IDailyNorma
+>("auth/users/updateDailyNorma", async (newDailyNorma, thunkAPI) => {
   try {
     const response = await axios.patch("/users/water-rate", newDailyNorma);
     return response.data.dailyNorma;

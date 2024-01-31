@@ -58,7 +58,7 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const { dailyNorma } = data;
     console.log(dailyNorma);
-    dispatch(updateUserDailyNormaThunk(dailyNorma));
+    dispatch(updateUserDailyNormaThunk({ dailyNorma: +dailyNorma }));
     onClose();
   };
 

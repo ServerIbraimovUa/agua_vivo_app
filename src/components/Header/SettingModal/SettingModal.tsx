@@ -24,7 +24,7 @@ import {
 } from "./SettingModal.styled";
 
 type SettingForm = {
-  avatar: string;
+  avatar: File | null;
   gender?: "woman" | "man";
   name: string;
   email: string;
@@ -120,7 +120,7 @@ const SettingModal: React.FC = () => {
           ) : (
             <img
               className="avatar-setting"
-              src={data.avatar}
+              // src={data.avatar}
               alt="User avatar"
             />
           )}{" "}
