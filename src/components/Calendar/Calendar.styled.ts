@@ -5,15 +5,16 @@ export const CalendarContainer = styled.div`
   position: relative;
 
   width: 264;
-  height: 440px;
+  height: 500px;
   background-color: #ecf2ff;
   @media ${device.tablet} {
     width: 646px;
-    height: 330px;
+    height: 315px;
   }
   @media ${device.desktop} {
-    width: 544px;
-    height: 330px;
+
+width: 544px;
+height: 320px;
   }
 
   .right-align {
@@ -116,10 +117,7 @@ export const ModalContent = styled.div`
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: absolute;
-  @media ${device.tablet} {
-  }
-  @media ${device.desktop} {
-  }
+
   .close {
     position: absolute;
     top: 24px;
