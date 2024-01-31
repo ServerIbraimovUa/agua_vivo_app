@@ -133,23 +133,29 @@ section{
   min-height: 100vh;
   @media ${device.tablet} {
     padding-top: 40px;
+   
+
   }
   @media ${device.desktop} {
-    padding-top: 80px;
+    padding-top: 80px;     
+ 
   }
 }
-.welcome-section{
+.welcome-section{  
   background-image: url(src/assets/images/Back_Main_Mob1.png);
-  background-size: cover;
+    background-position: center;  
   background-repeat: no-repeat;
   @media ${device.tablet} {
-    background-image: url(src/assets/images/Back_Main_Tab1.png);
+    background-image: url(src/assets/images/Back_Main_Tab1.png);    
+    padding-bottom: 50px;
   }
   @media ${device.desktop} {
-
+    
     background-image: url(src/assets/images/Back_Main_Desc2.png),
       url(src/assets/images/Back_Main_Desc1.png);
-    /* background-position: center, center 228px; */
+    background-position: top, bottom;
+    /* background-position: 136px 44px, 100px 307px; */
+  
   }
 }
 .container {

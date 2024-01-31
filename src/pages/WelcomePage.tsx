@@ -8,6 +8,9 @@ const DivStyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
+  @media ${device.tablet} {
+    gap: 60px;
+  }
   @media ${device.desktop} {
     flex-direction: row;
     justify-content: center;
