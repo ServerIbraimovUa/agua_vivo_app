@@ -74,7 +74,7 @@ const Calendar: React.FC = () => {
     const modalWidth = 292;
     const modalHeight = 188;
   
-    const modalTop = dayElementRect.top - modalHeight - 40;
+    const modalTop = dayElementRect.top - modalHeight - 10;
     const modalLeft =
       dayElementRect.left + dayElementRect.width / 2 - modalWidth / 2;
   
