@@ -37,21 +37,6 @@ const Calendar: React.FC = () => {
     return daysArray;
   };
 
-  // const isCurrentMonth = (): boolean => {
-  //   const currentDateStart = new Date(
-  //     currentDate.getFullYear(),
-  //     currentDate.getMonth(),
-  //     1
-  //   );
-  //   const currentDateEnd = new Date(
-  //     currentDate.getFullYear(),
-  //     currentDate.getMonth() + 1,
-  //     0
-  //   );
-  //   const today = getCurrentDate();
-
-  //   return today >= currentDateStart && today <= currentDateEnd;
-  // };
 
   const handlePrevMonth = (): void => {
     setCurrentDate(
@@ -72,32 +57,37 @@ const Calendar: React.FC = () => {
   };
 
   const handleDayClick = (day: Day): void => {
-    const dayElement = document.getElementById(`day-${day.day}`);
-
-    if (!dayElement) {
-      console.error(`Element with id 'day-${day.day}' not found.`);
+    if (selectedDay === day.day) {
+      closeModal();
+      setSelectedDay(null);
       return;
     }
-
+  
+    const dayElement = document.getElementById(`day-${day.day}`);
+  
+    if (!dayElement) {
+      console.error(`Елемент з id 'day-${day.day}' не знайдено.`);
+      return;
+    }
+  
     const dayElementRect = dayElement.getBoundingClientRect();
     const modalWidth = 292;
     const modalHeight = 188;
-
-    const modalTop = dayElementRect.top - modalHeight - 40;
+  
+    const modalTop = dayElementRect.top - modalHeight - 10;
     const modalLeft =
       dayElementRect.left + dayElementRect.width / 2 - modalWidth / 2;
-
+  
     setSelectedDay(day.day);
     setModalContent(day);
-
+  
     document.documentElement.style.setProperty("--modal-top", `${modalTop}px`);
-    document.documentElement.style.setProperty(
-      "--modal-left",
-      `${modalLeft}px`
-    );
-
+    document.documentElement.style.setProperty("--modal-left", `${modalLeft}px`);
+  
     setIsModalOpen(true);
   };
+  
+  
 
   const closeModal = (): void => {
     setIsModalOpen(false);
@@ -126,20 +116,20 @@ const Calendar: React.FC = () => {
     <Styled.CalendarContainer>
       <div className="right-align">
         <h1 className="month">Month</h1>
-<div className="header">
-<button className="button" onClick={handlePrevMonth}>
-    &lt;
-  </button>
-  <div className="month-title">
-    {currentDate.toLocaleString("en-US", { month: "long" })},{" "}
-    {currentDate.getFullYear()}
-  </div>
-  {currentDate.getMonth() === new Date().getMonth() &&
-    currentDate.getFullYear() === new Date().getFullYear() ? null : (
-      <button className="button" onClick={handleNextMonth}>
-        &gt;
-      </button>
-    )}
+        <div className="header">
+          <button className="button" onClick={handlePrevMonth}>
+            &lt;
+          </button>
+          <div className="month-title">
+            {currentDate.toLocaleString("en-US", { month: "long" })},{" "}
+            {currentDate.getFullYear()}
+          </div>
+          {currentDate.getMonth() === new Date().getMonth() &&
+          currentDate.getFullYear() === new Date().getFullYear() ? null : (
+            <button className="button" onClick={handleNextMonth}>
+              &gt;
+            </button>
+          )}
         </div>
       </div>
 
