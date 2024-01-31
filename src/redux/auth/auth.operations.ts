@@ -5,10 +5,9 @@ import {
   IAuthInitInfo,
   ICurrentUserData,
   IGetUserInfo,
-  IUpdateUserinfo,
-  IUpdateUserAvatar,
   IUpdateUserDailyNorma,
   IDailyNorma,
+  IUpdateUserinfo,
 } from "../redux_ts/interfaces";
 import { handleToken, setToken, unsetToken } from "../services/handleToken";
 
@@ -57,7 +56,7 @@ export const getUserInfoThunk = createAsyncThunk<IGetUserInfo, undefined>(
   "auth/users/getInfo",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get("/users/info/");
+      const response = await axios.get("/users/info");
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -65,38 +64,38 @@ export const getUserInfoThunk = createAsyncThunk<IGetUserInfo, undefined>(
   }
 );
 
-export const updateUserInfoThunk = createAsyncThunk<
-  IUpdateUserinfo,
-  IUpdateUserinfo
->("auth/users/updateInfo", async (newUserData, thunkAPI) => {
-  try {
-    const response = await axios.patch("/users/update-user/", newUserData);
-    return response.data;
-  } catch (e) {
-    if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
-  }
-});
-
-export const updateUserAvatarThunk = createAsyncThunk<
-  IUpdateUserAvatar,
-  File | null
->("auth/users/avatars", async (newAvatar, thunkAPI) => {
-  try {
-    const formData = new FormData();
-    if (newAvatar) {
-      formData.append("avatar", newAvatar);
+export const updateUserInfoThunk = createAsyncThunk(
+  "auth/users/updateInfo",
+  async (newUserData: IUpdateUserinfo, thunkAPI) => {
+    try {
+      const response = await axios.patch("/users/update-user", newUserData);
+      return response.data;
+    } catch (e) {
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
-
-    const response = await axios.patch("/users/avatars", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return response.data.avatar;
-  } catch (e) {
-    if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
   }
-});
+);
+
+export const updateUserAvatarThunk = createAsyncThunk(
+  "auth/users/avatars",
+  async (newAvatar: File, thunkAPI) => {
+    try {
+      const formData = new FormData();
+      if (newAvatar) {
+        formData.append("avatar", newAvatar);
+      }
+
+      const response = await axios.patch("/users/avatars", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data.avatar;
+    } catch (e) {
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
 
 export const updateUserDailyNormaThunk = createAsyncThunk<
   IUpdateUserDailyNorma,

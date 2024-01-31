@@ -7,8 +7,8 @@ export interface IAuthInitInfo {
   user: {
     name?: string;
     email: string;
-    avatar: File | null;
-    gender: "women" | "man" | "";
+    avatar: string;
+    gender: "woman" | "man" | "";
     dailyNorma?: number | null;
   };
   token: string;
@@ -20,8 +20,8 @@ export interface IAuthInitInfo {
 export interface ICurrentUserData {
   name: string;
   email: string;
-  avatar: File | null;
-  gender: "women" | "man";
+  avatar: string;
+  gender: "woman" | "man";
   dailyNorma: number | null;
 }
 
@@ -29,8 +29,8 @@ export interface IGetUserInfo {
   user: {
     name: string;
     email: string;
-    avatar: File | null;
-    gender: "women" | "man";
+    avatar: string;
+    gender: "woman" | "man";
     dailyNorma: number | null;
   };
 }
@@ -38,11 +38,11 @@ export interface IGetUserInfo {
 export interface IUpdateUserinfo {
   name?: string;
   email?: string;
-  gender?: "women" | "man";
+  gender?: "woman" | "man";
 }
 
 export interface IUpdateUserAvatar {
-  avatar: File | null;
+  avatar: string;
 }
 
 export interface IUpdateUserDailyNorma {

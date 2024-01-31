@@ -15,7 +15,7 @@ const authInitialState = {
   user: {
     name: "",
     email: "",
-    avatar: null,
+    avatar: "",
     gender: "",
     dailyNorma: null,
   },
@@ -59,7 +59,7 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateUserAvatarThunk.fulfilled, (state, action) => {
-        state.user.avatar = action.payload.avatar;
+        state.user.avatar = action.payload;
         state.isAuthorized = true;
         state.isLoading = false;
       })
@@ -71,7 +71,7 @@ const authSlice = createSlice({
       .addCase(logOutThunk.fulfilled, (state) => {
         state.user = {
           email: "",
-          avatar: null,
+          avatar: "",
           gender: "",
           dailyNorma: 0,
           name: "",

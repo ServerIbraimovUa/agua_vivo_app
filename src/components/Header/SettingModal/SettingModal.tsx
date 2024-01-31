@@ -5,7 +5,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Icon from "../../Icon/Icon";
 import { selectUser } from "../../../redux/auth/authSelectors";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
-import { updateUserAvatarThunk } from "../../../redux/auth/auth.operations";
+import {
+  updateUserAvatarThunk,
+  updateUserInfoThunk,
+} from "../../../redux/auth/auth.operations";
 import {
   FormAvatar,
   FormGenderWrap,
@@ -24,8 +27,8 @@ import {
 } from "./SettingModal.styled";
 
 type SettingForm = {
-  avatar: File | null;
-  gender?: "woman" | "man";
+  avatar: File;
+  gender: "woman" | "man" | "";
   name: string;
   email: string;
   outdatedPassword?: string;
@@ -56,7 +59,7 @@ const SettingModal: React.FC = () => {
     formState: { errors, isSubmitting },
   } = useForm<SettingForm>({
     defaultValues: {
-      // gender: data.gender,
+      // gender: data.gender || "woman",
       name: data.name || "",
       email: data.email,
       outdatedPassword: "",
@@ -98,9 +101,22 @@ const SettingModal: React.FC = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<SettingForm> = async (data) => {
-    dispatch(updateUserAvatarThunk(file));
-    console.log(data);
+  const onSubmit: SubmitHandler<SettingForm> = async (user) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    if (file) {
+      dispatch(updateUserAvatarThunk(file));
+    }
+
+    if (data.gender) {
+      dispatch(updateUserInfoThunk({ gender: data.gender }));
+    }
+
+    if (data.name) {
+      dispatch(updateUserInfoThunk({ name: data.name }));
+    }
+
+    console.log(user);
     reset();
   };
 
@@ -118,7 +134,7 @@ const SettingModal: React.FC = () => {
           ) : (
             <img
               className="avatar-setting"
-              // src={data.avatar}
+              src={data.avatar}
               alt="User avatar"
             />
           )}{" "}
@@ -140,22 +156,22 @@ const SettingModal: React.FC = () => {
               <label className="gender-label">
                 <input
                   {...register("gender", {
-                    required: "Please select a gender",
+                    // required: "Please select a gender",
                   })}
                   value="woman"
                   type="radio"
                 />
-                <span className="gender-sub-title">Woman</span>
+                <span className="gender-sub-title">woman</span>
               </label>
               <label className="gender-label">
                 <input
                   {...register("gender", {
-                    required: "Please select a gender",
+                    // required: "Please select a gender",
                   })}
                   value="man"
                   type="radio"
                 />
-                <span className="gender-sub-title">Man</span>
+                <span className="gender-sub-title">man</span>
                 {errors.gender && <p>{`${errors.gender.message}`}</p>}
               </label>
             </FormGenderContair>
@@ -165,6 +181,7 @@ const SettingModal: React.FC = () => {
               <span className="user-info-title">Your name</span>
               <FormNameInput
                 {...register("name")}
+                className={errors.outdatedPassword ? "error-input" : ""}
                 type="text"
                 placeholder="your name"
               />
@@ -176,10 +193,13 @@ const SettingModal: React.FC = () => {
                 {...register("email", {
                   required: "This field is required",
                 })}
+                className={errors.outdatedPassword ? "error-input" : ""}
                 type="email"
                 placeholder="your e-mail"
               />
-              {errors.email && <p>{`${errors.email.message}`}</p>}
+              {errors.email && (
+                <p className="error-message">{`${errors.email.message}`}</p>
+              )}
             </label>
           </UserInfoWrap>
         </MainInfoWrap>
@@ -197,6 +217,7 @@ const SettingModal: React.FC = () => {
                   return true;
                 },
               })}
+              className={errors.outdatedPassword ? "error-input" : ""}
               type={outdatedPasswordToggle}
               placeholder="Password"
             />
@@ -211,7 +232,7 @@ const SettingModal: React.FC = () => {
               )}
             </span>
             {errors.outdatedPassword && (
-              <p>{`${errors.outdatedPassword.message}`}</p>
+              <p className="error-message">{`${errors.outdatedPassword.message}`}</p>
             )}
           </label>
 
@@ -234,6 +255,7 @@ const SettingModal: React.FC = () => {
                   message: "Password must be at most 64 characters",
                 },
               })}
+              className={errors.outdatedPassword ? "error-input" : ""}
               type={newPasswordToggle}
               placeholder="Password"
             />
@@ -247,7 +269,9 @@ const SettingModal: React.FC = () => {
                 <Icon className="password-eye-outline-icon" id="eye-outline" />
               )}
             </span>
-            {errors.newPassword && <p>{`${errors.newPassword.message}`}</p>}
+            {errors.newPassword && (
+              <p className="error-message">{`${errors.newPassword.message}`}</p>
+            )}
           </label>
 
           <label className="password-label">
@@ -265,6 +289,7 @@ const SettingModal: React.FC = () => {
                   message: "Password must be at most 64 characters",
                 },
               })}
+              className={errors.outdatedPassword ? "error-input" : ""}
               type={repeatNewPasswordToggle}
               placeholder="Password"
             />
@@ -279,7 +304,7 @@ const SettingModal: React.FC = () => {
               )}
             </span>
             {errors.repeatNewPassword && (
-              <p>{`${errors.repeatNewPassword.message}`}</p>
+              <p className="error-message">{`${errors.repeatNewPassword.message}`}</p>
             )}
           </label>
         </FormUserPassword>
