@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+
 export const CalendarContainer = styled.div`
   position: relative;
   width: 544px;
@@ -51,7 +52,7 @@ export const Days = styled.div`
 
 export const Day = styled.div`
   padding: 7px;
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 50%;
   text-align: center;
   width: 34px;
@@ -62,6 +63,7 @@ export const Day = styled.div`
   position: relative;
 `;
 
+
 // export const Button = styled.button`
 //   color: #407BFF;
 //   border: none;
@@ -70,6 +72,7 @@ export const Day = styled.div`
 //   flex-shrink: 0;
 //   cursor: pointer;
 // `;
+
 
 export const Modal = styled.div`
   position: fixed;
@@ -87,6 +90,7 @@ export const ModalContent = styled.div`
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: absolute;
+  
   .close {
       position: absolute;
   top: 10px;
@@ -118,8 +122,6 @@ export const Container = styled.div`
   margin-right: 16px;
   margin-bottom: 24px;
 `;
-
-
 
 
 export const LowPercentageDay = styled(Day)`

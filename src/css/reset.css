@@ -1,7 +1,12 @@
 a {
   text-decoration: none;
   color: inherit;
-  cursor: pointer;
+}
+
+*:hover,
+*:focus,
+*:active {
+  cursor: inherit;
 }
 
 button {
@@ -9,7 +14,6 @@ button {
   color: inherit;
   border-width: 0;
   padding: 0;
-  cursor: pointer;
 }
 
 ul,

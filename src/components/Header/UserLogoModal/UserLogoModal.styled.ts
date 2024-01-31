@@ -11,8 +11,6 @@ export const LogoWrapper = styled.div`
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    cursor: pointer;
-
     border: none;
     background-color: transparent;
 
@@ -55,7 +53,7 @@ export const LogoWrapper = styled.div`
     button {
       border: none;
       /* background-color: transparent; */
-      cursor: pointer;
+      cursor: inherit;
     }
     .gear_settings {
       width: 16px;

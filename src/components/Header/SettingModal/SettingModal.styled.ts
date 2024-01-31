@@ -40,14 +40,14 @@ export const FormAvatarLabel = styled.label`
     width: 16px;
     height: 16px;
     stroke: #407bff;
-    cursor: pointer;
+    cursor: inherit;
   }
 
   .text-loading {
     font-size: 14px;
     font-weight: 500;
     color: #407bff;
-    cursor: pointer;
+    cursor: inherit;
   }
 `;
 
@@ -227,7 +227,7 @@ export const BtnSubmit = styled.button`
       box-shadow: var(--btn-box-shadow);
     }
     &:active {
-      cursor: pointer;
+      cursor: inherit;
     }
   }
 `;

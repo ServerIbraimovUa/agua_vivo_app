@@ -66,7 +66,6 @@ export const Overlay = styled.div<Props>`
       padding: 0;
       background-color: transparent;
       border: none;
-      cursor: pointer;
 
       transition: transform 350ms ease-in-out;
 
