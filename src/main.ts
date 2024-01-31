@@ -38,7 +38,8 @@ export const GlobalStyle = createGlobalStyle`
   --high-index: 100;
 
 // SHADOW
---btn-box-shadow: 0 4px 14px #407bff;
+--btn-box-shadow: 0 4px 8px #407bff;
+--btn-box-shadow-hover: 0 4px 14px #407bff;
  
 }
 
@@ -127,10 +128,11 @@ export const GlobalStyle = createGlobalStyle`
   color: var(--primary-white);
   background-color: var(--primary-blue);
   cursor: inherit;
+  box-shadow:var(--btn-box-shadow);
   @media ${device.tablet}{
     &:hover,
     &:focus {
-      box-shadow:var(--btn-box-shadow);
+      box-shadow:var(--btn-box-shadow-hover);
     }}
    }
     
