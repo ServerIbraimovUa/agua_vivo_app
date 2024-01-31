@@ -3,6 +3,15 @@ import { IWaterData } from "../WaterList";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { addWaterThunk } from "../../../redux/water/water.operations";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
+import { AddWaterModalStyled } from "../WaterList.styled";
+import Icon from "../../Icon/Icon";
+// import TimePicker from "react-time-picker";
+// import type { Detail, LooseValue } from "./shared/types.js";
+
+///
+// type Detail = "hour" | "minute" | "second";
+// type LooseValuePiece = string | Date | null;
+// type LooseValue = LooseValuePiece | Range<LooseValuePiece>;
 
 interface IProps {
   title: string;
@@ -26,7 +35,11 @@ const AddWaterModal: FC<IProps> = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IWaterPortion>();
+  } = useForm<IWaterPortion>({
+    defaultValues: {
+      date: `${new Date().getHours()}:${new Date().getMinutes()}`,
+    },
+  });
 
   const dispatch = useAppDispatch();
 
@@ -34,6 +47,7 @@ const AddWaterModal: FC<IProps> = ({
     count: 0,
     inputValue: "0",
   });
+  // const [value, setValue] = useState<LooseValue>(getHoursMinutesSeconds(now));
 
   const handleCountChange = (newCount: number) => {
     if (state.count + newCount >= 0) {
@@ -75,44 +89,55 @@ const AddWaterModal: FC<IProps> = ({
   };
 
   return (
-    <div>
+    <AddWaterModalStyled>
       {show && (
         <div>
           <p>250 ml</p>
           <p>7:00 am</p>
         </div>
       )}
-      <h2>{title}</h2>
-      <p>Amount of water:</p>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="counter">
+      <h2 className="add-water-title">{title}</h2>
+      <div className="counter-box">
+        <p className="">Amount of water:</p>
+        <div className="counter-btn-box">
           <button
+            className="counter-btn"
             onClick={() => handleCountChange(state.count - 50)}
             type="button"
           >
-            -
+            {" "}
+            <Icon className="icon-minus" id="minus" />
           </button>
-          <span>{state.count}ml</span>
+          <span className="water-amount-span">{state.count}ml</span>
           <button
+            className="counter-btn"
             onClick={() => handleCountChange(state.count + 50)}
             type="button"
           >
-            +
+            <Icon className="icon-plus" id="plus"></Icon>
           </button>
         </div>
-        <label>
+      </div>
+      <form className="add-water-form" onSubmit={handleSubmit(onSubmit)}>
+        <label className="water-label">
           <span>Recording time:</span>
+          {/* <input aria-label="Time" type="time" /> */}
           <input
             {...register("date", { required: true })}
             type="time"
             name="date"
             step={300}
+            className="water-input"
+            aria-label="Time"
           />
+          {/* <TimePicker onChange={onChange} value={value} /> */}
           {errors.date && <span>This field is required</span>}
         </label>
 
-        <label>
-          <span>Enter the value of water used:</span>
+        <label className="water-label">
+          <span className="enter-water-span">
+            Enter the value of water used:
+          </span>
           <input
             {...register("waterVolume", { required: true })}
             type="number"
@@ -124,16 +149,19 @@ const AddWaterModal: FC<IProps> = ({
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             onKeyPress={handleInputKeyPress}
+            className="water-input"
           />
           {errors.waterVolume && <span>This field is required</span>}
         </label>
 
-        <div>
-          <span>{state.count}ml</span>
-          <button type="submit">Save</button>
+        <div className="btn-container">
+          <span className="water-amount">{state.count}ml</span>
+          <button type="submit" className="save-btn">
+            Save
+          </button>
         </div>
       </form>
-    </div>
+    </AddWaterModalStyled>
   );
 };
 

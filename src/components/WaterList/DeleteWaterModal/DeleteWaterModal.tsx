@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 interface IProps {
-  //   title: string;
+  title: string;
   //   show: boolean;
   handleDeleteWater: (id: string) => void;
   closeModal: () => void;
