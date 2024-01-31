@@ -120,18 +120,6 @@ export const logOutThunk = createAsyncThunk<unknown, unknown>(
     }
   }
 );
-// ** Якщо аватар стрінг
-// export const updateUserAvatarThunk = createAsyncThunk<
-//   IUpdateUserAvatar,
-//  string
-// >("auth/users/avatars", async (newAvatar, thunkAPI) => {
-//   try {
-//     const response = await axios.patch("/users/avatars", newAvatar);
-//     return response.data.avatar;
-//   } catch (e) {
-//     if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
-//   }
-// });
 
 // export const updatePassword = createAsyncThunk(
 //   "auth/updatePassword",
