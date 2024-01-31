@@ -69,7 +69,7 @@ export const updateUserInfoThunk = createAsyncThunk(
   async (newUserData: IUpdateUserinfo, thunkAPI) => {
     try {
       const response = await axios.patch("/users/update-user", newUserData);
-      return response.data;
+      return response.data.user;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
