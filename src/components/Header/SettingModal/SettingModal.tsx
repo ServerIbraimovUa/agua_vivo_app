@@ -25,7 +25,7 @@ import {
 
 type SettingForm = {
   avatar: string;
-  gender?: "women" | "man" | "other";
+  gender?: "woman" | "man";
   name: string;
   email: string;
   outdatedPassword?: string;
@@ -36,6 +36,13 @@ type SettingForm = {
 const SettingModal: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [previewURL, setpreviewURL] = useState<string | null>(null);
+
+  // зміна типу інпута
+  const [outdatedPasswordToggle, setOutdatedPasswordToggle] =
+    useState("password");
+  const [newPasswordToggle, setNewPasswordToggle] = useState("password");
+  const [repeatNewPasswordToggle, setRepeatNewPasswordToggle] =
+    useState("password");
 
   const data = useSelector(selectUser);
   const dispatch = useAppDispatch();
@@ -49,7 +56,7 @@ const SettingModal: React.FC = () => {
     formState: { errors, isSubmitting },
   } = useForm<SettingForm>({
     defaultValues: {
-      gender: data.gender || "other",
+      // gender: data.gender,
       name: data.name || "",
       email: data.email,
       outdatedPassword: "",
@@ -75,7 +82,24 @@ const SettingModal: React.FC = () => {
     }
   };
 
+  const handleTogglePassword = (field: string) => {
+    if (field === "outdatedPassword") {
+      setOutdatedPasswordToggle((prev) =>
+        prev === "password" ? "text" : "password"
+      );
+    } else if (field === "newPassword") {
+      setNewPasswordToggle((prev) =>
+        prev === "password" ? "text" : "password"
+      );
+    } else if (field === "repeatNewPassword") {
+      setRepeatNewPasswordToggle((prev) =>
+        prev === "password" ? "text" : "password"
+      );
+    }
+  };
+
   const onSubmit: SubmitHandler<SettingForm> = async (data) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     dispatch(updateAvatar(file));
     console.log(data);
 
@@ -134,16 +158,7 @@ const SettingModal: React.FC = () => {
                   type="radio"
                 />
                 <span className="gender-sub-title">Man</span>
-              </label>
-              <label className="gender-label">
-                <input
-                  {...register("gender", {
-                    required: "Please select a gender",
-                  })}
-                  value="other"
-                  type="radio"
-                />
-                <span>Other</span>
+                {errors.gender && <p>{`${errors.gender.message}`}</p>}
               </label>
             </FormGenderContair>
           </FormGenderWrap>
@@ -184,9 +199,19 @@ const SettingModal: React.FC = () => {
                   return true;
                 },
               })}
-              type="password"
+              type={outdatedPasswordToggle}
               placeholder="Password"
             />
+            <span
+              className="toggle-password"
+              onClick={() => handleTogglePassword("outdatedPassword")}
+            >
+              {outdatedPasswordToggle === "text" ? (
+                <Icon className="password-eye-icon" id="eye" />
+              ) : (
+                <Icon className="password-eye-outline-icon" id="eye-outline" />
+              )}
+            </span>
             {errors.outdatedPassword && (
               <p>{`${errors.outdatedPassword.message}`}</p>
             )}
@@ -211,9 +236,19 @@ const SettingModal: React.FC = () => {
                   message: "Password must be at most 64 characters",
                 },
               })}
-              type="password"
+              type={newPasswordToggle}
               placeholder="Password"
             />
+            <span
+              className="toggle-password"
+              onClick={() => handleTogglePassword("newPassword")}
+            >
+              {newPasswordToggle === "text" ? (
+                <Icon className="password-eye-icon" id="eye" />
+              ) : (
+                <Icon className="password-eye-outline-icon" id="eye-outline" />
+              )}
+            </span>
             {errors.newPassword && <p>{`${errors.newPassword.message}`}</p>}
           </label>
 
@@ -232,9 +267,19 @@ const SettingModal: React.FC = () => {
                   message: "Password must be at most 64 characters",
                 },
               })}
-              type="password"
+              type={repeatNewPasswordToggle}
               placeholder="Password"
             />
+            <span
+              className="toggle-password"
+              onClick={() => handleTogglePassword("repeatNewPassword")}
+            >
+              {repeatNewPasswordToggle === "text" ? (
+                <Icon className="password-eye-icon" id="eye" />
+              ) : (
+                <Icon className="password-eye-outline-icon" id="eye-outline" />
+              )}
+            </span>
             {errors.repeatNewPassword && (
               <p>{`${errors.repeatNewPassword.message}`}</p>
             )}
