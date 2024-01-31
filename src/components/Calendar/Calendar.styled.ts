@@ -3,15 +3,16 @@ import { device } from "../../css/deviceSize";
 
 export const CalendarContainer = styled.div`
   position: relative;
-  
+
   width: 264;
   height: 500px;
   background-color: #ecf2ff;
-    @media ${device.tablet} {
+  @media ${device.tablet} {
     width: 646px;
     height: 315px;
   }
   @media ${device.desktop} {
+
 width: 544px;
 height: 320px;
   }
@@ -47,15 +48,13 @@ height: 320px;
     background-color: transparent;
     padding: 5px 10px;
     flex-shrink: 0;
-    cursor: pointer;
   }
   .month {
     font-size: 26px;
-    color: #2F2F2F;
+    color: #2f2f2f;
     margin-left: 0;
-    
   }
-`
+`;
 
 export const Days = styled.ul`
   display: grid;
@@ -65,12 +64,12 @@ export const Days = styled.ul`
   gap: 16px 26px;
 
   @media ${device.tablet} {
-grid-template-columns: repeat(10, 1fr);
-gap: 20px 34px;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 20px 34px;
   }
-    @media ${device.desktop} {
-      grid-template-columns: repeat(10, 1fr);
-      gap: 20px 22px;
+  @media ${device.desktop} {
+    grid-template-columns: repeat(10, 1fr);
+    gap: 20px 22px;
   }
   li {
     display: flex;
@@ -118,12 +117,12 @@ export const ModalContent = styled.div`
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: absolute;
+
   .close {
     position: absolute;
     top: 24px;
     right: 16px;
     font-size: 20px;
-    cursor: pointer;
     color: #407bff;
   }
   .title-modal {
@@ -142,7 +141,7 @@ export const ModalContent = styled.div`
     margin-top: 36px;
   }
   .modal-paragraf-two-three {
-margin-top: 16px;
+    margin-top: 16px;
   }
   .span-modal {
     margin-left: 6px;

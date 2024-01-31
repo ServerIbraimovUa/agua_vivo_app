@@ -43,11 +43,11 @@ export const deleteWaterThunk = createAsyncThunk<string, string>(
   }
 );
 
-export const getAmountDailyThunk = createAsyncThunk<IAmountDaily, unknown>(
+export const getAmountDailyThunk = createAsyncThunk<IAmountDaily>(
   "water/getAmountDaily",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get("/api/water/today/");
+      const response = await axios.get("/api/water/today");
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);

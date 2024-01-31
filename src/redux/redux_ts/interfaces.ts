@@ -7,9 +7,9 @@ export interface IAuthInitInfo {
   user: {
     name?: string;
     email: string;
-    avatar: string;
+    avatar: File | null;
     gender: "women" | "man" | "";
-    dailyNorma?: number;
+    dailyNorma?: number | null;
   };
   token: string;
   isAuthorized: boolean;
@@ -20,18 +20,18 @@ export interface IAuthInitInfo {
 export interface ICurrentUserData {
   name: string;
   email: string;
-  avatar: string;
+  avatar: File | null;
   gender: "women" | "man";
-  dailyNorma: number;
+  dailyNorma: number | null;
 }
 
 export interface IGetUserInfo {
   user: {
     name: string;
     email: string;
-    avatar: string;
+    avatar: File | null;
     gender: "women" | "man";
-    dailyNorma: number;
+    dailyNorma: number | null;
   };
 }
 
@@ -46,7 +46,7 @@ export interface IUpdateUserAvatar {
 }
 
 export interface IUpdateUserDailyNorma {
-  dailyNorma: number;
+  dailyNorma: number | null;
 }
 
 export interface IWaterPayload {
@@ -76,6 +76,10 @@ export interface IMonth {
 
 export interface IAmountMonthly {
   month: [IMonth];
+}
+
+export interface IDailyNorma {
+  dailyNorma: number | null;
 }
 
 export interface IWater {

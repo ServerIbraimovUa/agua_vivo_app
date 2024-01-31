@@ -15,9 +15,9 @@ const authInitialState = {
   user: {
     name: "",
     email: "",
-    avatar: "",
+    avatar: null,
     gender: "",
-    dailyNorma: 0,
+    dailyNorma: null,
   },
   token: "",
   isAuthorized: false,
@@ -64,14 +64,14 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateUserDailyNormaThunk.fulfilled, (state, action) => {
-        state.user.dailyNorma = action.payload.dailyNorma;
+        state.user.dailyNorma = action.payload;
         state.isAuthorized = true;
         state.isLoading = false;
       })
       .addCase(logOutThunk.fulfilled, (state) => {
         state.user = {
           email: "",
-          avatar: "",
+          avatar: null,
           gender: "",
           dailyNorma: 0,
           name: "",

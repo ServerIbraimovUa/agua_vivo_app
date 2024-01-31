@@ -30,7 +30,7 @@ interface Props {
 type Inputs = {
   weight: string;
   time: string;
-  sex?: "Man" | "Woman";
+  sex?: "man" | "woman";
   dailyNorma: number;
 };
 
@@ -58,7 +58,7 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const { dailyNorma } = data;
     console.log(dailyNorma);
-    dispatch(updateUserDailyNormaThunk(dailyNorma));
+    dispatch(updateUserDailyNormaThunk({ dailyNorma: +dailyNorma }));
     onClose();
   };
 
@@ -67,7 +67,7 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
   const sex = String(watch("sex"));
 
   const calculateDailyNorma = (w: number, t: number, g: string): string => {
-    if (g === "Man") {
+    if (g === "man") {
       return String((w * 0.04 + t * 0.6).toFixed(1));
     } else {
       return String((w * 0.03 + t * 0.4).toFixed(1));
@@ -103,7 +103,7 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
                 {...register("sex", {
                   required: "Please select a gender",
                 })}
-                value="Woman"
+                value="woman"
                 type="radio"
               />
               For woman
@@ -113,7 +113,7 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
                 {...register("sex", {
                   required: "Please select a gender",
                 })}
-                value="Man"
+                value="man"
                 type="radio"
               />
               For man
