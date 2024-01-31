@@ -81,7 +81,7 @@ const WaterRatio = () => {
         <Modal setVisible={setVisible} title="Add water">
           <AddWaterModal
             title="Choose a value"
-            show={false}
+            show={true}
             closeModal={closeModal}
           />
         </Modal>

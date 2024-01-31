@@ -138,7 +138,7 @@ export const GlobalStyle = createGlobalStyle`
 
 section{
   padding-top: 24px;
-  min-height: 100vh;
+  min-height: 92vh;
   @media ${device.tablet} {
     padding-top: 40px;
   }
@@ -147,17 +147,16 @@ section{
   }
 }
 .welcome-section{
-  background-image: url(src/assets/images/Back_Main_Mob1.png);
+  background-image: url('../src/assets/images/welcome-mob.png');
   background-size: cover;
   background-repeat: no-repeat;
   @media ${device.tablet} {
-    background-image: url(src/assets/images/Back_Main_Tab1.png);
+    background-image: url('../src/assets/images/welcome-tab.png');
   }
   @media ${device.desktop} {
 
-    background-image: url(src/assets/images/Back_Main_Desc2.png),
-      url(src/assets/images/Back_Main_Desc1.png);
-    /* background-position: center, center 228px; */
+    background-image: url(../src/assets/images/welcome-desk.png);
+
   }
 }
 .container {
@@ -165,7 +164,6 @@ section{
   padding-left: 20px;
   padding-right: 20px;
   margin: 0 auto; 
-  outline: 1px solid black;
   
   @media ${device.mobile} {
         max-width: 320px;
