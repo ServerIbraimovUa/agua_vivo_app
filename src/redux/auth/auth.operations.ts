@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
 import {
   IAuthData,
   IAuthInitInfo,
@@ -53,29 +52,23 @@ export const getCurrentUserThunk = createAsyncThunk<
   }
 });
 
-export const getUserInfoThunk = createAsyncThunk<
-  IGetUserInfo,
-  undefined,
-  { state: { auth: IAuthInitInfo } }
->("auth/users/getInfo", async (_, thunkAPI) => {
-  try {
-    const state = thunkAPI.getState();
-    handleToken(state.auth.token);
-    const response = await axios.get("/users/info/");
-    return response.data;
-  } catch (e) {
-    if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+export const getUserInfoThunk = createAsyncThunk<IGetUserInfo, undefined>(
+  "auth/users/getInfo",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get("/users/info/");
+      return response.data;
+    } catch (e) {
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+    }
   }
-});
+);
 
 export const updateUserInfoThunk = createAsyncThunk<
   IUpdateUserinfo,
-  IUpdateUserinfo,
-  { state: { auth: IAuthInitInfo } }
+  IUpdateUserinfo
 >("auth/users/updateInfo", async (newUserData, thunkAPI) => {
   try {
-    const state = thunkAPI.getState();
-    handleToken(state.auth.token);
     const response = await axios.patch("/users/update-user/", newUserData);
     return response.data;
   } catch (e) {
@@ -85,13 +78,9 @@ export const updateUserInfoThunk = createAsyncThunk<
 
 export const updateUserAvatarThunk = createAsyncThunk<
   IUpdateUserAvatar,
-  File | null,
-  { state: { auth: IAuthInitInfo } }
+  File | null
 >("auth/users/avatars", async (newAvatar, thunkAPI) => {
   try {
-    const state = thunkAPI.getState();
-    handleToken(state.auth.token);
-
     const formData = new FormData();
     if (newAvatar) {
       formData.append("avatar", newAvatar);
@@ -110,12 +99,9 @@ export const updateUserAvatarThunk = createAsyncThunk<
 
 export const updateUserDailyNormaThunk = createAsyncThunk<
   IUpdateUserDailyNorma,
-  number,
-  { state: { auth: IAuthInitInfo } }
+  number
 >("auth/users/updateDailyNorma", async (newDailyNorma: number, thunkAPI) => {
   try {
-    const state = thunkAPI.getState();
-    handleToken(state.auth.token);
     const response = await axios.patch("/users/water-rate", newDailyNorma);
     return response.data.dailyNorma;
   } catch (e) {
@@ -123,20 +109,29 @@ export const updateUserDailyNormaThunk = createAsyncThunk<
   }
 });
 
-export const logOutThunk = createAsyncThunk<
-  unknown,
-  unknown,
-  { state: { auth: IAuthInitInfo } }
->("auth/logout", async (_, thunkAPI) => {
-  try {
-    const state = thunkAPI.getState();
-    handleToken(state.auth.token);
-    axios.post("/auth/logout");
-    unsetToken();
-  } catch (e) {
-    if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+export const logOutThunk = createAsyncThunk<unknown, unknown>(
+  "auth/logout",
+  async (_, thunkAPI) => {
+    try {
+      axios.post("/auth/logout");
+      unsetToken();
+    } catch (e) {
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+    }
   }
-});
+);
+// ** Якщо аватар стрінг
+// export const updateUserAvatarThunk = createAsyncThunk<
+//   IUpdateUserAvatar,
+//  string
+// >("auth/users/avatars", async (newAvatar, thunkAPI) => {
+//   try {
+//     const response = await axios.patch("/users/avatars", newAvatar);
+//     return response.data.avatar;
+//   } catch (e) {
+//     if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+//   }
+// });
 
 // export const updatePassword = createAsyncThunk(
 //   "auth/updatePassword",
