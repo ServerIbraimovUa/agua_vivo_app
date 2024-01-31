@@ -7,7 +7,7 @@ export interface IAuthInitInfo {
   user: {
     name?: string;
     email: string;
-    avatar: string;
+    avatar: File | null;
     gender: "women" | "man" | "";
     dailyNorma?: number;
   };
@@ -20,7 +20,7 @@ export interface IAuthInitInfo {
 export interface ICurrentUserData {
   name: string;
   email: string;
-  avatar: string;
+  avatar: File | null;
   gender: "women" | "man";
   dailyNorma: number;
 }
@@ -29,7 +29,7 @@ export interface IGetUserInfo {
   user: {
     name: string;
     email: string;
-    avatar: string;
+    avatar: File | null;
     gender: "women" | "man";
     dailyNorma: number;
   };

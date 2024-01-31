@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import {
   deleteWaterThunk,
   updateWaterVolumeThunk,
-  getAmountDailyThunk
+  getAmountDailyThunk,
 } from "../../redux/water/water.operations";
 import { useAppDispatch } from "../../redux/redux_ts/hook";
 import WaterListItem from "./WaterListItem/WaterListItem";
