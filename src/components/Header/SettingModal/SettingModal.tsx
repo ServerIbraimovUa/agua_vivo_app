@@ -99,10 +99,8 @@ const SettingModal: React.FC = () => {
   };
 
   const onSubmit: SubmitHandler<SettingForm> = async (data) => {
-
     dispatch(updateUserAvatarThunk(file));
-
-
+    console.log(data);
     reset();
   };
 
