@@ -6,9 +6,8 @@ import {
   ICurrentUserData,
   IGetUserInfo,
   IUpdateUserinfo,
-  IUpdateUserAvatar,
-  IUpdateUserDailyNorma,
-  IDailyNorma,
+  IUpdateUserAvatar
+  
 } from "../redux_ts/interfaces";
 import { handleToken, setToken, unsetToken } from "../services/handleToken";
 
