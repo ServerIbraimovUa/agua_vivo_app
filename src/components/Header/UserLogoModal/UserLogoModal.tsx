@@ -51,7 +51,7 @@ const UserLogoModal = () => {
           </Modal>
         )}
         <br />
-        <button onClick={() => setVisible(true)}>
+        <button className="button-popover" onClick={() => setVisible(true)}>
           <Icon className="logout" id="logout" />
           <span className="button-popover-name">Log out</span>
           
