@@ -28,12 +28,14 @@ const DeleteWaterModal: FC<IProps> = ({
   return (
     <DeleteWaterModalStyled>
       <p>Are you sure you want to delete the entry?</p>
-      <button className="cancel-btn" type="button" onClick={handleCancel}>
-        Cancel
-      </button>
-      <button className="delete-btn" type="button" onClick={handleDelete}>
-        Delete
-      </button>
+      <div className="delete-btn-box">
+        <button className="cancel-btn" type="button" onClick={handleCancel}>
+          Cancel
+        </button>
+        <button className="delete-btn" type="button" onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
     </DeleteWaterModalStyled>
   );
 };

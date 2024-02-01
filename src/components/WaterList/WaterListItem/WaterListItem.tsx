@@ -9,6 +9,7 @@ import {
   updateWaterVolumeThunk,
 } from "../../../redux/water/water.operations";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
+import { WaterItemBoxStyled, WaterItemStyled } from "../WaterList.styled";
 
 interface IProps {
   show: boolean;
@@ -33,8 +34,8 @@ const WaterListItem: FC<IProps> = ({ closeModal, waterItem }) => {
   };
 
   return (
-    <>
-      <li key={waterItem.id} id={waterItem.id}>
+    <WaterItemBoxStyled>
+      <WaterItemStyled key={waterItem.id} id={waterItem.id}>
         <span>
           <Icon className="water-glass-icon" id="water"></Icon>
         </span>
@@ -50,9 +51,9 @@ const WaterListItem: FC<IProps> = ({ closeModal, waterItem }) => {
         >
           <Icon className="edit-water-icon" id="pencil"></Icon>
         </button>
-        {visible && editModalVisible && (
+        {editModalVisible && (
           <Modal
-            setVisible={setVisible}
+            setVisible={setEditModalVisible}
             title="Edit the entered amount of water"
           >
             <AddWaterModal
@@ -92,8 +93,8 @@ const WaterListItem: FC<IProps> = ({ closeModal, waterItem }) => {
             />
           </Modal>
         )}
-      </li>
-    </>
+      </WaterItemStyled>
+    </WaterItemBoxStyled>
   );
 };
 
