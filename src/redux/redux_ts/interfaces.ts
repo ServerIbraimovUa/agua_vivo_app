@@ -11,9 +11,10 @@ export interface IAuthInitInfo {
     gender: "woman" | "man" | "";
     dailyNorma?: number | null;
   };
-  token: string;
+  token: string | null;
   isAuthorized: boolean;
   isLoading: boolean;
+  isRefreshing: boolean;
   error: unknown | string;
 }
 

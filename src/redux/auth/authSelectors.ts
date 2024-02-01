@@ -38,6 +38,10 @@ export const selectToken = createSelector(
   (auth) => auth.token
 );
 
+export const selectRefresh = createSelector(
+  selectAuthorization,
+  (auth) => auth.isRefreshing
+);
 export const selectIsAuthorized = createSelector(
   selectAuthorization,
   (auth) => auth.isAuthorized

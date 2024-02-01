@@ -19,9 +19,10 @@ const authInitialState = {
     gender: "",
     dailyNorma: null,
   },
-  token: "",
+  token: null,
   isAuthorized: false,
   isLoading: false,
+  isRefreshing: false,
   error: null,
 } as IAuthInitInfo;
 
@@ -36,49 +37,41 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isAuthorized = true;
         state.isLoading = false;
+        state.isRefreshing = false;
       })
       .addCase(logInThunk.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isAuthorized = true;
         state.isLoading = false;
+        state.isRefreshing = false;
       })
       .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuthorized = true;
-        state.isLoading = false;
+        state.isRefreshing = false;
       })
       .addCase(getUserInfoThunk.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isAuthorized = true;
-        state.isLoading = false;
+        state.isRefreshing = false;
+        state.isLoading = true;
       })
       .addCase(updateUserInfoThunk.fulfilled, (state, action) => {
         state.user = { ...state.user, ...action.payload };
-        state.isAuthorized = true;
-        state.isLoading = false;
       })
       .addCase(updateUserAvatarThunk.fulfilled, (state, action) => {
         state.user.avatar = action.payload;
-        state.isAuthorized = true;
-        state.isLoading = false;
       })
       .addCase(updateUserDailyNormaThunk.fulfilled, (state, action) => {
         state.user.dailyNorma = action.payload;
-        state.isAuthorized = true;
-        state.isLoading = false;
       })
-      .addCase(logOutThunk.fulfilled, (state) => {
-        state.user = {
-          email: "",
-          avatar: "",
-          gender: "",
-          dailyNorma: 0,
-          name: "",
-        };
-        state.token = "";
-        state.isAuthorized = false;
-        state.isLoading = false;
+      .addCase(logOutThunk.fulfilled, () => {
+        return authInitialState;
+      })
+      .addCase(getCurrentUserThunk.pending, (state) => {
+        state.error = null;
+        state.isRefreshing = true;
       })
       .addMatcher(
         isAnyOf(
@@ -95,13 +88,13 @@ const authSlice = createSlice({
           state.isLoading = false;
           console.log(action.payload);
           state.error = action.payload;
+          state.isRefreshing = false;
         }
       )
       .addMatcher(
         isAnyOf(
           registerThunk.pending,
           logInThunk.pending,
-          getCurrentUserThunk.pending,
           getUserInfoThunk.pending,
           updateUserInfoThunk.pending,
           updateUserAvatarThunk.pending,
