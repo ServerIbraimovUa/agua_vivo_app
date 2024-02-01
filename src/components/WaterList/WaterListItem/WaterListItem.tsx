@@ -1,81 +1,98 @@
-// import { useSelector } from "react-redux";
-// import { selectAllWater } from "../../../redux/water/waterSelectors";
 import { IWaterData } from "../WaterList";
 import { FC, useState } from "react";
 import Icon from "../../Icon/Icon";
 import Modal from "../../Modal/Modal";
 import AddWaterModal from "../AddWaterModal/AddWaterModal";
 import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
+import {
+  deleteWaterThunk,
+  updateWaterVolumeThunk,
+} from "../../../redux/water/water.operations";
+import { useAppDispatch } from "../../../redux/redux_ts/hook";
 
 interface IProps {
   show: boolean;
-  handleDeleteWater: (waterId: string) => void;
-  handleUpdateWater?: (waterData: IWaterData) => void;
   closeModal: () => void;
-  waterList: IWaterData[];
+
+  waterItem: IWaterData;
 }
 
-const WaterListItem: FC<IProps> = ({
-  //   show,
-  handleDeleteWater,
-  handleUpdateWater,
-  closeModal,
-  waterList,
-}) => {
+const WaterListItem: FC<IProps> = ({ closeModal, waterItem }) => {
   const [visible, setVisible] = useState(false);
-  // const waterList = useSelector(selectAllWater);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+
+  const dispatch = useAppDispatch();
+
+  const handleUpdateWater = (waterData: IWaterData) => {
+    dispatch(updateWaterVolumeThunk(waterData));
+  };
+
+  const handleDeleteWater = (waterID: string) => {
+    dispatch(deleteWaterThunk(waterID));
+  };
 
   return (
     <>
-      {waterList.map((item) => {
-        return (
-          <li key={item.id}>
-            <span>
-              <Icon className="water-glass-icon" id="water"></Icon>
-            </span>
-            <p>{item.waterVolume}</p>
-            {/* <p>{item.waterList.date}</p> */}
-            <button
-              type="button"
-              className="edit-btn"
-              // onClick={() => handleUpdateWater(waterData)}
-            >
-              <Icon className="edit-water-icon" id="pencil"></Icon>
-            </button>
-            {visible && (
-              <Modal
-                setVisible={setVisible}
-                title="Edit the entered amount of water"
-              >
-                <AddWaterModal
-                  title="Choose a value"
-                  show={false}
-                  handleUpdateWater={handleUpdateWater}
-                  closeModal={closeModal}
-                />
-              </Modal>
-            )}
-            <button
-              type="button"
-              className="delete-btn"
-              onClick={() => handleDeleteWater(item.id)}
-            >
-              <Icon className="delete-water-icon" id="delete"></Icon>
-            </button>
-            {visible && (
-              <Modal setVisible={setVisible} title="Delete water">
-                <DeleteWaterModal
-                  id={item.id}
-                  handleDeleteWater={handleDeleteWater}
-                  closeModal={closeModal}
-                  title="Delete entry?"
-                  //   show={false}
-                />
-              </Modal>
-            )}
-          </li>
-        );
-      })}
+      <li key={waterItem.id} id={waterItem.id}>
+        <span>
+          <Icon className="water-glass-icon" id="water"></Icon>
+        </span>
+        <p>{waterItem.waterVolume}</p>
+
+        <button
+          type="button"
+          className="edit-btn"
+          onClick={() => {
+            setVisible(true);
+            setEditModalVisible(true);
+          }}
+        >
+          <Icon className="edit-water-icon" id="pencil"></Icon>
+        </button>
+        {visible && editModalVisible && (
+          <Modal
+            setVisible={setVisible}
+            title="Edit the entered amount of water"
+          >
+            <AddWaterModal
+              title="Choose a value"
+              show={false}
+              handleUpdateWater={handleUpdateWater}
+              closeModal={() => {
+                setEditModalVisible(false);
+                setVisible(false);
+                closeModal();
+              }}
+            />
+          </Modal>
+        )}
+        <button
+          type="button"
+          className="delete-btn"
+          onClick={() => {
+            setVisible(true);
+            setDeleteModalVisible(true);
+          }}
+        >
+          <Icon className="delete-water-icon" id="delete"></Icon>
+        </button>
+        {visible && deleteModalVisible && (
+          <Modal setVisible={setVisible} title="Delete water">
+            <DeleteWaterModal
+              title="Delete entry?"
+              show={false}
+              closeModal={() => {
+                setDeleteModalVisible(false);
+                setVisible(false);
+                closeModal();
+              }}
+              handleDeleteWater={handleDeleteWater}
+              id={waterItem.id}
+            />
+          </Modal>
+        )}
+      </li>
     </>
   );
 };

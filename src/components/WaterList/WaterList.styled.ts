@@ -157,3 +157,21 @@ export const AddWaterModalStyled = styled.div`
   @media ${device.desktop} {
   }
 `;
+
+// DeleteWaterModal
+
+export const DeleteWaterModalStyled = styled.div`
+  .cancel-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 232px;
+    height: 36px;
+    border-radius: 10px;
+    color: var(--primary-white);
+    background-color: var(--secondary-blue);
+  }
+
+  .delete-btn {
+  }
+`;
