@@ -18,8 +18,7 @@ import Icon from "../Icon/Icon";
 import Modal from "../Modal/Modal";
 import AddWaterModal from "../WaterList/AddWaterModal/AddWaterModal";
 
-const WaterRatio = () => {
-  const value = [5];
+const WaterRatio = ({ value }) => {
   const [visible, setVisible] = useState(false);
 
   const closeModal = () => {

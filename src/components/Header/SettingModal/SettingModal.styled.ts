@@ -6,6 +6,18 @@ export const FormSettingStyled = styled.form`
   flex-direction: column;
   justify-content: center;
   gap: 24px;
+
+  .error-input {
+    border: 1px solid var(--secondary-red);
+  }
+  .error-message {
+    position: absolute;
+    top: 70px;
+    left: 0;
+
+    font-size: 14px;
+    color: var(--secondary-red);
+  }
 `;
 
 export const FormAvatar = styled.div`
@@ -172,7 +184,10 @@ export const FormNameInput = styled.input`
   padding: 12px 36px 12px 8px;
   color: var(--primary-blue);
   background-color: var(--primary-white);
-
+  &:hover,
+  &:focus {
+    outline: none;
+  }
   &::placeholder {
     font-size: 16px;
     font-weight: 400;
@@ -191,7 +206,10 @@ export const FormEmailInput = styled.input`
   padding: 12px 36px 12px 8px;
   color: var(--primary-blue);
   background-color: var(--primary-white);
-
+  &:hover,
+  &:focus {
+    outline: none;
+  }
   &::placeholder {
     font-size: 16px;
     font-weight: 400;
@@ -210,7 +228,10 @@ export const FormPasswordInput = styled.input`
   padding: 12px 36px 12px 8px;
   color: var(--primary-blue);
   background-color: var(--primary-white);
-
+  &:hover,
+  &:focus {
+    outline: none;
+  }
   &::placeholder {
     font-size: 16px;
     font-weight: 400;
