@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { Range, getTrackBackground } from "react-range";
+import { useState } from 'react';
+import { Range, getTrackBackground } from 'react-range';
 import {
   Output,
   OutputThumb,
@@ -13,12 +13,12 @@ import {
   WaterRatioRangeThumb,
   WaterRatioThumb,
   WaterRatioTitle,
-} from "./WaterRatio.styled";
-import Icon from "../Icon/Icon";
-import Modal from "../Modal/Modal";
-import AddWaterModal from "../WaterList/AddWaterModal/AddWaterModal";
-import { selectPercentage } from "../../redux/water/waterSelectors";
-import { useSelector } from "react-redux";
+} from './WaterRatio.styled';
+import Icon from '../Icon/Icon';
+import Modal from '../Modal/Modal';
+import AddWaterModal from '../WaterList/AddWaterModal/AddWaterModal';
+import { selectPercentage } from '../../redux/water/waterSelectors';
+import { useSelector } from 'react-redux';
 
 const WaterRatio = () => {
   const [visible, setVisible] = useState(false);
@@ -50,7 +50,7 @@ const WaterRatio = () => {
                       ...props.style,
                       background: getTrackBackground({
                         values: [normalizedValue],
-                        colors: ["#9EBBFF", "#D7E3FF"],
+                        colors: ['#9EBBFF', '#D7E3FF'],
                         min: 0,
                         max: 100,
                       }),
