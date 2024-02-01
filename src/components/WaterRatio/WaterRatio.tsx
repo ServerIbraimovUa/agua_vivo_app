@@ -17,13 +17,14 @@ import {
 import Icon from "../Icon/Icon";
 import Modal from "../Modal/Modal";
 import AddWaterModal from "../WaterList/AddWaterModal/AddWaterModal";
+import { selectPercentage } from "../../redux/water/waterSelectors";
+import { useSelector } from "react-redux";
 
-interface Props {
-  value: number[];
-}
-
-const WaterRatio: FC<Props> = ({ value }) => {
+const WaterRatio = () => {
   const [visible, setVisible] = useState(false);
+  const percentage = useSelector(selectPercentage);
+
+  const normalizedValue = percentage > 100 ? 100 : percentage;
 
   const closeModal = () => {
     setVisible(false);
@@ -40,7 +41,7 @@ const WaterRatio: FC<Props> = ({ value }) => {
                 disabled
                 min={0}
                 max={100}
-                values={value}
+                values={[normalizedValue]}
                 onChange={() => {}}
                 renderTrack={({ props, children }) => (
                   <RenderTrack
@@ -48,7 +49,7 @@ const WaterRatio: FC<Props> = ({ value }) => {
                     style={{
                       ...props.style,
                       background: getTrackBackground({
-                        values: value,
+                        values: [normalizedValue],
                         colors: ["#9EBBFF", "#D7E3FF"],
                         min: 0,
                         max: 100,
@@ -61,15 +62,23 @@ const WaterRatio: FC<Props> = ({ value }) => {
                 renderThumb={({ props }) => (
                   <RenderThumb {...props} key={props.key}>
                     <OutputThumb>
-                      <Output>{value[0]}%</Output>
+                      <Output>{normalizedValue}%</Output>
                     </OutputThumb>
                   </RenderThumb>
                 )}
               />
             </WaterRatioRangeThumb>
             <PointsThumb>
-              {value[0] <= 6 ? <span> </span> : <PointsSpan>0%</PointsSpan>}
-              {value[0] >= 91 ? <span> </span> : <PointsSpan>100%</PointsSpan>}
+              {normalizedValue <= 7 ? (
+                <span> </span>
+              ) : (
+                <PointsSpan>0%</PointsSpan>
+              )}
+              {normalizedValue >= 85 ? (
+                <span> </span>
+              ) : (
+                <PointsSpan>100%</PointsSpan>
+              )}
             </PointsThumb>
           </div>
           <WaterRatioBtnThumb className="hover">

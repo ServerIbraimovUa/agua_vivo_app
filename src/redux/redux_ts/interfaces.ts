@@ -64,7 +64,7 @@ export type IAddWaterPortion = {
 export interface IAmountDaily {
   amountOfWater: number;
   percentage: number;
-  entries: [IWaterPayload];
+  entries: IWaterPayload[];
 }
 
 export interface IMonth {
@@ -76,7 +76,7 @@ export interface IMonth {
 }
 
 export interface IAmountMonthly {
-  month: [IMonth];
+  month: IMonth[];
 }
 
 export interface IDailyNorma {
@@ -85,7 +85,7 @@ export interface IDailyNorma {
 
 export interface IWater {
   waterList: IWaterPayload[];
-  amountDaily: IAmountDaily | {};
+  amountDaily: IAmountDaily;
   amountMonthly: IAmountMonthly | {};
   isLoading: boolean;
   error: unknown | string;

@@ -31,9 +31,9 @@ export const updateWaterVolumeThunk = createAsyncThunk<
   }
 });
 
-export const deleteWaterThunk = createAsyncThunk<string, string>(
+export const deleteWaterThunk = createAsyncThunk(
   "water/deleteWater",
-  async (waterID, thunkAPI) => {
+  async (waterID: string, thunkAPI) => {
     try {
       const response = await axios.delete(`/api/water/delete/:${waterID}`);
       return response.data;

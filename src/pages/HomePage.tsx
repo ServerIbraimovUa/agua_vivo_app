@@ -2,27 +2,24 @@ import DailyNorma from "../components/DailyNorma/DailyNorma";
 import WaterList from "../components/WaterList/WaterList";
 import Calendar from "../components/Calendar/Calendar";
 import WaterRatio from "../components/WaterRatio/WaterRatio";
-// import { useDispatch } from "react-redux";
-import { useState } from "react";
-// import { getAmountDailyThunk } from "../redux/water/water.operations";
+import { useEffect } from "react";
+import { getAmountDailyThunk } from "../redux/water/water.operations";
+import { useAppDispatch } from "../redux/redux_ts/hook";
 
 const HomePage = () => {
-  const [percentageValue] = useState([50]);
-  // const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getAmountDailyThunk()).then((data) => {
-  //     console.log(data);
-  //     // setPercentageValue([data.percentage]);
-  //   });
-  // }, []);
+  useEffect(() => {
+    dispatch(getAmountDailyThunk());
+  }, [dispatch]);
+
   return (
     <section>
       <div className="container">
         <DailyNorma />
         <WaterList />
         <Calendar />
-        <WaterRatio value={percentageValue} />
+        <WaterRatio />
       </div>
     </section>
   );
