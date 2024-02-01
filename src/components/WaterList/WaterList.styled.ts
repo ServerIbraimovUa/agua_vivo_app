@@ -157,3 +157,76 @@ export const AddWaterModalStyled = styled.div`
   @media ${device.desktop} {
   }
 `;
+
+//WaterListItem
+export const WaterItemBoxStyled = styled.div`
+  .water-glass-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .edit-water-icon,
+  .delete-water-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  @media ${device.tablet} {
+    .water-glass-icon {
+      width: 36px;
+      height: 36px;
+    }
+  }
+`;
+export const WaterItemStyled = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+`;
+
+// DeleteWaterModal
+
+export const DeleteWaterModalStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+
+  .cancel-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 232px;
+    height: 36px;
+    border-radius: 10px;
+    color: var(--primary-white);
+    background-color: var(--primary-blue);
+  }
+
+  .delete-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 232px;
+    height: 36px;
+    border-radius: 10px;
+    color: var(--primary-white);
+    background-color: var(--secondary-red);
+  }
+
+  .delete-btn-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  @media ${device.tablet} {
+    .delete-btn-box {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+      align-items: center;
+    }
+  }
+`;

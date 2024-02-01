@@ -3,26 +3,17 @@ import Modal from "../Modal/Modal";
 import AddWaterModal from "./AddWaterModal/AddWaterModal";
 import {
   selectAllWater,
-  // selectDailyNorma,
   selectError,
   selectIsLoading,
 } from "../../redux/water/waterSelectors";
 import { useSelector } from "react-redux";
-import {
-  deleteWaterThunk,
-  updateWaterVolumeThunk,
-  getAmountDailyThunk,
-} from "../../redux/water/water.operations";
+import { getAmountDailyThunk } from "../../redux/water/water.operations";
 import { useAppDispatch } from "../../redux/redux_ts/hook";
 import WaterListItem from "./WaterListItem/WaterListItem";
 import Loading from "../Loading/Loading";
 import { WaterContainerStyled } from "./WaterList.styled";
 import Icon from "../Icon/Icon";
-
-// export interface INewPortion {
-//   waterVolume: string;
-//   date: string;
-// }
+import { selectDailyNorma } from "../../redux/auth/authSelectors";
 
 export interface IWaterData {
   waterVolume: number;
@@ -35,8 +26,7 @@ const WaterList = () => {
 
   const dispatch = useAppDispatch();
 
-  // const amountDaily = useSelector(selectDailyNorma);
-  // console.log(amountDaily);
+  const amountDaily = useSelector(selectDailyNorma);
 
   const waterList = useSelector(selectAllWater);
   const loading = useSelector(selectIsLoading);
@@ -46,14 +36,6 @@ const WaterList = () => {
     dispatch(getAmountDailyThunk());
   }, [dispatch]);
 
-  const handleDeleteWater = (waterID: string) => {
-    dispatch(deleteWaterThunk(waterID));
-  };
-
-  const handleUpdateWater = (waterData: IWaterData) => {
-    dispatch(updateWaterVolumeThunk(waterData));
-  };
-
   const closeModal = () => {
     setVisible(false);
   };
@@ -62,16 +44,20 @@ const WaterList = () => {
     <WaterContainerStyled>
       <h1 className="water-title">Today</h1>
       {loading && !error && <Loading />}
-      {waterList.length === 0 ? (
+      {amountDaily === 0 ? (
         <p className="water-empty">No notes yet</p>
       ) : (
-        <WaterListItem
-          show={false}
-          closeModal={closeModal}
-          handleDeleteWater={handleDeleteWater}
-          handleUpdateWater={handleUpdateWater}
-          waterList={waterList}
-        />
+        <>
+          {waterList.length > 0 &&
+            waterList.map((waterItem: IWaterData) => (
+              <WaterListItem
+                key={waterItem.id}
+                show={false}
+                closeModal={closeModal}
+                waterItem={waterItem}
+              />
+            ))}
+        </>
       )}
       <div>
         <button className="add-water-btn" onClick={() => setVisible(true)}>

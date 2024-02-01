@@ -57,7 +57,7 @@ export interface IWaterPayload {
 
 export type IAddWaterPortion = {
   waterVolume: number;
-  date: string;
+  time: string;
 };
 
 export interface IAmountDaily {

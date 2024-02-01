@@ -1,17 +1,10 @@
-import { ChangeEvent, FC, KeyboardEvent, useState } from "react";
+import { ChangeEvent, FC, KeyboardEvent, useEffect, useState } from "react";
 import { IWaterData } from "../WaterList";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { addWaterThunk } from "../../../redux/water/water.operations";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
 import { AddWaterModalStyled } from "../WaterList.styled";
 import Icon from "../../Icon/Icon";
-// import TimePicker from "react-time-picker";
-// import type { Detail, LooseValue } from "./shared/types.js";
-
-///
-// type Detail = "hour" | "minute" | "second";
-// type LooseValuePiece = string | Date | null;
-// type LooseValue = LooseValuePiece | Range<LooseValuePiece>;
+import { addWaterThunk } from "../../../redux/water/water.operations";
 
 interface IProps {
   title: string;
@@ -21,7 +14,7 @@ interface IProps {
 }
 
 export type IWaterPortion = {
-  date: string;
+  time: string;
   waterVolume: number;
 };
 
@@ -35,11 +28,7 @@ const AddWaterModal: FC<IProps> = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IWaterPortion>({
-    defaultValues: {
-      date: `${new Date().getHours()}:${new Date().getMinutes()}`,
-    },
-  });
+  } = useForm<IWaterPortion>();
 
   const dispatch = useAppDispatch();
 
@@ -47,7 +36,44 @@ const AddWaterModal: FC<IProps> = ({
     count: 0,
     inputValue: "0",
   });
-  // const [value, setValue] = useState<LooseValue>(getHoursMinutesSeconds(now));
+  const [timeOptions, setTimeOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    const now = new Date();
+    const minutes = now.getMinutes();
+    const amPM = now.getHours() >= 12 ? "PM" : "AM";
+    const formattedHours = (now.getHours() % 12 || 12)
+      .toString()
+      .padStart(2, "0");
+    const formattedMinutes = minutes.toString().padStart(2, "0");
+    const currentTime = `${formattedHours}:${formattedMinutes} ${amPM}`;
+
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+
+    let nextIntervalHour = currentHour;
+    let nextIntervalMinute = Math.ceil(currentMinute / 5) * 5;
+    if (nextIntervalMinute >= 60) {
+      nextIntervalHour++;
+      nextIntervalMinute -= 60;
+    }
+
+    const intervals: string[] = [];
+    for (
+      let i = nextIntervalHour * 60 + nextIntervalMinute;
+      i < 24 * 60;
+      i += 5
+    ) {
+      const minutes = (i % 60).toString().padStart(2, "0");
+      const amPM = Math.floor(i / 60) < 12 ? "AM" : "PM";
+      const formattedHours = (Math.floor(i / 60) % 12 || 12)
+        .toString()
+        .padStart(2, "0");
+      intervals.push(`${formattedHours}:${minutes} ${amPM}`);
+    }
+
+    setTimeOptions([currentTime, ...intervals]);
+  }, []);
 
   const handleCountChange = (newCount: number) => {
     if (state.count + newCount >= 0) {
@@ -79,7 +105,7 @@ const AddWaterModal: FC<IProps> = ({
 
   const onSubmit: SubmitHandler<IWaterPortion> = (data) => {
     const newData = {
-      date: data.date,
+      time: data.time,
       waterVolume: Number(state.inputValue),
     };
 
@@ -121,17 +147,19 @@ const AddWaterModal: FC<IProps> = ({
       <form className="add-water-form" onSubmit={handleSubmit(onSubmit)}>
         <label className="water-label">
           <span>Recording time:</span>
-          {/* <input aria-label="Time" type="time" /> */}
-          <input
-            {...register("date", { required: true })}
-            type="time"
-            name="date"
-            step={300}
+          <select
+            {...register("time", { required: true })}
+            name="time"
             className="water-input"
             aria-label="Time"
-          />
-          {/* <TimePicker onChange={onChange} value={value} /> */}
-          {errors.date && <span>This field is required</span>}
+          >
+            {timeOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          {errors.time && <span>This field is required</span>}
         </label>
 
         <label className="water-label">

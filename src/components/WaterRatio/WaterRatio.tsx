@@ -84,7 +84,7 @@ const WaterRatio: FC<Props> = ({ value }) => {
         <Modal setVisible={setVisible} title="Add water">
           <AddWaterModal
             title="Choose a value"
-            show={true}
+            show={false}
             closeModal={closeModal}
           />
         </Modal>

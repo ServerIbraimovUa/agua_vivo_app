@@ -23,7 +23,10 @@ const waterSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addWaterThunk.fulfilled, (state, action) => {
-        state.waterList.unshift(action.payload);
+        const index = state.waterList.findIndex(
+          (water) => (water.id = action.payload.id)
+        );
+        state.waterList[index] = action.payload;
         state.isLoading = false;
       })
       .addCase(updateWaterVolumeThunk.fulfilled, (state, action) => {
@@ -41,6 +44,7 @@ const waterSlice = createSlice({
       })
       .addCase(getAmountDailyThunk.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.waterList = action.payload.entries;
         state.amountDaily = action.payload;
       })
       .addCase(getAmountMonthlyThunk.fulfilled, (state, action) => {

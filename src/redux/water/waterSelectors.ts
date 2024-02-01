@@ -5,7 +5,10 @@ const selectWater = (state: RootState) => state.water;
 
 export const selectAllWater = createSelector(
   selectWater,
-  (water) => water.waterList
+
+  (water) => {
+    return water.waterList;
+  }
 );
 
 export const selectDailyNorma = createSelector(
