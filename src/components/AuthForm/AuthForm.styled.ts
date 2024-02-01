@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../css/deviceSize";
-import bgDeskImg from "../../assets/images/Back_signUp_desk.png";
+import bgDeskSignUpImg from "../../assets/images/BackSignUpDesk.png";
 
 export const StyledAuthSection = styled.section`
   /* display: flex; */
@@ -11,7 +11,7 @@ export const StyledAuthSection = styled.section`
   }
   @media ${device.desktop} {
     padding-top: 148px;
-    background-image: url(${bgDeskImg});
+    background-image: url(${bgDeskSignUpImg});
     /* background-size: contain; */
     background-repeat: no-repeat;
   }
@@ -130,8 +130,11 @@ export const StyledAuthFormSpan = styled.span`
 
 export const AuthFormButton = styled.button`
   width: 100%;
-  height: 44px;
+  height: 36px;
   border-radius: 10px;
   padding: 8px 30px;
   font-size: 16px;
+  @media ${device.tablet} {
+    height: 44px;
+  }
 `;
