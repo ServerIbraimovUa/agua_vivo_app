@@ -29,17 +29,18 @@ const waterSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addWaterThunk.fulfilled, (state, action) => {
-        const index = state.waterList.findIndex(
-          (water) => (water.id = action.payload.id)
-        );
-        state.waterList[index] = action.payload;
+        console.log(action.payload);
+        state.waterList.push(action.payload);
         state.isLoading = false;
       })
       .addCase(updateWaterVolumeThunk.fulfilled, (state, action) => {
-        state.waterList = state.waterList.map((water) => {
-          if (water.id === action.payload.id) return action.payload;
-          return water;
-        });
+        const idx = state.waterList.findIndex(
+          (water) => water.id === action.payload.id
+        );
+
+        if (idx !== -1) {
+          state.waterList[idx] = action.payload;
+        }
         state.isLoading = false;
       })
       .addCase(deleteWaterThunk.fulfilled, (state, action) => {
