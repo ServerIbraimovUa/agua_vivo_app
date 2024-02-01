@@ -61,31 +61,55 @@ const Calendar: React.FC = () => {
       setSelectedDay(null);
       return;
     }
-
+  
     const dayElement = document.getElementById(`day-${day.day}`);
-
+  
     if (!dayElement) {
       console.error(`Елемент з id 'day-${day.day}' не знайдено.`);
       return;
     }
-
+  
     const dayElementRect = dayElement.getBoundingClientRect();
     const modalWidth = 292;
     const modalHeight = 188;
-    const modalTop = dayElementRect.top - modalHeight - 10;
-    const modalLeft =
+    
+
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+  
+
+    let modalTop = dayElementRect.top - modalHeight - 10;
+    let modalLeft =
       window.innerWidth <= 768
         ? window.innerWidth / 2 - modalWidth / 2
-        :     dayElementRect.left + dayElementRect.width / 2 - modalWidth / 2;
+        : dayElementRect.left + dayElementRect.width / 2 - modalWidth / 2;
+  
 
+    if (modalTop < 0) {
+      modalTop = 0; 
+    }
+  
+    if (modalTop + modalHeight > screenHeight) {
+      modalTop = screenHeight - modalHeight;
+    }
+  
+    if (modalLeft < 0) {
+      modalLeft = 0; 
+    }
+  
+    if (modalLeft + modalWidth > screenWidth) {
+      modalLeft = screenWidth - modalWidth; 
+    }
+  
     setSelectedDay(day.day);
     setModalContent(day);
-
+  
     document.documentElement.style.setProperty("--modal-top", `${modalTop}px`);
     document.documentElement.style.setProperty("--modal-left", `${modalLeft}px`);
-
+  
     setIsModalOpen(true);
   };
+  
 
   const closeModal = (): void => {
     setIsModalOpen(false);
