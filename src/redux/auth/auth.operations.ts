@@ -50,7 +50,7 @@ export const getCurrentUserThunk = createAsyncThunk<
   }
 });
 
-export const getUserInfoThunk = createAsyncThunk<IGetUserInfo, undefined>(
+export const getUserInfoThunk = createAsyncThunk<IGetUserInfo>(
   "auth/users/getInfo",
   async (_, thunkAPI) => {
     try {
@@ -118,16 +118,3 @@ export const logOutThunk = createAsyncThunk(
     }
   }
 );
-
-// export const updatePassword = createAsyncThunk(
-//   "auth/updatePassword",
-//   async (newPassword, thunkAPI) => {
-//     try {
-//       const response = await axios.patch("/users/update-password", newPassword);
-//       setToken(response.data.token);
-//       return response.data;
-//     } catch (e) {
-//       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );

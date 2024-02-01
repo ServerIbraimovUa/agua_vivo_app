@@ -10,8 +10,14 @@ import { IWater } from "../redux_ts/interfaces";
 
 const waterInitState: IWater = {
   waterList: [],
-  amountDaily: {},
-  amountMonthly: {},
+  amountDaily: {
+    amountOfWater: 0,
+    percentage: 0,
+    entries: [],
+  },
+  amountMonthly: {
+    month: [],
+  },
   isLoading: false,
   error: null,
 };
