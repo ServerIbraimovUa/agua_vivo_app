@@ -37,21 +37,6 @@ const Calendar: React.FC = () => {
     return daysArray;
   };
 
-  const isCurrentMonth = (): boolean => {
-    const currentDateStart = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      1
-    );
-    const currentDateEnd = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 1,
-      0
-    );
-    const today = getCurrentDate();
-
-    return today >= currentDateStart && today <= currentDateEnd;
-  };
 
   const handlePrevMonth = (): void => {
     setCurrentDate(
@@ -72,32 +57,37 @@ const Calendar: React.FC = () => {
   };
 
   const handleDayClick = (day: Day): void => {
-    const dayElement = document.getElementById(`day-${day.day}`);
-
-    if (!dayElement) {
-      console.error(`Element with id 'day-${day.day}' not found.`);
+    if (selectedDay === day.day) {
+      closeModal();
+      setSelectedDay(null);
       return;
     }
-
+  
+    const dayElement = document.getElementById(`day-${day.day}`);
+  
+    if (!dayElement) {
+      console.error(`Елемент з id 'day-${day.day}' не знайдено.`);
+      return;
+    }
+  
     const dayElementRect = dayElement.getBoundingClientRect();
     const modalWidth = 292;
     const modalHeight = 188;
-
-    const modalTop = dayElementRect.top - modalHeight - 40;
+  
+    const modalTop = dayElementRect.top - modalHeight - 10;
     const modalLeft =
       dayElementRect.left + dayElementRect.width / 2 - modalWidth / 2;
-
+  
     setSelectedDay(day.day);
     setModalContent(day);
-
+  
     document.documentElement.style.setProperty("--modal-top", `${modalTop}px`);
-    document.documentElement.style.setProperty(
-      "--modal-left",
-      `${modalLeft}px`
-    );
-
+    document.documentElement.style.setProperty("--modal-left", `${modalLeft}px`);
+  
     setIsModalOpen(true);
   };
+  
+  
 
   const closeModal = (): void => {
     setIsModalOpen(false);
@@ -118,25 +108,29 @@ const Calendar: React.FC = () => {
   }, []);
 
   const calculatePercentage = (): number => {
-    const percentage = 60;
+    const percentage = 0;
     return percentage;
   };
 
   return (
     <Styled.CalendarContainer>
-      <div className="RightAlign">
-        <button className="Button" onClick={handlePrevMonth}>
-          &lt;
-        </button>
-        <div className="MonthTitle">
-          {currentDate.toLocaleString("en-US", { month: "long" })},{" "}
-          {currentDate.getFullYear()}
-        </div>
-        {!isCurrentMonth() && (
-          <button className="Button" onClick={handleNextMonth}>
-            &gt;
+      <div className="right-align">
+        <h1 className="month">Month</h1>
+        <div className="header">
+          <button className="button" onClick={handlePrevMonth}>
+            &lt;
           </button>
-        )}
+          <div className="month-title">
+            {currentDate.toLocaleString("en-US", { month: "long" })},{" "}
+            {currentDate.getFullYear()}
+          </div>
+          {currentDate.getMonth() === new Date().getMonth() &&
+          currentDate.getFullYear() === new Date().getFullYear() ? null : (
+            <button className="button" onClick={handleNextMonth}>
+              &gt;
+            </button>
+          )}
+        </div>
       </div>
 
       <Styled.Days>
@@ -171,16 +165,16 @@ const Calendar: React.FC = () => {
           <button className="close hover active" onClick={closeModal}>
             &times;
           </button>
-          <h3 className="TitleModal">{`${modalContent?.day}, ${modalContent?.month}`}</h3>
-          <p className="ModalParagraf">
-            Daily norm: <span className="SpanModal">1.5L</span>
+          <h3 className="title-modal">{`${modalContent?.day}, ${modalContent?.month}`}</h3>
+          <p className="modal-paragraf modal-paragraf-one">
+            Daily norm: <span className="span-modal">1.5L</span>
           </p>
-          <p className="ModalParagraf">
+          <p className="modal-paragraf modal-paragraf-two-three">
             Fulfillment of the daily norm:{" "}
-            <span className="SpanModal">100%</span>
+            <span className="span-modal">100%</span>
           </p>
-          <p className="ModalParagraf">
-            How many servings of water: <span className="SpanModal">6</span>
+          <p className="modal-paragraf modal-paragraf-two-three">
+            How many servings of water: <span className="span-modal">6</span>
           </p>
         </Styled.ModalContent>
       </Styled.Modal>

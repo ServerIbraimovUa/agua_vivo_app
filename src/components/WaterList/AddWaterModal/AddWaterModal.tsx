@@ -1,8 +1,10 @@
-import { ChangeEvent, FC, KeyboardEvent, useState } from "react";
+import { ChangeEvent, FC, KeyboardEvent, useEffect, useState } from "react";
 import { IWaterData } from "../WaterList";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { addWater } from "../../../redux/water/water.operations";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
+import { AddWaterModalStyled } from "../WaterList.styled";
+import Icon from "../../Icon/Icon";
+import { addWaterThunk } from "../../../redux/water/water.operations";
 
 interface IProps {
   title: string;
@@ -12,16 +14,11 @@ interface IProps {
 }
 
 export type IWaterPortion = {
-  date: string;
+  time: string;
   waterVolume: number;
 };
 
-const AddWaterModal: FC<IProps> = ({
-  title,
-  show,
-
-  closeModal,
-}) => {
+const AddWaterModal: FC<IProps> = ({ title, show, closeModal }) => {
   const {
     register,
     handleSubmit,
@@ -34,6 +31,44 @@ const AddWaterModal: FC<IProps> = ({
     count: 0,
     inputValue: "0",
   });
+  const [timeOptions, setTimeOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    const now = new Date();
+    const minutes = now.getMinutes();
+    const amPM = now.getHours() >= 12 ? "PM" : "AM";
+    const formattedHours = (now.getHours() % 12 || 12)
+      .toString()
+      .padStart(2, "0");
+    const formattedMinutes = minutes.toString().padStart(2, "0");
+    const currentTime = `${formattedHours}:${formattedMinutes} ${amPM}`;
+
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+
+    let nextIntervalHour = currentHour;
+    let nextIntervalMinute = Math.ceil(currentMinute / 5) * 5;
+    if (nextIntervalMinute >= 60) {
+      nextIntervalHour++;
+      nextIntervalMinute -= 60;
+    }
+
+    const intervals: string[] = [];
+    for (
+      let i = nextIntervalHour * 60 + nextIntervalMinute;
+      i < 24 * 60;
+      i += 5
+    ) {
+      const minutes = (i % 60).toString().padStart(2, "0");
+      const amPM = Math.floor(i / 60) < 12 ? "AM" : "PM";
+      const formattedHours = (Math.floor(i / 60) % 12 || 12)
+        .toString()
+        .padStart(2, "0");
+      intervals.push(`${formattedHours}:${minutes} ${amPM}`);
+    }
+
+    setTimeOptions([currentTime, ...intervals]);
+  }, []);
 
   const handleCountChange = (newCount: number) => {
     if (state.count + newCount >= 0) {
@@ -65,54 +100,67 @@ const AddWaterModal: FC<IProps> = ({
 
   const onSubmit: SubmitHandler<IWaterPortion> = (data) => {
     const newData = {
-      date: data.date,
+      time: data.time,
       waterVolume: Number(state.inputValue),
     };
 
-    dispatch(addWater(newData));
+    dispatch(addWaterThunk(newData));
 
     closeModal();
   };
 
   return (
-    <div>
+    <AddWaterModalStyled>
       {show && (
         <div>
           <p>250 ml</p>
           <p>7:00 am</p>
         </div>
       )}
-      <h2>{title}</h2>
-      <p>Amount of water:</p>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="counter">
+      <h2 className="add-water-title">{title}</h2>
+      <div className="counter-box">
+        <p className="">Amount of water:</p>
+        <div className="counter-btn-box">
           <button
+            className="counter-btn"
             onClick={() => handleCountChange(state.count - 50)}
             type="button"
           >
-            -
+            {" "}
+            <Icon className="icon-minus" id="minus" />
           </button>
-          <span>{state.count}ml</span>
+          <span className="water-amount-span">{state.count}ml</span>
           <button
+            className="counter-btn"
             onClick={() => handleCountChange(state.count + 50)}
             type="button"
           >
-            +
+            <Icon className="icon-plus" id="plus"></Icon>
           </button>
         </div>
-        <label>
+      </div>
+      <form className="add-water-form" onSubmit={handleSubmit(onSubmit)}>
+        <label className="water-label">
           <span>Recording time:</span>
-          <input
-            {...register("date", { required: true })}
-            type="time"
-            name="date"
-            step={300}
-          />
-          {errors.date && <span>This field is required</span>}
+          <select
+            {...register("time", { required: true })}
+            name="time"
+            className="water-input"
+            aria-label="Time"
+          >
+            {timeOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          {errors.time && <span>This field is required</span>}
         </label>
 
-        <label>
-          <span>Enter the value of water used:</span>
+        <label className="water-label">
+          <span className="enter-water-span">
+            Enter the value of water used:
+          </span>
           <input
             {...register("waterVolume", { required: true })}
             type="number"
@@ -124,16 +172,19 @@ const AddWaterModal: FC<IProps> = ({
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             onKeyPress={handleInputKeyPress}
+            className="water-input"
           />
           {errors.waterVolume && <span>This field is required</span>}
         </label>
 
-        <div>
-          <span>{state.count}ml</span>
-          <button type="submit">Save</button>
+        <div className="btn-container">
+          <span className="water-amount">{state.count}ml</span>
+          <button type="submit" className="save-btn">
+            Save
+          </button>
         </div>
       </form>
-    </div>
+    </AddWaterModalStyled>
   );
 };
 

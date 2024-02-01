@@ -1,37 +1,42 @@
 import { FC } from "react";
+import { DeleteWaterModalStyled } from "../WaterList.styled";
+import { deleteWaterThunk } from "../../../redux/water/water.operations";
+import { useAppDispatch } from "../../../redux/redux_ts/hook";
 
 interface IProps {
-  //   title: string;
-  //   show: boolean;
-  handleDeleteWater: (waterId: number) => void;
+  title: string;
+  show: boolean;
   closeModal: () => void;
-  waterId: number;
+  id: string;
 }
 
-const DeleteWaterModal: FC<IProps> = ({
-  handleDeleteWater,
-  closeModal,
-  waterId,
-}) => {
+const DeleteWaterModal: FC<IProps> = ({ closeModal, id }) => {
+  const dispatch = useAppDispatch();
   const handleCancel = () => {
     closeModal();
   };
 
-  const handleDelete = () => {
-    handleDeleteWater(waterId);
+  const handleDeleteWater = (waterID: string) => {
+    dispatch(deleteWaterThunk(waterID));
     closeModal();
   };
 
   return (
-    <div>
+    <DeleteWaterModalStyled>
       <p>Are you sure you want to delete the entry?</p>
-      <button type="button" onClick={handleCancel}>
-        Cancel
-      </button>
-      <button type="button" onClick={handleDelete}>
-        Save
-      </button>
-    </div>
+      <div className="delete-btn-box">
+        <button className="cancel-btn" type="button" onClick={handleCancel}>
+          Cancel
+        </button>
+        <button
+          className="delete-btn"
+          type="button"
+          onClick={() => handleDeleteWater(id)}
+        >
+          Delete
+        </button>
+      </div>
+    </DeleteWaterModalStyled>
   );
 };
 

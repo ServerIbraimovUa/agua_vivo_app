@@ -1,12 +1,33 @@
 import styled from "styled-components";
+import { device } from "../../css/deviceSize";
 
 export const CalendarContainer = styled.div`
   position: relative;
-  width: 544px;
-  height: 100%;
-  background-color: #ecf2ff;
 
-  .RightAlign {
+  width: 264;
+  height: 500px;
+  background-color: #ecf2ff;
+  @media ${device.tablet} {
+    width: 646px;
+    height: 315px;
+  }
+  @media ${device.desktop} {
+
+width: 544px;
+height: 320px;
+  }
+
+  .right-align {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: 32px;
+    width: 100%;
+    margin-top: 6px;
+    margin-left: auto;
+    margin-bottom: 16px;
+  }
+  .header {
     display: flex;
     align-items: center;
     justify-content: end;
@@ -15,27 +36,41 @@ export const CalendarContainer = styled.div`
     margin-top: 6px;
     margin-left: auto;
   }
-  .MonthTitle {
+  .month-title {
     font-size: 16px;
     color: #407bff;
+    width: 132px;
+    text-align: center;
   }
-  .Button {
+  .button {
     color: #407bff;
     border: none;
     background-color: transparent;
     padding: 5px 10px;
     flex-shrink: 0;
-    cursor: pointer;
+  }
+  .month {
+    font-size: 26px;
+    color: #2f2f2f;
+    margin-left: 0;
   }
 `;
 
 export const Days = styled.ul`
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   justify-items: center;
 
-  gap: 4px;
+  gap: 16px 26px;
 
+  @media ${device.tablet} {
+    grid-template-columns: repeat(10, 1fr);
+    gap: 20px 34px;
+  }
+  @media ${device.desktop} {
+    grid-template-columns: repeat(10, 1fr);
+    gap: 20px 22px;
+  }
   li {
     display: flex;
     flex-direction: column;
@@ -85,22 +120,30 @@ export const ModalContent = styled.div`
 
   .close {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 24px;
+    right: 16px;
     font-size: 20px;
-    cursor: pointer;
     color: #407bff;
   }
-  .TitleModal {
+  .title-modal {
+    position: absolute;
+    top: 24px;
     color: #407bff;
     font-size: 16px;
+    margin-bottom: 16px;
   }
-  .ModalParagraf {
+  .modal-paragraf {
     font-size: 16px;
     color: #2f2f2f;
     line-height: 20px;
   }
-  .SpanModal {
+  .modal-paragraf-one {
+    margin-top: 36px;
+  }
+  .modal-paragraf-two-three {
+    margin-top: 16px;
+  }
+  .span-modal {
     margin-left: 6px;
     color: #407bff;
     font-size: 18px;

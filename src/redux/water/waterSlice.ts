@@ -1,17 +1,23 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
-  addWater,
-  deleteWater,
-  getAmountDaily,
-  getAmountMonthly,
-  updateWaterVolume,
+  addWaterThunk,
+  deleteWaterThunk,
+  getAmountDailyThunk,
+  getAmountMonthlyThunk,
+  updateWaterVolumeThunk,
 } from "./water.operations";
 import { IWater } from "../redux_ts/interfaces";
 
 const waterInitState: IWater = {
   waterList: [],
-  amountDaily: {},
-  amountMonthly: [],
+  amountDaily: {
+    amountOfWater: 0,
+    percentage: 0,
+    entries: [],
+  },
+  amountMonthly: {
+    month: [],
+  },
   isLoading: false,
   error: null,
 };
@@ -22,38 +28,43 @@ const waterSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(addWater.fulfilled, (state, action) => {
+      .addCase(addWaterThunk.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.waterList.push(action.payload);
         state.isLoading = false;
-        state.waterList.unshift(action.payload);
       })
-      .addCase(getAmountDaily.fulfilled, (state, action) => {
+      .addCase(updateWaterVolumeThunk.fulfilled, (state, action) => {
+        const idx = state.waterList.findIndex(
+          (water) => water.id === action.payload.id
+        );
+
+        if (idx !== -1) {
+          state.waterList[idx] = action.payload;
+        }
         state.isLoading = false;
-        state.amountDaily = action.payload;
       })
-      .addCase(getAmountMonthly.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.amountMonthly = action.payload;
-      })
-      .addCase(updateWaterVolume.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.waterList = state.waterList.map((water) => {
-          if (water.id === action.payload.id) return action.payload;
-          return water;
-        });
-      })
-      .addCase(deleteWater.fulfilled, (state, action) => {
-        state.isLoading = false;
+      .addCase(deleteWaterThunk.fulfilled, (state, action) => {
         state.waterList = state.waterList.filter(
           (water) => !action.payload.includes(water.id)
         );
+        state.isLoading = false;
+      })
+      .addCase(getAmountDailyThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.waterList = action.payload.entries;
+        state.amountDaily = action.payload;
+      })
+      .addCase(getAmountMonthlyThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.amountMonthly = action.payload;
       })
       .addMatcher(
         isAnyOf(
-          addWater.pending,
-          getAmountDaily.pending,
-          getAmountMonthly.pending,
-          updateWaterVolume.pending,
-          deleteWater.pending
+          addWaterThunk.pending,
+          getAmountDailyThunk.pending,
+          getAmountMonthlyThunk.pending,
+          updateWaterVolumeThunk.pending,
+          deleteWaterThunk.pending
         ),
         (state) => {
           state.isLoading = true;
@@ -62,11 +73,11 @@ const waterSlice = createSlice({
       )
       .addMatcher(
         isAnyOf(
-          addWater.rejected,
-          getAmountDaily.rejected,
-          getAmountMonthly.rejected,
-          updateWaterVolume.rejected,
-          deleteWater.rejected
+          addWaterThunk.rejected,
+          getAmountDailyThunk.rejected,
+          getAmountMonthlyThunk.rejected,
+          updateWaterVolumeThunk.rejected,
+          deleteWaterThunk.rejected
         ),
         (state, action) => {
           state.isLoading = false;

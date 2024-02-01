@@ -3,6 +3,7 @@ import { device } from "../../css/deviceSize";
 
 export const FormContainer = styled.div``;
 export const Form = styled.form`
+
   display: flex;
   gap: 24px;
   flex-direction: column;
@@ -28,6 +29,7 @@ export const FormSub = styled.div`
   gap: 24px;
 `;
 export const Span = styled.span`
+  position: relative;
   color: var(--primary-blue);
   font-size: 18px;
 `;
@@ -117,3 +119,25 @@ export const SpanNorma = styled.span`
     font-size: 24px;
   }
 `;
+
+//Popover
+export const PopoverWrapper=styled.div`
+  position: absolute;
+  padding: 10px; 
+  top: -60px;
+  left: -130px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 200px;
+  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
+  @media ${device.tablet} {
+    top: -70px;
+    left: 0px;
+  }
+`
+export const PopoverMessage = styled.span`
+   color: red;
+   font-size: 16px;
+`
+  

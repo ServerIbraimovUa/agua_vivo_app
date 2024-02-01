@@ -59,62 +59,77 @@ const AuthForm: FC<Props> = ({ repeat }) => {
     <StyledAuthForm onSubmit={handleSubmit(onSubmit)}>
       <label>
         <span>Enter your email</span>
-        <input
-          {...register("email", { required: true })}
-          type="email"
-          placeholder="E-mail"
-        />
-        {errors.email && <span>This field is required</span>}
-      </label>
-      <label>
-        <span>Enter your password</span>
-        <div className="eye-input">
+        <span className={errors.email ? "gap-error" : "gap-normal"}>
           <input
-            {...register("password", { required: true })}
-            type={toggleInput}
-            placeholder="Password"
+            className={errors.email ? "input-red input" : "input-blue input"}
+            {...register("email", { required: true })}
+            type="email"
+            placeholder="E-mail"
           />
-          <StyledAuthFormSpan
-            onClick={() =>
-              togglePassword(toggleInput, setToggleInput, setToggleIcon)
-            }
-          >
-            {toggleIcon ? (
-              <Icon className="eye-icon" id="eye" />
-            ) : (
-              <Icon className="eye-outline-icon" id="eye-outline" />
-            )}
-          </StyledAuthFormSpan>
-        </div>
-
-        {errors.password?.message}
+          <span className="error">
+            {errors.email && <span>This field is required</span>}
+          </span>
+        </span>
       </label>
+
+      <label className={errors.email ? "gap-error" : "gap-label-normal"}>
+        <span>Enter your password</span>
+        <span className={errors.email ? "gap-error" : "gap-normal"}>
+          <div className="eye-input">
+            <input
+              className={
+                errors.password ? "input-red input" : "input-blue input"
+              }
+              {...register("password", { required: true })}
+              type={toggleInput}
+              placeholder="Password"
+            />
+            <StyledAuthFormSpan
+              onClick={() =>
+                togglePassword(toggleInput, setToggleInput, setToggleIcon)
+              }
+            >
+              {toggleIcon ? (
+                <Icon className="eye-icon" id="eye" />
+              ) : (
+                <Icon className="eye-outline-icon" id="eye-outline" />
+              )}
+            </StyledAuthFormSpan>
+          </div>
+          <span className="error">{errors.password?.message}</span>
+        </span>
+      </label>
+
       {repeat && (
         <>
-          <label>
+          <label className={errors.email ? "gap-error" : "gap-label-normal"}>
             <span>Repeat password</span>
-            <div className="eye-input">
-              <input
-                {...register("repeatPassword", {
-                  required: true,
-                })}
-                type={toggleInput}
-                placeholder="Repeat password"
-              />
-              <StyledAuthFormSpan
-                onClick={() =>
-                  togglePassword(toggleInput, setToggleInput, setToggleIcon)
-                }
-              >
-                {toggleIcon ? (
-                  <Icon className="eye-icon" id="eye" />
-                ) : (
-                  <Icon className="eye-outline-icon" id="eye-outline" />
-                )}
-              </StyledAuthFormSpan>
-            </div>
-
-            {errors.repeatPassword?.message}
+            <span className={errors.email ? "gap-error" : "gap-normal"}>
+              <div className="eye-input">
+                <input
+                  className={
+                    errors.password ? "input-red input" : "input-blue input"
+                  }
+                  {...register("repeatPassword", {
+                    required: true,
+                  })}
+                  type={toggleInput}
+                  placeholder="Repeat password"
+                />
+                <StyledAuthFormSpan
+                  onClick={() =>
+                    togglePassword(toggleInput, setToggleInput, setToggleIcon)
+                  }
+                >
+                  {toggleIcon ? (
+                    <Icon className="eye-icon" id="eye" />
+                  ) : (
+                    <Icon className="eye-outline-icon" id="eye-outline" />
+                  )}
+                </StyledAuthFormSpan>
+              </div>
+              <span className="error">{errors.repeatPassword?.message}</span>
+            </span>
           </label>
         </>
       )}

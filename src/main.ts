@@ -38,7 +38,8 @@ export const GlobalStyle = createGlobalStyle`
   --high-index: 100;
 
 // SHADOW
---btn-box-shadow: 0 4px 14px #407bff;
+--btn-box-shadow: 0 4px 8px #407BFF57;
+--btn-box-shadow-hover: 0 4px 14px #407BFF8A;
  
 }
 
@@ -68,13 +69,14 @@ export const GlobalStyle = createGlobalStyle`
       auto;
   }
 
-  a, button, textarea, input, label, .hover{
+  a, button, textarea, input, label, .hover {
+    
     &:hover, &:focus{
         cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" height="72px" width="72px" stroke="black" fill="transparent" stroke-width="3"><g><path d="M10.756 29.167l-2.897-10.82M7.859 18.347l-5.355 4.747 1.214-20.203 11.151 16.89-7.010-1.434z"/></g></svg>')
       1 1,
       pointer;
       }
-  }
+  } 
   
   a, button, textarea, input, label, .active{
     &:active{
@@ -128,10 +130,11 @@ export const GlobalStyle = createGlobalStyle`
   color: var(--primary-white);
   background-color: var(--primary-blue);
   cursor: inherit;
+  box-shadow:var(--btn-box-shadow);
   @media ${device.tablet}{
     &:hover,
     &:focus {
-      box-shadow:var(--btn-box-shadow);
+      box-shadow:var(--btn-box-shadow-hover);
     }}
    }
     
@@ -160,6 +163,7 @@ section{
 
   }
 }
+
 .container {
   width: 100%;
   padding-left: 20px;
