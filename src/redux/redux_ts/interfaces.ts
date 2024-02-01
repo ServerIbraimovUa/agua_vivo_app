@@ -51,7 +51,7 @@ export interface IUpdateUserDailyNorma {
 }
 
 export interface IWaterPayload {
-  id: string;
+  _id: string;
   waterVolume: number;
   time: string;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "../Modal/Modal";
 import AddWaterModal from "./AddWaterModal/AddWaterModal";
 import {
@@ -7,8 +7,7 @@ import {
   selectIsLoading,
 } from "../../redux/water/waterSelectors";
 import { useSelector } from "react-redux";
-import { getAmountDailyThunk } from "../../redux/water/water.operations";
-import { useAppDispatch } from "../../redux/redux_ts/hook";
+
 import WaterListItem from "./WaterListItem/WaterListItem";
 import Loading from "../Loading/Loading";
 import { WaterContainerStyled } from "./WaterList.styled";
@@ -18,46 +17,34 @@ import { selectDailyNorma } from "../../redux/auth/authSelectors";
 export interface IWaterData {
   waterVolume: number;
   time: string;
-  id: string;
+  _id: string;
 }
 
 const WaterList = () => {
   const [visible, setVisible] = useState(false);
-
-  const dispatch = useAppDispatch();
 
   const amountDaily = useSelector(selectDailyNorma);
 
   const waterList = useSelector(selectAllWater);
   const loading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-
-  useEffect(() => {
-    dispatch(getAmountDailyThunk());
-  }, [dispatch]);
-
   const closeModal = () => {
     setVisible(false);
   };
 
   return (
     <WaterContainerStyled>
-      <h1 className="water-title">Today</h1>
+      <h3 className="water-title">Today</h3>
       {loading && !error && <Loading />}
       {amountDaily === 0 ? (
         <p className="water-empty">No notes yet</p>
       ) : (
-        <>
+        <ul>
           {waterList.length > 0 &&
-            waterList.map((waterItem: IWaterData) => (
-              <WaterListItem
-                key={waterItem.id}
-                show={false}
-                closeModal={closeModal}
-                waterItem={waterItem}
-              />
+            waterList.map(({ _id, waterVolume }) => (
+              <WaterListItem key={_id} id={_id} waterVolume={waterVolume} />
             ))}
-        </>
+        </ul>
       )}
       <div>
         <button className="add-water-btn" onClick={() => setVisible(true)}>

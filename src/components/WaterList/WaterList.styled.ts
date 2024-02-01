@@ -159,7 +159,10 @@ export const AddWaterModalStyled = styled.div`
 `;
 
 //WaterListItem
-export const WaterItemBoxStyled = styled.div`
+export const WaterItemBoxStyled = styled.li`
+  display: flex;
+  gap: 12px;
+  align-items: center;
   .water-glass-icon {
     width: 26px;
     height: 26px;
@@ -177,11 +180,6 @@ export const WaterItemBoxStyled = styled.div`
       height: 36px;
     }
   }
-`;
-export const WaterItemStyled = styled.div`
-  display: flex;
-  gap: 12px;
-  align-items: center;
 `;
 
 // DeleteWaterModal

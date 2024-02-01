@@ -18,12 +18,7 @@ export type IWaterPortion = {
   waterVolume: number;
 };
 
-const AddWaterModal: FC<IProps> = ({
-  title,
-  show,
-
-  closeModal,
-}) => {
+const AddWaterModal: FC<IProps> = ({ title, show, closeModal }) => {
   const {
     register,
     handleSubmit,
