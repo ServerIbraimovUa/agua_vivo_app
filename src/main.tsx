@@ -10,7 +10,7 @@ import { persistor, store } from "./redux/store.ts";
 import { PersistGate } from "redux-persist/integration/react";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+  // <StrictMode>
     <BrowserRouter basename="/agua_vivo_app">
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={<div>Loading...</div>}>
@@ -19,5 +19,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </PersistGate>
       </Provider>
     </BrowserRouter>
-  </StrictMode>
+  // </StrictMode>
 );

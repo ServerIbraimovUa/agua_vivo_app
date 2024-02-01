@@ -86,7 +86,7 @@ export interface IDailyNorma {
 export interface IWater {
   waterList: IWaterPayload[];
   amountDaily: IAmountDaily;
-  amountMonthly: IAmountMonthly | {};
+  amountMonthly: IAmountMonthly;
   isLoading: boolean;
   error: unknown | string;
 }

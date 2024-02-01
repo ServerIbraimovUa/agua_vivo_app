@@ -1,25 +1,42 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import * as Styled from "./Calendar.styled";
-import { useOutsideClick } from "../../hooks/useOutsideClick";
+import { useAppDispatch } from "../../redux/redux_ts/hook";
+import { getAmountMonthlyThunk } from "../../redux/water/water.operations";
+import { useSelector } from "react-redux";
+import { selectAmountMonthly } from "../../redux/water/waterSelectors";
+import CalendarModal from "./CalendarModal";
 
-interface Day {
+export interface Day {
   day: number;
   month: string;
+  percent?: number;
+  dailyNorma?: number;
+  amountOfWater?: number;
 }
-
+interface IDateInfo extends Day {
+  percent?: number;
+}
 const Calendar: React.FC = () => {
   const getCurrentDate = (): Date => new Date();
   const [currentDate, setCurrentDate] = useState<Date>(getCurrentDate());
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<Day | null>(null);
-  const modalRef = useRef(null);
+  // const date = new Date();
+  // const year = date.getFullYear().toString();
+  // const month = (date.getMonth() + 1).toString();
+  const amountMonth = useSelector(selectAmountMonthly);
+  // const monthIndex = month.padStart(2, "0");
+  const id = `${currentDate.getFullYear()}-${(currentDate.getMonth() +1).toString().padStart(2, "0")}`;
+  const dispatch = useAppDispatch();
+console.log(id)
+  useEffect(() => {
+    dispatch(getAmountMonthlyThunk(id));
 
-  useOutsideClick(modalRef, () => {
-    if (isModalOpen) {
-      setIsModalOpen(false);
-    }
-  });
+  }, [dispatch, id]);
+
+
+
 
   const getDaysInMonth = (date: Date): Day[] => {
     const year = date.getFullYear();
@@ -61,77 +78,78 @@ const Calendar: React.FC = () => {
       setSelectedDay(null);
       return;
     }
-  
+
     const dayElement = document.getElementById(`day-${day.day}`);
-  
+
     if (!dayElement) {
       console.error(`Елемент з id 'day-${day.day}' не знайдено.`);
       return;
     }
-  
+
     const dayElementRect = dayElement.getBoundingClientRect();
     const modalWidth = 292;
     const modalHeight = 188;
-    
 
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-  
 
     let modalTop = dayElementRect.top - modalHeight - 10;
     let modalLeft =
       window.innerWidth <= 768
         ? window.innerWidth / 2 - modalWidth / 2
         : dayElementRect.left + dayElementRect.width / 2 - modalWidth / 2;
-  
 
     if (modalTop < 0) {
-      modalTop = 0; 
+      modalTop = 0;
     }
-  
+
     if (modalTop + modalHeight > screenHeight) {
       modalTop = screenHeight - modalHeight;
     }
-  
+
     if (modalLeft < 0) {
-      modalLeft = 0; 
+      modalLeft = 0;
     }
-  
+
     if (modalLeft + modalWidth > screenWidth) {
-      modalLeft = screenWidth - modalWidth; 
+      modalLeft = screenWidth - modalWidth;
     }
-  
+
     setSelectedDay(day.day);
     setModalContent(day);
-  
+
     document.documentElement.style.setProperty("--modal-top", `${modalTop}px`);
-    document.documentElement.style.setProperty("--modal-left", `${modalLeft}px`);
-  
+    document.documentElement.style.setProperty(
+      "--modal-left",
+      `${modalLeft}px`
+    );
+
     setIsModalOpen(true);
   };
-  
 
   const closeModal = (): void => {
     setIsModalOpen(false);
   };
 
-  useEffect(() => {
-    const handleEscapeKey = (event: Event): void => {
-      if (event instanceof KeyboardEvent && event.key === "Escape") {
-        closeModal();
-      }
-    };
+  const getCurrentDayInfo = (day: IDateInfo) => {
+    const currentDay = day.day.toString();
+    const index = amountMonth.month
+      .map((obj) => obj.date.slice(-2).trim())
+      .indexOf(currentDay);
 
-    window.addEventListener("keydown", handleEscapeKey);
+    if (index === -1) {
+      day.percent = 0;
+      day.amountOfWater = 0;
+      day.dailyNorma = 2.0;
+    }
+    if (index !== -1) {
+      const { amountOfWater, dailyNorma, percentage } =
+        amountMonth.month[index];
 
-    return () => {
-      window.removeEventListener("keydown", handleEscapeKey);
-    };
-  }, []);
-
-  const calculatePercentage = (): number => {
-    const percentage = 0;
-    return percentage;
+      day.percent = percentage;
+      day.amountOfWater = amountOfWater;
+      day.dailyNorma = dailyNorma;
+    }
   };
 
   return (
@@ -148,10 +166,7 @@ const Calendar: React.FC = () => {
           </div>
           {currentDate.getMonth() === new Date().getMonth() &&
           currentDate.getFullYear() === new Date().getFullYear() ? (
-            <button
-              className={`button disabled`}
-              disabled={true}
-            >
+            <button className={`button disabled`} disabled={true}>
               &gt;
             </button>
           ) : (
@@ -163,51 +178,43 @@ const Calendar: React.FC = () => {
       </div>
 
       <Styled.Days>
-        {getDaysInMonth(currentDate).map((day) => (
-          <li key={day.day} id={`day-${day.day}`} className="hover active">
-            {calculatePercentage() < 100 ? (
-              <Styled.LowPercentageDay
-                className={`day ${selectedDay === day.day ? "selected" : ""}`}
-                onClick={() => handleDayClick(day)}
-              >
-                {day.day}
-              </Styled.LowPercentageDay>
-            ) : (
-              <Styled.Day
-                className={`day ${selectedDay === day.day ? "selected" : ""}`}
-                onClick={() => handleDayClick(day)}
-              >
-                {day.day}
-              </Styled.Day>
-            )}
-            <p
-              className={`procent ${
-                calculatePercentage() < 100 ? "lowPercentage" : ""
-              }`}
-            >{`${calculatePercentage()}%`}</p>
-          </li>
-        ))}
-      </Styled.Days>
+        {getDaysInMonth(currentDate).map((day: Day) => {
+          getCurrentDayInfo(day);
 
-      <Styled.Modal ref={modalRef} className={isModalOpen ? "open" : ""}>
-        <Styled.ModalContent>
-          <button className="close hover active" onClick={closeModal}>
-            &times;
-          </button>
-          <h3 className="title-modal">{`${modalContent?.day}, ${modalContent?.month}`}</h3>
-          <p className="modal-paragraf modal-paragraf-one">
-            Daily norm: <span className="span-modal">1.5L</span>
-          </p>
-          <p className="modal-paragraf modal-paragraf-two-three">
-            Fulfillment of the daily norm:{" "}
-            <span className="span-modal">100%</span>
-          </p>
-          <p className="modal-paragraf modal-paragraf-two-three">
-            How many servings of water: <span className="span-modal">6</span>
-          </p>
-        </Styled.ModalContent>
-      </Styled.Modal>
-    </Styled.CalendarContainer>
+          return (
+            <li key={day.day} id={`day-${day.day}`} className="hover active">
+              {day.percent !== undefined && day.percent < 100 ? (
+                <Styled.LowPercentageDay
+                  className={`day ${selectedDay === day.day ? "selected" : ""}`}
+                  onClick={() => handleDayClick(day)}
+                >
+                  {day.day}
+                </Styled.LowPercentageDay>
+              ) : (
+                <Styled.Day
+                  className={`day ${selectedDay === day.day ? "selected" : ""}`}
+                  onClick={() => handleDayClick(day)}
+                >
+                  {day.day}
+                </Styled.Day>
+              )}
+              <p
+                className={`procent ${
+                  day.percent !== undefined && day.percent < 100
+                    ? "lowPercentage"
+                    : ""
+                }`}
+              >{`${
+                day.percent !== undefined && day.percent >= 100
+                  ? 100
+                  : day.percent
+              }%`}</p>
+            </li>
+          );
+        })}
+      </Styled.Days>
+     <CalendarModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} modalContent={modalContent} closeModal={closeModal}/>
+     </Styled.CalendarContainer>
   );
 };
 
