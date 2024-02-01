@@ -37,7 +37,6 @@ const Calendar: React.FC = () => {
     return daysArray;
   };
 
-
   const handlePrevMonth = (): void => {
     setCurrentDate(
       (prevDate) => new Date(prevDate.getFullYear(), prevDate.getMonth() - 1)
@@ -62,33 +61,38 @@ const Calendar: React.FC = () => {
       setSelectedDay(null);
       return;
     }
-  
+
     const dayElement = document.getElementById(`day-${day.day}`);
-  
+
     if (!dayElement) {
       console.error(`Елемент з id 'day-${day.day}' не знайдено.`);
       return;
     }
-  
+
     const dayElementRect = dayElement.getBoundingClientRect();
     const modalWidth = 292;
     const modalHeight = 188;
-  
     const modalTop = dayElementRect.top - modalHeight - 10;
     const modalLeft =
-      dayElementRect.left + dayElementRect.width / 2 - modalWidth / 2;
-  
+      window.innerWidth <= 768
+        ? window.innerWidth / 2 - modalWidth / 2
+        :     dayElementRect.left + dayElementRect.width / 2 - modalWidth / 2;
+
     setSelectedDay(day.day);
     setModalContent(day);
-  
+
     document.documentElement.style.setProperty("--modal-top", `${modalTop}px`);
     document.documentElement.style.setProperty("--modal-left", `${modalLeft}px`);
-  
-    setIsModalOpen(true);
-  };
-  
-  
 
+    setIsModalOpen(true);
+
+
+
+    
+  };
+
+
+  
   const closeModal = (): void => {
     setIsModalOpen(false);
   };
@@ -160,7 +164,7 @@ const Calendar: React.FC = () => {
         ))}
       </Styled.Days>
 
-      <Styled.Modal ref={modalRef} className={isModalOpen ? `open` : ""}>
+      <Styled.Modal ref={modalRef} className={isModalOpen ? "open" : ""}>
         <Styled.ModalContent>
           <button className="close hover active" onClick={closeModal}>
             &times;
@@ -183,3 +187,4 @@ const Calendar: React.FC = () => {
 };
 
 export default Calendar;
+
