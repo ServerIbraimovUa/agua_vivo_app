@@ -1,26 +1,19 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-import { CurrentData, IAuthInit, UpdateUser } from "../redux_ts/interfaces";
-
-axios.defaults.baseURL = "https://agua-vivo-app-backend.onrender.com";
-export interface Data {
-  email: string;
-  password: string;
-}
-const setToken = (token: string) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-const unsetToken = () => {
-  axios.defaults.headers.common.Authorization = "";
-};
+import {
+  IAuthData,
+  IAuthInitInfo,
+  ICurrentUserData,
+  IGetUserInfo,
+  IUpdateUserinfo,
+} from "../redux_ts/interfaces";
+import { handleToken, setToken, unsetToken } from "../services/handleToken";
 
 export const registerThunk = createAsyncThunk(
   "auth/register",
-  async (data: Data, thunkAPI) => {
+  async (data: IAuthData, thunkAPI) => {
     try {
-      const response = await axios.post("/users/register", data);
+      const response = await axios.post("/auth/register", data);
       setToken(response.data.token);
       return response.data;
     } catch (e) {
@@ -31,10 +24,10 @@ export const registerThunk = createAsyncThunk(
 
 export const logInThunk = createAsyncThunk(
   "auth/login",
-  async (data: Data, thunkAPI) => {
+  async (data: IAuthData, thunkAPI) => {
     try {
-      const response = await axios.post("/users/login", data);
-      setToken(response.data.token);
+      const response = await axios.post("/auth/login", data);
+
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -43,32 +36,25 @@ export const logInThunk = createAsyncThunk(
 );
 
 export const getCurrentUserThunk = createAsyncThunk<
-  CurrentData,
+  ICurrentUserData,
   undefined,
-  { state: { auth: IAuthInit } }
+  { state: { auth: IAuthInitInfo } }
 >("auth/current", async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  handleToken(state.auth.token);
   try {
-    const state = thunkAPI.getState();
-
-    const persistedToken = state.auth.token;
-
-    if (persistedToken === null) {
-      return thunkAPI.rejectWithValue("Unable to fetch user");
-    }
-
-    setToken(persistedToken);
-    const response = await axios.get("/users/current");
+    const response = await axios.get("/auth/current");
     return response.data;
   } catch (e) {
     if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
   }
 });
 
-export const getUserInfoByIdThunk = createAsyncThunk(
-  "auth/getInfo",
-  async (userID, thunkAPI) => {
+export const getUserInfoThunk = createAsyncThunk<IGetUserInfo>(
+  "auth/users/getInfo",
+  async (_, thunkAPI) => {
     try {
-      const response = await axios.get(`/users/info/:${userID}`);
+      const response = await axios.get("/users/info");
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -76,35 +62,32 @@ export const getUserInfoByIdThunk = createAsyncThunk(
   }
 );
 
-export const updateUserInfoByIdThunk = createAsyncThunk(
-  "auth/updateInfo",
-  async (newUserData: UpdateUser, thunkAPI) => {
+export const updateUserInfoThunk = createAsyncThunk(
+  "auth/users/updateInfo",
+  async (newUserData: IUpdateUserinfo, thunkAPI) => {
     try {
-      const response = await axios.patch(
-        `/users/update-user/:${newUserData.id}`,
-        newUserData
-      );
-      return response.data;
+      const response = await axios.patch("/users/update-user", newUserData);
+      return response.data.user;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
 
-export const updateAvatar = createAsyncThunk(
-  "auth/avatars",
-  async (newAvatar: File | null, thunkAPI) => {
+export const updateUserAvatarThunk = createAsyncThunk(
+  "auth/users/avatars",
+  async (newAvatar: File, thunkAPI) => {
     try {
       const formData = new FormData();
       if (newAvatar) {
         formData.append("avatar", newAvatar);
       }
+
       const response = await axios.patch("/users/avatars", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(response.data);
       return response.data.avatar;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -112,25 +95,12 @@ export const updateAvatar = createAsyncThunk(
   }
 );
 
-export const updateDailyNorma = createAsyncThunk(
-  "auth/updateDailyNorma",
-  async (newDailyNorma: string, thunkAPI) => {
+export const updateUserDailyNormaThunk = createAsyncThunk(
+  "auth/users/updateDailyNorma",
+  async (newDailyNorma: { dailyNorma: number }, thunkAPI) => {
     try {
       const response = await axios.patch("/users/water-rate", newDailyNorma);
-      return response.data;
-    } catch (e) {
-      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
-export const updatePassword = createAsyncThunk(
-  "auth/updatePassword",
-  async (newPassword, thunkAPI) => {
-    try {
-      const response = await axios.patch("/users/update-password", newPassword);
-      setToken(response.data.token);
-      return response.data;
+      return response.data.dailyNorma;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
     }
@@ -141,7 +111,7 @@ export const logOutThunk = createAsyncThunk(
   "auth/logout",
   async (_, thunkAPI) => {
     try {
-      axios.post("/users/logout");
+      axios.post("/auth/logout");
       unsetToken();
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);

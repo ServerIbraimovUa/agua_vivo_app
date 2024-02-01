@@ -1,37 +1,42 @@
 import { FC } from "react";
+import { DeleteWaterModalStyled } from "../WaterList.styled";
 
 interface IProps {
-  //   title: string;
-  //   show: boolean;
-  handleDeleteWater: (waterId: number) => void;
+  title: string;
+  show: boolean;
+  handleDeleteWater: (id: string) => void;
   closeModal: () => void;
-  waterId: number;
+  id: string;
 }
 
 const DeleteWaterModal: FC<IProps> = ({
   handleDeleteWater,
   closeModal,
-  waterId,
+  id,
 }) => {
+  console.log(id);
   const handleCancel = () => {
     closeModal();
   };
 
   const handleDelete = () => {
-    handleDeleteWater(waterId);
+    handleDeleteWater(id);
+
     closeModal();
   };
 
   return (
-    <div>
+    <DeleteWaterModalStyled>
       <p>Are you sure you want to delete the entry?</p>
-      <button type="button" onClick={handleCancel}>
-        Cancel
-      </button>
-      <button type="button" onClick={handleDelete}>
-        Save
-      </button>
-    </div>
+      <div className="delete-btn-box">
+        <button className="cancel-btn" type="button" onClick={handleCancel}>
+          Cancel
+        </button>
+        <button className="delete-btn" type="button" onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
+    </DeleteWaterModalStyled>
   );
 };
 

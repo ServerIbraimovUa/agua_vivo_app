@@ -32,11 +32,13 @@ export const Overlay = styled.div<Props>`
       transform: translateX(-50%);
     }
 
-    background: var(--secondary-white);
+    background: var(--primary-white);
     border-radius: 8px;
     overflow: hidden;
     padding: 24px 12px;
     overflow: auto;
+
+   
 
     @media ${device.tablet} {
       width: ${(props) => (props.$logout || props.$delete ? "592px" : "704px")};
@@ -64,7 +66,6 @@ export const Overlay = styled.div<Props>`
       padding: 0;
       background-color: transparent;
       border: none;
-      cursor: pointer;
 
       transition: transform 350ms ease-in-out;
 

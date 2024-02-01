@@ -3,22 +3,28 @@ import {
   registerThunk,
   logInThunk,
   getCurrentUserThunk,
-  updateAvatar,
-  updateDailyNorma,
-  getUserInfoByIdThunk,
-  updateUserInfoByIdThunk,
-  updatePassword,
   logOutThunk,
+  getUserInfoThunk,
+  updateUserInfoThunk,
+  updateUserAvatarThunk,
+  updateUserDailyNormaThunk,
 } from "./auth.operations";
-import { IAuthInit } from "../redux_ts/interfaces";
+import { IAuthInitInfo } from "../redux_ts/interfaces";
 
 const authInitialState = {
-  user: { email: "", avatar: "", gender: "", dailyNorma: "", name: "" },
-  token: "",
+  user: {
+    name: "",
+    email: "",
+    avatar: "",
+    gender: "",
+    dailyNorma: null,
+  },
+  token: null,
   isAuthorized: false,
   isLoading: false,
+  isRefreshing: false,
   error: null,
-} as IAuthInit;
+} as IAuthInitInfo;
 
 const authSlice = createSlice({
   name: "auth",
@@ -31,81 +37,68 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isAuthorized = true;
         state.isLoading = false;
+        state.isRefreshing = false;
       })
       .addCase(logInThunk.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isAuthorized = true;
         state.isLoading = false;
+        state.isRefreshing = false;
       })
       .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuthorized = true;
-        state.isLoading = false;
+        state.isRefreshing = false;
       })
-      .addCase(getUserInfoByIdThunk.fulfilled, (state, action) => {
-        state.user = action.payload;
+      .addCase(getUserInfoThunk.fulfilled, (state, action) => {
+        state.user = action.payload.user;
         state.isAuthorized = true;
-        state.isLoading = false;
+        state.isRefreshing = false;
+        state.isLoading = true;
       })
-      .addCase(updateUserInfoByIdThunk.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isAuthorized = true;
-        state.isLoading = false;
+      .addCase(updateUserInfoThunk.fulfilled, (state, action) => {
+        state.user = { ...state.user, ...action.payload };
       })
-      .addCase(updateAvatar.fulfilled, (state, action) => {
+      .addCase(updateUserAvatarThunk.fulfilled, (state, action) => {
         state.user.avatar = action.payload;
-        state.isLoading = false;
       })
-      .addCase(updateDailyNorma.fulfilled, (state, action) => {
+      .addCase(updateUserDailyNormaThunk.fulfilled, (state, action) => {
         state.user.dailyNorma = action.payload;
-        state.isLoading = false;
       })
-      .addCase(updatePassword.fulfilled, (state, action) => {
-        state.token = action.payload;
-        state.isAuthorized = true;
-        state.isLoading = false;
+      .addCase(logOutThunk.fulfilled, () => {
+        return authInitialState;
       })
-      .addCase(logOutThunk.fulfilled, (state) => {
-        state.user = {
-          email: "",
-          avatar: "",
-          gender: "",
-          dailyNorma: "",
-          name: "",
-        };
-        state.token = "";
-        state.isAuthorized = false;
-        state.isLoading = false;
+      .addCase(getCurrentUserThunk.pending, (state) => {
+        state.error = null;
+        state.isRefreshing = true;
       })
       .addMatcher(
         isAnyOf(
           registerThunk.rejected,
           logInThunk.rejected,
           getCurrentUserThunk.rejected,
-          getUserInfoByIdThunk.rejected,
-          updateUserInfoByIdThunk.rejected,
-          updateAvatar.rejected,
-          updateDailyNorma.rejected,
-          updatePassword.rejected,
+          getUserInfoThunk.rejected,
+          updateUserInfoThunk.rejected,
+          updateUserAvatarThunk.rejected,
+          updateUserDailyNormaThunk.rejected,
           logOutThunk.rejected
         ),
         (state, action) => {
           state.isLoading = false;
           console.log(action.payload);
           state.error = action.payload;
+          state.isRefreshing = false;
         }
       )
       .addMatcher(
         isAnyOf(
           registerThunk.pending,
           logInThunk.pending,
-          getCurrentUserThunk.pending,
-          getUserInfoByIdThunk.pending,
-          updateUserInfoByIdThunk.pending,
-          updateAvatar.pending,
-          updateDailyNorma.pending,
-          updatePassword.pending,
+          getUserInfoThunk.pending,
+          updateUserInfoThunk.pending,
+          updateUserAvatarThunk.pending,
+          updateUserDailyNormaThunk.pending,
           logOutThunk.pending
         ),
         (state) => {

@@ -1,4 +1,3 @@
-// Calendar.tsx
 import React, { useState, useEffect, useRef } from "react";
 import * as Styled from "./Calendar.styled";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
@@ -14,9 +13,9 @@ const Calendar: React.FC = () => {
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<Day | null>(null);
-  const menuRef = useRef(null);
+  const modalRef = useRef(null);
 
-  useOutsideClick(menuRef, () => {
+  useOutsideClick(modalRef, () => {
     if (isModalOpen) {
       setIsModalOpen(false);
     }
@@ -38,21 +37,6 @@ const Calendar: React.FC = () => {
     return daysArray;
   };
 
-  const isCurrentMonth = (): boolean => {
-    const currentDateStart = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      1
-    );
-    const currentDateEnd = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 1,
-      0
-    );
-    const today = getCurrentDate();
-
-    return today >= currentDateStart && today <= currentDateEnd;
-  };
 
   const handlePrevMonth = (): void => {
     setCurrentDate(
@@ -72,58 +56,42 @@ const Calendar: React.FC = () => {
     }
   };
 
-  const closeAndReopenModal = (): void => {
-    closeModal();
-  };
-
   const handleDayClick = (day: Day): void => {
-    const dayElement = document.getElementById(`day-${day.day}`);
-
-    if (!dayElement) {
-      console.error(`Element with id 'day-${day.day}' not found.`);
+    if (selectedDay === day.day) {
+      closeModal();
+      setSelectedDay(null);
       return;
     }
-
+  
+    const dayElement = document.getElementById(`day-${day.day}`);
+  
+    if (!dayElement) {
+      console.error(`Елемент з id 'day-${day.day}' не знайдено.`);
+      return;
+    }
+  
     const dayElementRect = dayElement.getBoundingClientRect();
     const modalWidth = 292;
     const modalHeight = 188;
-
-    const modalTop = dayElementRect.top - modalHeight - 40;
+  
+    const modalTop = dayElementRect.top - modalHeight - 10;
     const modalLeft =
       dayElementRect.left + dayElementRect.width / 2 - modalWidth / 2;
-
-    if (selectedDay === day.day) {
-      closeAndReopenModal();
-    } else {
-      setSelectedDay(day.day);
-      setModalContent(day);
-
-      document.documentElement.style.setProperty(
-        "--modal-top",
-        `${modalTop}px`
-      );
-      document.documentElement.style.setProperty(
-        "--modal-left",
-        `${modalLeft}px`
-      );
-
-      setIsModalOpen(true);
-    }
+  
+    setSelectedDay(day.day);
+    setModalContent(day);
+  
+    document.documentElement.style.setProperty("--modal-top", `${modalTop}px`);
+    document.documentElement.style.setProperty("--modal-left", `${modalLeft}px`);
+  
+    setIsModalOpen(true);
   };
+  
+  
 
   const closeModal = (): void => {
     setIsModalOpen(false);
   };
-
-  // const handleOutsideClick = (event: MouseEvent): void => {
-  //   const isDayClicked = (event.target as HTMLElement).classList.contains(
-  //     "day"
-  //   );
-
-  //   if (!isDayClicked && selectedDay !== null) {
-  //     closeAndReopenModal();
-  //   }
-  // };
 
   useEffect(() => {
     const handleEscapeKey = (event: Event): void => {
@@ -140,28 +108,34 @@ const Calendar: React.FC = () => {
   }, []);
 
   const calculatePercentage = (): number => {
-    const percentage = 100;
+    const percentage = 0;
     return percentage;
   };
 
   return (
     <Styled.CalendarContainer>
-      <Styled.Header>
-        <Styled.RightAlign>
-          <Styled.Button onClick={handlePrevMonth}>&lt;</Styled.Button>
-          <Styled.MonthTitle>
+      <div className="right-align">
+        <h1 className="month">Month</h1>
+        <div className="header">
+          <button className="button" onClick={handlePrevMonth}>
+            &lt;
+          </button>
+          <div className="month-title">
             {currentDate.toLocaleString("en-US", { month: "long" })},{" "}
             {currentDate.getFullYear()}
-          </Styled.MonthTitle>
-          {!isCurrentMonth() && (
-            <Styled.Button onClick={handleNextMonth}>&gt;</Styled.Button>
+          </div>
+          {currentDate.getMonth() === new Date().getMonth() &&
+          currentDate.getFullYear() === new Date().getFullYear() ? null : (
+            <button className="button" onClick={handleNextMonth}>
+              &gt;
+            </button>
           )}
-        </Styled.RightAlign>
-      </Styled.Header>
+        </div>
+      </div>
 
       <Styled.Days>
         {getDaysInMonth(currentDate).map((day) => (
-          <div key={day.day} id={`day-${day.day}`}>
+          <li key={day.day} id={`day-${day.day}`} className="hover active">
             {calculatePercentage() < 100 ? (
               <Styled.LowPercentageDay
                 className={`day ${selectedDay === day.day ? "selected" : ""}`}
@@ -177,38 +151,33 @@ const Calendar: React.FC = () => {
                 {day.day}
               </Styled.Day>
             )}
-            <Styled.Procent
+            <p
               className={`procent ${
                 calculatePercentage() < 100 ? "lowPercentage" : ""
               }`}
-            >{`${calculatePercentage()}%`}</Styled.Procent>
-          </div>
+            >{`${calculatePercentage()}%`}</p>
+          </li>
         ))}
       </Styled.Days>
 
-      {isModalOpen && (
-        <Styled.Modal ref={menuRef}>
-          <Styled.ModalContent>
-            <Styled.Container>
-              <Styled.CloseButton onClick={closeModal}>
-                &times;
-              </Styled.CloseButton>
-              <Styled.TitleModal>{`${modalContent?.day}, ${modalContent?.month}`}</Styled.TitleModal>
-              <Styled.ModalParagraf>
-                Daily norm: <Styled.SpanModal>1.5L</Styled.SpanModal>
-              </Styled.ModalParagraf>
-              <Styled.ModalParagraf>
-                Fulfillment of the daily norm:{" "}
-                <Styled.SpanModal>100%</Styled.SpanModal>
-              </Styled.ModalParagraf>
-              <Styled.ModalParagraf>
-                How many servings of water:{" "}
-                <Styled.SpanModal>6</Styled.SpanModal>
-              </Styled.ModalParagraf>
-            </Styled.Container>
-          </Styled.ModalContent>
-        </Styled.Modal>
-      )}
+      <Styled.Modal ref={modalRef} className={isModalOpen ? `open` : ""}>
+        <Styled.ModalContent>
+          <button className="close hover active" onClick={closeModal}>
+            &times;
+          </button>
+          <h3 className="title-modal">{`${modalContent?.day}, ${modalContent?.month}`}</h3>
+          <p className="modal-paragraf modal-paragraf-one">
+            Daily norm: <span className="span-modal">1.5L</span>
+          </p>
+          <p className="modal-paragraf modal-paragraf-two-three">
+            Fulfillment of the daily norm:{" "}
+            <span className="span-modal">100%</span>
+          </p>
+          <p className="modal-paragraf modal-paragraf-two-three">
+            How many servings of water: <span className="span-modal">6</span>
+          </p>
+        </Styled.ModalContent>
+      </Styled.Modal>
     </Styled.CalendarContainer>
   );
 };

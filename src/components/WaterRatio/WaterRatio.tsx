@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Range, getTrackBackground } from "react-range";
+import { useState } from 'react';
+import { Range, getTrackBackground } from 'react-range';
 import {
   Output,
   OutputThumb,
@@ -13,62 +13,92 @@ import {
   WaterRatioRangeThumb,
   WaterRatioThumb,
   WaterRatioTitle,
-} from "./WaterRatio.styled";
-import Icon from "../Icon/Icon";
+} from './WaterRatio.styled';
+import Icon from '../Icon/Icon';
+import Modal from '../Modal/Modal';
+import AddWaterModal from '../WaterList/AddWaterModal/AddWaterModal';
+import { selectPercentage } from '../../redux/water/waterSelectors';
+import { useSelector } from 'react-redux';
 
 const WaterRatio = () => {
-  const [value] = useState([67]);
+  const [visible, setVisible] = useState(false);
+  const percentage = useSelector(selectPercentage);
+
+  const normalizedValue = percentage > 100 ? 100 : percentage;
+
+  const closeModal = () => {
+    setVisible(false);
+  };
 
   return (
-    <WaterRatioContainer>
-      <WaterRatioThumb>
-        <div>
-          <WaterRatioTitle>Today</WaterRatioTitle>
-          <WaterRatioRangeThumb>
-            <Range
-              disabled
-              min={0}
-              max={100}
-              values={value}
-              onChange={() => {}}
-              renderTrack={({ props, children }) => (
-                <RenderTrack
-                  {...props}
-                  style={{
-                    ...props.style,
-                    background: getTrackBackground({
-                      values: value,
-                      colors: ["#9EBBFF", "#D7E3FF"],
-                      min: 0,
-                      max: 100,
-                    }),
-                  }}
-                >
-                  {children}
-                </RenderTrack>
+    <>
+      <WaterRatioContainer>
+        <WaterRatioThumb>
+          <div>
+            <WaterRatioTitle>Today</WaterRatioTitle>
+            <WaterRatioRangeThumb>
+              <Range
+                disabled
+                min={0}
+                max={100}
+                values={[normalizedValue]}
+                onChange={() => {}}
+                renderTrack={({ props, children }) => (
+                  <RenderTrack
+                    {...props}
+                    style={{
+                      ...props.style,
+                      background: getTrackBackground({
+                        values: [normalizedValue],
+                        colors: ['#9EBBFF', '#D7E3FF'],
+                        min: 0,
+                        max: 100,
+                      }),
+                    }}
+                  >
+                    {children}
+                  </RenderTrack>
+                )}
+                renderThumb={({ props }) => (
+                  <RenderThumb {...props} key={props.key}>
+                    <OutputThumb>
+                      <Output>{normalizedValue}%</Output>
+                    </OutputThumb>
+                  </RenderThumb>
+                )}
+              />
+            </WaterRatioRangeThumb>
+            <PointsThumb>
+              {normalizedValue <= 7 ? (
+                <span> </span>
+              ) : (
+                <PointsSpan>0%</PointsSpan>
               )}
-              renderThumb={({ props }) => (
-                <RenderThumb {...props} key={props.key}>
-                  <OutputThumb>
-                    <Output>{value[0]}%</Output>
-                  </OutputThumb>
-                </RenderThumb>
+              {normalizedValue >= 85 ? (
+                <span> </span>
+              ) : (
+                <PointsSpan>100%</PointsSpan>
               )}
-            />
-          </WaterRatioRangeThumb>
-          <PointsThumb>
-            {value[0] <= 6 ? <span> </span> : <PointsSpan>0%</PointsSpan>}
-            {value[0] >= 91 ? <span> </span> : <PointsSpan>100%</PointsSpan>}
-          </PointsThumb>
-        </div>
-        <WaterRatioBtnThumb>
-          <WaterRatioBtn className="btn">
-            <Icon className="water-ratio-plus" id="plus-circle" />
-            Add Water
-          </WaterRatioBtn>
-        </WaterRatioBtnThumb>
-      </WaterRatioThumb>
-    </WaterRatioContainer>
+            </PointsThumb>
+          </div>
+          <WaterRatioBtnThumb className="hover">
+            <WaterRatioBtn className="btn" onClick={() => setVisible(true)}>
+              <Icon className="water-ratio-plus" id="plus-circle" />
+              Add Water
+            </WaterRatioBtn>
+          </WaterRatioBtnThumb>
+        </WaterRatioThumb>
+      </WaterRatioContainer>
+      {visible && (
+        <Modal setVisible={setVisible} title="Add water">
+          <AddWaterModal
+            title="Choose a value"
+            show={false}
+            closeModal={closeModal}
+          />
+        </Modal>
+      )}
+    </>
   );
 };
 

@@ -1,15 +1,23 @@
 import { NavLink } from "react-router-dom";
 import AuthForm from "../components/AuthForm/AuthForm";
+import {
+  StyledAuthSection,
+  StyledLoginDiv,
+} from "../components/AuthForm/AuthForm.styled";
 
 const RegisterPage = () => {
   return (
-    <section>
+    <StyledAuthSection className="auth-section">
       <div className="container">
-        <h2>Sign Up</h2>
-        <AuthForm repeat={true} />
-        <NavLink to="/signin">Sign in</NavLink>
+        <StyledLoginDiv>
+          <h2 className="title">Sign Up</h2>
+          <AuthForm repeat={true} />
+          <NavLink className="auth-link" to="/signin">
+            Sign in
+          </NavLink>
+        </StyledLoginDiv>
       </div>
-    </section>
+    </StyledAuthSection>
   );
 };
 

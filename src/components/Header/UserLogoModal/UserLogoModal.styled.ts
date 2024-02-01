@@ -11,8 +11,6 @@ export const LogoWrapper = styled.div`
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    cursor: pointer;
-
     border: none;
     background-color: transparent;
 
@@ -54,14 +52,13 @@ export const LogoWrapper = styled.div`
     }
     button {
       border: none;
-      background-color: transparent;
-      cursor: pointer;
+      /* background-color: transparent; */
     }
     .gear_settings {
       width: 16px;
       height: 16px;
     }
-     .logout {
+    .logout {
       width: 16px;
       height: 16px;
     }
@@ -70,10 +67,10 @@ export const LogoWrapper = styled.div`
       font-size: 16px;
       margin-left: 8px;
       color: var(--primary-blue);
-      font-family: 'Roboto-Regular',sans-serif;
+      font-family: "Roboto-Regular", sans-serif;
     }
 
-    .button-popover{
+    .button-popover {
       display: flex;
       align-items: center;
     }

@@ -6,6 +6,18 @@ export const FormSettingStyled = styled.form`
   flex-direction: column;
   justify-content: center;
   gap: 24px;
+
+  .error-input {
+    border: 1px solid var(--secondary-red);
+  }
+  .error-message {
+    position: absolute;
+    top: 70px;
+    left: 0;
+
+    font-size: 14px;
+    color: var(--secondary-red);
+  }
 `;
 
 export const FormAvatar = styled.div`
@@ -39,15 +51,15 @@ export const FormAvatarLabel = styled.label`
   .setting-modal-icon {
     width: 16px;
     height: 16px;
-    stroke: #407bff;
-    cursor: pointer;
+    stroke: var(--primary-blue);
+    cursor: inherit;
   }
 
   .text-loading {
     font-size: 14px;
     font-weight: 500;
-    color: #407bff;
-    cursor: pointer;
+    color: var(--primary-blue);
+    cursor: inherit;
   }
 `;
 
@@ -139,6 +151,7 @@ export const FormUserPassword = styled.div`
   }
 
   .password-label {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -148,21 +161,37 @@ export const FormUserPassword = styled.div`
   .password-sub-title {
     font-size: 16px;
   }
+
+  .toggle-password {
+    position: absolute;
+    top: 40px;
+    right: 16px;
+  }
+
+  .password-eye-icon,
+  .password-eye-outline-icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--primary-blue);
+  }
 `;
 
 export const FormNameInput = styled.input`
   width: 256px;
   height: 44px;
-  border: 1px solid #d7e3ff;
+  border: 1px solid var(--secondary-light-blue);
   border-radius: 6px;
   padding: 12px 36px 12px 8px;
-  color: #407bff;
-  background-color: #ffffff;
-
+  color: var(--primary-blue);
+  background-color: var(--primary-white);
+  &:hover,
+  &:focus {
+    outline: none;
+  }
   &::placeholder {
     font-size: 16px;
     font-weight: 400;
-    color: #9ebbff;
+    color: var(--secondary-blue);
   }
   @media ${device.tablet} {
     width: 392px;
@@ -172,16 +201,19 @@ export const FormNameInput = styled.input`
 export const FormEmailInput = styled.input`
   width: 256px;
   height: 44px;
-  border: 1px solid #d7e3ff;
+  border: 1px solid var(--secondary-light-blue);
   border-radius: 6px;
   padding: 12px 36px 12px 8px;
-  color: #407bff;
-  background-color: #ffffff;
-
+  color: var(--primary-blue);
+  background-color: var(--primary-white);
+  &:hover,
+  &:focus {
+    outline: none;
+  }
   &::placeholder {
     font-size: 16px;
     font-weight: 400;
-    color: #9ebbff;
+    color: var(--secondary-blue);
   }
   @media ${device.tablet} {
     width: 392px;
@@ -191,22 +223,24 @@ export const FormEmailInput = styled.input`
 export const FormPasswordInput = styled.input`
   width: 256px;
   height: 44px;
-  border: 1px solid #d7e3ff;
+  border: 1px solid var(--secondary-light-blue);
   border-radius: 6px;
   padding: 12px 36px 12px 8px;
-  color: #407bff;
-  background-color: #ffffff;
-
+  color: var(--primary-blue);
+  background-color: var(--primary-white);
+  &:hover,
+  &:focus {
+    outline: none;
+  }
   &::placeholder {
     font-size: 16px;
     font-weight: 400;
-    color: #9ebbff;
+    color: var(--secondary-blue);
   }
   @media ${device.tablet} {
     width: 392px;
   }
 `;
-
 export const BtnSubmit = styled.button`
   display: flex;
   justify-content: center;
@@ -215,9 +249,9 @@ export const BtnSubmit = styled.button`
   width: 256px;
   height: 44px;
   border-radius: 10px;
-  color: #ffffff;
-  box-shadow: 0px 4px 8px 0px #407bff57;
-  background-color: #407bff;
+  color: var(--primary-white);
+  box-shadow: var(--btn-box-shadow);
+  background-color: var(--primary-blue);
 
   @media ${device.tablet} {
     width: 160px;
@@ -227,7 +261,7 @@ export const BtnSubmit = styled.button`
       box-shadow: var(--btn-box-shadow);
     }
     &:active {
-      cursor: pointer;
+      cursor: inherit;
     }
   }
 `;
