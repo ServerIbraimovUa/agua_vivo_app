@@ -2,9 +2,9 @@ import DailyNorma from "../components/DailyNorma/DailyNorma";
 import WaterList from "../components/WaterList/WaterList";
 import Calendar from "../components/Calendar/Calendar";
 import WaterRatio from "../components/WaterRatio/WaterRatio";
-import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import { getAmountDailyThunk } from "../redux/water/water.operations";
+// import { useDispatch } from "react-redux";
+import { useState } from "react";
+// import { getAmountDailyThunk } from "../redux/water/water.operations";
 
 const HomePage = () => {
   const [percentageValue] = useState([50]);

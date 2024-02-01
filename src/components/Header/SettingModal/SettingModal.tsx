@@ -36,7 +36,9 @@ type SettingForm = {
   repeatNewPassword?: string;
 };
 
-const SettingModal: React.FC = () => {
+const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
+  setVisible,
+}) => {
   const [file, setFile] = useState<File | null>(null);
   const [previewURL, setpreviewURL] = useState<string | null>(null);
 
@@ -47,7 +49,7 @@ const SettingModal: React.FC = () => {
   const [repeatNewPasswordToggle, setRepeatNewPasswordToggle] =
     useState("password");
 
-  const data = useSelector(selectUser);
+  const user = useSelector(selectUser);
   const dispatch = useAppDispatch();
 
   const {
@@ -59,9 +61,9 @@ const SettingModal: React.FC = () => {
     formState: { errors, isSubmitting },
   } = useForm<SettingForm>({
     defaultValues: {
-      // gender: data.gender || "woman",
-      name: data.name || "",
-      email: data.email,
+      gender: user.gender || "woman",
+      name: user.name || "",
+      email: user.email,
       outdatedPassword: "",
       newPassword: "",
       repeatNewPassword: "",
@@ -101,22 +103,22 @@ const SettingModal: React.FC = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<SettingForm> = async (user) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
+  const onSubmit: SubmitHandler<SettingForm> = async (data) => {
     if (file) {
       dispatch(updateUserAvatarThunk(file));
     }
 
     if (data.gender) {
-      dispatch(updateUserInfoThunk({ gender: data.gender }));
+      dispatch(updateUserInfoThunk({ gender: data.gender }))
+        .unwrap()
+        .then(() => setVisible(false));
     }
 
     if (data.name) {
       dispatch(updateUserInfoThunk({ name: data.name }));
     }
 
-    console.log(user);
+    console.log(data);
     reset();
   };
 
@@ -134,7 +136,7 @@ const SettingModal: React.FC = () => {
           ) : (
             <img
               className="avatar-setting"
-              src={data.avatar}
+              src={user.avatar}
               alt="User avatar"
             />
           )}{" "}
@@ -161,7 +163,7 @@ const SettingModal: React.FC = () => {
                   value="woman"
                   type="radio"
                 />
-                <span className="gender-sub-title">woman</span>
+                <span className="gender-sub-title">Woman</span>
               </label>
               <label className="gender-label">
                 <input
@@ -171,7 +173,7 @@ const SettingModal: React.FC = () => {
                   value="man"
                   type="radio"
                 />
-                <span className="gender-sub-title">man</span>
+                <span className="gender-sub-title">Man</span>
                 {errors.gender && <p>{`${errors.gender.message}`}</p>}
               </label>
             </FormGenderContair>

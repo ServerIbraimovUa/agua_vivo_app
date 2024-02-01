@@ -2,10 +2,17 @@ import styled from "styled-components";
 import { device } from "../../css/deviceSize";
 
 export const StyledAuthSection = styled.section`
-  display: flex;
+  /* display: flex; */
+  padding-top: 24px;
+
   @media ${device.tablet} {
+    padding-top: 40px;
   }
   @media ${device.desktop} {
+    padding-top: 148px;
+    background-image: url("../../assets/images/Back_sign.png");
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 `;
 
@@ -27,6 +34,9 @@ export const StyledAuthForm = styled.form`
   }
   .gap-error {
     gap: 4px;
+  }
+  .gap-normal {
+    gap: 8px;
   }
 
   .error {
