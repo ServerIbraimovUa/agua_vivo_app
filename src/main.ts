@@ -60,6 +60,7 @@ export const GlobalStyle = createGlobalStyle`
     src: url(${Bold}) format('truetype'),
     }
 
+
   // STYLES
 
   #root {

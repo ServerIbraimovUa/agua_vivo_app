@@ -2,11 +2,14 @@ import styled from "styled-components";
 import { device } from "../../css/deviceSize";
 
 export const CalendarContainer = styled.div`
-  position: relative;
+            /* position: absolute;
+            bottom: 0;
+            right: 0; */
 
   width: 264;
   height: 500px;
   background-color: #ecf2ff;
+
   @media ${device.tablet} {
     width: 646px;
     height: 315px;
@@ -49,6 +52,10 @@ height: 320px;
     padding: 5px 10px;
     flex-shrink: 0;
   }
+  .button.disabled {
+  color: grey;
+  cursor: not-allowed;
+}
   .month {
     font-size: 26px;
     color: #2f2f2f;
