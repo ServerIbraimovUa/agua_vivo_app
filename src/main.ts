@@ -185,7 +185,7 @@ section{
   }
   @media ${device.desktop} {
     /* margin-top: 109px; */
-    background-image: url(src/assets/images/WelcomeDeskt.png);
+    background-image: url(src/assets/images/Welcome-bg-dsc.png);
     background-size: 100%; 
     background-position-y: 96px;  
 
