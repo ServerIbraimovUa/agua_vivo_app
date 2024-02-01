@@ -4,9 +4,13 @@ import { PrivateRoute } from "./components/PrivateRoute/PrivateRote.jsx";
 import { PublicRoute } from "./components/PublicRoute/PublicRoute";
 import { useAppDispatch } from "./redux/redux_ts/hook.js";
 import { getCurrentUserThunk } from "./redux/auth/auth.operations.js";
-import { selectIsAuthorized } from "./redux/auth/authSelectors.js";
+import {
+  selectIsAuthorized,
+  selectRefresh,
+} from "./redux/auth/authSelectors.js";
 import { useSelector } from "react-redux";
 import Layout from "./components/Layout/Layout.js";
+import Loading from "./components/Loading/Loading.js";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
@@ -15,12 +19,15 @@ const WelcomePage = lazy(() => import("./pages/WelcomePage.js"));
 
 export default function App() {
   const isAuthorized = useSelector(selectIsAuthorized);
+  const isRefresh = useSelector(selectRefresh);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getCurrentUserThunk());
   }, [dispatch]);
 
-  return (
+  return isRefresh ? (
+    <Loading />
+  ) : (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>

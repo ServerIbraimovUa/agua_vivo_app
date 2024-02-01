@@ -27,7 +27,7 @@ export const logInThunk = createAsyncThunk(
   async (data: IAuthData, thunkAPI) => {
     try {
       const response = await axios.post("/auth/login", data);
-      setToken(response.data.token);
+
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
@@ -40,9 +40,9 @@ export const getCurrentUserThunk = createAsyncThunk<
   undefined,
   { state: { auth: IAuthInitInfo } }
 >("auth/current", async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  handleToken(state.auth.token);
   try {
-    const state = thunkAPI.getState();
-    handleToken(state.auth.token);
     const response = await axios.get("/auth/current");
     return response.data;
   } catch (e) {
