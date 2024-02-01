@@ -20,8 +20,9 @@ import {
 } from "./DailyNorma.styled";
 import { useAppDispatch } from "../../redux/redux_ts/hook";
 import { updateUserDailyNormaThunk } from "../../redux/auth/auth.operations";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../redux/auth/authSelectors";
+import Popover from "./Popover";
+
+
 
 interface Props {
   onClose: () => void;
@@ -31,14 +32,12 @@ type Inputs = {
   weight: string;
   time: string;
   sex?: "man" | "woman";
-  dailyNorma: number;
+  dailyNorma: string;
 };
 
 const DailyNormaModal: FC<Props> = ({ onClose }) => {
-  const { gender } = useSelector(selectUser);
-  console.log(gender);
 
-  const {
+   const {
     register,
     handleSubmit,
     watch,
@@ -47,35 +46,56 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
     defaultValues: {
       weight: "",
       time: "",
-      //sex:gender,
-      dailyNorma: 0,
+      sex:"woman",
+      dailyNorma: "",
     },
     mode: "onChange",
   });
 
   const dispatch = useAppDispatch();
+  
+ 
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const { dailyNorma } = data;
-    console.log(dailyNorma);
+
     dispatch(updateUserDailyNormaThunk({ dailyNorma: +dailyNorma }));
     onClose();
   };
 
-  const weight = Number(watch("weight"));
+  let visible;
+  const weight = Number(watch("weight"))
   const time = Number(watch("time"));
   const sex = String(watch("sex"));
 
   const calculateDailyNorma = (w: number, t: number, g: string): string => {
+  
     if (g === "man") {
-      return String((w * 0.04 + t * 0.6).toFixed(1));
+      return String((w * 0.04 + t * 0.6).toFixed(1))+"L";
     } else {
-      return String((w * 0.03 + t * 0.4).toFixed(1));
+      return String((w * 0.03 + t * 0.4).toFixed(1))+"L";
     }
   };
 
-  const myDailyNorma = calculateDailyNorma(weight, time, sex);
+  const createPopoverMessage = (w:number, t:number) : string|undefined=>{
+    if(w<20 && w!==0){
+    visible=true;
+    return "You couldn't be less than 20kg";
+    }
+    if(t>24){
+      visible=true;
+      return "Day contains only 24H";
+    }
+    if(t<0){
+      visible=true;
+      return "Time should be only positive integer";
+    }
+   }
 
+  const myDailyNorma = calculateDailyNorma(weight, time, sex);
+  const message = createPopoverMessage(weight, time);
+  
+ 
   return (
     <FormContainer>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -100,9 +120,7 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
           <FormSub>
             <label>
               <FormRadioInput
-                {...register("sex", {
-                  required: "Please select a gender",
-                })}
+                {...register("sex")}
                 value="woman"
                 type="radio"
               />
@@ -110,9 +128,7 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
             </label>
             <label>
               <FormRadioInput
-                {...register("sex", {
-                  required: "Please select a gender",
-                })}
+                {...register("sex")}
                 value="man"
                 type="radio"
               />
@@ -122,9 +138,11 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
           <Label>
             <span>Your weight in kilograms:</span>
             <Input
-              {...register("weight", { min: 20, max: 320 })}
+              {...register("weight")}
               type="number"
               placeholder="0"
+              min={10}
+              max={300}
             />
           </Label>
           <Label>
@@ -133,14 +151,16 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
               with a high physical. load in hours:
             </span>
             <Input
-              {...register("time", { max: 24 })}
+              {...register("time")}
               type="number"
               placeholder="0"
+              min={0}
+              max={24}
             />
           </Label>
           <LabelNorma>
             <SpanText>The required amount of water in liters per day:</SpanText>
-            <Span>{myDailyNorma} L</Span>
+            <Span>{visible?(<Popover message={message}/>):myDailyNorma}</Span>
           </LabelNorma>
         </FormBody>
         <FormFooter>
@@ -148,7 +168,12 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
             <FormSubtitle>
               Write down how much water you will drink:
             </FormSubtitle>
-            <Input {...register("dailyNorma", { max: 15 })} type="number" />
+            <Input  {...register("dailyNorma", {
+                    required: true,
+                  })} 
+            type="number" step="any" 
+            max={15}
+            placeholder="0"/>
             {errors.dailyNorma && <span>This field is required</span>}
           </Label>
         </FormFooter>
