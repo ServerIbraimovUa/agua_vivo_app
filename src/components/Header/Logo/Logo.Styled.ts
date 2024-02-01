@@ -11,7 +11,8 @@ export const LogoContainer = styled.div`
   }
 
   .logo-text {
-    width: 55px;
+   
+    width: 64px;
     font-size: 12px;
     font-weight: 700;
     line-height: 14px;
