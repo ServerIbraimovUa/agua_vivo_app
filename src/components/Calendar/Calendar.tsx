@@ -85,14 +85,8 @@ const Calendar: React.FC = () => {
     document.documentElement.style.setProperty("--modal-left", `${modalLeft}px`);
 
     setIsModalOpen(true);
-
-
-
-    
   };
 
-
-  
   const closeModal = (): void => {
     setIsModalOpen(false);
   };
@@ -129,7 +123,14 @@ const Calendar: React.FC = () => {
             {currentDate.getFullYear()}
           </div>
           {currentDate.getMonth() === new Date().getMonth() &&
-          currentDate.getFullYear() === new Date().getFullYear() ? null : (
+          currentDate.getFullYear() === new Date().getFullYear() ? (
+            <button
+              className={`button disabled`}
+              disabled={true}
+            >
+              &gt;
+            </button>
+          ) : (
             <button className="button" onClick={handleNextMonth}>
               &gt;
             </button>
@@ -187,4 +188,3 @@ const Calendar: React.FC = () => {
 };
 
 export default Calendar;
-

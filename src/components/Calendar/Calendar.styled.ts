@@ -52,6 +52,10 @@ height: 320px;
     padding: 5px 10px;
     flex-shrink: 0;
   }
+  .button.disabled {
+  color: grey;
+  cursor: not-allowed;
+}
   .month {
     font-size: 26px;
     color: #2f2f2f;
