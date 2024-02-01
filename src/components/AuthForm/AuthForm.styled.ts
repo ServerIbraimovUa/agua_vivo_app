@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../css/deviceSize";
-import bgDeskImg from "../../assets/images/Back_sign.png";
+import bgDeskImg from "../../assets/images/Back_signUp_desk.png";
 
 export const StyledAuthSection = styled.section`
   /* display: flex; */
