@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Range, getTrackBackground } from "react-range";
 import {
   Output,
@@ -18,7 +18,11 @@ import Icon from "../Icon/Icon";
 import Modal from "../Modal/Modal";
 import AddWaterModal from "../WaterList/AddWaterModal/AddWaterModal";
 
-const WaterRatio = ({ value }) => {
+interface Props {
+  value: number[];
+}
+
+const WaterRatio: FC<Props> = ({ value }) => {
   const [visible, setVisible] = useState(false);
 
   const closeModal = () => {

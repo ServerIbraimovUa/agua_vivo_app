@@ -47,7 +47,7 @@ const UserLogoModal = () => {
         </button>
         {settingsVisible && (
           <Modal setVisible={setSettingsVisible} title="Setting" setting={true}>
-            <SettingModal />
+            <SettingModal setVisible={setSettingsVisible}/>
           </Modal>
         )}
         <br />
