@@ -81,20 +81,6 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
     setTimeOptions([currentTime, ...intervals]);
   }, []);
 
-  // useEffect(() => {
-  //   if (entries.length > 0) {
-  //     const lastEntryWaterVolume = entries[entries.length - 1].waterVolume;
-  //     setState((prevState) => ({
-  //       ...prevState,
-  //       count: lastEntryWaterVolume,
-  //     }));
-  //   } else {
-  //     setState((prevState) => ({
-  //       ...prevState,
-  //       count: 0, // Встановлюємо значення за замовчуванням 0, якщо entries порожній
-  //     }));
-  //   }
-  // }, [entries]);
 
   const handleCountChange = (newCount: number) => {
     if (state.count + newCount >= 0) {
