@@ -1,4 +1,21 @@
-import{u as t,d as i,j as e,I as s,w as a}from"./index-A0dwmDTO.js";const o=t.ul`
+import{u as t,d as i,j as e,I as s,w as o}from"./index-18bWKq1D.js";const l="/agua_vivo_app/assets/welcome-mob-9xutC1rA.png",r="/agua_vivo_app/assets/WelcomeTab-KNRMQHDm.png",c="/agua_vivo_app/assets/WelcomeDeskt-qiCvHL9S.png",d=t.section`
+  &.welcome-section {
+    background-image: url(${l});
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    @media ${i.tablet} {
+      background-image: url(${r});
+    }
+    @media ${i.desktop} {
+      /* margin-top: 109px; */
+      background-image: url(${c});
+      background-size: 100%;
+      background-position-y: 96px;
+    }
+  }
+`,p=t.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -18,7 +35,7 @@ import{u as t,d as i,j as e,I as s,w as a}from"./index-A0dwmDTO.js";const o=t.ul
       background-color: #407bff;
     }
   }
-`,r=t.div`
+`,x=t.div`
   padding: 24px 16px;
   background-color: var(--secondary-white);
   border-radius: 10px;
@@ -40,7 +57,7 @@ import{u as t,d as i,j as e,I as s,w as a}from"./index-A0dwmDTO.js";const o=t.ul
 `;t.section`
   position: fixed;
   bottom: 0;
-`;const d=()=>e.jsxs(r,{children:[e.jsx("h3",{children:"Why Drink Water"}),e.jsxs(o,{children:[e.jsx("li",{children:e.jsx("p",{children:"Supply of nutrients to all organs"})}),e.jsx("li",{children:e.jsx("p",{children:"Providing oxygen to the lungs"})}),e.jsx("li",{children:e.jsx("p",{children:"Maintaining the work of the heart"})}),e.jsx("li",{children:e.jsx("p",{children:"Release of processed substances"})}),e.jsx("li",{children:e.jsx("p",{children:"Ensuring the stability of the internal environment"})}),e.jsx("li",{children:e.jsx("p",{children:"Maintaining within the normal temperature"})}),e.jsx("li",{children:e.jsx("p",{children:"Maintaining an immune system capable of resisting disease"})})]})]}),c=t.div`
+`;const h=()=>e.jsxs(x,{children:[e.jsx("h3",{children:"Why Drink Water"}),e.jsxs(p,{children:[e.jsx("li",{children:e.jsx("p",{children:"Supply of nutrients to all organs"})}),e.jsx("li",{children:e.jsx("p",{children:"Providing oxygen to the lungs"})}),e.jsx("li",{children:e.jsx("p",{children:"Maintaining the work of the heart"})}),e.jsx("li",{children:e.jsx("p",{children:"Release of processed substances"})}),e.jsx("li",{children:e.jsx("p",{children:"Ensuring the stability of the internal environment"})}),e.jsx("li",{children:e.jsx("p",{children:"Maintaining within the normal temperature"})}),e.jsx("li",{children:e.jsx("p",{children:"Maintaining an immune system capable of resisting disease"})})]})]}),g=t.div`
   h1 {
     font-weight: var(--bold-font-weight);
     font-size: 28px;
@@ -108,7 +125,7 @@ import{u as t,d as i,j as e,I as s,w as a}from"./index-A0dwmDTO.js";const o=t.ul
       line-height: 1.33;
     }
   }
-`,x=t.ul`
+`,m=t.ul`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -128,7 +145,7 @@ import{u as t,d as i,j as e,I as s,w as a}from"./index-A0dwmDTO.js";const o=t.ul
       line-height: 1.25;
     }
   }
-`,h=({handleClick:n})=>e.jsxs(c,{children:[e.jsx("h1",{className:"title",children:"Water consumption tracker"}),e.jsx("h2",{children:"Record daily water intake and track"}),e.jsxs("div",{className:"tracker",children:[e.jsx("h3",{children:"Tracker Benefits"}),e.jsxs(x,{children:[e.jsxs("li",{children:[e.jsx(s,{className:"welcome-icon",id:"calendar"}),e.jsx("p",{children:"Habit drive"})]}),e.jsxs("li",{children:[e.jsx(s,{className:"welcome-icon",id:"bar"}),e.jsx("p",{children:"View statistics"})]}),e.jsxs("li",{children:[e.jsx(s,{className:"welcome-icon",id:"tools"}),e.jsx("p",{children:"Personal rate setting"})]})]})]}),e.jsx("button",{className:"btn",onClick:n,type:"button",children:"Try tracker"})]}),p=t.div`
+`,u=({handleClick:n})=>e.jsxs(g,{children:[e.jsx("h1",{className:"title",children:"Water consumption tracker"}),e.jsx("h2",{children:"Record daily water intake and track"}),e.jsxs("div",{className:"tracker",children:[e.jsx("h3",{children:"Tracker Benefits"}),e.jsxs(m,{children:[e.jsxs("li",{children:[e.jsx(s,{className:"welcome-icon",id:"calendar"}),e.jsx("p",{children:"Habit drive"})]}),e.jsxs("li",{children:[e.jsx(s,{className:"welcome-icon",id:"bar"}),e.jsx("p",{children:"View statistics"})]}),e.jsxs("li",{children:[e.jsx(s,{className:"welcome-icon",id:"tools"}),e.jsx("p",{children:"Personal rate setting"})]})]})]}),e.jsx("button",{className:"btn",onClick:n,type:"button",children:"Try tracker"})]}),b=t.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -141,4 +158,4 @@ import{u as t,d as i,j as e,I as s,w as a}from"./index-A0dwmDTO.js";const o=t.ul
     gap: 81px;
     align-items: flex-end;
   }
-`,g=()=>{const n=a(),l=()=>n("/signup");return e.jsx("section",{className:"welcome-section",children:e.jsxs(p,{className:"container",children:[e.jsx(h,{handleClick:l}),e.jsx(d,{})]})})};export{g as default};
+`,j=()=>{const n=o(),a=()=>n("/signup");return e.jsx(d,{className:"welcome-section",children:e.jsxs(b,{className:"container",children:[e.jsx(u,{handleClick:a}),e.jsx(h,{})]})})};export{j as default};
