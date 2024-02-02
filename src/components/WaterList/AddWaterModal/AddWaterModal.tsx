@@ -1,18 +1,22 @@
 import { ChangeEvent, FC, KeyboardEvent, useEffect, useState } from "react";
-import { IWaterData } from "../WaterList";
+
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
 import { AddWaterModalStyled } from "../WaterList.styled";
 import Icon from "../../Icon/Icon";
-import { addWaterThunk } from "../../../redux/water/water.operations";
+import {
+  addWaterThunk,
+  updateWaterVolumeThunk,
+} from "../../../redux/water/water.operations";
 import { useSelector } from "react-redux";
 import { selectAmountDaily } from "../../../redux/water/waterSelectors";
+import { IUpdateWaterPayload } from "../../../redux/redux_ts/interfaces";
 
 interface IProps {
-  _id?: string;
+  id?: string;
   title: string;
   show: boolean;
-  handleUpdateWater?: (waterData: IWaterData) => void;
+  handleUpdateWater?: (waterData: IUpdateWaterPayload) => void;
   closeModal: () => void;
 }
 
@@ -21,7 +25,7 @@ export type IWaterPortion = {
   waterVolume: number;
 };
 
-const AddWaterModal: FC<IProps> = ({ title, show, closeModal, _id }) => {
+const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
   const {
     register,
     handleSubmit,
@@ -36,7 +40,7 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, _id }) => {
   });
 
   const { entries } = useSelector(selectAmountDaily);
-  const water = entries.find((entry) => entry._id === _id);
+  const water = entries.find((entry) => entry._id === id);
 
   const [timeOptions, setTimeOptions] = useState<string[]>([]);
 
@@ -110,8 +114,11 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, _id }) => {
       time: data.time,
       waterVolume: Number(state.inputValue),
     };
-
-    dispatch(addWaterThunk(newData));
+    if (show && id) {
+      dispatch(updateWaterVolumeThunk({ ...newData, id }));
+    } else {
+      dispatch(addWaterThunk(newData));
+    }
 
     closeModal();
   };

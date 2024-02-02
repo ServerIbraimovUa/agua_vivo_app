@@ -66,8 +66,10 @@ const authSlice = createSlice({
       .addCase(updateUserDailyNormaThunk.fulfilled, (state, action) => {
         state.user.dailyNorma = action.payload;
       })
-      .addCase(logOutThunk.fulfilled, () => {
-        return authInitialState;
+      .addCase(logOutThunk.fulfilled, (state) => {
+        state.user = authInitialState.user;
+        state.token = "";
+        state.isAuthorized = false;
       })
       .addCase(getCurrentUserThunk.pending, (state) => {
         state.error = null;
