@@ -81,6 +81,21 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
     setTimeOptions([currentTime, ...intervals]);
   }, []);
 
+  // useEffect(() => {
+  //   if (entries.length > 0) {
+  //     const lastEntryWaterVolume = entries[entries.length - 1].waterVolume;
+  //     setState((prevState) => ({
+  //       ...prevState,
+  //       count: lastEntryWaterVolume,
+  //     }));
+  //   } else {
+  //     setState((prevState) => ({
+  //       ...prevState,
+  //       count: 0, // Встановлюємо значення за замовчуванням 0, якщо entries порожній
+  //     }));
+  //   }
+  // }, [entries]);
+
   const handleCountChange = (newCount: number) => {
     if (state.count + newCount >= 0) {
       setState({
@@ -114,7 +129,9 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
       time: data.time,
       waterVolume: Number(state.inputValue),
     };
-    if (show && id) {
+    if (newData.waterVolume === 0) {
+      alert("Кількість води не може бути 0!");
+    } else if (show && id) {
       dispatch(updateWaterVolumeThunk({ ...newData, id }));
     } else {
       dispatch(addWaterThunk(newData));
@@ -143,7 +160,14 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
           >
             <Icon className="icon-minus" id="minus" />
           </button>
-          <span className="water-amount-span">{state.count}ml</span>
+          <span className="water-amount-span">
+            {show
+              ? entries.length > 0
+                ? entries[entries.length - 1].waterVolume + "ml"
+                : "0ml"
+              : `${state.count}ml`}
+            {/* {state.count}ml */}
+          </span>
           <button
             className="counter-btn"
             onClick={() => handleCountChange(state.count + 50)}
