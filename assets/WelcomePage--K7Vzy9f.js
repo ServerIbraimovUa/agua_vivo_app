@@ -1,4 +1,4 @@
-import{u as t,d as i,j as e,I as s,w as a}from"./index-rhkdOiWc.js";const o=t.ul`
+import{u as t,d as i,j as e,I as s,w as a}from"./index-A0dwmDTO.js";const o=t.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -132,6 +132,9 @@ import{u as t,d as i,j as e,I as s,w as a}from"./index-rhkdOiWc.js";const o=t.ul
   display: flex;
   flex-direction: column;
   gap: 40px;
+  @media ${i.tablet} {
+    gap: 60px;
+  }
   @media ${i.desktop} {
     flex-direction: row;
     justify-content: center;
