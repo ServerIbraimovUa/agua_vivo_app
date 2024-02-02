@@ -3,7 +3,7 @@ import { device } from "../../css/deviceSize";
 
 export const WaterContainerStyled = styled.section`
   margin-bottom: 24px;
-
+  padding-top: 40px;
   .water-section {
     min-width: 544px;
   }

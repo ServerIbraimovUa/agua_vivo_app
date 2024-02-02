@@ -102,22 +102,33 @@ export const FormButton = styled.button`
 //Daily Norma
 export const Title = styled.h2`
   font-size: 18px;
-  font-weight: var(--bold-font-weight);
   line-height: 1.33;
-  margin-bottom: 12px;
 `;
 export const EditButton = styled.button`
   color: #8baeff;
 `;
 export const Wrapper = styled.div`
   display: flex;
-  gap: 5px;
-  margin-bottom: 16px;
+  flex-direction: column;
+  width: 164px;
+  gap: 12px;
+  margin-bottom: 232px;
+  padding: 8px 20px;
+  background-color: #fff;
+  border-radius: 10px;    
+  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
+`;
+export const WrapperButton=styled.div`
+  display: flex;
+  gap:12px;
+  flex-direction: row;
+
 `;
 export const SpanNorma = styled.span`
   color: var(--primary-blue);
   font-size: 22px;
   font-weight: var(--bold-font-weight);
+  line-height: 100%;
   @media ${device.tablet} {
     font-size: 24px;
   }
