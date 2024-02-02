@@ -88,10 +88,10 @@ export const GlobalStyle = createGlobalStyle`
       }
   }
 
-  body {
+  body{
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
     overflow-x: hidden;
     font-family: 'Roboto', sans-serif;
     font-weight: var(--regular-font-weight);
@@ -152,10 +152,10 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 section{
-
+height: 98.5vh;
 
   padding-top: 80px;     
-  min-height: 100vh;
+
 
  
   @media ${device.tablet} {
@@ -165,35 +165,12 @@ section{
 
   }
   @media ${device.desktop} {
-    /* padding-top: 31px; */
     padding-top: 109px;
 
   }
 }
 
-.welcome-section{  
 
-  background-image: url(src/assets/images/Back_Main_Mob1.png);
-    background-position: center;  
-
-
-
-  background-repeat: no-repeat;
-
-  @media ${device.tablet} {
-
-
-    background-image: url(src/assets/images/Back_Main_Tab2.png);
-   
-  }
-  @media ${device.desktop} {
-    /* margin-top: 109px; */
-    background-image: url(src/assets/images/Welcome-bg-dsc.png);
-    background-size: 100%; 
-    background-position-y: 96px;  
-
-  }
-}
 
 .container {
   width: 100%;
