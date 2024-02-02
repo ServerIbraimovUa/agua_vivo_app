@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { device } from "../../css/deviceSize";
 import bgMobile from "../../assets/images/welcome-mob.png";
 import bgTablet from "../../assets/images/WelcomeTab.png";
-import bgDesk from "../../assets/images/WelcomeDeskt.png";
+// import bgDesk from "../../assets/images/WelcomeDeskt.png";
+import bgDesk from "../../assets/images/Welcome-bg-dsc.png";
 
 export const WelcomeSection = styled.section`
   &.welcome-section {
