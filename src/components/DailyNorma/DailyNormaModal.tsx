@@ -21,6 +21,8 @@ import {
 import { useAppDispatch } from "../../redux/redux_ts/hook";
 import { updateUserDailyNormaThunk } from "../../redux/auth/auth.operations";
 import Popover from "./Popover";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/authSelectors";
 
 
 
@@ -37,6 +39,7 @@ type Inputs = {
 
 const DailyNormaModal: FC<Props> = ({ onClose }) => {
 
+  const user = useSelector(selectUser);
    const {
     register,
     handleSubmit,
@@ -46,14 +49,13 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
     defaultValues: {
       weight: "",
       time: "",
-      sex:"woman",
+      sex:user.gender||"woman",
       dailyNorma: "",
     },
     mode: "onChange",
   });
 
   const dispatch = useAppDispatch();
-  
  
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -140,9 +142,8 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
             <Input
               {...register("weight")}
               type="number"
-              placeholder="0"
-              min={10}
-              max={300}
+              placeholder="0"           
+              
             />
           </Label>
           <Label>
@@ -153,9 +154,7 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
             <Input
               {...register("time")}
               type="number"
-              placeholder="0"
-              min={0}
-              max={24}
+              placeholder="0"             
             />
           </Label>
           <LabelNorma>
