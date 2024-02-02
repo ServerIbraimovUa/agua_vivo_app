@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { device } from "../../css/deviceSize";
 
-export const WaterContainerStyled = styled.section`
+export const WaterContainerStyled = styled.div`
   margin-bottom: 24px;
-  padding-top: 40px;
+
   .water-section {
     min-width: 544px;
   }
