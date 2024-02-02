@@ -10,7 +10,7 @@ const Header = () => {
   const isAuthorized = useSelector(selectIsAuthorized);
   return (
     <HeaderStyle>
-      <div className="container">
+      <div className="container header-container">
         <NavbarContainer>
           <Logo />
 

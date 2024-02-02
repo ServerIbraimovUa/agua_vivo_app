@@ -51,7 +51,7 @@ export interface IUpdateUserDailyNorma {
 }
 
 export interface IWaterPayload {
-  id: string;
+  _id: string;
   waterVolume: number;
   time: string;
 }
@@ -84,9 +84,8 @@ export interface IDailyNorma {
 }
 
 export interface IWater {
-  waterList: IWaterPayload[];
   amountDaily: IAmountDaily;
-  amountMonthly: IAmountMonthly | {};
+  amountMonthly: IAmountMonthly | null;
   isLoading: boolean;
   error: unknown | string;
 }

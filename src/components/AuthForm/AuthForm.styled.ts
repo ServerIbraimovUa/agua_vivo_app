@@ -1,18 +1,43 @@
 import styled from "styled-components";
 import { device } from "../../css/deviceSize";
+import bgDeskSignUpImg from "../../assets/images/BackSignUpDesk.png";
+import bgDeskSignInImg from "../../assets/images/BackSignInDesk.png";
+import bgTabAuthImg from "../../assets/images/BackAuthTab.png";
+import bgMobAuthImg from "../../assets/images/BackAuthMob.png";
 
-export const StyledAuthSection = styled.section`
-  /* display: flex; */
+export const StyledRegisterSection = styled.section`
+  background-repeat: no-repeat;
   padding-top: 24px;
+  background-image: url(${bgMobAuthImg});
+  background-position: 50% 53px;
 
   @media ${device.tablet} {
     padding-top: 40px;
+    background-image: url(${bgTabAuthImg});
+    background-position: 50% 26px;
   }
   @media ${device.desktop} {
     padding-top: 148px;
-    background-image: url("../../assets/images/Back_sign.png");
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-image: url(${bgDeskSignUpImg});
+    background-position: 50% 0;
+  }
+`;
+
+export const StyledLoginSection = styled.section`
+  background-image: url(${bgMobAuthImg});
+  background-repeat: no-repeat;
+  padding-top: 24px;
+  background-position: 50% 53px;
+
+  @media ${device.tablet} {
+    padding-top: 40px;
+    background-image: url(${bgTabAuthImg});
+    background-position: 50% 26px;
+  }
+  @media ${device.desktop} {
+    padding-top: 162px;
+    background-image: url(${bgDeskSignInImg});
+    background-position: 50% 25px;
   }
 `;
 
@@ -28,6 +53,7 @@ export const StyledAuthForm = styled.form`
     gap: 8px;
     font-style: "Roboto-Regular", sans-serif;
     font-size: 18px;
+    line-height: 1.33;
     .eye-input {
       position: relative;
     }
@@ -42,8 +68,6 @@ export const StyledAuthForm = styled.form`
   .error {
     color: var(--secondary-red);
     font-size: 14px;
-
-    /* border: 1px solid var(--secondary-red); */
   }
   .input {
     width: 100%;
@@ -53,10 +77,10 @@ export const StyledAuthForm = styled.form`
     padding: 12px 36px 12px 10px;
     color: var(--primary-blue);
     background-color: var(--primary-white);
-    &:hover,
+    /* &:hover,
     &:focus {
       outline: none;
-    }
+    } */
 
     &::placeholder {
       font-size: 16px;
@@ -132,4 +156,7 @@ export const AuthFormButton = styled.button`
   border-radius: 10px;
   padding: 8px 30px;
   font-size: 16px;
+  @media ${device.tablet} {
+    height: 44px;
+  }
 `;

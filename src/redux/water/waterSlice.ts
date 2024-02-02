@@ -9,7 +9,6 @@ import {
 import { IWater } from "../redux_ts/interfaces";
 
 const waterInitState: IWater = {
-  waterList: [],
   amountDaily: {
     amountOfWater: 0,
     percentage: 0,
@@ -29,28 +28,31 @@ const waterSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addWaterThunk.fulfilled, (state, action) => {
-        const index = state.waterList.findIndex(
-          (water) => (water.id = action.payload.id)
-        );
-        state.waterList[index] = action.payload;
+        console.log(action.payload);
+        state.amountDaily.entries.push(action.payload);
         state.isLoading = false;
       })
       .addCase(updateWaterVolumeThunk.fulfilled, (state, action) => {
-        state.waterList = state.waterList.map((water) => {
-          if (water.id === action.payload.id) return action.payload;
-          return water;
-        });
+        const idx = state.amountDaily.entries.findIndex(
+          (water) => water._id === action.payload._id
+        );
+
+        if (idx !== -1) {
+          state.amountDaily.entries[idx] = action.payload;
+        }
         state.isLoading = false;
       })
       .addCase(deleteWaterThunk.fulfilled, (state, action) => {
-        state.waterList = state.waterList.filter(
-          (water) => !action.payload.includes(water.id)
+        const index = state.amountDaily.entries.findIndex(
+          (water) => water._id === action.payload
         );
+
+        state.amountDaily.entries.splice(index, 1);
+
         state.isLoading = false;
       })
       .addCase(getAmountDailyThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.waterList = action.payload.entries;
         state.amountDaily = action.payload;
       })
       .addCase(getAmountMonthlyThunk.fulfilled, (state, action) => {
