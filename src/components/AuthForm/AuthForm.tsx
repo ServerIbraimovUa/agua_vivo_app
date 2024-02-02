@@ -11,6 +11,7 @@ import {
   StyledAuthForm,
   StyledAuthFormSpan,
 } from "./AuthForm.styled";
+import { toast } from "react-toastify";
 export interface Data {
   email: string;
   password: string;
@@ -47,11 +48,18 @@ const AuthForm: FC<Props> = ({ repeat }) => {
       : dispatch(logInThunk(newData))
           .unwrap()
           .then(() => {
-            alert(`Welcome to your account!`), reset();
+            toast.success(
+              repeat ? "Registration successful!" : "Welcome to your account!"
+            );
+            reset();
           })
           .catch((err) => {
             console.log(err);
-            alert(`Please write the correct Email or Password`);
+            toast.error(
+              repeat
+                ? "This email is already exists!"
+                : "Please write the correct Email or Password"
+            );
           });
   };
 
