@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import BgImgMob from "../../assets/images/homePage/Background element Home screen mobile.png"
-import BottleMob from "../../assets/images/homePage/Bottle home screen mobile.png"
+import BgImgMob from "../../assets/images/homePage/BackgroundHomeMobile.png"
+import BottleMob from "../../assets/images/homePage/BottleHomeMobile.png"
 
 export const StyledHomePageSection = styled.section`
     background-image: url("${BgImgMob}");    
