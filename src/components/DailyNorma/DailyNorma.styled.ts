@@ -117,6 +117,12 @@ export const Wrapper = styled.div`
   background-color: #fff;
   border-radius: 10px;    
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
+  @media ${device.tablet} {
+    margin-bottom: 326px;
+    }
+    @media ${device.desktop} {
+      margin-bottom: 350px;
+    }
 `;
 export const WrapperButton=styled.div`
   display: flex;
