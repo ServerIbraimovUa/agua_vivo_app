@@ -5,6 +5,8 @@ import Bold from "./assets/fonts/Roboto-Bold.ttf";
 import { device } from "./css/deviceSize";
 import "modern-normalize/modern-normalize.css";
 import "./index.css";
+
+
 export const GlobalStyle = createGlobalStyle`
 
 :root{
@@ -184,4 +186,14 @@ section{
     }
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input:hover,
+input:focus{
+  outline: none;
+}
 `;

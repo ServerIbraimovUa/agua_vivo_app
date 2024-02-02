@@ -4,6 +4,7 @@ import DailyNormaModal from "./DailyNormaModal";
 import { EditButton, SpanNorma, Title, Wrapper } from "./DailyNorma.styled";
 import { useSelector } from "react-redux";
 import { selectDailyNorma } from "../../redux/auth/authSelectors";
+import BottleImg from "../../assets/images/Bottle home screen mobile.png"
 
 const DailyNorma: React.FC = () => {
   const [visible, setVisible] = useState(false);
@@ -29,6 +30,7 @@ const DailyNorma: React.FC = () => {
           Edit
         </EditButton>
       </Wrapper>
+      <img src={BottleImg}/>
     </>
   );
 };

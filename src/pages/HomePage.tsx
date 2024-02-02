@@ -14,12 +14,12 @@ const HomePage = () => {
   }, [dispatch]);
 
   return (
-    <section>
+    <section className="homePage-section">
       <div className="container">
         <DailyNorma />
+        <WaterRatio />
         <WaterList />
         <Calendar />
-        <WaterRatio />
       </div>
     </section>
   );
