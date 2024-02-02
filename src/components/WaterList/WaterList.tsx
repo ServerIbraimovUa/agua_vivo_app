@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../Modal/Modal";
 import AddWaterModal from "./AddWaterModal/AddWaterModal";
 import {
-  selectAllWater,
+  selectAmountDaily,
   selectError,
   selectIsLoading,
 } from "../../redux/water/waterSelectors";
@@ -12,7 +12,6 @@ import WaterListItem from "./WaterListItem/WaterListItem";
 import Loading from "../Loading/Loading";
 import { WaterContainerStyled } from "./WaterList.styled";
 import Icon from "../Icon/Icon";
-import { selectDailyNorma } from "../../redux/auth/authSelectors";
 
 export interface IWaterData {
   waterVolume: number;
@@ -23,26 +22,32 @@ export interface IWaterData {
 const WaterList = () => {
   const [visible, setVisible] = useState(false);
 
-  const amountDaily = useSelector(selectDailyNorma);
+  const { entries } = useSelector(selectAmountDaily);
 
-  const waterList = useSelector(selectAllWater);
   const loading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const closeModal = () => {
     setVisible(false);
   };
 
+  useEffect(() => {}, [entries]);
+
   return (
     <WaterContainerStyled>
       <h3 className="water-title">Today</h3>
       {loading && !error && <Loading />}
-      {amountDaily === 0 ? (
+      {entries.length === 0 ? (
         <p className="water-empty">No notes yet</p>
       ) : (
-        <ul>
-          {waterList.length > 0 &&
-            waterList.map(({ _id, waterVolume }) => (
-              <WaterListItem key={_id} id={_id} waterVolume={waterVolume} />
+        <ul className="water-list">
+          {entries.length > 0 &&
+            entries.map(({ _id, waterVolume, time }) => (
+              <WaterListItem
+                key={_id}
+                _id={_id}
+                waterVolume={waterVolume}
+                time={time}
+              />
             ))}
         </ul>
       )}

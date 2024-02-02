@@ -5,8 +5,11 @@ import { useAppDispatch } from "../../../redux/redux_ts/hook";
 import { AddWaterModalStyled } from "../WaterList.styled";
 import Icon from "../../Icon/Icon";
 import { addWaterThunk } from "../../../redux/water/water.operations";
+import { useSelector } from "react-redux";
+import { selectAmountDaily } from "../../../redux/water/waterSelectors";
 
 interface IProps {
+  _id?: string;
   title: string;
   show: boolean;
   handleUpdateWater?: (waterData: IWaterData) => void;
@@ -18,7 +21,7 @@ export type IWaterPortion = {
   waterVolume: number;
 };
 
-const AddWaterModal: FC<IProps> = ({ title, show, closeModal }) => {
+const AddWaterModal: FC<IProps> = ({ title, show, closeModal, _id }) => {
   const {
     register,
     handleSubmit,
@@ -31,6 +34,10 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal }) => {
     count: 0,
     inputValue: "0",
   });
+
+  const { entries } = useSelector(selectAmountDaily);
+  const water = entries.find((entry) => entry._id === _id);
+
   const [timeOptions, setTimeOptions] = useState<string[]>([]);
 
   useEffect(() => {
@@ -112,9 +119,10 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal }) => {
   return (
     <AddWaterModalStyled>
       {show && (
-        <div>
-          <p>250 ml</p>
-          <p>7:00 am</p>
+        <div className="water-card">
+          <Icon className="water-glass-icon" id="water"></Icon>
+          <p className="water-amount-card">{water?.waterVolume} ml</p>
+          <p className="time">{water?.time}</p>
         </div>
       )}
       <h2 className="add-water-title">{title}</h2>
@@ -126,7 +134,6 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal }) => {
             onClick={() => handleCountChange(state.count - 50)}
             type="button"
           >
-            {" "}
             <Icon className="icon-minus" id="minus" />
           </button>
           <span className="water-amount-span">{state.count}ml</span>

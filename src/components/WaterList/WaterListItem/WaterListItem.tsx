@@ -9,14 +9,14 @@ import { WaterItemBoxStyled } from "../WaterList.styled";
 import { IWaterPayload } from "../../../redux/redux_ts/interfaces";
 
 interface IProps {
-  id: string;
+  _id: string;
+  time: string;
   waterVolume: number;
 }
 
-const WaterListItem: FC<IProps> = ({ id, waterVolume }) => {
+const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-
   const dispatch = useAppDispatch();
 
   const handleUpdateWater = (waterData: IWaterPayload) => {
@@ -25,16 +25,29 @@ const WaterListItem: FC<IProps> = ({ id, waterVolume }) => {
 
   return (
     <WaterItemBoxStyled>
-      <Icon className="water-glass-icon" id="water"></Icon>
-      <p>{waterVolume}</p>
-
-      <button
-        type="button"
-        className="edit-btn"
-        onClick={() => setEditModalVisible(true)}
-      >
-        <Icon className="edit-water-icon" id="pencil"></Icon>
-      </button>
+      <div className="water-info">
+        <Icon className="water-glass-icon" id="water"></Icon>
+        <p className="water-amount-card">{waterVolume} ml</p>
+        <p className="time">{time}</p>
+      </div>
+      <div className="edit-delete-btn-box">
+        <button
+          type="button"
+          className="edit-btn"
+          onClick={() => setEditModalVisible(true)}
+        >
+          <Icon className="edit-water-icon" id="pencil"></Icon>
+        </button>
+        <button
+          type="button"
+          className="delete-btn"
+          onClick={() => {
+            setDeleteModalVisible(true);
+          }}
+        >
+          <Icon className="delete-water-icon" id="delete"></Icon>
+        </button>
+      </div>
       {editModalVisible && (
         <Modal
           setVisible={setEditModalVisible}
@@ -47,18 +60,11 @@ const WaterListItem: FC<IProps> = ({ id, waterVolume }) => {
             closeModal={() => {
               setEditModalVisible(false);
             }}
+            _id={_id}
           />
         </Modal>
       )}
-      <button
-        type="button"
-        className="delete-btn"
-        onClick={() => {
-          setDeleteModalVisible(true);
-        }}
-      >
-        <Icon className="delete-water-icon" id="delete"></Icon>
-      </button>
+
       {deleteModalVisible && (
         <Modal setVisible={setDeleteModalVisible} title="Delete water">
           <DeleteWaterModal
@@ -67,7 +73,7 @@ const WaterListItem: FC<IProps> = ({ id, waterVolume }) => {
             closeModal={() => {
               setDeleteModalVisible(false);
             }}
-            id={id}
+            _id={_id}
           />
         </Modal>
       )}
