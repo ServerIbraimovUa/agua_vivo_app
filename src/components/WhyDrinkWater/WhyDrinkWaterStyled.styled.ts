@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { device } from "../../css/deviceSize";
-import bgMobile from "../../assets/images/welcome-mob.png";
+import bgMobile from "../../assets/images/welcomeMob.png";
 import bgTablet from "../../assets/images/WelcomeTab.png";
-// import bgDesk from "../../assets/images/WelcomeDeskt.png";
-import bgDesk from "../../assets/images/Welcome-bg-dsc.png";
+import bgDesk from "../../assets/images/WelcomeDesk.png";
 
 export const WelcomeSection = styled.section`
   &.welcome-section {
@@ -16,7 +15,6 @@ export const WelcomeSection = styled.section`
       background-image: url(${bgTablet});
     }
     @media ${device.desktop} {
-      /* margin-top: 109px; */
       background-image: url(${bgDesk});
       background-size: 100%;
       background-position-y: 96px;
