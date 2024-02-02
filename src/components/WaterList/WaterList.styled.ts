@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { device } from "../../css/deviceSize";
 
-export const WaterContainerStyled = styled.section`
+export const WaterContainerStyled = styled.div`
   margin-bottom: 24px;
 
   .water-section {
