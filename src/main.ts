@@ -140,26 +140,55 @@ export const GlobalStyle = createGlobalStyle`
     
 // CONTAINER
 
+
+.header-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+
+}
+
 section{
-  padding-top: 24px;
-  min-height: 92vh;
+
+
+  padding-top: 80px;     
+  min-height: 100vh;
+
+ 
   @media ${device.tablet} {
-    padding-top: 40px;
+  
+    padding-top:  104px;     
+   
+
   }
   @media ${device.desktop} {
-    padding-top: 80px;
+    /* padding-top: 31px; */
+    padding-top: 109px;
+
   }
 }
-.welcome-section{
-  background-image: url('../src/assets/images/welcome-mob.png');
-  background-size: cover;
+
+.welcome-section{  
+
+  background-image: url(src/assets/images/Back_Main_Mob1.png);
+    background-position: center;  
+
+
+
   background-repeat: no-repeat;
+
   @media ${device.tablet} {
-    background-image: url('../src/assets/images/welcome-tab.png');
+
+
+    background-image: url(src/assets/images/Back_Main_Tab2.png);
+   
   }
   @media ${device.desktop} {
-
-    background-image: url(../src/assets/images/welcome-desk.png);
+    /* margin-top: 109px; */
+    background-image: url(src/assets/images/Welcome-bg-dsc.png);
+    background-size: 100%; 
+    background-position-y: 96px;  
 
   }
 }
