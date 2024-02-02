@@ -184,12 +184,23 @@ height: 98.5vh;
   
   @media ${device.tablet} {
         max-width: 744px;
+        
         }
 
-    @media ${device.desktop} {
+    @media ${device.desktop} {        
         max-width: 1264px;
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-left: 0;
+        padding-right: 0;
+      
+        }
+}
+.homePage-section{
+  display: flex;
+  flex-direction: column;
+  gap:40px;
+  @media ${device.desktop} {
+        flex-direction: row;
+        justify-content:space-between;            
     }
 }
 
