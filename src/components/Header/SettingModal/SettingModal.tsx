@@ -32,7 +32,7 @@ type SettingForm = {
   name: string;
   email: string;
   outdatedPassword?: string;
-  newPassword?: string;
+  newPassword: string;
   repeatNewPassword?: string;
 };
 
@@ -109,17 +109,26 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
     }
 
     if (data.gender) {
-      dispatch(updateUserInfoThunk({ gender: data.gender }))
+      dispatch(updateUserInfoThunk({ gender: data.gender }));
+    }
+
+    if (data.name) {
+      dispatch(updateUserInfoThunk({ name: data.name }))
         .unwrap()
         .then(() => setVisible(false));
     }
 
-    if (data.name) {
-      dispatch(updateUserInfoThunk({ name: data.name }));
-    }
+    // if (data.newPassword) {
+    //   dispatch(updateUserInfoThunk({ }))
+
+    // }
 
     console.log(data);
-    reset();
+    reset({
+      outdatedPassword: "",
+      newPassword: "",
+      repeatNewPassword: "",
+    });
   };
 
   return (
@@ -183,7 +192,7 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
               <span className="user-info-title">Your name</span>
               <FormNameInput
                 {...register("name")}
-                className={errors.outdatedPassword ? "error-input" : ""}
+                className={errors.name ? "error-input" : ""}
                 type="text"
                 placeholder="your name"
               />
@@ -192,10 +201,11 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
             <label className="label-email">
               <span className="user-info-title">E-mail</span>
               <FormEmailInput
+                readOnly
                 {...register("email", {
                   required: "This field is required",
                 })}
-                className={errors.outdatedPassword ? "error-input" : ""}
+                className={errors.email ? "error-input" : ""}
                 type="email"
                 placeholder="your e-mail"
               />

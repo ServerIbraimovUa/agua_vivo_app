@@ -9,10 +9,11 @@ export const FormSettingStyled = styled.form`
 
   .error-input {
     border: 1px solid var(--secondary-red);
+    color: var(--secondary-red);
   }
   .error-message {
     position: absolute;
-    top: 70px;
+    top: 72px;
     left: 0;
 
     font-size: 14px;
@@ -143,11 +144,12 @@ export const FormUserPassword = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
 
   .password-title {
     font-size: 18px;
     font-weight: 500;
+    line-height: 1.11em;
   }
 
   .password-label {
@@ -160,6 +162,7 @@ export const FormUserPassword = styled.div`
 
   .password-sub-title {
     font-size: 16px;
+    line-height: 1.25em;
   }
 
   .toggle-password {
@@ -204,7 +207,7 @@ export const FormEmailInput = styled.input`
   border: 1px solid var(--secondary-light-blue);
   border-radius: 6px;
   padding: 12px 36px 12px 8px;
-  color: var(--primary-blue);
+  color: var(--secondary-blue);
   background-color: var(--primary-white);
   &:hover,
   &:focus {
