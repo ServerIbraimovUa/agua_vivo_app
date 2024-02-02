@@ -7,10 +7,10 @@ interface IProps {
   title: string;
   show: boolean;
   closeModal: () => void;
-  id: string;
+  _id: string;
 }
 
-const DeleteWaterModal: FC<IProps> = ({ closeModal, id }) => {
+const DeleteWaterModal: FC<IProps> = ({ closeModal, _id }) => {
   const dispatch = useAppDispatch();
   const handleCancel = () => {
     closeModal();
@@ -31,7 +31,7 @@ const DeleteWaterModal: FC<IProps> = ({ closeModal, id }) => {
         <button
           className="delete-btn"
           type="button"
-          onClick={() => handleDeleteWater(id)}
+          onClick={() => handleDeleteWater(_id)}
         >
           Delete
         </button>

@@ -3,9 +3,9 @@ import { RootState } from "../store";
 
 const selectWater = (state: RootState) => state.water;
 
-export const selectAllWater = createSelector(selectWater, (water) => {
-  return water.waterList;
-});
+// export const selectAllWater = createSelector(selectWater, (water) => {
+//   return water.waterList;
+// });
 
 export const selectAmountDaily = createSelector(
   selectWater,

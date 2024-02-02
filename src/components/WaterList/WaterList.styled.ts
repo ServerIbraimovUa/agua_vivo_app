@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { device } from "../../css/deviceSize";
 
-export const WaterContainerStyled = styled.div`
-  width: 264px;
-  height: 258px;
-  overflow-y: auto;
+export const WaterContainerStyled = styled.section`
+  margin-bottom: 24px;
+
+  .water-section {
+    min-width: 544px;
+  }
 
   .water-title {
     font-size: 24px;
@@ -14,6 +16,22 @@ export const WaterContainerStyled = styled.div`
   .water-empty {
     color: var(--primary-blue);
     margin-bottom: 24px;
+  }
+
+  .water-list {
+    display: flex;
+    flex-direction: column;
+
+    max-height: 194px;
+    overflow-y: auto;
+  }
+  .water-list::-webkit-scrollbar {
+    width: 4px;
+    background-color: var(--secondary-light-blue);
+  }
+  .water-list::-webkit-scrollbar-thumb {
+    width: 4px;
+    background: var(--secondary-blue);
   }
 
   .water-plus-icon {
@@ -27,11 +45,79 @@ export const WaterContainerStyled = styled.div`
     font-weight: var(--medium-font-weight);
     color: var(--primary-blue);
   }
+
+  @media ${device.tablet} {
+    .water-title {
+      margin-bottom: 24px;
+    }
+  }
+`;
+
+//WaterListItem
+export const WaterItemBoxStyled = styled.li`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 6.5px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--secondary-light-blue);
+
+  .water-info {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .water-glass-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .water-amount-card {
+    font-size: 18px;
+    color: var(--primary-blue);
+  }
+
+  .time {
+    font-size: 12px;
+  }
+
+  .edit-water-icon,
+  .delete-water-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .edit-delete-btn-box {
+    display: flex;
+    gap: 18px;
+  }
+
+  @media ${device.tablet} {
+    .water-glass-icon {
+      width: 36px;
+      height: 36px;
+    }
+  }
 `;
 
 // AddWaterModal
 
 export const AddWaterModalStyled = styled.div`
+  .water-card {
+    width: 254px;
+    padding: 8px 24px;
+    margin-bottom: 24px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    border-radius: 10px;
+    background: var(--secondary-light-blue);
+  }
   .add-water-title {
     font-size: 18px;
     font-weight: var(--medium-font-weight);
@@ -158,30 +244,6 @@ export const AddWaterModalStyled = styled.div`
   }
 `;
 
-//WaterListItem
-export const WaterItemBoxStyled = styled.li`
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  .water-glass-icon {
-    width: 26px;
-    height: 26px;
-  }
-
-  .edit-water-icon,
-  .delete-water-icon {
-    width: 16px;
-    height: 16px;
-  }
-
-  @media ${device.tablet} {
-    .water-glass-icon {
-      width: 36px;
-      height: 36px;
-    }
-  }
-`;
-
 // DeleteWaterModal
 
 export const DeleteWaterModalStyled = styled.div`
@@ -215,7 +277,7 @@ export const DeleteWaterModalStyled = styled.div`
   .delete-btn-box {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     gap: 24px;
   }
 
