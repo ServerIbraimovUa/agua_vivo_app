@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { device } from "../../css/deviceSize";
 
-
 export const FormContainer = styled.div``;
 export const Form = styled.form`
-
   display: flex;
   gap: 24px;
   flex-direction: column;
@@ -112,17 +110,21 @@ export const Wrapper = styled.div`
   flex-direction: column;
   width: 164px;
   gap: 12px;
-  margin-bottom: 232px;
   padding: 8px 20px;
   background-color: #fff;
-  border-radius: 10px;    
+  border-radius: 10px;
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
+  @media ${device.tablet} {
+    margin-bottom: 326px;
+  }
+  @media ${device.desktop} {
+    margin-bottom: 350px;
+  }
 `;
-export const WrapperButton=styled.div`
+export const WrapperButton = styled.div`
   display: flex;
-  gap:12px;
+  gap: 12px;
   flex-direction: row;
-
 `;
 export const SpanNorma = styled.span`
   color: var(--primary-blue);
@@ -135,57 +137,55 @@ export const SpanNorma = styled.span`
 `;
 
 //Popover
-export const PopoverWrapper=styled.span`
+export const PopoverWrapper = styled.span`
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 10px; 
+  padding: 10px;
   top: -90px;
-  left: -170px;  
+  left: -170px;
   background-color: var(--secondary-light-blue);
   border-radius: 10px;
   border-bottom-left-radius: 0;
   width: 200px;
   height: 80px;
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
-  &::after{
+  &::after {
     content: "";
     width: 0;
     height: 0;
     position: absolute;
     right: 20px;
-    top:100%;
+    top: 100%;
     border-bottom: 35px solid transparent;
     border-right: 30px solid var(--secondary-light-blue);
     border-top: transparent;
   }
 
-  @media ${device.tablet} 
-  {
+  @media ${device.tablet} {
     top: -70px;
     left: 25px;
-  
-  &::before{
-    content: "";
-    width: 0;
-    height: 0;
-    position: absolute;
-    right: 100%;
-    top:76%;
-    border-top: 20px solid transparent;
-    border-right: 30px solid var(--secondary-light-blue);
-    border-bottom: transparent;
+
+    &::before {
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      right: 100%;
+      top: 76%;
+      border-top: 20px solid transparent;
+      border-right: 30px solid var(--secondary-light-blue);
+      border-bottom: transparent;
+    }
+    &::after {
+      display: none;
+    }
   }
-  &::after{
-    display: none;
-  }
-}
-`
+`;
 
 export const PopoverMessage = styled.span`
-   color: var(--primary-blue);
-   font-size: 18px;
-`
-  
+  color: var(--primary-blue);
+  font-size: 18px;
+`;

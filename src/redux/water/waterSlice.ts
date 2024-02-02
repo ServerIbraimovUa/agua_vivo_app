@@ -28,7 +28,6 @@ const waterSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addWaterThunk.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.amountDaily.entries.push(action.payload);
         state.isLoading = false;
       })

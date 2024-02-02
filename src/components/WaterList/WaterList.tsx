@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "../Modal/Modal";
 import AddWaterModal from "./AddWaterModal/AddWaterModal";
 import {
@@ -29,8 +29,6 @@ const WaterList = () => {
   const closeModal = () => {
     setVisible(false);
   };
-
-  useEffect(() => {}, [entries]);
 
   return (
     <WaterContainerStyled>
