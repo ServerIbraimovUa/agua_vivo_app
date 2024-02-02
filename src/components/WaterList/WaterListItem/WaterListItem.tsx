@@ -6,7 +6,7 @@ import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 import { updateWaterVolumeThunk } from "../../../redux/water/water.operations";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
 import { WaterItemBoxStyled } from "../WaterList.styled";
-import { IWaterPayload } from "../../../redux/redux_ts/interfaces";
+import { IUpdateWaterPayload } from "../../../redux/redux_ts/interfaces";
 
 interface IProps {
   _id: string;
@@ -19,7 +19,7 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const dispatch = useAppDispatch();
 
-  const handleUpdateWater = (waterData: IWaterPayload) => {
+  const handleUpdateWater = (waterData: IUpdateWaterPayload) => {
     dispatch(updateWaterVolumeThunk(waterData));
   };
 
@@ -60,7 +60,7 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
             closeModal={() => {
               setEditModalVisible(false);
             }}
-            _id={_id}
+            id={_id}
           />
         </Modal>
       )}
