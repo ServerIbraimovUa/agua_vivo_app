@@ -7,17 +7,14 @@ import bgMobAuthImg from "../../assets/images/BackAuthMob.png";
 
 export const StyledRegisterSection = styled.section`
   background-repeat: no-repeat;
-  padding-top: 24px;
   background-image: url(${bgMobAuthImg});
   background-position: 50% 53px;
 
   @media ${device.tablet} {
-    padding-top: 40px;
     background-image: url(${bgTabAuthImg});
     background-position: 50% 26px;
   }
   @media ${device.desktop} {
-    padding-top: 148px;
     background-image: url(${bgDeskSignUpImg});
     background-position: 50% 0;
   }
@@ -26,16 +23,13 @@ export const StyledRegisterSection = styled.section`
 export const StyledLoginSection = styled.section`
   background-image: url(${bgMobAuthImg});
   background-repeat: no-repeat;
-  padding-top: 24px;
   background-position: 50% 53px;
 
   @media ${device.tablet} {
-    padding-top: 40px;
     background-image: url(${bgTabAuthImg});
     background-position: 50% 26px;
   }
   @media ${device.desktop} {
-    padding-top: 162px;
     background-image: url(${bgDeskSignInImg});
     background-position: 50% 25px;
   }

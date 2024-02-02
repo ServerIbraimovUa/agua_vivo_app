@@ -1,5 +1,27 @@
 import styled from "styled-components";
 import { device } from "../../css/deviceSize";
+import bgMobile from "../../assets/images/welcome-mob.png";
+import bgTablet from "../../assets/images/WelcomeTab.png";
+import bgDesk from "../../assets/images/WelcomeDeskt.png";
+
+export const WelcomeSection = styled.section`
+  &.welcome-section {
+    background-image: url(${bgMobile});
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    @media ${device.tablet} {
+      background-image: url(${bgTablet});
+    }
+    @media ${device.desktop} {
+      /* margin-top: 109px; */
+      background-image: url(${bgDesk});
+      background-size: 100%;
+      background-position-y: 96px;
+    }
+  }
+`;
 
 export const Ul = styled.ul`
   list-style: none;
