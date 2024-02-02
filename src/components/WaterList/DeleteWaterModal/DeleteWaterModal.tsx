@@ -23,7 +23,7 @@ const DeleteWaterModal: FC<IProps> = ({ closeModal, _id }) => {
 
   return (
     <DeleteWaterModalStyled>
-      <p>Are you sure you want to delete the entry?</p>
+      <p className="delete-title">Are you sure you want to delete the entry?</p>
       <div className="delete-btn-box">
         <button className="cancel-btn" type="button" onClick={handleCancel}>
           Cancel
