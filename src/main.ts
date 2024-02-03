@@ -202,15 +202,17 @@ input:focus{
 .tost{
   background: var(--secondary-white);
   color: #2F2F2F;
-  
-  .Toastify__progress-bar--success{
-    background: var(--primary-blue);
-    
+  &.Toastify__toast--success{
     .Toastify__toast-icon {
       svg{
         fill: var(--secondary-blue);
       }
     }
+
+  }
+  .Toastify__progress-bar--success{
+    background: var(--primary-blue);
+    
   }
 }
 `;
