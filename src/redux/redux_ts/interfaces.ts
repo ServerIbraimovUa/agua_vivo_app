@@ -55,6 +55,11 @@ export interface IWaterPayload {
   waterVolume: number;
   time: string;
 }
+export interface IUpdateWaterPayload {
+  id: string;
+  waterVolume: number;
+  time: string;
+}
 
 export type IAddWaterPortion = {
   waterVolume: number;
@@ -84,9 +89,8 @@ export interface IDailyNorma {
 }
 
 export interface IWater {
-  waterList: IWaterPayload[];
   amountDaily: IAmountDaily;
-  amountMonthly: IAmountMonthly;
+  amountMonthly: IAmountMonthly | null;
   isLoading: boolean;
   error: unknown | string;
 }

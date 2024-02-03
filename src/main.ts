@@ -5,6 +5,7 @@ import Bold from "./assets/fonts/Roboto-Bold.ttf";
 import { device } from "./css/deviceSize";
 import "modern-normalize/modern-normalize.css";
 import "./index.css";
+
 export const GlobalStyle = createGlobalStyle`
 
 :root{
@@ -86,10 +87,10 @@ export const GlobalStyle = createGlobalStyle`
       }
   }
 
-  body {
+  body{
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
     overflow-x: hidden;
     font-family: 'Roboto', sans-serif;
     font-weight: var(--regular-font-weight);
@@ -140,29 +141,35 @@ export const GlobalStyle = createGlobalStyle`
     
 // CONTAINER
 
+
+.header-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+
+}
+
 section{
-  padding-top: 24px;
-  min-height: 92vh;
-  @media ${device.tablet} {
-    padding-top: 40px;
-  }
-  @media ${device.desktop} {
-    padding-top: 80px;
-  }
-}
-.welcome-section{
-  background-image: url('../src/assets/images/welcome-mob.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  @media ${device.tablet} {
-    background-image: url('../src/assets/images/welcome-tab.png');
-  }
-  @media ${device.desktop} {
+min-height: 98.5vh;
 
-    background-image: url(../src/assets/images/welcome-desk.png);
+  padding-top: 80px;     
+
+
+ 
+  @media ${device.tablet} {
+  
+    padding-top:  104px;     
+   
+
+  }
+  @media ${device.desktop} {
+    padding-top: 109px;
 
   }
 }
+
+
 
 .container {
   width: 100%;
@@ -176,13 +183,32 @@ section{
   
   @media ${device.tablet} {
         max-width: 744px;
+        
         }
 
-    @media ${device.desktop} {
-        max-width: 1264px;
-        padding-left: 24px;
-        padding-right: 24px;
+    @media ${device.desktop} {        
+        max-width: 1264px;       
+      
+      }
+}
+.homePage-section{
+  display: flex;
+  flex-direction: column;
+  gap:40px;
+  @media ${device.desktop} {
+        flex-direction: row;
+        justify-content:space-between;            
     }
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input:hover,
+input:focus{
+  outline: none;
+}
 `;

@@ -1,19 +1,43 @@
 import styled from "styled-components";
 import { device } from "../../css/deviceSize";
 import bgDeskSignUpImg from "../../assets/images/BackSignUpDesk.png";
+import bgDeskSignInImg from "../../assets/images/BackSignInDesk.png";
+import bgTabAuthImg from "../../assets/images/BackAuthTab.png";
+import bgMobAuthImg from "../../assets/images/BackAuthMob.png";
 
-export const StyledAuthSection = styled.section`
-  /* display: flex; */
-  padding-top: 24px;
+export const StyledRegisterSection = styled.section`
+  background-repeat: no-repeat;
+  padding-top: 72px;
+  background-image: url(${bgMobAuthImg});
+  background-position: 50% 101px;
 
   @media ${device.tablet} {
-    padding-top: 40px;
+    padding-top: 88px;
+    background-image: url(${bgTabAuthImg});
+    background-position: 50% 74px;
   }
   @media ${device.desktop} {
-    padding-top: 148px;
+    padding-top: 196px;
     background-image: url(${bgDeskSignUpImg});
-    /* background-size: contain; */
-    background-repeat: no-repeat;
+    background-position: 50% 48px;
+  }
+`;
+
+export const StyledLoginSection = styled.section`
+  background-image: url(${bgMobAuthImg});
+  background-repeat: no-repeat;
+  padding-top: 72px;
+  background-position: 50% 101px;
+
+  @media ${device.tablet} {
+    padding-top: 88px;
+    background-image: url(${bgTabAuthImg});
+    background-position: 50% 74px;
+  }
+  @media ${device.desktop} {
+    padding-top: 210px;
+    background-image: url(${bgDeskSignInImg});
+    background-position: 50% 73px;
   }
 `;
 
@@ -44,8 +68,6 @@ export const StyledAuthForm = styled.form`
   .error {
     color: var(--secondary-red);
     font-size: 14px;
-
-    /* border: 1px solid var(--secondary-red); */
   }
   .input {
     width: 100%;
@@ -55,10 +77,10 @@ export const StyledAuthForm = styled.form`
     padding: 12px 36px 12px 10px;
     color: var(--primary-blue);
     background-color: var(--primary-white);
-    &:hover,
+    /* &:hover,
     &:focus {
       outline: none;
-    }
+    } */
 
     &::placeholder {
       font-size: 16px;
@@ -119,9 +141,9 @@ export const StyledAuthFormSpan = styled.span`
   .eye-outline-icon {
     top: 50%;
     right: 2px;
-
     transform: translate(-50%, -50%);
     position: absolute;
+    z-index: 10;
     width: 16px;
     height: 16px;
     fill: var(--primary-blue);

@@ -3,11 +3,15 @@ import WhyDrinkWater from "../components/WhyDrinkWater/WhyDrinkWater";
 import WaterConsumptionTracker from "../components/WaterConsumptionTracker/WaterConsumptionTracker";
 import styled from "styled-components";
 import { device } from "../css/deviceSize";
+import { WelcomeSection } from "../components/WhyDrinkWater/WhyDrinkWaterStyled.styled";
 
 const DivStyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
+  @media ${device.tablet} {
+    gap: 60px;
+  }
   @media ${device.desktop} {
     flex-direction: row;
     justify-content: center;
@@ -23,12 +27,12 @@ const WelcomePage = () => {
   };
 
   return (
-    <section className="welcome-section">
+    <WelcomeSection className="welcome-section">
       <DivStyled className="container">
         <WaterConsumptionTracker handleClick={handleClick} />
         <WhyDrinkWater />
       </DivStyled>
-    </section>
+    </WelcomeSection>
   );
 };
 

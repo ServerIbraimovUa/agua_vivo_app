@@ -5,6 +5,7 @@ import {
   IAmountDaily,
   IAmountMonthly,
   IWaterPayload,
+  IUpdateWaterPayload,
 } from "../redux_ts/interfaces";
 
 export const addWaterThunk = createAsyncThunk<IWaterPayload, IAddWaterPortion>(
@@ -19,23 +20,25 @@ export const addWaterThunk = createAsyncThunk<IWaterPayload, IAddWaterPortion>(
   }
 );
 
-export const updateWaterVolumeThunk = createAsyncThunk<
-  IWaterPayload,
-  IWaterPayload
->("water/updateWaterVolume", async (waterData, thunkAPI) => {
-  try {
-    const response = await axios.put(`/api/water/update`, waterData);
-    return response.data;
-  } catch (e) {
-    if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+export const updateWaterVolumeThunk = createAsyncThunk(
+  "water/updateWaterVolume",
+  async (waterData: IUpdateWaterPayload, thunkAPI) => {
+    try {
+      const response = await axios.put(`/api/water/update`, waterData);
+      return response.data;
+    } catch (e) {
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+    }
   }
-});
+);
 
 export const deleteWaterThunk = createAsyncThunk(
   "water/deleteWater",
   async (waterID: string, thunkAPI) => {
     try {
+      console.log(waterID);
       const response = await axios.delete(`/api/water/delete/${waterID}`);
+
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);

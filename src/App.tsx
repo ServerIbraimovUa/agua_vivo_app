@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import Layout from "./components/Layout/Layout.js";
 import Loading from "./components/Loading/Loading.js";
 
-const HomePage = lazy(() => import("./pages/HomePage"));
+const HomePage = lazy(() => import("./pages/HomePage/HomePage.js"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const WelcomePage = lazy(() => import("./pages/WelcomePage.js"));
@@ -21,6 +21,7 @@ export default function App() {
   const isAuthorized = useSelector(selectIsAuthorized);
   const isRefresh = useSelector(selectRefresh);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(getCurrentUserThunk());
   }, [dispatch]);
