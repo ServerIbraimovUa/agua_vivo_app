@@ -32,6 +32,7 @@ gap:40px;
     
     flex-direction: row;
       justify-content:space-between;
+      gap:0px;
   }
 `
 export const ContainerDailyNorma = styled.div`
@@ -40,16 +41,23 @@ export const ContainerDailyNorma = styled.div`
   object-fit: contain;
   background-position-x: 10px;
   background-position-y: 90px;
+  padding: 24px 8px;
 
   @media ${device.tablet} {
     background-image: url("${BottleTabl}");
-    background-position-y: 50px;
-    background-position-x: 90px;
+    background-position-y: 5px;
+    background-position-x: 90px;   
+    padding-top: 0px;
+    padding-bottom: 32px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
   @media ${device.desktop} {
     background-image: url("${BottleDesk}");
     background-position-y: 0px;
     background-position-x: -50px;
+    height: 548px;
+   
   }
 `;
 export const ContainerCalendar = styled.div`
@@ -79,5 +87,7 @@ export const ContainerCalendar = styled.div`
     width: 592px;
     max-height: 688px;
     background-image: url("${BgImgDesk}");
+    margin-bottom: 0px;
+    padding-top: 0px;
   }
 `;

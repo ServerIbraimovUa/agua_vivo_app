@@ -106,6 +106,7 @@ export const WrapperImg=styled.div`
     margin-bottom: 16px;
   }
   @media ${device.desktop} {
+    position: relative;
     height: 548px;
   }
 `
@@ -118,6 +119,10 @@ export const Wrapper = styled.div`
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
+
+  @media ${device.desktop} {
+    position: absolute;
+  }
   
 `;
 export const Title = styled.h2`

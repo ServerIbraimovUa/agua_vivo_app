@@ -13,11 +13,13 @@ import Layout from "./components/Layout/Layout.js";
 import Loading from "./components/Loading/Loading.js";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage.js";
 import ResetPasswordPage from "./pages/ResetPasswordPage.js";
+import VerificationPage from "./pages/VerificationPage/VerificationPage.js";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.js"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const WelcomePage = lazy(() => import("./pages/WelcomePage.js"));
+//const VerificationPage = lazy(() => import("./pages/VerificationPage/VerificationPage.js"));
 
 export default function App() {
   const isAuthorized = useSelector(selectIsAuthorized);
@@ -33,12 +35,17 @@ export default function App() {
   ) : (
     <>
       <Routes>
+      <Route
+            path="/verify"
+            element={<VerificationPage/>}
+          />
         <Route path="/" element={<Layout />}>
           {/* Public Routers  */}
           <Route
             index
             element={!isAuthorized ? <WelcomePage /> : <HomePage />}
           />
+        
           <Route
             path="/welcome"
             element={

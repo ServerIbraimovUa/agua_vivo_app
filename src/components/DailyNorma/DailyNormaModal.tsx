@@ -171,6 +171,7 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
                     required: true,
                   })} 
             type="number" step="any" 
+            min={0}
             max={15}
             placeholder="0"/>
             {errors.dailyNorma && <span>This field is required</span>}
