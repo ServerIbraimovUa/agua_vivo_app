@@ -45,21 +45,21 @@ const AuthForm: FC<Props> = ({ repeat }) => {
 
     repeat
       ? dispatch(registerThunk(newData))
+          .unwrap()
+          .then(() => toast.success("Registration successful!"))
+          .catch((e) => {
+            if (e.includes("409")) {
+              toast.error("Email in use.");
+            }
+          })
       : dispatch(logInThunk(newData))
           .unwrap()
           .then(() => {
-            toast.success(
-              repeat ? "Registration successful!" : "Welcome to your account!"
-            );
+            toast.success("Welcome to your account!");
             reset();
           })
-          .catch((err) => {
-            console.log(err);
-            toast.error(
-              repeat
-                ? "This email is already exists!"
-                : "Please write the correct Email or Password"
-            );
+          .catch(() => {
+            toast.error("Please write the correct Email or Password");
           });
   };
 

@@ -7,6 +7,7 @@ import { getCurrentUserThunk } from "./redux/auth/auth.operations.js";
 import {
   selectIsAuthorized,
   selectRefresh,
+  selectToken,
 } from "./redux/auth/authSelectors.js";
 import { useSelector } from "react-redux";
 import Layout from "./components/Layout/Layout.js";
@@ -20,10 +21,13 @@ const WelcomePage = lazy(() => import("./pages/WelcomePage.js"));
 export default function App() {
   const isAuthorized = useSelector(selectIsAuthorized);
   const isRefresh = useSelector(selectRefresh);
+  const token = useSelector(selectToken);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
+    if (!token) return;
     dispatch(getCurrentUserThunk());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   return isRefresh ? (
     <Loading />
