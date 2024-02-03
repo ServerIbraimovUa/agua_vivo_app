@@ -15,7 +15,7 @@ import { IUpdateWaterPayload } from "../../../redux/redux_ts/interfaces";
 interface IProps {
   id?: string;
   title: string;
-  show: boolean;
+  //   show: boolean;
   handleUpdateWater?: (waterData: IUpdateWaterPayload) => void;
   closeModal: () => void;
 }
@@ -25,7 +25,7 @@ export type IWaterPortion = {
   waterVolume: number;
 };
 
-const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
+const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
   const {
     register,
     handleSubmit,
@@ -115,9 +115,9 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
       waterVolume: Number(state.inputValue),
     };
     if (newData.waterVolume === 0) {
-      alert("The amount of water cannot be 0!");
+      alert("Кількість води не може бути 0!");
     } else if (!errors.time) {
-      if (show && id) {
+      if (id) {
         dispatch(updateWaterVolumeThunk({ ...newData, id }));
       } else {
         dispatch(addWaterThunk(newData));
@@ -147,6 +147,12 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
 
   return (
     <AddWaterModalStyled>
+      <div className="water-card">
+        <Icon className="water-glass-icon" id="water"></Icon>
+        <p className="water-amount-card">{water?.waterVolume} ml</p>
+        <p className="time">{water?.time}</p>
+      </div>
+
       <h2 className="add-water-title">{title}</h2>
       <div className="counter-box">
         <p className="">Amount of water:</p>
@@ -159,10 +165,7 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
             <Icon className="icon-minus" id="minus" />
           </button>
           <span className="water-amount-span">
-            {entries.length > 0
-              ? `${entries[entries.length - 1].waterVolume}ml`
-              : `${state.count}ml`}
-
+            {water?.waterVolume} ml
             {/* {state.count}ml */}
           </span>
           <button
@@ -205,12 +208,8 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
             max={5000}
             step={50}
             name="waterVolume"
-            value={state.inputValue}
-            // value={
-            //   entries.length > 0
-            //     ? `${entries[entries.length - 1].waterVolume}ml`
-            //     : `${state.count}ml`
-            // }
+            // value={state.inputValue}
+            value={water?.waterVolume}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             onKeyPress={handleInputKeyPress}
@@ -220,9 +219,7 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
         </label>
 
         <div className="btn-container">
-          <span className="water-amount">
-            {show ? `${water?.waterVolume}ml` : `${state.count}ml`}
-          </span>
+          <span className="water-amount">{water?.waterVolume}ml</span>
           <button type="submit" className="save-btn">
             Save
           </button>
@@ -232,4 +229,4 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
   );
 };
 
-export default AddWaterModal;
+export default EditWaterModal;

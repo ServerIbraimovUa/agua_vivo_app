@@ -58,7 +58,7 @@ const WaterList = () => {
       {visible && (
         <Modal setVisible={setVisible} title="Add water">
           <AddWaterModal
-            title="Choose a value"
+            title="Choose a value:"
             show={false}
             closeModal={closeModal}
           />
