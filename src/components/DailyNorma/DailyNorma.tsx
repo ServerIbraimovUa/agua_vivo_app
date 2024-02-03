@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "../Modal/Modal";
 import DailyNormaModal from "./DailyNormaModal";
-import { EditButton, SpanNorma, Title, Wrapper, WrapperButton } from "./DailyNorma.styled";
+import {  EditButton, SpanNorma, Title, Wrapper, WrapperButton,WrapperImg } from "./DailyNorma.styled";
 import { useSelector } from "react-redux";
 import { selectDailyNorma } from "../../redux/auth/authSelectors";
 
@@ -16,6 +16,7 @@ const DailyNorma: React.FC = () => {
 
   return (
     <>
+    
       <Wrapper>
       <Title>My daily norma</Title>
       <WrapperButton>
@@ -30,6 +31,7 @@ const DailyNorma: React.FC = () => {
         </EditButton>
       </WrapperButton>
       </Wrapper>
+      <WrapperImg></WrapperImg>
     </>
   );
 };
