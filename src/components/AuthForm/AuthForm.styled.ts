@@ -7,31 +7,37 @@ import bgMobAuthImg from "../../assets/images/BackAuthMob.png";
 
 export const StyledRegisterSection = styled.section`
   background-repeat: no-repeat;
+  padding-top: 72px;
   background-image: url(${bgMobAuthImg});
-  background-position: 50% 53px;
+  background-position: 50% 101px;
 
   @media ${device.tablet} {
+    padding-top: 88px;
     background-image: url(${bgTabAuthImg});
-    background-position: 50% 26px;
+    background-position: 50% 74px;
   }
   @media ${device.desktop} {
+    padding-top: 196px;
     background-image: url(${bgDeskSignUpImg});
-    background-position: 50% 0;
+    background-position: 50% 48px;
   }
 `;
 
 export const StyledLoginSection = styled.section`
   background-image: url(${bgMobAuthImg});
   background-repeat: no-repeat;
-  background-position: 50% 53px;
+  padding-top: 72px;
+  background-position: 50% 101px;
 
   @media ${device.tablet} {
+    padding-top: 88px;
     background-image: url(${bgTabAuthImg});
-    background-position: 50% 26px;
+    background-position: 50% 74px;
   }
   @media ${device.desktop} {
+    padding-top: 210px;
     background-image: url(${bgDeskSignInImg});
-    background-position: 50% 25px;
+    background-position: 50% 73px;
   }
 `;
 
@@ -135,9 +141,9 @@ export const StyledAuthFormSpan = styled.span`
   .eye-outline-icon {
     top: 50%;
     right: 2px;
-
     transform: translate(-50%, -50%);
     position: absolute;
+    z-index: 10;
     width: 16px;
     height: 16px;
     fill: var(--primary-blue);

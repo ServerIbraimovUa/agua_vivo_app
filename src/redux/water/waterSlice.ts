@@ -42,12 +42,9 @@ const waterSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(deleteWaterThunk.fulfilled, (state, action) => {
-        const index = state.amountDaily.entries.findIndex(
-          (water) => water._id === action.payload
+        state.amountDaily.entries = state.amountDaily.entries.filter(
+          (day) => day._id !== action.payload._id
         );
-
-        state.amountDaily.entries.splice(index, 1);
-
         state.isLoading = false;
       })
       .addCase(getAmountDailyThunk.fulfilled, (state, action) => {

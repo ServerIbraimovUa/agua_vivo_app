@@ -68,7 +68,7 @@ const authSlice = createSlice({
       })
       .addCase(logOutThunk.fulfilled, (state) => {
         state.user = authInitialState.user;
-        state.token = "";
+        state.token = null;
         state.isAuthorized = false;
       })
       .addCase(getCurrentUserThunk.pending, (state) => {

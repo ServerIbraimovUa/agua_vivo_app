@@ -21,6 +21,7 @@ export default function App() {
   const isAuthorized = useSelector(selectIsAuthorized);
   const isRefresh = useSelector(selectRefresh);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(getCurrentUserThunk());
   }, [dispatch]);
