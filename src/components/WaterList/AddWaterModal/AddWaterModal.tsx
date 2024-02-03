@@ -33,14 +33,14 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
   } = useForm<IWaterPortion>();
 
   const dispatch = useAppDispatch();
-
-  const [state, setState] = useState({
-    count: 0,
-    inputValue: "0",
-  });
-
   const { entries } = useSelector(selectAmountDaily);
   const water = entries.find((entry) => entry._id === id);
+
+  const [state, setState] = useState({
+    count: entries.length > 0 ? entries[entries.length - 1].waterVolume : 0,
+    inputValue:
+      entries.length > 0 ? entries[entries.length - 1].waterVolume : "0",
+  });
 
   const [timeOptions, setTimeOptions] = useState<string[]>([]);
 
@@ -158,13 +158,7 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
           >
             <Icon className="icon-minus" id="minus" />
           </button>
-          <span className="water-amount-span">
-            {entries.length > 0
-              ? `${entries[entries.length - 1].waterVolume}ml`
-              : `${state.count}ml`}
-
-            {/* {state.count}ml */}
-          </span>
+          <span className="water-amount-span">{state.count}ml</span>
           <button
             className="counter-btn"
             onClick={() => handleCountChange(state.count + 50)}
@@ -206,11 +200,6 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
             step={50}
             name="waterVolume"
             value={state.inputValue}
-            // value={
-            //   entries.length > 0
-            //     ? `${entries[entries.length - 1].waterVolume}ml`
-            //     : `${state.count}ml`
-            // }
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             onKeyPress={handleInputKeyPress}

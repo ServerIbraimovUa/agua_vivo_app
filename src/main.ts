@@ -6,7 +6,6 @@ import { device } from "./css/deviceSize";
 import "modern-normalize/modern-normalize.css";
 import "./index.css";
 
-
 export const GlobalStyle = createGlobalStyle`
 
 :root{
@@ -152,7 +151,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 section{
-height: 98.5vh;
+min-height: 98.5vh;
 
   padding-top: 80px;     
 

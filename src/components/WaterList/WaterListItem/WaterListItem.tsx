@@ -66,7 +66,11 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
       )}
 
       {deleteModalVisible && (
-        <Modal setVisible={setDeleteModalVisible} title="Delete water">
+        <Modal
+          setVisible={setDeleteModalVisible}
+          title="Delete water"
+          delete={true}
+        >
           <DeleteWaterModal
             title="Delete entry?"
             show={false}
