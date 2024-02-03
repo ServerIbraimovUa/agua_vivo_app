@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { device } from "../../css/deviceSize";
 
 export const CalendarContainer = styled.div`
-  width: 264;
+  width: 264px;
   height: 500px;
   background-color: transparent;
 
@@ -63,7 +63,7 @@ export const Days = styled.ul`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   justify-items: center;
-
+  justify-content: center;
   gap: 16px 26px;
 
   @media ${device.tablet} {

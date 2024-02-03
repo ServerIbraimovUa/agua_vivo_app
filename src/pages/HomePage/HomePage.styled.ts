@@ -59,8 +59,7 @@ export const ContainerCalendar = styled.div`
   justify-content: space-between;
   padding: 24px 8px;
   margin-bottom: 40px;
-
-  height: auto;
+   height: auto;
 
   background-color: var(--secondary-white);
   background-image: url("${BgImgMob}");
