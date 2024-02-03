@@ -3,6 +3,12 @@ import { device } from "../../css/deviceSize";
 
 export const HeaderStyle = styled.header`
   padding-top: 8px;
+  .header-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
 
   @media ${device.tablet} {
     padding-top: 16px;

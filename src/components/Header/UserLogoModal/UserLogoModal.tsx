@@ -30,9 +30,7 @@ const UserLogoModal = () => {
   return (
     <LogoWrapper>
       <button className="open-btn" onClick={handleClick}>
-        <span className="name">
-          {!name ? email?.substring(0, 1).toUpperCase() : name}
-        </span>
+        <span className="name">{!name ? email?.substring(0, 8) : name}</span>
         <img
           className="user-photo"
           src={`${avatar}`}
