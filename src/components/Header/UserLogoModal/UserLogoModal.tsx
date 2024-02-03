@@ -15,7 +15,7 @@ const UserLogoModal = () => {
   const [visible, setVisible] = useState(false);
   const menuRef = useRef(null);
 
-  const { email, avatar } = useSelector(selectUser);
+  const { email, avatar, name } = useSelector(selectUser);
 
   useOutsideClick(menuRef, () => {
     if (anchorEl) {
@@ -30,7 +30,9 @@ const UserLogoModal = () => {
   return (
     <LogoWrapper>
       <button className="open-btn" onClick={handleClick}>
-        <span className="name">{email.substring(0, 8)}</span>
+        <span className="name">
+          {!name ? email?.substring(0, 1).toUpperCase() : name}
+        </span>
         <img
           className="user-photo"
           src={`${avatar}`}
