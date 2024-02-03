@@ -21,23 +21,14 @@ const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState<Date>(getCurrentDate());
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  // const [isErorr, setIsErorr] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<Day | null>(null);
-  // const date = new Date();
-  // const year = date.getFullYear().toString();
-  // const month = (date.getMonth() + 1).toString();
   const amountMonth = useSelector(selectAmountMonthly);
-  // const monthIndex = month.padStart(2, "0");
   const id = `${currentDate.getFullYear()}-${(currentDate.getMonth() +1).toString().padStart(2, "0")}`;
   const dispatch = useAppDispatch();
-console.log(id)
 
   useEffect(() => {
-    dispatch(getAmountMonthlyThunk(id)).then((data) => console.log(data)  );
-
+    dispatch(getAmountMonthlyThunk(id));
   }, [dispatch, id]);
-
-
 
 
   const getDaysInMonth = (date: Date): Day[] => {
@@ -84,7 +75,6 @@ console.log(id)
     const dayElement = document.getElementById(`day-${day.day}`);
 
     if (!dayElement) {
-      console.error(`Елемент з id 'day-${day.day}' не знайдено.`);
       return;
     }
 
@@ -138,8 +128,7 @@ console.log(id)
       day.percent = 0;
       day.amountOfWater = 0;
       day.dailyNorma = 2.0;
-       return 
-       
+       return  
     }
 
     const currentDay = day.day.toString();
@@ -152,6 +141,7 @@ console.log(id)
       day.amountOfWater = 0;
       day.dailyNorma = 2.0;
     }
+    
     if (index !== -1) {
       const { amountOfWater, dailyNorma, percentage } =
         amountMonth.month[index];
