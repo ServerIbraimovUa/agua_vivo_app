@@ -13,7 +13,7 @@ const Logo = () => {
           <NavLink to="/home">
             <LogoContainer>
               <Icon className="icon" id="logo" />
-              <span className="logo-text">TRACKER OF WATER</span>
+              <span className="logo-text">Tracker of water</span>
             </LogoContainer>
           </NavLink>
         </>

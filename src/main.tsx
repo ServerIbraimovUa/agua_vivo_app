@@ -9,6 +9,9 @@ import { Provider } from "react-redux";
 import { persistor, store } from "./redux/store.ts";
 import { PersistGate } from "redux-persist/integration/react";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter basename="/agua_vivo_app">
@@ -16,8 +19,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <PersistGate persistor={persistor} loading={<div>Loading...</div>}>
           <GlobalStyle />
           <App />
+          <ToastContainer />
         </PersistGate>
       </Provider>
     </BrowserRouter>
-  </StrictMode>
+   </StrictMode>
 );

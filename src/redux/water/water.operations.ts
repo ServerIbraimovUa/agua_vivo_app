@@ -63,7 +63,7 @@ export const getAmountMonthlyThunk = createAsyncThunk<IAmountMonthly, string>(
   "water/getAmountMonthly",
   async (date, thunkAPI) => {
     try {
-      const response = await axios.get(`/api/water/month/:${date}`);
+      const response = await axios.get(`/api/water/month/${date}`);
       return response.data;
     } catch (e) {
       if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);

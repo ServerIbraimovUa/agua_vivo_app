@@ -20,7 +20,7 @@ export const Overlay = styled.div<Props>`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-width: 280px;
+    width: 280px;
     height: auto;
     max-height: 90%;
     @media screen and (max-width: 767px) {
@@ -35,10 +35,9 @@ export const Overlay = styled.div<Props>`
     background: var(--primary-white);
     border-radius: 8px;
     overflow: hidden;
-    padding: 24px 12px;
+    padding: ${(props) =>
+      props.$logout || props.$delete ? "32px 24px" : "24px 12px"};
     overflow: auto;
-
-   
 
     @media ${device.tablet} {
       width: ${(props) => (props.$logout || props.$delete ? "592px" : "704px")};

@@ -1,12 +1,12 @@
 import { FC, useState } from "react";
 import Icon from "../../Icon/Icon";
 import Modal from "../../Modal/Modal";
-import AddWaterModal from "../AddWaterModal/AddWaterModal";
 import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 import { updateWaterVolumeThunk } from "../../../redux/water/water.operations";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
 import { WaterItemBoxStyled } from "../WaterList.styled";
 import { IUpdateWaterPayload } from "../../../redux/redux_ts/interfaces";
+import EditWaterModal from "../EditWaterModal/EditWaterModal";
 
 interface IProps {
   _id: string;
@@ -53,9 +53,9 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
           setVisible={setEditModalVisible}
           title="Edit the entered amount of water"
         >
-          <AddWaterModal
+          <EditWaterModal
             title="Correct entered data:"
-            show={true}
+            // show={true}
             handleUpdateWater={handleUpdateWater}
             closeModal={() => {
               setEditModalVisible(false);
@@ -66,7 +66,11 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
       )}
 
       {deleteModalVisible && (
-        <Modal setVisible={setDeleteModalVisible} title="Delete water">
+        <Modal
+          setVisible={setDeleteModalVisible}
+          title="Delete water"
+          delete={true}
+        >
           <DeleteWaterModal
             title="Delete entry?"
             show={false}
