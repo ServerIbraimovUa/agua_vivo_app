@@ -2,13 +2,9 @@ import styled from "styled-components";
 import { device } from "../../css/deviceSize";
 
 export const CalendarContainer = styled.div`
-            /* position: absolute;
-            bottom: 0;
-            right: 0; */
-
   width: 264;
   height: 500px;
-  background-color: #ecf2ff;
+  background-color: transparent;
 
   @media ${device.tablet} {
     width: 646px;
