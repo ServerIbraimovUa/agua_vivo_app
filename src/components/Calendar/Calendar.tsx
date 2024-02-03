@@ -21,6 +21,7 @@ const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState<Date>(getCurrentDate());
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  // const [isErorr, setIsErorr] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<Day | null>(null);
   // const date = new Date();
   // const year = date.getFullYear().toString();
@@ -30,8 +31,9 @@ const Calendar: React.FC = () => {
   const id = `${currentDate.getFullYear()}-${(currentDate.getMonth() +1).toString().padStart(2, "0")}`;
   const dispatch = useAppDispatch();
 console.log(id)
+
   useEffect(() => {
-    dispatch(getAmountMonthlyThunk(id));
+    dispatch(getAmountMonthlyThunk(id)).then((data) => console.log(data)  );
 
   }, [dispatch, id]);
 
@@ -132,6 +134,14 @@ console.log(id)
   };
 
   const getCurrentDayInfo = (day: IDateInfo) => {
+    if(!amountMonth.month) {
+      day.percent = 0;
+      day.amountOfWater = 0;
+      day.dailyNorma = 2.0;
+       return 
+       
+    }
+
     const currentDay = day.day.toString();
     const index = amountMonth.month
       .map((obj) => obj.date.slice(-2).trim())
@@ -179,7 +189,8 @@ console.log(id)
 
       <Styled.Days>
         {getDaysInMonth(currentDate).map((day: Day) => {
-          getCurrentDayInfo(day);
+            getCurrentDayInfo(day);
+          
 
           return (
             <li key={day.day} id={`day-${day.day}`} className="hover active">
