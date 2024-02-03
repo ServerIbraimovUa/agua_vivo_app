@@ -11,6 +11,8 @@ import {
 import { useSelector } from "react-redux";
 import Layout from "./components/Layout/Layout.js";
 import Loading from "./components/Loading/Loading.js";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage.js";
+import ResetPasswordPage from "./pages/ResetPasswordPage.js";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.js"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
@@ -53,6 +55,24 @@ export default function App() {
             path="/signin"
             element={
               <PublicRoute redirectTo="/home" component={<LoginPage />} />
+            }
+          />
+          <Route
+            path="/forgotpass"
+            element={
+              <PublicRoute
+                redirectTo="/home"
+                component={<ForgotPasswordPage />}
+              />
+            }
+          />{" "}
+          <Route
+            path="/resetpass"
+            element={
+              <PublicRoute
+                redirectTo="/home"
+                component={<ResetPasswordPage />}
+              />
             }
           />
           {/* Private Routers */}
