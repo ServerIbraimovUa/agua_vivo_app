@@ -55,6 +55,10 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.amountMonthly = action.payload;
       })
+      .addCase(getAmountDailyThunk.rejected, (state) => {
+        state.isLoading = false;
+        state.amountDaily = waterInitState.amountDaily;
+      })
       .addMatcher(
         isAnyOf(
           addWaterThunk.pending,
@@ -78,7 +82,7 @@ const waterSlice = createSlice({
         ),
         (state, action) => {
           state.isLoading = false;
-          state.amountMonthly = {month: []}
+          state.amountMonthly = { month: [] };
           state.error = action.payload;
         }
       );

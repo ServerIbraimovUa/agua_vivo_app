@@ -90,8 +90,11 @@ export const GlobalStyle = createGlobalStyle`
   body{
     display: flex;
     flex-direction: column;
-    height: 100vh;
     overflow-x: hidden;
+
+    height: 100vh;
+   
+    
     font-family: 'Roboto', sans-serif;
     font-weight: var(--regular-font-weight);
     font-style: normal;
@@ -142,28 +145,22 @@ export const GlobalStyle = createGlobalStyle`
 // CONTAINER
 
 
-.header-container {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
 
-}
 
 section{
-min-height: 98.5vh;
-
-  padding-top: 80px;     
-
- 
-  @media ${device.tablet} {
   
-    padding-top:  104px;     
-   
-
+  min-height: 98.5vh;
+  padding-top:68px;     
+  
+  
+  @media ${device.tablet} {
+    
+    padding-top:  72px;     
+    
+    
   }
   @media ${device.desktop} {
-    padding-top: 109px;
+    padding-top: 68px;
 
   }
 }
@@ -200,5 +197,20 @@ input::-webkit-inner-spin-button{
 input:hover,
 input:focus{
   outline: none;
+}
+
+.tost{
+  background: var(--secondary-white);
+  color: #2F2F2F;
+  
+  .Toastify__progress-bar--success{
+    background: var(--primary-blue);
+    
+    .Toastify__toast-icon {
+      svg{
+        fill: var(--secondary-blue);
+      }
+    }
+  }
 }
 `;
