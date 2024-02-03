@@ -16,7 +16,7 @@ const DailyNorma: React.FC = () => {
 
   return (
     <>
-    
+       <WrapperImg>
       <Wrapper>
       <Title>My daily norma</Title>
       <WrapperButton>
@@ -31,7 +31,7 @@ const DailyNorma: React.FC = () => {
         </EditButton>
       </WrapperButton>
       </Wrapper>
-      <WrapperImg></WrapperImg>
+     </WrapperImg>
     </>
   );
 };
