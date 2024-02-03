@@ -124,7 +124,7 @@ const Calendar: React.FC = () => {
   };
 
   const getCurrentDayInfo = (day: IDateInfo) => {
-    if(!amountMonth.month) {
+    if(!amountMonth?.month) {
       day.percent = 0;
       day.amountOfWater = 0;
       day.dailyNorma = 2.0;
