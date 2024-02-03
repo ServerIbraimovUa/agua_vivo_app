@@ -29,7 +29,11 @@ const authInitialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState: authInitialState,
-  reducers: {},
+  reducers: {
+    setVerify(state, action){
+      return (state={...state, token:action.payload});
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerThunk.fulfilled, (state, action) => {
@@ -112,3 +116,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
+export const {setVerify}=authSlice.actions;
