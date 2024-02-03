@@ -78,6 +78,7 @@ const waterSlice = createSlice({
         ),
         (state, action) => {
           state.isLoading = false;
+          state.amountMonthly = {month: []}
           state.error = action.payload;
         }
       );
