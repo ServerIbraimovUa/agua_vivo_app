@@ -8,14 +8,17 @@ export const WelcomeSection = styled.section`
   &.welcome-section {
     background-image: url(${bgMobile});
     background-position: center;
+    padding-top: 68px;
 
     background-repeat: no-repeat;
 
     @media ${device.tablet} {
       background-image: url(${bgTablet});
+      padding-top: 88px;
     }
     @media ${device.desktop} {
       background-image: url(${bgDesk});
+      padding-top: 97px;
       background-size: 100%;
       background-position-y: 96px;
     }
@@ -62,8 +65,4 @@ export const Div = styled.div`
     font-weight: var(--medium-font-weight);
     line-height: 1.11;
   }
-`;
-export const Section = styled.section`
-  position: fixed;
-  bottom: 0;
 `;
