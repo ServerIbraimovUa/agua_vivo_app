@@ -10,6 +10,11 @@ export const UserWrapper = styled.div`
   .text {
     font-size: 16px;
     color: var(--primary-blue);
+    transition: color 300ms ease;
+    &:hover,
+    &:focus {
+      color: var(--secondary-orange);
+    }
   }
   img {
     width: 28px;
