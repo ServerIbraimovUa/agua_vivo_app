@@ -98,13 +98,17 @@ export const FormButton = styled.button`
 `;
 
 //Daily Norma
-export const Title = styled.h2`
-  font-size: 18px;
-  line-height: 1.33;
-`;
-export const EditButton = styled.button`
-  color: #8baeff;
-`;
+export const WrapperImg=styled.div`
+  height: 208px;
+  margin-bottom: 30px;
+  @media ${device.tablet} {
+    height: 386px;
+    margin-bottom: 16px;
+  }
+  @media ${device.desktop} {
+    height: 548px;
+  }
+`
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -114,12 +118,14 @@ export const Wrapper = styled.div`
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
-  @media ${device.tablet} {
-    margin-bottom: 326px;
-  }
-  @media ${device.desktop} {
-    margin-bottom: 350px;
-  }
+  
+`;
+export const Title = styled.h2`
+  font-size: 18px;
+  line-height: 1.33;
+`;
+export const EditButton = styled.button`
+  color: #8baeff;
 `;
 export const WrapperButton = styled.div`
   display: flex;

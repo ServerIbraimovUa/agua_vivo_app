@@ -156,7 +156,6 @@ height: 98.5vh;
 
   padding-top: 80px;     
 
-
  
   @media ${device.tablet} {
   
@@ -191,15 +190,6 @@ height: 98.5vh;
         max-width: 1264px;       
       
       }
-}
-.homePage-section{
-  display: flex;
-  flex-direction: column;
-  gap:40px;
-  @media ${device.desktop} {
-        flex-direction: row;
-        justify-content:space-between;            
-    }
 }
 
 input::-webkit-outer-spin-button,

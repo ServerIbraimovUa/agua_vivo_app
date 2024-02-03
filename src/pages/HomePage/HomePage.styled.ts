@@ -11,7 +11,7 @@ export const StyledHomePageSection = styled.section`
   background-image: url("${BgImgMob}");
   background-repeat: no-repeat;
   object-fit: cover;
-  background-position-x: 50px;
+  background-position-x: 70px;
   background-position-y: 100px;
   @media ${device.tablet} {
     background-image: url("${BgImgTabl}");
@@ -20,24 +20,36 @@ export const StyledHomePageSection = styled.section`
   }
   @media ${device.desktop} {
     background-image: url("${BgImgDesk}");
+   
   }
 `;
+
+export const ContainerWrapper=styled.div`
+display: flex;
+flex-direction: column;
+gap:40px;
+@media ${device.desktop} {
+    
+    flex-direction: row;
+      justify-content:space-between;
+  }
+`
 export const ContainerDailyNorma = styled.div`
   background-image: url("${BottleMob}");
   background-repeat: no-repeat;
   object-fit: contain;
-  background-position-x: 30px;
+  background-position-x: 10px;
   background-position-y: 90px;
 
   @media ${device.tablet} {
     background-image: url("${BottleTabl}");
-    background-position-y: 10px;
+    background-position-y: 50px;
     background-position-x: 90px;
   }
   @media ${device.desktop} {
     background-image: url("${BottleDesk}");
     background-position-y: 0px;
-    background-position-x: 0px;
+    background-position-x: -50px;
   }
 `;
 export const ContainerCalendar = styled.div`
@@ -51,7 +63,7 @@ export const ContainerCalendar = styled.div`
   height: auto;
 
   background-color: var(--secondary-white);
-  background-image: url("${BgImgDesk}");
+  background-image: url("${BgImgMob}");
   background-repeat: no-repeat;
   object-fit: cover;
 
@@ -60,10 +72,13 @@ export const ContainerCalendar = styled.div`
 
   @media ${device.tablet} {
     padding: 32px 24px;
+    background-image: url("${BgImgTabl}");
+    
   }
 
   @media ${device.desktop} {
     width: 592px;
     max-height: 688px;
+    background-image: url("${BgImgDesk}");
   }
 `;

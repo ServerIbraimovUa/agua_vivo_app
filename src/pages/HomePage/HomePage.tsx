@@ -5,7 +5,7 @@ import WaterRatio from "../../components/WaterRatio/WaterRatio";
 import { useEffect } from "react";
 import { getAmountDailyThunk } from "../../redux/water/water.operations";
 import { useAppDispatch } from "../../redux/redux_ts/hook";
-import { ContainerCalendar, ContainerDailyNorma, StyledHomePageSection } from "./HomePage.styled";
+import { ContainerCalendar, ContainerDailyNorma, ContainerWrapper, StyledHomePageSection } from "./HomePage.styled";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +15,9 @@ const HomePage = () => {
   }, [dispatch]);
 
   return (
-    <StyledHomePageSection className="homePage-section container">      
+    <StyledHomePageSection> 
+    <div className="container">
+      <ContainerWrapper>
         <ContainerDailyNorma  >
         <DailyNorma />
         <WaterRatio />
@@ -24,6 +26,8 @@ const HomePage = () => {
         <WaterList />
         <Calendar />
       </ContainerCalendar>  
+      </ContainerWrapper>
+      </div> 
     </StyledHomePageSection>
   );
 };
