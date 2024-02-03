@@ -80,9 +80,9 @@ const AuthForm: FC<Props> = ({ repeat }) => {
         </span>
       </label>
 
-      <label className={errors.email ? "gap-error" : "gap-label-normal"}>
+      <label className={errors.password ? "gap-error" : "gap-label-normal"}>
         <span>Enter your password</span>
-        <span className={errors.email ? "gap-error" : "gap-normal"}>
+        <span className={errors.password ? "gap-error" : "gap-normal"}>
           <div className="eye-input">
             <input
               className={
@@ -110,9 +110,9 @@ const AuthForm: FC<Props> = ({ repeat }) => {
 
       {repeat && (
         <>
-          <label className={errors.email ? "gap-error" : "gap-label-normal"}>
+          <label className={errors.password ? "gap-error" : "gap-label-normal"}>
             <span>Repeat password</span>
-            <span className={errors.email ? "gap-error" : "gap-normal"}>
+            <span className={errors.password ? "gap-error" : "gap-normal"}>
               <div className="eye-input">
                 <input
                   className={
