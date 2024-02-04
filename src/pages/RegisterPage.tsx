@@ -15,7 +15,7 @@ const RegisterPage = () => {
           <AuthForm repeat={true} />
           <AuthFormLink
             className="btn"
-            href="http://localhost:8000/google/google"
+            href="https://agua-vivo-app-backend.onrender.com/google/google"
           >
             Google
           </AuthFormLink>
