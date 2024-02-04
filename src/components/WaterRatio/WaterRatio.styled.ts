@@ -42,7 +42,7 @@ export const WaterRatioRangeThumb = styled.div`
   align-items: center;
 `;
 
-export const WaterRatioTitle = styled.h2`
+export const WaterRatioTitle = styled.h3`
   padding-bottom: 8px;
   font-size: 18px;
   line-height: 1.33;
