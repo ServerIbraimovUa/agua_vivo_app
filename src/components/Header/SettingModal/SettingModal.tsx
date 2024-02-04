@@ -59,8 +59,8 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
     reset,
 
     formState: { errors, isSubmitting },
-      } = useForm<SettingForm>({
-        defaultValues: {
+  } = useForm<SettingForm>({
+    defaultValues: {
       gender: user.gender || "woman",
       name: user.name || "",
       email: user.email,
@@ -110,36 +110,34 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
   };
 
   const onSubmit: SubmitHandler<SettingForm> = async (data) => {
+    let newData: Partial<SettingForm> = {};
+
     if (file) {
-      dispatch(updateUserAvatarThunk(file))
+      await dispatch(updateUserAvatarThunk(file))
         .unwrap()
         .then(() => toast.success("Avatar updated successfully"))
-        .catch((e) => {
-          if (e.includes("500")) {
-            toast.error("File size too large. Maximum size is 10 MB.");
-          }
-        });
+        .catch(() => toast.error("Something went wrong"));
     }
 
     if (data.gender !== user.gender || data.name !== user.name) {
-      dispatch(updateUserInfoThunk({ gender: data.gender, name: data.name }))
-        .unwrap()
-        .then(() => toast.success("Data updated successfully"));
+      newData = { ...newData, gender: data.gender, name: data.name };
     }
 
-    if (data.newPassword) {
-      try {
-        await dispatch(
-          updateUserInfoThunk({
-            password: data.password,
-            newPassword: data.newPassword,
-          })
-        ).unwrap();
-        toast.success("Password updated successfully");
-      } catch (error) {
-        toast.error("Something went wrong");
-      }
+    if (data.newPassword && data.newPassword !== data.password) {
+      newData = {
+        ...newData,
+        password: data.password,
+        newPassword: data.newPassword,
+      };
     }
+
+    if (Object.keys(newData).length > 0) {
+      await dispatch(updateUserInfoThunk(newData))
+        .unwrap()
+        .then(() => toast.success("Data updated successfully"))
+        .catch(() => toast.error("Something went wrong"));
+    }
+
     setVisible(false);
     reset({
       password: "",
@@ -257,6 +255,9 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
             <FormPasswordInput
               {...register("newPassword", {
                 validate: (value, { password }) => {
+                  if (password && value === password) {
+                    return "The new password cannot be old one";
+                  }
                   if (password) {
                     return !!value || "This field is required";
                   }
