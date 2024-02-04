@@ -185,7 +185,7 @@ export const PopoverWrapper = styled.span`
       height: 0;
       position: absolute;
       right: 100%;
-      top: 76%;
+      top: 75%;
       border-top: 20px solid transparent;
       border-right: 30px solid var(--secondary-light-blue);
       border-bottom: transparent;

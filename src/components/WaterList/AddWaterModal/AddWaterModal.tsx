@@ -1,22 +1,20 @@
-import { ChangeEvent, FC, KeyboardEvent, useEffect, useState } from "react";
-
+import { ChangeEvent, FC, KeyboardEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useAppDispatch } from "../../../redux/redux_ts/hook";
-import { AddWaterModalStyled } from "../WaterList.styled";
-import Icon from "../../Icon/Icon";
-import {
-  addWaterThunk,
-  updateWaterVolumeThunk,
-} from "../../../redux/water/water.operations";
+import { generateTimeOptions } from "../utils/utils";
 import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../../redux/redux_ts/hook";
+
+import { AddWaterModalStyled } from "../WaterList.styled";
+import Popover from "../../DailyNorma/Popover";
+import Icon from "../../Icon/Icon";
+
+import { addWaterThunk } from "../../../redux/water/water.operations";
 import { selectAmountDaily } from "../../../redux/water/waterSelectors";
-import { IUpdateWaterPayload } from "../../../redux/redux_ts/interfaces";
 
 interface IProps {
   id?: string;
   title: string;
   show: boolean;
-  handleUpdateWater?: (waterData: IUpdateWaterPayload) => void;
   closeModal: () => void;
 }
 
@@ -25,16 +23,20 @@ export type IWaterPortion = {
   waterVolume: number;
 };
 
-const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
+const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
   const {
     register,
     handleSubmit,
+    watch,
+    getValues,
     formState: { errors },
-  } = useForm<IWaterPortion>();
+  } = useForm<IWaterPortion>({
+    mode: "onChange",
+  });
 
   const dispatch = useAppDispatch();
+
   const { entries } = useSelector(selectAmountDaily);
-  const water = entries.find((entry) => entry._id === id);
 
   const [state, setState] = useState({
     count: entries.length > 0 ? entries[entries.length - 1].waterVolume : 0,
@@ -42,44 +44,13 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
       entries.length > 0 ? entries[entries.length - 1].waterVolume : "0",
   });
 
-  const [timeOptions, setTimeOptions] = useState<string[]>([]);
+  const timeOptions = generateTimeOptions();
 
-  useEffect(() => {
-    const now = new Date();
-    const minutes = now.getMinutes();
-    const amPM = now.getHours() >= 12 ? "PM" : "AM";
-    const formattedHours = (now.getHours() % 12 || 12)
-      .toString()
-      .padStart(2, "0");
-    const formattedMinutes = minutes.toString().padStart(2, "0");
-    const currentTime = `${formattedHours}:${formattedMinutes} ${amPM}`;
-
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-
-    let nextIntervalHour = currentHour;
-    let nextIntervalMinute = Math.ceil(currentMinute / 5) * 5;
-    if (nextIntervalMinute >= 60) {
-      nextIntervalHour++;
-      nextIntervalMinute -= 60;
-    }
-
-    const intervals: string[] = [];
-    for (
-      let i = nextIntervalHour * 60 + nextIntervalMinute;
-      i < 24 * 60;
-      i += 5
-    ) {
-      const minutes = (i % 60).toString().padStart(2, "0");
-      const amPM = Math.floor(i / 60) < 12 ? "AM" : "PM";
-      const formattedHours = (Math.floor(i / 60) % 12 || 12)
-        .toString()
-        .padStart(2, "0");
-      intervals.push(`${formattedHours}:${minutes} ${amPM}`);
-    }
-
-    setTimeOptions([currentTime, ...intervals]);
-  }, []);
+  const amountWater = state.inputValue;
+  const time = String(watch("time"));
+  const waterVolume = getValues("waterVolume");
+  const chosenTime = time.slice(3, 5);
+  const firstTime = timeOptions[0].slice(3, 5).toString();
 
   const handleCountChange = (newCount: number) => {
     if (state.count + newCount >= 0) {
@@ -114,36 +85,44 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
       time: data.time,
       waterVolume: Number(state.inputValue),
     };
-    if (newData.waterVolume === 0) {
-      alert("The amount of water cannot be 0!");
-    } else if (!errors.time) {
-      if (show && id) {
-        dispatch(updateWaterVolumeThunk({ ...newData, id }));
-      } else {
-        dispatch(addWaterThunk(newData));
-      }
-      closeModal();
+
+    if (errors.waterVolume) {
+      return;
     }
 
-    // if (newData.waterVolume === 0) {
-    //   alert("Кількість води не може бути 0!");
-    //   return; // Повертаємося, щоб не продовжувати зберігання даних
-    // }
+    if (newData.waterVolume === 0) {
+      return;
+    }
 
-    // const minutes = new Date(data.time).getMinutes();
-    // if (minutes % 5 !== 0) {
-    //   // Перевірка, чи поточний час кратний 5
-    //   alert("Поточний час має бути кратним 5!");
-    //   return; // Повертаємося, щоб не продовжувати зберігання даних
-    // }
-    // if (show && id) {
-    //   dispatch(updateWaterVolumeThunk({ ...newData, id }));
-    // } else {
-    //   dispatch(addWaterThunk(newData));
-    // }
+    if (Number(chosenTime) % 5 !== 0) {
+      return;
+    }
+    message = createPopoverMessage(chosenTime, waterVolume, firstTime);
 
-    // closeModal(); // Викликаємо closeModal останнім
+    dispatch(addWaterThunk(newData));
+    closeModal();
   };
+
+  let visible = false;
+  const createPopoverMessage = (
+    t: string,
+    w: number,
+    f: string
+  ): string | undefined => {
+    if (w === 0) {
+      visible = true;
+      return "The amount of water cannot be 0!";
+    } else if (Number(t) % 5 !== 0 && Number(f) % 5 !== 0) {
+      visible = true;
+      return "Please choose a time that is divisible by 5";
+    }
+  };
+
+  let message = createPopoverMessage(
+    chosenTime,
+    Number(amountWater),
+    firstTime
+  );
 
   return (
     <AddWaterModalStyled>
@@ -170,11 +149,12 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
       </div>
       <form className="add-water-form" onSubmit={handleSubmit(onSubmit)}>
         <label className="water-label">
-          <span>Recording time:</span>
+          <span className="popover">Recording time:</span>
+          {visible && <Popover message={message} />}
           <select
             {...register("time", { required: true })}
             name="time"
-            className="water-input"
+            className="water-select"
             aria-label="Time"
           >
             {timeOptions.map((option) => (
@@ -183,11 +163,7 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
               </option>
             ))}
           </select>
-          {errors.time && (
-            <span>Please choose a time that is divisible by 5</span>
-          )}
         </label>
-
         <label className="water-label">
           <span className="enter-water-span">
             Enter the value of water used:
@@ -203,15 +179,12 @@ const AddWaterModal: FC<IProps> = ({ title, show, closeModal, id }) => {
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             onKeyPress={handleInputKeyPress}
-            className="water-input"
+            className="water-select"
           />
-          {errors.waterVolume && <span>This field is required</span>}
         </label>
 
         <div className="btn-container">
-          <span className="water-amount">
-            {show ? `${water?.waterVolume}ml` : `${state.count}ml`}
-          </span>
+          <span className="water-amount">{`${state.count}ml`}</span>
           <button type="submit" className="save-btn">
             Save
           </button>

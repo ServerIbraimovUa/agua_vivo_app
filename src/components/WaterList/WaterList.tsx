@@ -49,12 +49,12 @@ const WaterList = () => {
             ))}
         </ul>
       )}
-      <div>
-        <button className="add-water-btn" onClick={() => setVisible(true)}>
-          <Icon className="water-plus-icon" id="plus"></Icon>
-          Add water
-        </button>
-      </div>
+
+      <button className="add-water-btn" onClick={() => setVisible(true)}>
+        <Icon className="water-plus-icon" id="plus" />
+        Add water
+      </button>
+
       {visible && (
         <Modal setVisible={setVisible} title="Add water">
           <AddWaterModal

@@ -36,7 +36,7 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
           className="edit-btn"
           onClick={() => setEditModalVisible(true)}
         >
-          <Icon className="edit-water-icon" id="pencil"></Icon>
+          <Icon className="edit-water-icon" id="pencil" />
         </button>
         <button
           type="button"
@@ -45,7 +45,7 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
             setDeleteModalVisible(true);
           }}
         >
-          <Icon className="delete-water-icon" id="delete"></Icon>
+          <Icon className="delete-water-icon" id="delete" />
         </button>
       </div>
       {editModalVisible && (
@@ -55,7 +55,6 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
         >
           <EditWaterModal
             title="Correct entered data:"
-            // show={true}
             handleUpdateWater={handleUpdateWater}
             closeModal={() => {
               setEditModalVisible(false);
@@ -64,7 +63,6 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
           />
         </Modal>
       )}
-
       {deleteModalVisible && (
         <Modal
           setVisible={setDeleteModalVisible}
