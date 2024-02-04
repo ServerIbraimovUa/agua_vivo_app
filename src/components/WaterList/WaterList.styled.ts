@@ -2,8 +2,6 @@ import styled from "styled-components";
 import { device } from "../../css/deviceSize";
 
 export const WaterContainerStyled = styled.div`
-  max-height: 260px;
-
   .water-section {
     min-width: 544px;
   }
@@ -15,15 +13,15 @@ export const WaterContainerStyled = styled.div`
 
   .water-empty {
     color: var(--primary-blue);
-    margin-bottom: 24px;
+    height: 162px;
   }
 
   .water-list {
     display: flex;
     flex-direction: column;
-    margin-bottom: 12px;
 
-    max-height: 194px;
+    height: 150px;
+    margin-bottom: 12px;
     overflow-y: auto;
   }
   .water-list::-webkit-scrollbar {
@@ -41,21 +39,42 @@ export const WaterContainerStyled = styled.div`
     fill: var(--primary-blue);
   }
 
+  .water-plus-icon:hover {
+    fill: var(--secondary-orange);
+  }
+
   .add-water-btn {
-    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 16px;
     font-weight: var(--medium-font-weight);
     color: var(--primary-blue);
+  }
+  .add-water-btn:hover {
+    color: var(--secondary-orange);
   }
 
   @media ${device.tablet} {
     .water-title {
       margin-bottom: 16px;
     }
+
+    .water-plus-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .add-water-btn {
+      font-size: 18px;
+    }
   }
 `;
 
 //WaterListItem
 export const WaterItemBoxStyled = styled.li`
+  height: 50px;
   display: flex;
   gap: 12px;
   align-items: center;
@@ -90,7 +109,25 @@ export const WaterItemBoxStyled = styled.li`
     width: 16px;
     height: 16px;
   }
+  .edit-btn,
+  .delete-btn {
+    position: relative;
+  }
 
+  .edit-btn:hover::after,
+  .delete-btn:hover::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: "";
+    width: 16px;
+    height: 1px;
+    background-color: var(--secondary-red);
+  }
+
+  .edit-btn:hover::after {
+    background-color: var(--secondary-blue);
+  }
   .edit-delete-btn-box {
     display: flex;
     gap: 18px;
@@ -170,7 +207,7 @@ export const AddWaterModalStyled = styled.div`
     flex-direction: column;
   }
 
-  .water-input {
+  .water-select {
     color: var(--primary-blue);
     height: 44px;
     width: 120px;
@@ -181,6 +218,7 @@ export const AddWaterModalStyled = styled.div`
   }
 
   .water-label {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -214,18 +252,37 @@ export const AddWaterModalStyled = styled.div`
 
   .save-btn {
     width: 256px;
+    height: 36px;
     border-radius: 10px;
     font-size: 18px;
     padding: 8px 30px;
     background-color: var(--primary-blue);
     color: var(--secondary-white);
   }
+  //
 
+  /* select {
+    width: 120px;
+    border: 1px solid var(--select-border);
+    border-radius: 10px;
+    background-color: var(--primary-blue);
+  } */
+
+  /* select option {
+    background-color: red;
+    color: black;
+  } */
+
+  //
   @media ${device.tablet} {
     max-width: 744px;
 
-    .water-input {
+    .water-select {
       width: 100%;
+    }
+
+    .save-btn {
+      height: 44px;
     }
 
     .btn-container {
@@ -255,7 +312,6 @@ export const DeleteWaterModalStyled = styled.div`
   .delete-title {
     font-size: 18px;
     font-weight: var(--medium-font-weight);
-    /* width: 207px; */
   }
 
   .cancel-btn {
@@ -284,7 +340,7 @@ export const DeleteWaterModalStyled = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 12px;
   }
 
   @media ${device.tablet} {
@@ -293,6 +349,11 @@ export const DeleteWaterModalStyled = styled.div`
       flex-direction: row;
       gap: 24px;
       justify-content: end;
+    }
+
+    .cancel-btn,
+    .delete-btn {
+      height: 44px;
     }
   }
 `;
