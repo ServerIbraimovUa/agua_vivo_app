@@ -17,7 +17,7 @@ const LoginPage = () => {
           <NavLink className="auth-link" to="/signup">
             Sign up
           </NavLink>
-          <NavLink className="auth-link" to="/forgotpass">
+          <NavLink className="auth-link" to="/forgot-password">
             Forgot your password?
           </NavLink>
         </StyledLoginDiv>

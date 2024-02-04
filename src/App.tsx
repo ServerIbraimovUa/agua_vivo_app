@@ -35,17 +35,13 @@ export default function App() {
   ) : (
     <>
       <Routes>
-      <Route
-            path="/verify"
-            element={<VerificationPage/>}
-          />
+        <Route path="/verify" element={<VerificationPage />} />
         <Route path="/" element={<Layout />}>
           {/* Public Routers  */}
           <Route
             index
             element={!isAuthorized ? <WelcomePage /> : <HomePage />}
           />
-        
           <Route
             path="/welcome"
             element={
@@ -64,24 +60,8 @@ export default function App() {
               <PublicRoute redirectTo="/home" component={<LoginPage />} />
             }
           />
-          <Route
-            path="/forgotpass"
-            element={
-              <PublicRoute
-                redirectTo="/home"
-                component={<ForgotPasswordPage />}
-              />
-            }
-          />{" "}
-          <Route
-            path="/resetpass"
-            element={
-              <PublicRoute
-                redirectTo="/home"
-                component={<ResetPasswordPage />}
-              />
-            }
-          />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password/:id" element={<ResetPasswordPage />} />
           {/* Private Routers */}
           <Route
             path="/home"

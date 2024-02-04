@@ -4,6 +4,9 @@ import {
   ForgotPassFormButton,
   StyledForgotPasswordForm,
 } from "./ForgoPasswordForm.styled";
+import { forgotPasswordThunk } from "../../redux/auth/auth.operations";
+import { useAppDispatch } from "../../redux/redux_ts/hook";
+import { toast } from "react-toastify";
 export interface Data {
   email: string;
 }
@@ -16,10 +19,19 @@ const ForgotPasswordForm = () => {
     formState: { errors },
   } = useForm<Data>();
 
-  //   const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const onSubmit = async (data: Data) => {
-    console.log(data);
+    dispatch(forgotPasswordThunk(data))
+      .unwrap()
+      .then(() => {
+        toast.success("Email was successfully sent");
+      })
+      .catch((e) => {
+        if (e.includes("409")) {
+          toast.error("Email wasn't sent");
+        }
+      });
   };
 
   return (
