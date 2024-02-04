@@ -51,7 +51,9 @@ const AuthForm: FC<Props> = ({ repeat }) => {
           .then((data) => {
             console.log(data);
             if (data.user.verificationToken) {
-              navigate(`/verify/${data.user.verificationToken}`);
+              navigate(
+                `/verify/${data.user.verificationToken}?email=${data.user.email}`
+              );
             } else {
               toast.success("Registration successful!");
               navigate("/home");

@@ -144,3 +144,15 @@ export const resetPasswordThunk = createAsyncThunk(
     }
   }
 );
+
+export const resendVerifyEmail = createAsyncThunk(
+  "auth/verify",
+  async (email: IEmail, thunkAPI) => {
+    try {
+      const response = await axios.post("/auth/verify", email);
+      return response;
+    } catch (e) {
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
