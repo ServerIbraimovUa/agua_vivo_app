@@ -1,4 +1,4 @@
-import{u as a,d as t,G as p,H as l,c as x,r as m,J as u,j as e,K as g,P as b,Q as f,I as h,R as k,E as v}from"./index-gOnItpdz.js";import{B as y,a as j,b as $,c as w,d as B,e as I,P as s}from"./BottleHomeDesk-hJ9wXjOs.js";const P=a.section`
+import{u as a,d as t,E as p,F as l,c as x,r as m,G as u,j as e,H as g,J as b,K as f,I as h,P as k,C as v}from"./index-sXitEqrI.js";import{B as y,a as j,b as $,c as w,d as B,e as I,P as s}from"./BottleHomeDesk-khABNzq-.js";const C=a.section`
     background-image: url("${y}");
     display: flex;
     background-position-x: 70px;
@@ -11,7 +11,7 @@ import{u as a,d as t,G as p,H as l,c as x,r as m,J as u,j as e,K as g,P as b,Q a
 @media ${t.desktop} {
     background-image: url("${$}"); 
   }
-`,z=a.div`
+`,P=a.div`
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -22,7 +22,7 @@ import{u as a,d as t,G as p,H as l,c as x,r as m,J as u,j as e,K as g,P as b,Q a
     @media ${t.desktop}{
         padding-top: 0px;       
     }
-  `,C=a.img`
+  `,z=a.img`
   width: 300px;
   border-radius: 10px;
   box-shadow: var(--btn-box-shadow);
@@ -129,4 +129,4 @@ import{u as a,d as t,G as p,H as l,c as x,r as m,J as u,j as e,K as g,P as b,Q a
     background-position-x: 220px;
 }
 
-`,V="/agua_vivo_app/assets/garage-Tlp1eJi3.jpg",S=()=>{const{token:o}=p(),[r]=l(),n=r.get("email"),i=x();m.useEffect(()=>{o&&i(u(o))},[o,i]);const c=d=>{d.preventDefault(),n&&i(k({email:n})).unwrap().then(()=>v.success("Email was resended successfully"))};return e.jsxs(e.Fragment,{children:[e.jsx(g,{children:e.jsx("div",{className:"container header-container",children:e.jsx(b,{children:e.jsx(f,{})})})}),e.jsx(P,{className:"section",children:e.jsxs(D,{children:[e.jsxs(E,{className:"container",children:[e.jsx(s,{message:"Check your email to verify your account"}),e.jsx(s,{message:"If you didn't receive an email, click this link to resend",verify:!0}),e.jsx(h,{className:"icon-mail",id:"mail"}),e.jsx(N,{onClick:c,children:"Resend"})]}),e.jsxs(z,{className:"container",children:[e.jsx(s,{message:"Here you could be your advertisment!",advert:!0}),e.jsx(C,{src:V,alt:"advertisment"})]})]})})]})};export{S as default};
+`,V="/agua_vivo_app/assets/garage-Tlp1eJi3.jpg",T=()=>{const{token:o}=p(),[r]=l(),n=r.get("email"),i=x();m.useEffect(()=>{o&&i(u(o))},[o,i]);const c=d=>{d.preventDefault(),n&&i(k({email:n})).unwrap().then(()=>v.success("Email was resended successfully"))};return e.jsxs(e.Fragment,{children:[e.jsx(g,{children:e.jsx("div",{className:"container header-container",children:e.jsx(b,{children:e.jsx(f,{})})})}),e.jsx(C,{className:"section",children:e.jsxs(D,{children:[e.jsxs(E,{className:"container",children:[e.jsx(s,{message:"Check your email to verify your account"}),e.jsx(s,{message:"If you didn't receive an email, click this link to resend",verify:!0}),e.jsx(h,{className:"icon-mail",id:"mail"}),e.jsx(N,{onClick:c,children:"Resend"})]}),e.jsxs(P,{className:"container",children:[e.jsx(s,{message:"Here you could be your advertisment!",advert:!0}),e.jsx(z,{src:V,alt:"advertisment"})]})]})})]})};export{T as default};
