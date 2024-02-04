@@ -19,7 +19,6 @@ import { setVerify } from "../../redux/auth/authSlice";
 
 const VerificationPage = () => {
   const { token } = useParams();
-  console.log(token);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
