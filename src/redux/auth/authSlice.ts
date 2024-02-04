@@ -30,9 +30,9 @@ const authSlice = createSlice({
   name: "auth",
   initialState: authInitialState,
   reducers: {
-    setVerify(state, action){
-      return (state={...state, token:action.payload});
-    }
+    setVerify(state, action) {
+      return (state = { ...state, token: action.payload });
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -88,7 +88,7 @@ const authSlice = createSlice({
           updateUserInfoThunk.rejected,
           updateUserAvatarThunk.rejected,
           updateUserDailyNormaThunk.rejected,
-          logOutThunk.rejected,
+          logOutThunk.rejected
         ),
         (state, action) => {
           state.isLoading = false;
@@ -104,7 +104,7 @@ const authSlice = createSlice({
           updateUserInfoThunk.pending,
           updateUserAvatarThunk.pending,
           updateUserDailyNormaThunk.pending,
-          logOutThunk.pending,
+          logOutThunk.pending
         ),
         (state) => {
           state.isLoading = true;
@@ -115,4 +115,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const {setVerify}=authSlice.actions;
+export const { setVerify } = authSlice.actions;

@@ -2,7 +2,9 @@ import { Navigate } from "react-router-dom";
 
 import { FC, ReactElement } from "react";
 import { useSelector } from "react-redux";
-import { selectIsAuthorized } from "../../redux/auth/authSelectors";
+import {
+  selectIsAuthorized,
+} from "../../redux/auth/authSelectors";
 interface Props {
   component: ReactElement;
   redirectTo: string;
@@ -13,6 +15,7 @@ export const PrivateRoute: FC<Props> = ({
   redirectTo = "/",
 }) => {
   const isAuthorized = useSelector(selectIsAuthorized);
-  const shouldRedirect = !isAuthorized;
+
+  const shouldRedirect = !isAuthorized 
   return shouldRedirect ? <Navigate to={redirectTo} /> : Component;
 };
