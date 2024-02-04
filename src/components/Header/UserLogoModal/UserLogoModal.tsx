@@ -28,7 +28,7 @@ const UserLogoModal = () => {
   };
 
   return (
-    <LogoWrapper>
+    <LogoWrapper className="seventh-step">
       <button className="open-btn" onClick={handleClick}>
         <span className="name">{!name ? email?.substring(0, 8) : name}</span>
         <img

@@ -1,12 +1,18 @@
+import Icon from "../../Icon/Icon";
 import UserLogoModal from "../UserLogoModal/UserLogoModal";
+import { useTour } from "@reactour/tour";
+import { UserLogoStyled } from "./UserLogo.styled";
 
 const UserLogo = () => {
-  
+  const { setIsOpen } = useTour();
+
   return (
-    <div>
-      <UserLogoModal/>
- 
-    </div>
+    <UserLogoStyled>
+      <button onClick={() => setIsOpen(true)}>
+        <Icon className="question-icon" id="question" />
+      </button>
+      <UserLogoModal />
+    </UserLogoStyled>
   );
 };
 
