@@ -151,15 +151,15 @@ const Calendar: React.FC = () => {
       day.dailyNorma = dailyNorma;
     }
   };
-
+  const isJanuary2024 = currentDate.getMonth() === 0 && currentDate.getFullYear() === 2024;
   return (
     <Styled.CalendarContainer>
       <div className="right-align">
         <h1 className="month">Month</h1>
         <div className="header">
-          <button className="button" onClick={handlePrevMonth}>
-            &lt;
-          </button>
+        <button className={`button ${isJanuary2024 ? "disabled" : ""}`} disabled={isJanuary2024} onClick={handlePrevMonth}>
+  &lt;
+</button>
           <div className="month-title">
             {currentDate.toLocaleString("en-US", { month: "long" })},{" "}
             {currentDate.getFullYear()}
