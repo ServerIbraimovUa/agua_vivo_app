@@ -118,3 +118,29 @@ export const logOutThunk = createAsyncThunk(
     }
   }
 );
+export interface IEmail {
+  email: string;
+}
+export const forgotPasswordThunk = createAsyncThunk(
+  "auth/forgot-password",
+  async (email: IEmail, thunkAPI) => {
+    try {
+      const response = await axios.post("/auth/forgot-password", email);
+      return response.data;
+    } catch (e) {
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const resetPasswordThunk = createAsyncThunk(
+  "auth/reset-password",
+  async (data: { password: string; id: string }, thunkAPI) => {
+    try {
+      const response = await axios.patch("/auth/reset-password", data);
+      return response;
+    } catch (e) {
+      if (e instanceof Error) return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);

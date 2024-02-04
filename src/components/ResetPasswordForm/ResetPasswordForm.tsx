@@ -7,6 +7,10 @@ import {
   StyledResetPassForm,
   StyledResetPassFormSpan,
 } from "./ResetPasswordForm.styled";
+import { useAppDispatch } from "../../redux/redux_ts/hook";
+import { resetPasswordThunk } from "../../redux/auth/auth.operations";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export interface Data {
   password: string;
@@ -16,6 +20,9 @@ export interface Data {
 const ResetPasswordForm = () => {
   const [toggleInput, setToggleInput] = useState("password");
   const [toggleIcon, setToggleIcon] = useState(false);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  if (!id) return;
 
   const {
     register,
@@ -24,10 +31,18 @@ const ResetPasswordForm = () => {
     formState: { errors },
   } = useForm<Data>();
 
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const onSubmit = async (data: Data) => {
-    console.log(data);
+    dispatch(resetPasswordThunk({ password: data.password, id }))
+      .unwrap()
+      .then(() => {
+        toast.success("Password was changed successfully");
+        navigate("/signin");
+      })
+      .catch(() => {
+          toast.error("Password  wasn't changed");
+      });
   };
 
   return (

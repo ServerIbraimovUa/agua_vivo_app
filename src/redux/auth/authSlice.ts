@@ -88,11 +88,10 @@ const authSlice = createSlice({
           updateUserInfoThunk.rejected,
           updateUserAvatarThunk.rejected,
           updateUserDailyNormaThunk.rejected,
-          logOutThunk.rejected
+          logOutThunk.rejected,
         ),
         (state, action) => {
           state.isLoading = false;
-          console.log(action.payload);
           state.error = action.payload;
           state.isRefreshing = false;
         }
@@ -105,7 +104,7 @@ const authSlice = createSlice({
           updateUserInfoThunk.pending,
           updateUserAvatarThunk.pending,
           updateUserDailyNormaThunk.pending,
-          logOutThunk.pending
+          logOutThunk.pending,
         ),
         (state) => {
           state.isLoading = true;
