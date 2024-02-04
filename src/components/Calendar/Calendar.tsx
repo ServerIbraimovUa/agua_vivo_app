@@ -151,7 +151,25 @@ const Calendar: React.FC = () => {
       day.dailyNorma = dailyNorma;
     }
   };
+
+
   const isJanuary2024 = currentDate.getMonth() === 0 && currentDate.getFullYear() === 2024;
+
+
+  const isNextDayDisabled = (day: number): boolean => {
+    if (currentDate.getMonth() !== new Date().getMonth()) {
+      return false;
+    }
+  
+    const nextDay = getCurrentDate().getDate() + 1;
+    return day >= nextDay;
+  };
+  
+  
+  
+  
+  
+  
   return (
     <Styled.CalendarContainer>
       <div className="right-align">
@@ -179,22 +197,25 @@ const Calendar: React.FC = () => {
 
       <Styled.Days>
         {getDaysInMonth(currentDate).map((day: Day) => {
-            getCurrentDayInfo(day);
-          
+          getCurrentDayInfo(day);
+
+          const isDisabled = isNextDayDisabled(day.day);
 
           return (
-            <li key={day.day} id={`day-${day.day}`} className="hover active">
+            <li key={day.day} id={`day-${day.day}`} className={`li hover active ${isDisabled ? 'disabled' : ''}`}>
               {day.percent !== undefined && day.percent < 100 ? (
                 <Styled.LowPercentageDay
-                  className={`day ${selectedDay === day.day ? "selected" : ""}`}
-                  onClick={() => handleDayClick(day)}
+                  className={`day ${selectedDay === day.day ? "selected" : ""} ${isDisabled ? 'disabled' : ''}`}
+                  onClick={isDisabled ? undefined : () => handleDayClick(day)}
+                  aria-disabled={isDisabled}
                 >
                   {day.day}
                 </Styled.LowPercentageDay>
               ) : (
                 <Styled.Day
-                  className={`day ${selectedDay === day.day ? "selected" : ""}`}
-                  onClick={() => handleDayClick(day)}
+                  className={`day ${selectedDay === day.day ? "selected" : ""} ${isDisabled ? 'disabled' : ''}`}
+                  onClick={isDisabled ? undefined : () => handleDayClick(day)}
+                  aria-disabled={isDisabled}
                 >
                   {day.day}
                 </Styled.Day>
@@ -214,6 +235,7 @@ const Calendar: React.FC = () => {
           );
         })}
       </Styled.Days>
+
      <CalendarModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} modalContent={modalContent} closeModal={closeModal}/>
      </Styled.CalendarContainer>
   );
