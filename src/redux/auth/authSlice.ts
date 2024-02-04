@@ -39,7 +39,6 @@ const authSlice = createSlice({
       .addCase(registerThunk.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
-        state.isAuthorized = true;
         state.isLoading = false;
         state.isRefreshing = false;
       })
