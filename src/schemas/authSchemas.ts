@@ -64,13 +64,6 @@ export const emailSchema = () => {
 export const passwordSchemas = () => {
   return yup
     .object({
-      email: yup
-        .string()
-        .matches(
-          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-          "Invalid email address"
-        )
-        .required("Email is required"),
       password: yup
         .string()
         .matches(

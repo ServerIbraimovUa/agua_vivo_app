@@ -23,14 +23,13 @@ const ResetPasswordForm = () => {
   const [passwordToggleInput, setPasswordToggleInput] = useState("password");
   const [passwordToggleIcon, setPasswordToggleIcon] = useState(false);
 
+  const dispatch = useAppDispatch();
   const [repeatPasswordToggleInput, setRepeatPasswordToggleInput] =
     useState("password");
   const [repeatPasswordToggleIcon, setRepeatPasswordToggleIcon] =
     useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
-  if (!id) return;
-
   const {
     register,
     handleSubmit,
@@ -40,7 +39,7 @@ const ResetPasswordForm = () => {
     resolver: yupResolver(passwordSchemas()),
   });
 
-  const dispatch = useAppDispatch();
+  if (!id) return;
 
   const onSubmit = async (data: Data) => {
     dispatch(resetPasswordThunk({ password: data.password, id }))
