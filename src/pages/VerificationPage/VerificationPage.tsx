@@ -40,11 +40,11 @@ const VerificationPage = () => {
       <VerificationSection className="section">
         <ContainerLink className="container">
           <WrapperLink>
-            <Title>Verify your mail</Title>
+            <Title>Check your email to verify your account</Title>
           </WrapperLink>
         </ContainerLink>
         <WrapperImg className="container">
-        <Title>Here you could be your advertisment!</Title>
+          <Title>Here you could be your advertisment!</Title>
           <ImgGarage src={Img} alt="advertisment" />
         </WrapperImg>
       </VerificationSection>

@@ -12,6 +12,7 @@ import {
   StyledAuthFormSpan,
 } from "./AuthForm.styled";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 export interface Data {
   email: string;
   password: string;
@@ -35,6 +36,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
   });
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = async (data: Data) => {
     const { email, password } = data;
@@ -46,7 +48,15 @@ const AuthForm: FC<Props> = ({ repeat }) => {
     repeat
       ? dispatch(registerThunk(newData))
           .unwrap()
-          .then(() => toast.success("Registration successful!"))
+          .then((data) => {
+            console.log(data);
+            if (data.user.verificationToken) {
+              navigate(`/verify/${data.user.verificationToken}`);
+            } else {
+              toast.success("Registration successful!");
+              navigate("/home");
+            }
+          })
           .catch((e) => {
             if (e.includes("409")) {
               toast.error("Email in use.");
