@@ -1,6 +1,6 @@
 import axios from "axios";
-// axios.defaults.baseURL = "https://agua-vivo-app-backend.onrender.com";
-axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = "https://agua-vivo-app-backend.onrender.com";
+// axios.defaults.baseURL = "http://localhost:8000";
 
 export const setToken = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;

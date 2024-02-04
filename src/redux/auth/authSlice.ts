@@ -8,7 +8,6 @@ import {
   updateUserInfoThunk,
   updateUserAvatarThunk,
   updateUserDailyNormaThunk,
-  forgotPasswordThunk,
 } from "./auth.operations";
 import { IAuthInitInfo } from "../redux_ts/interfaces";
 
@@ -80,9 +79,6 @@ const authSlice = createSlice({
         state.error = null;
         state.isRefreshing = true;
       })
-      .addCase(forgotPasswordThunk.fulfilled, (state, action) => {
-        state.token = action.payload
-      })
       .addMatcher(
         isAnyOf(
           registerThunk.rejected,
@@ -93,7 +89,6 @@ const authSlice = createSlice({
           updateUserAvatarThunk.rejected,
           updateUserDailyNormaThunk.rejected,
           logOutThunk.rejected,
-          forgotPasswordThunk.rejected,
         ),
         (state, action) => {
           state.isLoading = false;
