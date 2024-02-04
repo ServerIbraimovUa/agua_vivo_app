@@ -152,7 +152,8 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
       <form className="add-water-form" onSubmit={handleSubmit(onSubmit)}>
         <label className="water-label">
           <span className="popover">Recording time:</span>
-          {visible && <Popover message={message} waterAmount={true}/>}
+          {visible && <Popover message={message} waterAmount={true} />}
+
           <select
             {...register("time", { required: true })}
             name="time"
@@ -170,7 +171,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
           <span className="enter-water-span">
             Enter the value of water used:
           </span>
-   
+
           <input
             {...register("waterVolume", { required: true })}
             type="number"
@@ -179,9 +180,11 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
             step={50}
             name="waterVolume"
             value={state.inputValue}
+            // value={state.inputValue === "0" ? "" : state.inputValue}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             onKeyPress={handleInputKeyPress}
+            placeholder="0"
             className="water-select"
           />
         </label>

@@ -40,7 +40,7 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
         </button>
         <button
           type="button"
-          className="delete-btn"
+          className="delete-btn-card"
           onClick={() => {
             setDeleteModalVisible(true);
           }}

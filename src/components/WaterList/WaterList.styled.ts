@@ -7,7 +7,8 @@ export const WaterContainerStyled = styled.div`
   }
 
   .water-title {
-    font-size: 24px;
+    font-size: 26px;
+    font-weight: var(--medium-font-weight);
     margin-bottom: 16px;
   }
 
@@ -36,11 +37,7 @@ export const WaterContainerStyled = styled.div`
   .water-plus-icon {
     width: 16px;
     height: 16px;
-    fill: var(--primary-blue);
-  }
-
-  .water-plus-icon:hover {
-    fill: var(--secondary-orange);
+    stroke: var(--primary-blue);
   }
 
   .add-water-btn {
@@ -52,8 +49,19 @@ export const WaterContainerStyled = styled.div`
     font-weight: var(--medium-font-weight);
     color: var(--primary-blue);
   }
-  .add-water-btn:hover {
+  .add-water-btn:hover,
+  .add-water-btn:focus {
+    .water-plus-icon {
+      stroke: var(--secondary-orange);
+    }
     color: var(--secondary-orange);
+
+    transform: scale(1.1);
+    text-decoration-thickness: 2px;
+
+    text-decoration: underline;
+    text-decoration-color: var(--secondary-orange);
+    text-decoration-thickness: 2px;
   }
 
   @media ${device.tablet} {
@@ -98,6 +106,7 @@ export const WaterItemBoxStyled = styled.li`
   .water-amount-card {
     font-size: 18px;
     color: var(--primary-blue);
+    width: 65px;
   }
 
   .time {
@@ -110,12 +119,14 @@ export const WaterItemBoxStyled = styled.li`
     height: 16px;
   }
   .edit-btn,
-  .delete-btn {
+  .delete-btn-card {
     position: relative;
   }
 
   .edit-btn:hover::after,
-  .delete-btn:hover::after {
+  .edit-btn:focus::after,
+  .delete-btn-card:hover::after,
+  .delete-btn-card:focus::after {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -123,10 +134,13 @@ export const WaterItemBoxStyled = styled.li`
     width: 16px;
     height: 1px;
     background-color: var(--secondary-red);
+    /* transition: width 1s ease-in; */
   }
 
-  .edit-btn:hover::after {
+  .edit-btn:hover::after,
+  .edit-btn:focus::after {
     background-color: var(--secondary-blue);
+    /* width: 100%; */
   }
   .edit-delete-btn-box {
     display: flex;
@@ -187,7 +201,7 @@ export const AddWaterModalStyled = styled.div`
   .icon-plus {
     width: 24px;
     height: 24px;
-    color: var(--primary-blue);
+    stroke: var(--primary-blue);
   }
 
   .counter-btn {
@@ -198,7 +212,10 @@ export const AddWaterModalStyled = styled.div`
 
     border-radius: 30px;
     border: 1px solid var(--secondary-blue);
-    box-shadow: 0px 2px 4px 0px rgba(64, 123, 255, 0.2);
+  }
+  .counter-btn:hover,
+  .counter-btn:focus {
+    box-shadow: var(--btn-box-shadow);
   }
 
   .add-water-form {
@@ -258,22 +275,15 @@ export const AddWaterModalStyled = styled.div`
     padding: 8px 30px;
     background-color: var(--primary-blue);
     color: var(--secondary-white);
+    &:hover,
+    &:focus {
+      box-shadow: var(--btn-box-shadow);
+    }
+    &:active {
+      cursor: inherit;
+    }
   }
-  //
 
-  /* select {
-    width: 120px;
-    border: 1px solid var(--select-border);
-    border-radius: 10px;
-    background-color: var(--primary-blue);
-  } */
-
-  /* select option {
-    background-color: red;
-    color: black;
-  } */
-
-  //
   @media ${device.tablet} {
     max-width: 744px;
 
@@ -318,22 +328,45 @@ export const DeleteWaterModalStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    font-size: 18px;
+    font-weight: var(--medium-font-weight);
+
     width: 232px;
     height: 36px;
     border-radius: 10px;
-    color: var(--primary-white);
-    background-color: var(--primary-blue);
+    color: var(--primary-blue);
+    background-color: var(--secondary-light-blue);
+    &:hover,
+    &:focus {
+      box-shadow: var(--btn-box-shadow);
+    }
+    &:active {
+      cursor: inherit;
+    }
   }
 
   .delete-btn {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    font-size: 18px;
+    font-weight: var(--medium-font-weight);
+
     width: 232px;
     height: 36px;
     border-radius: 10px;
     color: var(--primary-white);
     background-color: var(--secondary-red);
+
+    &:hover,
+    &:focus {
+      box-shadow: var(--btn-box-shadow);
+    }
+    &:active {
+      cursor: inherit;
+    }
   }
 
   .delete-btn-box {
