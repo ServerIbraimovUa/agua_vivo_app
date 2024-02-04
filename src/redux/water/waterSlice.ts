@@ -45,6 +45,7 @@ const waterSlice = createSlice({
         state.amountDaily.entries = state.amountDaily.entries.filter(
           (day) => day._id !== action.payload._id
         );
+
         state.isLoading = false;
       })
       .addCase(getAmountDailyThunk.fulfilled, (state, action) => {
