@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { device } from "../../css/deviceSize";
+import styled from 'styled-components';
+import { device } from '../../css/deviceSize';
 
 export const Div = styled.div`
   h1 {
@@ -17,7 +17,7 @@ export const Div = styled.div`
   }
   h2 {
     font-size: 24px;
-    line-height: 1.25;
+    line-height: var(--standart-line-height);
     width: 199px;
     margin-bottom: 24px;
 
@@ -35,7 +35,7 @@ export const Div = styled.div`
     line-height: 1.11;
   }
   .tracker {
-    margin-bottom: 24px;    
+    margin-bottom: 24px;
   }
   .welcome-icon {
     width: 32px;
@@ -63,7 +63,7 @@ export const Div = styled.div`
       height: 44px;
     }
 
-    line-height: 1.25;
+    line-height: var(--standart-line-height);
     @media ${device.tablet} {
       font-size: 18px;
       line-height: 1.33;
@@ -88,7 +88,7 @@ export const Ul = styled.ul`
     gap: 8px;
     align-items: center;
     p {
-      line-height: 1.25;
+      line-height: var(--standart-line-height);
     }
   }
 `;

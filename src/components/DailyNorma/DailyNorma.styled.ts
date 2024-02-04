@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { device } from "../../css/deviceSize";
+import styled from 'styled-components';
+import { device } from '../../css/deviceSize';
 
 export const FormContainer = styled.div``;
 export const Form = styled.form`
@@ -98,32 +98,24 @@ export const FormButton = styled.button`
 `;
 
 //Daily Norma
-export const WrapperImg=styled.div`
-  height: 208px;
-  margin-bottom: 30px;
-  @media ${device.tablet} {
-    height: 386px;
-    margin-bottom: 16px;
-  }
-  @media ${device.desktop} {
-    position: relative;
-    height: 548px;
-  }
-`
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 164px;
+  margin-bottom: 10px;
   gap: 12px;
   padding: 8px 20px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
 
+  @media ${device.tablet} {
+    position: absolute;
+  }
+
   @media ${device.desktop} {
     position: absolute;
   }
-  
 `;
 export const Title = styled.h2`
   font-size: 18px;
@@ -164,7 +156,7 @@ export const PopoverWrapper = styled.span`
   height: 80px;
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
   &::after {
-    content: "";
+    content: '';
     width: 0;
     height: 0;
     position: absolute;
@@ -180,7 +172,7 @@ export const PopoverWrapper = styled.span`
     left: 25px;
 
     &::before {
-      content: "";
+      content: '';
       width: 0;
       height: 0;
       position: absolute;

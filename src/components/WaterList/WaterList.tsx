@@ -1,17 +1,17 @@
-import { useState } from "react";
-import Modal from "../Modal/Modal";
-import AddWaterModal from "./AddWaterModal/AddWaterModal";
+import { useState } from 'react';
+import Modal from '../Modal/Modal';
+import AddWaterModal from './AddWaterModal/AddWaterModal';
 import {
   selectAmountDaily,
   selectError,
   selectIsLoading,
-} from "../../redux/water/waterSelectors";
-import { useSelector } from "react-redux";
+} from '../../redux/water/waterSelectors';
+import { useSelector } from 'react-redux';
 
-import WaterListItem from "./WaterListItem/WaterListItem";
-import Loading from "../Loading/Loading";
-import { WaterContainerStyled } from "./WaterList.styled";
-import Icon from "../Icon/Icon";
+import WaterListItem from './WaterListItem/WaterListItem';
+import Loading from '../Loading/Loading';
+import { WaterContainerStyled } from './WaterList.styled';
+import Icon from '../Icon/Icon';
 
 export interface IWaterData {
   waterVolume: number;

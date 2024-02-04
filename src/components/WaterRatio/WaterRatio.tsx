@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { Range, getTrackBackground } from "react-range";
+import { useState } from 'react';
+import { Range, getTrackBackground } from 'react-range';
 import {
   Output,
   OutputThumb,
   PointsSpan,
   PointsThumb,
+  RangeContainer,
   RenderThumb,
   RenderTrack,
   WaterRatioBtn,
@@ -13,11 +14,11 @@ import {
   WaterRatioRangeThumb,
   WaterRatioThumb,
   WaterRatioTitle,
-} from "./WaterRatio.styled";
-import Icon from "../Icon/Icon";
-import Modal from "../Modal/Modal";
-import AddWaterModal from "../WaterList/AddWaterModal/AddWaterModal";
-import { useWaterPercentage } from "../../hooks/useWaterPercentage";
+} from './WaterRatio.styled';
+import Icon from '../Icon/Icon';
+import Modal from '../Modal/Modal';
+import AddWaterModal from '../WaterList/AddWaterModal/AddWaterModal';
+import { useWaterPercentage } from '../../hooks/useWaterPercentage';
 
 const WaterRatio = () => {
   const [visible, setVisible] = useState(false);
@@ -33,7 +34,7 @@ const WaterRatio = () => {
     <>
       <WaterRatioContainer>
         <WaterRatioThumb>
-          <div>
+          <RangeContainer>
             <WaterRatioTitle>Today</WaterRatioTitle>
             <WaterRatioRangeThumb>
               <Range
@@ -49,7 +50,7 @@ const WaterRatio = () => {
                       ...props.style,
                       background: getTrackBackground({
                         values: [normalizedValue],
-                        colors: ["#9EBBFF", "#D7E3FF"],
+                        colors: ['#9EBBFF', '#D7E3FF'],
                         min: 0,
                         max: 100,
                       }),
@@ -79,7 +80,7 @@ const WaterRatio = () => {
                 <PointsSpan>100%</PointsSpan>
               )}
             </PointsThumb>
-          </div>
+          </RangeContainer>
           <WaterRatioBtnThumb className="hover">
             <WaterRatioBtn className="btn" onClick={() => setVisible(true)}>
               <Icon className="water-ratio-plus" id="plus-circle" />

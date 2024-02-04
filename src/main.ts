@@ -1,10 +1,10 @@
-import { createGlobalStyle } from "styled-components";
-import Regular from "./assets/fonts/Roboto-Regular.ttf";
-import Medium from "./assets/fonts/Roboto-Medium.ttf";
-import Bold from "./assets/fonts/Roboto-Bold.ttf";
-import { device } from "./css/deviceSize";
-import "modern-normalize/modern-normalize.css";
-import "./index.css";
+import { createGlobalStyle } from 'styled-components';
+import Regular from './assets/fonts/Roboto-Regular.ttf';
+import Medium from './assets/fonts/Roboto-Medium.ttf';
+import Bold from './assets/fonts/Roboto-Bold.ttf';
+import { device } from './css/deviceSize';
+import 'modern-normalize/modern-normalize.css';
+import './index.css';
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -149,18 +149,18 @@ export const GlobalStyle = createGlobalStyle`
 
 section{
   
-  min-height: 98.5vh;
-  padding-top:68px;     
+  min-height: 98.5dvh;
+  margin-top:68px;     
   
   
   @media ${device.tablet} {
     
-    padding-top:  72px;     
+    margin-top:  72px;     
     
     
   }
   @media ${device.desktop} {
-    padding-top: 68px;
+    margin-top: 68px;
 
   }
 }

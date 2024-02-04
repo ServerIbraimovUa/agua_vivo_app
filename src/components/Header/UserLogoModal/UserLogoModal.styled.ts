@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const LogoWrapper = styled.div`
   position: relative;
-  height: 22px;
+  height: 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,6 +12,7 @@ export const LogoWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
     font-size: 18px;
     border: none;
     background-color: transparent;
@@ -26,9 +27,6 @@ export const LogoWrapper = styled.div`
 
     .user-photo {
       border-radius: 28px;
-      margin-left: 8px;
-      margin-right: 4px;
-
       width: 28px;
       height: 28px;
     }
@@ -74,12 +72,12 @@ export const LogoWrapper = styled.div`
     }
     .button-popover-name {
       display: flex;
-      
+
       width: 62px;
       margin-left: 8px;
       font-size: 16px;
       color: var(--primary-blue);
-      font-family: "Roboto-Regular", sans-serif;
+      font-family: 'Roboto-Regular', sans-serif;
     }
 
     .button-popover {

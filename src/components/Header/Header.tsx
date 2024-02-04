@@ -1,10 +1,10 @@
-import Logo from "./Logo/Logo";
+import Logo from './Logo/Logo';
 
-import UserAuth from "./UserAuth/UserAuth";
-import UserLogo from "./UserLogo/UserLogo";
-import { NavbarContainer, HeaderStyle } from "./Header.style.js";
-import { useSelector } from "react-redux";
-import { selectIsAuthorized } from "../../redux/auth/authSelectors.js";
+import UserAuth from './UserAuth/UserAuth';
+import UserLogo from './UserLogo/UserLogo';
+import { NavbarContainer, HeaderStyle } from './Header.style.js';
+import { useSelector } from 'react-redux';
+import { selectIsAuthorized } from '../../redux/auth/authSelectors.js';
 
 const Header = () => {
   const isAuthorized = useSelector(selectIsAuthorized);

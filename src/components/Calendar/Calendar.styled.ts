@@ -1,68 +1,59 @@
-import styled from "styled-components";
-import { device } from "../../css/deviceSize";
+import styled from 'styled-components';
+import { device } from '../../css/deviceSize';
 
 export const CalendarContainer = styled.div`
+  position: relative;
+  z-index: 50;
   width: 264px;
-  height: 500px;
   background-color: transparent;
-
-  @media ${device.tablet} {
-    width: 646px;
-    height: 315px;
-  }
-  @media ${device.desktop} {
-
-width: 544px;
-height: 320px;
-  }
 
   .right-align {
     display: flex;
     align-items: center;
-    justify-content: end;
-    height: 32px;
+    justify-content: space-between;
     width: 100%;
-    margin-top: 6px;
-    margin-left: auto;
     margin-bottom: 16px;
   }
   .header {
     display: flex;
     align-items: center;
-    justify-content: end;
-    height: 32px;
-    width: 100%;
-    margin-top: 6px;
-    margin-left: auto;
   }
   .month-title {
-    font-size: 16px;
     color: #407bff;
-    width: 132px;
-    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
   }
   .button {
     color: #407bff;
     border: none;
     background-color: transparent;
-    padding: 5px 10px;
     flex-shrink: 0;
   }
   .button.disabled {
-  color: grey;
-  cursor: not-allowed;
-}
+    color: grey;
+    cursor: not-allowed;
+  }
   .month {
     font-size: 26px;
     color: #2f2f2f;
-    margin-left: 0;
+  }
+
+  @media ${device.tablet} {
+    width: 646px;
+
+    .month {
+      font-weight: var(--medium-font-weight);
+    }
+  }
+  @media ${device.desktop} {
+    width: 544px;
+    height: 335px;
   }
 `;
 
 export const Days = styled.ul`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  justify-items: center;
   justify-content: center;
   gap: 16px 26px;
 
@@ -89,16 +80,20 @@ export const Days = styled.ul`
 `;
 
 export const Day = styled.span`
-  padding: 7px;
   background-color: #fff;
   border-radius: 50%;
   text-align: center;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+
+  @media ${device.tablet} {
+    width: 34px;
+    height: 34px;
+  }
 `;
 
 export const Modal = styled.div`

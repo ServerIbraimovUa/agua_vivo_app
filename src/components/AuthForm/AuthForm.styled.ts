@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { device } from "../../css/deviceSize";
-import bgDeskSignUpImg from "../../assets/images/BackSignUpDesk.png";
-import bgDeskSignInImg from "../../assets/images/BackSignInDesk.png";
-import bgTabAuthImg from "../../assets/images/BackAuthTab.png";
-import bgMobAuthImg from "../../assets/images/BackAuthMob.png";
+import styled from 'styled-components';
+import { device } from '../../css/deviceSize';
+import bgDeskSignUpImg from '../../assets/images/BackSignUpDesk.png';
+import bgDeskSignInImg from '../../assets/images/BackSignInDesk.png';
+import bgTabAuthImg from '../../assets/images/BackAuthTab.png';
+import bgMobAuthImg from '../../assets/images/BackAuthMob.png';
 
 export const StyledRegisterSection = styled.section`
   background-repeat: no-repeat;
@@ -51,7 +51,7 @@ export const StyledAuthForm = styled.form`
     display: flex;
     flex-direction: column;
     gap: 8px;
-    font-style: "Roboto-Regular", sans-serif;
+    font-style: 'Roboto-Regular', sans-serif;
     font-size: 18px;
     line-height: 1.33;
     .eye-input {
@@ -114,14 +114,14 @@ export const StyledLoginDiv = styled.div`
   min-height: 396px;
   gap: 16px;
   .title {
-    font-family: "Roboto-Medium", sans-serif;
+    font-family: 'Roboto-Medium', sans-serif;
     font-size: 26px;
     line-height: 1.23;
   }
   .auth-link {
-    font-style: "Roboto-Regular", sans-serif;
+    font-style: 'Roboto-Regular', sans-serif;
     font-size: 16px;
-    line-height: 1.25;
+    line-height: var(--standart-line-height);
     color: var(--primary-blue);
     &:hover {
       color: var(--secondary-orange);

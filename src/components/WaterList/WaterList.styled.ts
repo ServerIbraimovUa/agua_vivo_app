@@ -1,14 +1,19 @@
-import styled from "styled-components";
-import { device } from "../../css/deviceSize";
+import styled from 'styled-components';
+import { device } from '../../css/deviceSize';
 
 export const WaterContainerStyled = styled.div`
+  position: relative;
+  z-index: 50;
+
   .water-section {
     min-width: 544px;
   }
 
   .water-title {
-    font-size: 24px;
     margin-bottom: 16px;
+    font-weight: var(--medium-font-weight);
+    font-size: 26px;
+    line-height: var(--standart-line-height);
   }
 
   .water-empty {
@@ -57,17 +62,26 @@ export const WaterContainerStyled = styled.div`
   }
 
   @media ${device.tablet} {
-    .water-title {
-      margin-bottom: 16px;
-    }
-
     .water-plus-icon {
       width: 24px;
       height: 24px;
     }
 
     .add-water-btn {
+      font-weight: var(--medium-font-weight);
       font-size: 18px;
+      line-height: 1.33;
+    }
+  }
+
+  @media ${device.desktop} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 260px;
+
+    .water-title {
+      margin-bottom: 0;
     }
   }
 `;
@@ -76,11 +90,12 @@ export const WaterContainerStyled = styled.div`
 export const WaterItemBoxStyled = styled.li`
   height: 50px;
   display: flex;
-  gap: 12px;
   align-items: center;
   justify-content: space-between;
 
-  padding: 12px 10px 12px 0;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 3px;
 
   border-bottom: 1px solid var(--secondary-light-blue);
 
@@ -88,6 +103,17 @@ export const WaterItemBoxStyled = styled.li`
     display: flex;
     gap: 12px;
     align-items: center;
+  }
+
+  .water-amount-time {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 128px;
+
+    @media ${device.tablet} {
+      width: 158px;
+    }
   }
 
   .water-glass-icon {
@@ -119,7 +145,7 @@ export const WaterItemBoxStyled = styled.li`
     position: absolute;
     bottom: 0;
     left: 0;
-    content: "";
+    content: '';
     width: 16px;
     height: 1px;
     background-color: var(--secondary-red);
@@ -131,6 +157,9 @@ export const WaterItemBoxStyled = styled.li`
   .edit-delete-btn-box {
     display: flex;
     gap: 18px;
+    @media ${device.tablet} {
+      gap: 20px;
+    }
   }
 
   @media ${device.tablet} {

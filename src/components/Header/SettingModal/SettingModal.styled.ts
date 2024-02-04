@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { device } from "../../../css/deviceSize";
+import styled from 'styled-components';
+import { device } from '../../../css/deviceSize';
 
 export const FormSettingStyled = styled.form`
   display: flex;
@@ -162,7 +162,7 @@ export const FormUserPassword = styled.div`
 
   .password-sub-title {
     font-size: 16px;
-    line-height: 1.25em;
+    line-height: var(--standart-line-height);
   }
 
   .toggle-password {
