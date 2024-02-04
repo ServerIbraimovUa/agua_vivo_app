@@ -134,6 +134,12 @@ export const StyledLoginDiv = styled.div`
     max-width: 384px;
     margin-left: 728px;
   }
+
+  .btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export const StyledAuthFormSpan = styled.span`

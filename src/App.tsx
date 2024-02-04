@@ -14,6 +14,9 @@ import Loading from "./components/Loading/Loading.js";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage.js";
 import ResetPasswordPage from "./pages/ResetPasswordPage.js";
 import { AuthGoogle } from "./components/AuthGoogle/AuthGoogle.js";
+import Calendar from "./components/Calendar/Calendar.js";
+
+import ChartWater from "./components/Chart/Chart.js";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.js"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
@@ -70,7 +73,10 @@ export default function App() {
             element={
               <PrivateRoute redirectTo="/welcome" component={<HomePage />} />
             }
-          />
+          >
+            <Route path="/home" element={<Calendar />} />
+            <Route path="graf" element={<ChartWater />} />
+          </Route>
           <Route path="/google" element={<AuthGoogle redirectTo="/home" />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
