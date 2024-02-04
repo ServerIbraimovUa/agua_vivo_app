@@ -160,3 +160,14 @@ export const AuthFormButton = styled.button`
     height: 44px;
   }
 `;
+
+export const AuthFormLink = styled.a`
+  width: 100%;
+  height: 36px;
+  border-radius: 10px;
+  padding: 8px 30px;
+  font-size: 16px;
+  @media ${device.tablet} {
+    height: 44px;
+  }
+`;

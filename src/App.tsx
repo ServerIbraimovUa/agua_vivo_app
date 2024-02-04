@@ -13,6 +13,7 @@ import Layout from "./components/Layout/Layout.js";
 import Loading from "./components/Loading/Loading.js";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage.js";
 import ResetPasswordPage from "./pages/ResetPasswordPage.js";
+import { AuthGoogle } from "./components/AuthGoogle/AuthGoogle.js";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.js"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
@@ -70,6 +71,7 @@ export default function App() {
               <PrivateRoute redirectTo="/welcome" component={<HomePage />} />
             }
           />
+          <Route path="/google" element={<AuthGoogle redirectTo="/home" />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>

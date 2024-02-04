@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import AuthForm from "../components/AuthForm/AuthForm";
 import {
+  AuthFormLink,
   StyledLoginDiv,
   StyledRegisterSection,
 } from "../components/AuthForm/AuthForm.styled";
@@ -12,6 +13,12 @@ const RegisterPage = () => {
         <StyledLoginDiv>
           <h2 className="title">Sign Up</h2>
           <AuthForm repeat={true} />
+          <AuthFormLink
+            className="btn"
+            href="http://localhost:8000/google/google"
+          >
+            Google
+          </AuthFormLink>
           <NavLink className="auth-link" to="/signin">
             Sign in
           </NavLink>
