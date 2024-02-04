@@ -40,6 +40,9 @@ export const FormAvatarLabel = styled.label`
   gap: 8px;
 
   .avatar-setting {
+    object-fit: cover;
+    object-position: center;
+
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -132,7 +135,9 @@ export const UserInfoWrap = styled.div`
     align-items: flex-start;
     gap: 8px;
   }
-
+  .disabled-label {
+    cursor: not-allowed;
+  }
   .user-info-title,
   .user-info-title {
     font-size: 18px;
@@ -187,10 +192,7 @@ export const FormNameInput = styled.input`
   padding: 12px 36px 12px 8px;
   color: var(--primary-blue);
   background-color: var(--primary-white);
-  &:hover,
-  &:focus {
-    outline: none;
-  }
+
   &::placeholder {
     font-size: 16px;
     font-weight: 400;
@@ -209,10 +211,8 @@ export const FormEmailInput = styled.input`
   padding: 12px 36px 12px 8px;
   color: var(--secondary-blue);
   background-color: var(--primary-white);
-  &:hover,
-  &:focus {
-    outline: none;
-  }
+  pointer-events: none;
+
   &::placeholder {
     font-size: 16px;
     font-weight: 400;
@@ -231,10 +231,7 @@ export const FormPasswordInput = styled.input`
   padding: 12px 36px 12px 8px;
   color: var(--primary-blue);
   background-color: var(--primary-white);
-  &:hover,
-  &:focus {
-    outline: none;
-  }
+
   &::placeholder {
     font-size: 16px;
     font-weight: 400;

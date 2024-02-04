@@ -40,6 +40,8 @@ export interface IUpdateUserinfo {
   name?: string;
   email?: string;
   gender?: "woman" | "man";
+  password?: string;
+  newPassword?: string;
 }
 
 export interface IUpdateUserAvatar {
