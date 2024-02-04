@@ -65,7 +65,7 @@ export const Days = styled.ul`
   justify-items: center;
   justify-content: center;
   gap: 16px 26px;
-
+   
   @media ${device.tablet} {
     grid-template-columns: repeat(10, 1fr);
     gap: 20px 34px;
@@ -80,6 +80,10 @@ export const Days = styled.ul`
     align-items: center;
     justify-content: center;
     gap: 2px;
+  }
+  li.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
   }
   .procent {
     color: #9ebbff;
@@ -155,4 +159,7 @@ export const ModalContent = styled.div`
 
 export const LowPercentageDay = styled(Day)`
   border: #ff9d43 1px solid;
+  &.disabled {
+    border: none;
+  }
 `;
