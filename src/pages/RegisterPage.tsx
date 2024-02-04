@@ -14,7 +14,7 @@ const RegisterPage = () => {
           <h2 className="title">Sign Up</h2>
           <AuthForm repeat={true} />
           <AuthFormLink
-            className="btn"
+            className="btn btn-google"
             href="https://agua-vivo-app-backend.onrender.com/google/google"
           >
             Google

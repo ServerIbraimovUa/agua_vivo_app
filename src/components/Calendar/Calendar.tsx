@@ -3,7 +3,10 @@ import * as Styled from "./Calendar.styled";
 import { useAppDispatch } from "../../redux/redux_ts/hook";
 import { getAmountMonthlyThunk } from "../../redux/water/water.operations";
 import { useSelector } from "react-redux";
-import { selectAmountMonthly } from "../../redux/water/waterSelectors";
+import {
+  selectAmountDaily,
+  selectAmountMonthly,
+} from "../../redux/water/waterSelectors";
 import CalendarModal from "./CalendarModal";
 
 export interface Day {
@@ -23,13 +26,15 @@ const Calendar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<Day | null>(null);
   const amountMonth = useSelector(selectAmountMonthly);
-  const id = `${currentDate.getFullYear()}-${(currentDate.getMonth() +1).toString().padStart(2, "0")}`;
+  const data = useSelector(selectAmountDaily);
+  const id = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}`;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getAmountMonthlyThunk(id));
-  }, [dispatch, id]);
-
+  }, [dispatch, id, data.entries.length]);
 
   const getDaysInMonth = (date: Date): Day[] => {
     const year = date.getFullYear();
@@ -124,11 +129,11 @@ const Calendar: React.FC = () => {
   };
 
   const getCurrentDayInfo = (day: IDateInfo) => {
-    if(!amountMonth?.month) {
+    if (!amountMonth?.month) {
       day.percent = 0;
       day.amountOfWater = 0;
       day.dailyNorma = 2.0;
-       return  
+      return;
     }
 
     const currentDay = day.day.toString();
@@ -141,7 +146,7 @@ const Calendar: React.FC = () => {
       day.amountOfWater = 0;
       day.dailyNorma = 2.0;
     }
-    
+
     if (index !== -1) {
       const { amountOfWater, dailyNorma, percentage } =
         amountMonth.month[index];
@@ -238,6 +243,15 @@ const Calendar: React.FC = () => {
 
      <CalendarModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} modalContent={modalContent} closeModal={closeModal}/>
      </Styled.CalendarContainer>
+
+      <CalendarModal
+        setIsModalOpen={setIsModalOpen}
+        isModalOpen={isModalOpen}
+        modalContent={modalContent}
+        closeModal={closeModal}
+      />
+    </Styled.CalendarContainer>
+
   );
 };
 

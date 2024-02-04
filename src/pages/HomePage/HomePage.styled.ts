@@ -20,21 +20,19 @@ export const StyledHomePageSection = styled.section`
   }
   @media ${device.desktop} {
     background-image: url("${BgImgDesk}");
-   
   }
 `;
 
-export const ContainerWrapper=styled.div`
-display: flex;
-flex-direction: column;
-gap:40px;
-@media ${device.desktop} {
-    
+export const ContainerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  @media ${device.desktop} {
     flex-direction: row;
-      justify-content:space-between;
-      gap:0px;
+    justify-content: space-between;
+    gap: 0px;
   }
-`
+`;
 export const ContainerDailyNorma = styled.div`
   background-image: url("${BottleMob}");
   background-repeat: no-repeat;
@@ -46,7 +44,7 @@ export const ContainerDailyNorma = styled.div`
   @media ${device.tablet} {
     background-image: url("${BottleTabl}");
     background-position-y: 5px;
-    background-position-x: 90px;   
+    background-position-x: 90px;
     padding-top: 0px;
     padding-bottom: 32px;
     padding-left: 24px;
@@ -57,7 +55,6 @@ export const ContainerDailyNorma = styled.div`
     background-position-y: 0px;
     background-position-x: -50px;
     height: 548px;
-   
   }
 `;
 export const ContainerCalendar = styled.div`
@@ -80,7 +77,6 @@ export const ContainerCalendar = styled.div`
   @media ${device.tablet} {
     padding: 32px 24px;
     background-image: url("${BgImgTabl}");
-    
   }
 
   @media ${device.desktop} {
@@ -88,5 +84,35 @@ export const ContainerCalendar = styled.div`
     max-height: 688px;
     background-image: url("${BgImgDesk}");
     margin-bottom: 0px;
+  }
+  .chart-container {
+    width: 246px;
+    height: 500px;
+    @media ${device.tablet} {
+      width: 646px;
+      height: 264px;
+    }
+    @media ${device.desktop} {
+      width: 544px;
+      height: 320px;
+    }
+  }
+  .mont-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    a:hover {
+      cursor: inherit;
+      scale: 1.2;
+    }
+  }
+  .month-icon {
+    width: 32px;
+    height: 32px;
+    fill: var(--primary-blue);
+
+    &:hover {
+      fill: var(--secondary-orange);
+    }
   }
 `;
