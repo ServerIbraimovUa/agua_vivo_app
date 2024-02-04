@@ -4,12 +4,12 @@ import {
 } from "../../components/Header/Header.style";
 import Logo from "../../components/Header/Logo/Logo";
 import {
+  Button,
   ContainerLink,
   ImgGarage,
   Title,
   VerificationSection,
-  WrapperImg,
-  WrapperLink,
+  WrapperImg 
 } from "./VerificationPagestyled";
 import Img from "../../assets/images/garage.jpg";
 import { useParams } from "react-router";
@@ -19,6 +19,8 @@ import { setVerify } from "../../redux/auth/authSlice";
 import { resendVerifyEmail } from "../../redux/auth/auth.operations";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Popover from "../../components/Popover/Popover";
+import Icon from "../../components/Icon/Icon";
 
 const VerificationPage = () => {
   const { token } = useParams();
@@ -42,29 +44,30 @@ const VerificationPage = () => {
   };
   return (
     <>
-      <HeaderStyle>
+      <HeaderStyle  className="section">
         <div className="container header-container">
           <NavbarContainer>
             <Logo />
           </NavbarContainer>
         </div>
       </HeaderStyle>
+      <main>
       <VerificationSection className="section">
         <ContainerLink className="container">
-          <WrapperLink>
-            <Title>Check your email to verify your account</Title>
-            <div>
-              <span>If you didn't receive an email</span>
-
-              <button onClick={handleClick}>click this link to resend</button>
-            </div>
-          </WrapperLink>
+          <Popover message="Check your email to verify your account"/>
+          <Popover message="If you didn't receive an email, click this link to resend" verify={true}/>
+            
+          <Icon className="icon-mail" id="mail" />
+              <Button onClick={handleClick}>Resend</Button>
+           
+         
         </ContainerLink>
         <WrapperImg className="container">
           <Title>Here you could be your advertisment!</Title>
           <ImgGarage src={Img} alt="advertisment" />
         </WrapperImg>
       </VerificationSection>
+      </main>
     </>
   );
 };

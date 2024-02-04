@@ -6,6 +6,7 @@ interface Props {
     message?: string;
     dailyNorma?: boolean;
     waterAmount?:boolean;
+    verify?:boolean;
   }
 
 const Popover: FC<Props> = ({ message, ...arg }) => {
@@ -14,7 +15,8 @@ const Popover: FC<Props> = ({ message, ...arg }) => {
     <>
     <PopoverWrapper 
       $dailyNorma={arg.dailyNorma}
-      $waterAmount={arg.waterAmount}>
+      $waterAmount={arg.waterAmount}
+      $verify={arg.verify}>
       <PopoverMessage>{message}</PopoverMessage>
     </PopoverWrapper>
     </>

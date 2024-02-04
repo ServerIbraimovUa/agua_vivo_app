@@ -3,7 +3,8 @@ import { device } from "../../css/deviceSize";
 
 interface Props {
     $dailyNorma: boolean | undefined;
-    $waterAmount: boolean | undefined;    
+    $waterAmount: boolean | undefined; 
+    $verify:boolean | undefined;   
 }
 
 export const PopoverWrapper = styled.span<Props>`
@@ -20,11 +21,13 @@ export const PopoverWrapper = styled.span<Props>`
   width: 200px;
   height: 80px;
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
-  top: ${(props) => (props.$dailyNorma ? "-90px":"-80px")};
+  top: ${(props) => (props.$dailyNorma ? "-90px":"70px")};
   left: ${(props) => (props.$dailyNorma && "-170px")};
-  left: ${(props) => (props.$waterAmount && "125px")};
   top: ${(props) => (props.$waterAmount && "0px")};
+  left: ${(props) => (props.$waterAmount && "125px")};
   width: ${(props) => (props.$waterAmount && "140px")};
+  top: ${(props) => (props.$verify && "360px")};
+  left: ${(props) => (props.$verify && "45px")};
  
   &::after {
     content: "";
