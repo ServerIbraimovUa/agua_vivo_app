@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
-// import { useAppDispatch } from "../../redux/redux_ts/hook";
+import { emailSchema } from "../../schemas/authSchemas";
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   ForgotPassFormButton,
   StyledForgotPasswordForm,
@@ -17,7 +18,9 @@ const ForgotPasswordForm = () => {
     handleSubmit,
     // reset,
     formState: { errors },
-  } = useForm<Data>();
+  } = useForm<Data>({
+    resolver: yupResolver(emailSchema()),
+  });
 
   const dispatch = useAppDispatch();
 
@@ -46,7 +49,7 @@ const ForgotPasswordForm = () => {
             placeholder="E-mail"
           />
           <span className="error">
-            {errors.email && <span>This field is required</span>}
+            {errors.email && <span>{errors.email?.message}</span>}
           </span>
         </span>
       </label>

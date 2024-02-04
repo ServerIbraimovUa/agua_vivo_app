@@ -11,6 +11,8 @@ import { useAppDispatch } from "../../redux/redux_ts/hook";
 import { resetPasswordThunk } from "../../redux/auth/auth.operations";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { passwordSchemas } from "../../schemas/authSchemas";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export interface Data {
   password: string;
@@ -18,8 +20,13 @@ export interface Data {
 }
 
 const ResetPasswordForm = () => {
-  const [toggleInput, setToggleInput] = useState("password");
-  const [toggleIcon, setToggleIcon] = useState(false);
+  const [passwordToggleInput, setPasswordToggleInput] = useState("password");
+  const [passwordToggleIcon, setPasswordToggleIcon] = useState(false);
+
+  const [repeatPasswordToggleInput, setRepeatPasswordToggleInput] =
+    useState("password");
+  const [repeatPasswordToggleIcon, setRepeatPasswordToggleIcon] =
+    useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   if (!id) return;
@@ -29,7 +36,9 @@ const ResetPasswordForm = () => {
     handleSubmit,
     // reset,
     formState: { errors },
-  } = useForm<Data>();
+  } = useForm<Data>({
+    resolver: yupResolver(passwordSchemas()),
+  });
 
   const dispatch = useAppDispatch();
 
@@ -41,7 +50,7 @@ const ResetPasswordForm = () => {
         navigate("/signin");
       })
       .catch(() => {
-          toast.error("Password  wasn't changed");
+        toast.error("Password  wasn't changed");
       });
   };
 
@@ -56,15 +65,19 @@ const ResetPasswordForm = () => {
                 errors.password ? "input-red input" : "input-blue input"
               }
               {...register("password", { required: true })}
-              type={toggleInput}
+              type={passwordToggleInput}
               placeholder="Password"
             />
             <StyledResetPassFormSpan
               onClick={() =>
-                togglePassword(toggleInput, setToggleInput, setToggleIcon)
+                togglePassword(
+                  passwordToggleInput,
+                  setPasswordToggleInput,
+                  setPasswordToggleIcon
+                )
               }
             >
-              {toggleIcon ? (
+              {passwordToggleIcon ? (
                 <Icon className="eye-icon" id="eye" />
               ) : (
                 <Icon className="eye-outline-icon" id="eye-outline" />
@@ -86,15 +99,19 @@ const ResetPasswordForm = () => {
               {...register("repeatPassword", {
                 required: true,
               })}
-              type={toggleInput}
+              type={repeatPasswordToggleInput}
               placeholder="Repeat password"
             />
             <StyledResetPassFormSpan
               onClick={() =>
-                togglePassword(toggleInput, setToggleInput, setToggleIcon)
+                togglePassword(
+                  repeatPasswordToggleInput,
+                  setRepeatPasswordToggleInput,
+                  setRepeatPasswordToggleIcon
+                )
               }
             >
-              {toggleIcon ? (
+              {repeatPasswordToggleIcon ? (
                 <Icon className="eye-icon" id="eye" />
               ) : (
                 <Icon className="eye-outline-icon" id="eye-outline" />
