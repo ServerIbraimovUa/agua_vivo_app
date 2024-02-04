@@ -83,7 +83,7 @@ export const Days = styled.ul`
   }
   li.disabled {
   cursor: not-allowed;
-  color: gray;
+  opacity: 0.6;
   }
   .procent {
     color: #9ebbff;
@@ -159,4 +159,7 @@ export const ModalContent = styled.div`
 
 export const LowPercentageDay = styled(Day)`
   border: #ff9d43 1px solid;
+  &.disabled {
+    border: none;
+  }
 `;
