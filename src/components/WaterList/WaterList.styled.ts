@@ -120,6 +120,10 @@ export const WaterItemBoxStyled = styled.li`
     width: 26px;
     height: 26px;
   }
+  .water-bottle-icon {
+    width: 26px;
+    height: 30px;
+  }
 
   .water-amount-card {
     font-size: 18px;
@@ -166,6 +170,10 @@ export const WaterItemBoxStyled = styled.li`
     .water-glass-icon {
       width: 36px;
       height: 36px;
+    }
+    .water-bottle-icon {
+      width: 36px;
+      height: 39px;
     }
   }
 `;

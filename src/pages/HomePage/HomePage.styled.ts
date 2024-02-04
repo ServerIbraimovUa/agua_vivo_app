@@ -43,9 +43,6 @@ export const ContainerDailyNorma = styled.div`
   background-position-y: 100px;
   @media ${device.tablet} {
     background-position-x: 0px;
-    background-position-y: 20px;
-    position: relative;
-    z-index: 1;
   }
 `;
 
@@ -96,5 +93,35 @@ export const ContainerCalendar = styled.div`
     width: 592px;
     margin-bottom: 0px;
     padding-top: 24px;
+  }
+  .chart-container {
+    width: 246px;
+    height: 500px;
+    @media ${device.tablet} {
+      width: 646px;
+      height: 264px;
+    }
+    @media ${device.desktop} {
+      width: 544px;
+      height: 320px;
+    }
+  }
+  .mont-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    a:hover {
+      cursor: inherit;
+      scale: 1.2;
+    }
+  }
+  .month-icon {
+    width: 32px;
+    height: 32px;
+    fill: var(--primary-blue);
+
+    &:hover {
+      fill: var(--secondary-orange);
+    }
   }
 `;

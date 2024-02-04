@@ -5,11 +5,12 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
 
 import { AddWaterModalStyled } from "../WaterList.styled";
-import Popover from "../../DailyNorma/Popover";
+
 import Icon from "../../Icon/Icon";
 
 import { addWaterThunk } from "../../../redux/water/water.operations";
 import { selectAmountDaily } from "../../../redux/water/waterSelectors";
+import Popover from "../../Popover/Popover";
 
 interface IProps {
   id?: string;
@@ -112,7 +113,8 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
     if (w === 0) {
       visible = true;
       return "The amount of water cannot be 0!";
-    } else if (Number(t) % 5 !== 0 && Number(f) % 5 !== 0) {
+    }
+    if (Number(t) % 5 !== 0 && Number(f) % 5 !== 0) {
       visible = true;
       return "Please choose a time that is divisible by 5";
     }
@@ -150,7 +152,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
       <form className="add-water-form" onSubmit={handleSubmit(onSubmit)}>
         <label className="water-label">
           <span className="popover">Recording time:</span>
-          {visible && <Popover message={message} />}
+          {visible && <Popover message={message} waterAmount={true}/>}
           <select
             {...register("time", { required: true })}
             name="time"
@@ -168,6 +170,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
           <span className="enter-water-span">
             Enter the value of water used:
           </span>
+   
           <input
             {...register("waterVolume", { required: true })}
             type="number"

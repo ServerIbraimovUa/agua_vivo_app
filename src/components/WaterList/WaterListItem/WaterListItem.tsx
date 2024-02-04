@@ -22,11 +22,20 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
   const handleUpdateWater = (waterData: IUpdateWaterPayload) => {
     dispatch(updateWaterVolumeThunk(waterData));
   };
+  const waterIcon = (volume: number) => {
+    if (volume >= 1500) {
+      return <Icon className="water-bottle-icon" id="barrel" />;
+    } else if (volume >= 500) {
+      return <Icon className="water-bottle-icon" id="bottle" />;
+    } else {
+      return <Icon className="water-glass-icon" id="water" />;
+    }
+  };
 
   return (
     <WaterItemBoxStyled>
       <div className="water-info">
-        <Icon className="water-glass-icon" id="water"></Icon>
+        {waterIcon(waterVolume)}
         <div className="water-amount-time">
           <p className="water-amount-card">{waterVolume} ml</p>
           <p className="time">{time}</p>

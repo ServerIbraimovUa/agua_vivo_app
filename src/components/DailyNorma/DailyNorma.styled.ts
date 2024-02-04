@@ -123,6 +123,12 @@ export const Title = styled.h2`
 `;
 export const EditButton = styled.button`
   color: #8baeff;
+  &:hover{
+    text-decoration: underline;
+    text-decoration-color:var(--secondary-orange);
+    text-decoration-thickness:2px;
+    font-size: 18px;
+  }
 `;
 export const WrapperButton = styled.div`
   display: flex;
