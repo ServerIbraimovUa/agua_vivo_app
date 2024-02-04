@@ -40,10 +40,8 @@ const ResetPasswordForm = () => {
         toast.success("Password was changed successfully");
         navigate("/signin");
       })
-      .catch((e) => {
-        if (e.includes("409")) {
+      .catch(() => {
           toast.error("Password  wasn't changed");
-        }
       });
   };
 
