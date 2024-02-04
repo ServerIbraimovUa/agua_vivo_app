@@ -3,7 +3,10 @@ import * as Styled from "./Calendar.styled";
 import { useAppDispatch } from "../../redux/redux_ts/hook";
 import { getAmountMonthlyThunk } from "../../redux/water/water.operations";
 import { useSelector } from "react-redux";
-import { selectAmountMonthly } from "../../redux/water/waterSelectors";
+import {
+  selectAmountDaily,
+  selectAmountMonthly,
+} from "../../redux/water/waterSelectors";
 import CalendarModal from "./CalendarModal";
 
 export interface Day {
@@ -23,13 +26,15 @@ const Calendar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<Day | null>(null);
   const amountMonth = useSelector(selectAmountMonthly);
-  const id = `${currentDate.getFullYear()}-${(currentDate.getMonth() +1).toString().padStart(2, "0")}`;
+  const data = useSelector(selectAmountDaily);
+  const id = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}`;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getAmountMonthlyThunk(id));
-  }, [dispatch, id]);
-
+  }, [dispatch, id, data.entries.length]);
 
   const getDaysInMonth = (date: Date): Day[] => {
     const year = date.getFullYear();
@@ -124,11 +129,11 @@ const Calendar: React.FC = () => {
   };
 
   const getCurrentDayInfo = (day: IDateInfo) => {
-    if(!amountMonth?.month) {
+    if (!amountMonth?.month) {
       day.percent = 0;
       day.amountOfWater = 0;
       day.dailyNorma = 2.0;
-       return  
+      return;
     }
 
     const currentDay = day.day.toString();
@@ -141,7 +146,7 @@ const Calendar: React.FC = () => {
       day.amountOfWater = 0;
       day.dailyNorma = 2.0;
     }
-    
+
     if (index !== -1) {
       const { amountOfWater, dailyNorma, percentage } =
         amountMonth.month[index];
@@ -152,12 +157,28 @@ const Calendar: React.FC = () => {
     }
   };
 
+  const isJanuary2024 =
+    currentDate.getMonth() === 0 && currentDate.getFullYear() === 2024;
+
+  const isNextDayDisabled = (day: number): boolean => {
+    if (currentDate.getMonth() !== new Date().getMonth()) {
+      return false;
+    }
+
+    const nextDay = getCurrentDate().getDate() + 1;
+    return day >= nextDay;
+  };
+
   return (
     <Styled.CalendarContainer>
       <div className="right-align">
         <h1 className="month">Month</h1>
         <div className="header">
-          <button className="button" onClick={handlePrevMonth}>
+          <button
+            className={`button ${isJanuary2024 ? "disabled" : ""}`}
+            disabled={isJanuary2024}
+            onClick={handlePrevMonth}
+          >
             &lt;
           </button>
           <div className="month-title">
@@ -179,22 +200,33 @@ const Calendar: React.FC = () => {
 
       <Styled.Days>
         {getDaysInMonth(currentDate).map((day: Day) => {
-            getCurrentDayInfo(day);
-          
+          getCurrentDayInfo(day);
+
+          const isDisabled = isNextDayDisabled(day.day);
 
           return (
-            <li key={day.day} id={`day-${day.day}`} className="hover active">
+            <li
+              key={day.day}
+              id={`day-${day.day}`}
+              className={`li hover active ${isDisabled ? "disabled" : ""}`}
+            >
               {day.percent !== undefined && day.percent < 100 ? (
                 <Styled.LowPercentageDay
-                  className={`day ${selectedDay === day.day ? "selected" : ""}`}
-                  onClick={() => handleDayClick(day)}
+                  className={`day ${
+                    selectedDay === day.day ? "selected" : ""
+                  } ${isDisabled ? "disabled" : ""}`}
+                  onClick={isDisabled ? undefined : () => handleDayClick(day)}
+                  aria-disabled={isDisabled}
                 >
                   {day.day}
                 </Styled.LowPercentageDay>
               ) : (
                 <Styled.Day
-                  className={`day ${selectedDay === day.day ? "selected" : ""}`}
-                  onClick={() => handleDayClick(day)}
+                  className={`day ${
+                    selectedDay === day.day ? "selected" : ""
+                  } ${isDisabled ? "disabled" : ""}`}
+                  onClick={isDisabled ? undefined : () => handleDayClick(day)}
+                  aria-disabled={isDisabled}
                 >
                   {day.day}
                 </Styled.Day>
@@ -214,8 +246,14 @@ const Calendar: React.FC = () => {
           );
         })}
       </Styled.Days>
-     <CalendarModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} modalContent={modalContent} closeModal={closeModal}/>
-     </Styled.CalendarContainer>
+
+      <CalendarModal
+        setIsModalOpen={setIsModalOpen}
+        isModalOpen={isModalOpen}
+        modalContent={modalContent}
+        closeModal={closeModal}
+      />
+    </Styled.CalendarContainer>
   );
 };
 

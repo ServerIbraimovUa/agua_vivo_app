@@ -14,7 +14,7 @@ const LoginPage = () => {
           <h2 className="title">Sign In</h2>
           <AuthForm repeat={false} />
           <AuthFormLink
-            className="btn"
+            className="btn btn-google"
             href="https://agua-vivo-app-backend.onrender.com/google/google"
           >
             Google
