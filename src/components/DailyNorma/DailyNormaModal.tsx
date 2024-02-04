@@ -20,9 +20,9 @@ import {
 } from "./DailyNorma.styled";
 import { useAppDispatch } from "../../redux/redux_ts/hook";
 import { updateUserDailyNormaThunk } from "../../redux/auth/auth.operations";
-import Popover from "./Popover";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelectors";
+import Popover from "../Popover/Popover";
 
 
 
@@ -34,12 +34,13 @@ type Inputs = {
   weight: string;
   time: string;
   sex?: "man" | "woman";
-  dailyNorma: string;
+  dailyNorma: number;
 };
 
 const DailyNormaModal: FC<Props> = ({ onClose }) => {
 
   const user = useSelector(selectUser);
+
    const {
     register,
     handleSubmit,
@@ -50,7 +51,7 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
       weight: "",
       time: "",
       sex:user.gender||"woman",
-      dailyNorma: "",
+      dailyNorma: user.dailyNorma||undefined,
     },
     mode: "onChange",
   });
@@ -159,7 +160,7 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
           </Label>
           <LabelNorma>
             <SpanText>The required amount of water in liters per day:</SpanText>
-            <Span>{visible?(<Popover message={message}/>):myDailyNorma}</Span>
+            <Span>{visible?(<Popover message={message} dailyNorma={true}/>):myDailyNorma}</Span>
           </LabelNorma>
         </FormBody>
         <FormFooter>
