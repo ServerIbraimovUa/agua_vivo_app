@@ -11,7 +11,7 @@ import {
   WrapperImg,
   WrapperLink,
 } from "./VerificationPagestyled";
-import Img from "../../assets/images/garage.png";
+import Img from "../../assets/images/garage.jpg";
 import { useParams } from "react-router";
 import { useAppDispatch } from "../../redux/redux_ts/hook";
 import { useEffect } from "react";

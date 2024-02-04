@@ -10,7 +10,8 @@ import { useAppDispatch } from "../../../redux/redux_ts/hook";
 import { updateWaterVolumeThunk } from "../../../redux/water/water.operations";
 import { selectAmountDaily } from "../../../redux/water/waterSelectors";
 import { IUpdateWaterPayload } from "../../../redux/redux_ts/interfaces";
-import Popover from "../../DailyNorma/Popover";
+import Popover from "../../Popover/Popover";
+
 
 interface IProps {
   id?: string;
@@ -138,7 +139,7 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
       <form className="add-water-form" onSubmit={handleSubmit(onSubmit)}>
         <label className="water-label">
           <span>Recording time:</span>
-          {visible && <Popover message={message} />}
+          {visible && <Popover message={message} waterAmount={true}/>}
           <select
             {...register("time", { required: true })}
             name="time"
