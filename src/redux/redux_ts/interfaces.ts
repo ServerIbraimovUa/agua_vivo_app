@@ -12,7 +12,6 @@ export interface IAuthInitInfo {
     dailyNorma?: number | null;
   };
   token: string | null;
-  isVerified: boolean,
   isAuthorized: boolean;
   isLoading: boolean;
   isRefreshing: boolean;
