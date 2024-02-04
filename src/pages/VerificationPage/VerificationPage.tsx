@@ -6,10 +6,11 @@ import Logo from "../../components/Header/Logo/Logo";
 import {
   Button,
   ContainerLink,
-  ImgGarage,
-  Title,
+  ImgGarage, 
   VerificationSection,
-  WrapperImg 
+  WrapperContainer,
+  WrapperImg, 
+  
 } from "./VerificationPagestyled";
 import Img from "../../assets/images/garage.jpg";
 import { useParams } from "react-router";
@@ -44,31 +45,33 @@ const VerificationPage = () => {
   };
   return (
     <>
-      <HeaderStyle  className="section">
+      <HeaderStyle>
         <div className="container header-container">
           <NavbarContainer>
             <Logo />
           </NavbarContainer>
         </div>
       </HeaderStyle>
-      <main>
+    
       <VerificationSection className="section">
+        <WrapperContainer>
         <ContainerLink className="container">
+       
           <Popover message="Check your email to verify your account"/>
           <Popover message="If you didn't receive an email, click this link to resend" verify={true}/>
             
           <Icon className="icon-mail" id="mail" />
-              <Button onClick={handleClick}>Resend</Button>
-           
-         
+
+          <Button onClick={handleClick}>Resend</Button>        
+              
         </ContainerLink>
         <WrapperImg className="container">
-          <Title>Here you could be your advertisment!</Title>
+          <Popover message="Here you could be your advertisment!" advert={true}/>
           <ImgGarage src={Img} alt="advertisment" />
         </WrapperImg>
+        </WrapperContainer>
       </VerificationSection>
-      </main>
-    </>
+        </>
   );
 };
 
