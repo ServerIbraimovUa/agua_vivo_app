@@ -1,6 +1,6 @@
-import { FC, ReactNode, useEffect } from "react";
-import { Overlay } from "./Modal.styled";
-import Icon from "../Icon/Icon";
+import { FC, ReactNode, useEffect } from 'react';
+import { Overlay } from './Modal.styled';
+import Icon from '../Icon/Icon';
 
 interface Props {
   setVisible: (boolean: boolean) => void;
@@ -10,19 +10,26 @@ interface Props {
   logout?: boolean;
   daily?: boolean;
   delete?: boolean;
+  isTeamModal?: boolean;
 }
 
-const Modal: FC<Props> = ({ setVisible, title, children, ...arg }) => {
+const Modal: FC<Props> = ({
+  setVisible,
+  isTeamModal,
+  title,
+  children,
+  ...arg
+}) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.code === "Escape") {
+      if (e.code === 'Escape') {
         setVisible(false);
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [setVisible]);
 
@@ -40,8 +47,26 @@ const Modal: FC<Props> = ({ setVisible, title, children, ...arg }) => {
       $logout={arg.logout}
       $delete={arg.delete}
     >
-      <div className="modal">
-        <div className="header">
+      <div
+        className="modal"
+        style={
+          isTeamModal
+            ? { backgroundColor: 'var(--secondary-light-blue)' }
+            : { backgroundColor: 'var(--primary-white)' }
+        }
+      >
+        <div
+          className="header"
+          style={
+            isTeamModal
+              ? {
+                  color: 'var(--primary-blue)',
+                  marginBottom: '0px',
+                  fontStyle: 'italic',
+                }
+              : { color: '#2f2f2f', marginBottom: '24px', fontStyle: 'normal' }
+          }
+        >
           <p>{title}</p>
           <button onClick={() => setVisible(false)}>
             <Icon className="modal-icon" id="close" />
