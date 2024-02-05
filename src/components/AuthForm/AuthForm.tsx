@@ -23,9 +23,13 @@ interface Props {
 }
 
 const AuthForm: FC<Props> = ({ repeat }) => {
-  const [toggleInput, setToggleInput] = useState("password");
-  const [toggleIcon, setToggleIcon] = useState(false);
+  const [passwordToggleInput, setPasswordToggleInput] = useState("password");
+  const [passwordToggleIcon, setPasswordToggleIcon] = useState(false);
 
+  const [repeatPasswordToggleInput, setRepeatPasswordToggleInput] =
+    useState("password");
+  const [repeatPasswordToggleIcon, setRepeatPasswordToggleIcon] =
+    useState(false);
   const {
     register,
     handleSubmit,
@@ -87,7 +91,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
             placeholder="E-mail"
           />
           <span className="error">
-            {errors.email && <span>This field is required</span>}
+            {errors.email && <span>{errors.email?.message}</span>}
           </span>
         </span>
       </label>
@@ -101,15 +105,19 @@ const AuthForm: FC<Props> = ({ repeat }) => {
                 errors.password ? "input-red input" : "input-blue input"
               }
               {...register("password", { required: true })}
-              type={toggleInput}
+              type={passwordToggleInput}
               placeholder="Password"
             />
             <StyledAuthFormSpan
               onClick={() =>
-                togglePassword(toggleInput, setToggleInput, setToggleIcon)
+                togglePassword(
+                  passwordToggleInput,
+                  setPasswordToggleInput,
+                  setPasswordToggleIcon
+                )
               }
             >
-              {toggleIcon ? (
+              {passwordToggleIcon ? (
                 <Icon className="eye-icon" id="eye" />
               ) : (
                 <Icon className="eye-outline-icon" id="eye-outline" />
@@ -133,15 +141,19 @@ const AuthForm: FC<Props> = ({ repeat }) => {
                   {...register("repeatPassword", {
                     required: true,
                   })}
-                  type={toggleInput}
+                  type={repeatPasswordToggleInput}
                   placeholder="Repeat password"
                 />
                 <StyledAuthFormSpan
                   onClick={() =>
-                    togglePassword(toggleInput, setToggleInput, setToggleIcon)
+                    togglePassword(
+                      repeatPasswordToggleInput,
+                      setRepeatPasswordToggleInput,
+                      setRepeatPasswordToggleIcon
+                    )
                   }
                 >
-                  {toggleIcon ? (
+                  {repeatPasswordToggleIcon ? (
                     <Icon className="eye-icon" id="eye" />
                   ) : (
                     <Icon className="eye-outline-icon" id="eye-outline" />

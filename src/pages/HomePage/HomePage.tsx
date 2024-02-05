@@ -35,9 +35,9 @@ const HomePage = () => {
               <DailyNorma />
               <WaterRatio />
             </ContainerDailyNorma>
-            <ContainerCalendar>
+            <ContainerCalendar className="fourth-step">
               <WaterList />
-              <div className="mont-box">
+              <div className="mont-box fifth-step">
                 <Link to="/home">
                   <Icon className="month-icon" id="date" />
                 </Link>

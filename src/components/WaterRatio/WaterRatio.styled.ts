@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { device } from "../../css/deviceSize";
+import styled from 'styled-components';
+import { device } from '../../css/deviceSize';
 
 export const WaterRatioContainer = styled.div`
   width: 280px;
@@ -18,11 +18,21 @@ export const WaterRatioContainer = styled.div`
 export const WaterRatioThumb = styled.div`
   @media ${device.tablet} {
     display: flex;
-    gap: 30px;
+    gap: 16px;
   }
   @media ${device.desktop} {
     display: flex;
     gap: 24px;
+  }
+`;
+
+export const RangeContainer = styled.div`
+  width: 280px;
+  @media ${device.tablet} {
+    width: 356px;
+  }
+  @media ${device.desktop} {
+    width: 391px;
   }
 `;
 
@@ -32,11 +42,11 @@ export const WaterRatioRangeThumb = styled.div`
   align-items: center;
 `;
 
-export const WaterRatioTitle = styled.h2`
+export const WaterRatioTitle = styled.h3`
   padding-bottom: 8px;
   font-size: 18px;
   line-height: 1.33;
-  color: var(--proimary-blue);
+  color: var(--primary-blue);
 
   @media ${device.tablet} {
     padding-bottom: 16px;
@@ -95,10 +105,10 @@ export const WaterRatioBtnThumb = styled.div`
   align-items: center;
   border-radius: 10px;
   @media ${device.tablet} {
-    width: 400px;
+    width: 336px;
   }
   @media ${device.desktop} {
-    width: 592px;
+    width: 178px;
   }
 `;
 
@@ -106,17 +116,13 @@ export const WaterRatioBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 280px;
+  width: 100%;
   height: 36px;
   gap: 5px;
   font-weight: var(--medium-font-weight);
   border-radius: 10px;
 
   @media ${device.tablet} {
-    width: 336px;
     height: 44px;
-  }
-  @media ${device.desktop} {
-    width: 178px;
   }
 `;

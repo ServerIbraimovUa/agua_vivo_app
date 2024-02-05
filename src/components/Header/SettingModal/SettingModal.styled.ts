@@ -21,49 +21,6 @@ export const FormSettingStyled = styled.form`
   }
 `;
 
-export const FormAvatar = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  width: 100%;
-`;
-
-export const FormAvatarTitle = styled.span`
-  font-size: 18px;
-  font-weight: 500;
-`;
-
-export const FormAvatarLabel = styled.label`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  .avatar-setting {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-  }
-
-  .input-avatar {
-    display: none;
-  }
-
-  .setting-modal-icon {
-    width: 16px;
-    height: 16px;
-    stroke: var(--primary-blue);
-    cursor: inherit;
-  }
-
-  .text-loading {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--primary-blue);
-    cursor: inherit;
-  }
-`;
-
 export const FormUserWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -132,7 +89,9 @@ export const UserInfoWrap = styled.div`
     align-items: flex-start;
     gap: 8px;
   }
-
+  .disabled-label {
+    cursor: not-allowed;
+  }
   .user-info-title,
   .user-info-title {
     font-size: 18px;
@@ -187,10 +146,7 @@ export const FormNameInput = styled.input`
   padding: 12px 36px 12px 8px;
   color: var(--primary-blue);
   background-color: var(--primary-white);
-  &:hover,
-  &:focus {
-    outline: none;
-  }
+
   &::placeholder {
     font-size: 16px;
     font-weight: 400;
@@ -209,10 +165,8 @@ export const FormEmailInput = styled.input`
   padding: 12px 36px 12px 8px;
   color: var(--secondary-blue);
   background-color: var(--primary-white);
-  &:hover,
-  &:focus {
-    outline: none;
-  }
+  pointer-events: none;
+
   &::placeholder {
     font-size: 16px;
     font-weight: 400;
@@ -231,10 +185,7 @@ export const FormPasswordInput = styled.input`
   padding: 12px 36px 12px 8px;
   color: var(--primary-blue);
   background-color: var(--primary-white);
-  &:hover,
-  &:focus {
-    outline: none;
-  }
+
   &::placeholder {
     font-size: 16px;
     font-weight: 400;

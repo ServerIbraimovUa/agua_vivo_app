@@ -32,7 +32,7 @@ const WaterList = () => {
 
   return (
     <WaterContainerStyled>
-      <h3 className="water-title">Today</h3>
+      <h2 className="water-title">Today</h2>
       {loading && !error && <Loading />}
       {entries.length === 0 ? (
         <p className="water-empty">No notes yet</p>

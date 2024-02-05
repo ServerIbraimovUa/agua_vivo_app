@@ -5,6 +5,7 @@ import {
   OutputThumb,
   PointsSpan,
   PointsThumb,
+  RangeContainer,
   RenderThumb,
   RenderTrack,
   WaterRatioBtn,
@@ -33,7 +34,7 @@ const WaterRatio = () => {
     <>
       <WaterRatioContainer>
         <WaterRatioThumb>
-          <div>
+          <RangeContainer className="third-step">
             <WaterRatioTitle>Today</WaterRatioTitle>
             <WaterRatioRangeThumb>
               <Range
@@ -79,9 +80,12 @@ const WaterRatio = () => {
                 <PointsSpan>100%</PointsSpan>
               )}
             </PointsThumb>
-          </div>
+          </RangeContainer>
           <WaterRatioBtnThumb className="hover">
-            <WaterRatioBtn className="btn" onClick={() => setVisible(true)}>
+            <WaterRatioBtn
+              className="btn second-step"
+              onClick={() => setVisible(true)}
+            >
               <Icon className="water-ratio-plus" id="plus-circle" />
               Add Water
             </WaterRatioBtn>
