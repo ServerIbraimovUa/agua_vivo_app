@@ -29,8 +29,8 @@ export const PopoverWrapper = styled.span<Props>`
   width: ${(props) => (props.$waterAmount && "140px")};
   top: ${(props) => (props.$verify && "320px")};
   left: ${(props) => (props.$verify && "10px")};
-  top: ${(props) => (props.$advert && "560px")};
-  left: ${(props) => (props.$advert && "160px")};
+  top: ${(props) => (props.$advert && "20px")};
+  left: ${(props) => (props.$advert && "120px")};
  
   &::after {
     content: "";
@@ -51,10 +51,11 @@ export const PopoverWrapper = styled.span<Props>`
     left: ${(props) => (props.$dailyNorma ? "25px":"120px")};
     left: ${(props) => (props.$waterAmount && "220px")};
     top: ${(props) => (props.$waterAmount && "-70px")};
-    width: ${(props) => (props.$waterAmount && "200px")};
+    width: ${(props) => (props.$waterAmount && "300px")};
+    width: ${(props) => (props.$dailyNorma&&"300px")};
     top: ${(props) => (props.$verify && "210px")};
     left: ${(props) => (props.$verify && "140px")};
-    top: ${(props) => (props.$advert && "520px")};
+    top: ${(props) => (props.$advert && "-40px")};
     left: ${(props) => (props.$advert && "500px")};
     &::before {
       content: "";
@@ -75,11 +76,13 @@ export const PopoverWrapper = styled.span<Props>`
     top: ${(props) => (props.$dailyNorma ? "-70px":"60px")};
     left: ${(props) => (props.$dailyNorma ? "25px":"140px")};
     top: ${(props) => (props.$verify && "300px")};
+    left: ${(props) => (props.$waterAmount&&"245px")};
+    top: ${(props) => (props.$waterAmount && "-70px")};
     left: ${(props) => (props.$verify && "150px")};
     width: ${(props) => (props.$verify && "300px")};
-    width: ${(props) => (props.$dailyNorma? "200px":"300px")};
-    top: ${(props) => (props.$advert && "600px")};
-    left: ${(props) => (props.$advert && "950px")};
+    width: ${(props) => (props.$dailyNorma?"200px": "300px")};
+    top: ${(props) => (props.$advert && "520px")};
+    left: ${(props) => (props.$advert && "320px")};
   }
 `;
 
