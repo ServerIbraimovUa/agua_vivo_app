@@ -1,0 +1,71 @@
+{
+  "topology": "topology",
+  "header": {
+    "signin": "signin",
+    "signup": "signup"
+  },
+  "welcome": {
+    "title": "Water consumption tracker",
+    "subtitle": "Record daily water intake and track",
+    "subtitle3": "Tracker Benefits",
+    "trackerLi1": "Habit drive",
+    "trackerLi2": "View statistics",
+    "trackerLi3": "Personal rate setting",
+    "button": "Try tracker",
+    "subtitle3Why": "Why Drink Water",
+    "subtitle3WhyLI1": "Supply of nutrients to all organs",
+    "subtitle3WhyLI2": "Providing oxygen to the lungs",
+    "subtitle3WhyLI3": "Maintaining the work of the heart",
+    "subtitle3WhyLI4": "Release of processed substances",
+    "subtitle3WhyLI5": "Ensuring the stability of the internal environment",
+    "subtitle3WhyLI6": "Maintaining within the normal temperature",
+    "subtitle3WhyLI7": "Maintaining an immune system capable of resisting disease"
+  },
+  "signin": {
+    "title": "Sign In",
+    "label1": "Enter your email",
+    "label2": "Enter your password",
+    "signinButton": "Sign In",
+    "signup": "Sign up",
+    "forgot": "Forgot your password?",
+    "notifySuccess": "Welcome to your account!",
+    "notifyError": "Please write the correct Email or Password"
+  },
+  "signup": {
+    "title": "Sign Up",
+    "label1": "Enter your email",
+    "label2": "Enter your password",
+    "label3": "Repeat password",
+    "signupButton": "Sign In",
+    "signin": "Sign in",
+    "notifySuccess": "Registration successful!",
+    "notifyError": "Email in use."
+  },
+  "forgot": {
+    "title": "Forgot password",
+    "label1": "Enter your email",
+    "sendButton": "Send",
+    "notify": "Email was successfully sent"
+  },
+  "resetPass": {
+    "title": "Reset password",
+    "label1": "Enter your password",
+    "label2": "Repeat password",
+    "updateButton": "Update",
+    "notify": "Email was successfully sent"
+  },
+  "verifyEmail": {
+    "title1": "Check your email to verify your account",
+    "link": "If you didn't receive an email click this link to resend",
+    "title2": "Here you could be your advertisement!",
+    "notify": "Email was resented successfully"
+  },
+  "homepage": {
+    "h3DailyNorma": "My daily norma",
+    "editButton": "Edit",
+    "h2-3Today": "Today",
+    "addWaterButton": "Add Water",
+    "h2Month": "Month",
+    "pEmpty": "No notes yet"
+  }
+}
