@@ -116,8 +116,8 @@ export const ContainerCalendar = styled.div`
 
 export const TeamContainerDiv = styled.div`
   position: absolute;
-  bottom: 0px;
-  right: 4px;
+  bottom: 47px;
+  right: 20px;
   display: flex;
   align-items: baseline;
   justify-content: center;
@@ -137,14 +137,22 @@ export const TeamContainerDiv = styled.div`
 `;
 
 export const CopirightText = styled.p`
-  font-weight: var(--bold-font-weight);
   text-transform: uppercase;
+  font-size: 14px;
   color: var(--primary-blue);
+  font-weight: var(--bold-font-weight);
+  @media ${device.tablet} {
+    font-size: 16px;
+  }
 `;
 
 export const TeamForce = styled.button`
+  font-size: 14px;
   font-weight: var(--bold-font-weight);
   padding-bottom: 2px;
   border-bottom: 3px solid;
   color: var(--primary-blue);
+  @media ${device.tablet} {
+    font-size: 16px;
+  }
 `;
