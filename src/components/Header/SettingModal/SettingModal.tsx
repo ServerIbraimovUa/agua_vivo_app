@@ -1,5 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
-
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Icon from "../../Icon/Icon";
@@ -10,12 +9,9 @@ import {
   updateUserInfoThunk,
 } from "../../../redux/auth/auth.operations";
 import {
-  FormAvatar,
   FormGenderWrap,
   FormSettingStyled,
   FormUserPassword,
-  FormAvatarTitle,
-  FormAvatarLabel,
   FormGenderContair,
   FormPasswordInput,
   FormNameInput,
@@ -26,6 +22,7 @@ import {
   MainInfoWrap,
 } from "./SettingModal.styled";
 import { toast } from "react-toastify";
+import AvatarForm from "./Avatar/AvatarForm";
 
 type SettingForm = {
   avatar: File | null;
@@ -41,9 +38,7 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
   setVisible,
 }) => {
   const [file, setFile] = useState<File | null>(null);
-  const [previewURL, setpreviewURL] = useState<string | null>(null);
 
-  // зміна типу інпута
   const [passwordToggle, setPasswordToggle] = useState("password");
   const [newPasswordToggle, setNewPasswordToggle] = useState("password");
   const [repeatNewPasswordToggle, setRepeatNewPasswordToggle] =
@@ -57,7 +52,6 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
     handleSubmit,
     getValues,
     reset,
-
     formState: { errors, isSubmitting },
   } = useForm<SettingForm>({
     defaultValues: {
@@ -69,31 +63,6 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
       repeatNewPassword: "",
     },
   });
-
-  const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-
-    if (files && files.length > 0) {
-      const selectedFile = files[0];
-      const fileSizeInMegabytes = selectedFile.size / 1024 / 1024;
-      const maxFileSizeInMegabytes = 10;
-
-      if (fileSizeInMegabytes > maxFileSizeInMegabytes) {
-        toast.error("The file is too large. Maximum allowed size is 10MB.");
-        return;
-      }
-
-      setFile(selectedFile);
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setpreviewURL(reader.result as string);
-        }
-      };
-      reader.readAsDataURL(selectedFile);
-    }
-  };
 
   const handleTogglePassword = (field: string) => {
     if (field === "password") {
@@ -148,33 +117,7 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
 
   return (
     <FormSettingStyled onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-      <FormAvatar>
-        <FormAvatarTitle>Your photo</FormAvatarTitle>
-        <FormAvatarLabel>
-          {previewURL ? (
-            <img
-              className="avatar-setting"
-              src={previewURL}
-              alt="User avatar"
-            />
-          ) : (
-            <img
-              className="avatar-setting"
-              src={user.avatar}
-              alt="User avatar"
-            />
-          )}{" "}
-          <input
-            id="fileElem"
-            className="input-avatar"
-            type="file"
-            accept=".jpeg,.jpg,.png,.gif"
-            onChange={onChangeFile}
-          />
-          <Icon className="setting-modal-icon" id="arow-up" />
-          <span className="text-loading">Upload a photo</span>
-        </FormAvatarLabel>
-      </FormAvatar>
+      <AvatarForm setFile={setFile} />
       <FormUserWrap>
         <MainInfoWrap>
           <FormGenderWrap>
@@ -297,14 +240,6 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
               {...register("repeatNewPassword", {
                 validate: (value) =>
                   value === getValues("newPassword") || "Passwords must match",
-                minLength: {
-                  value: 8,
-                  message: "Password must be at least 8 characters",
-                },
-                maxLength: {
-                  value: 64,
-                  message: "Password must be at most 64 characters",
-                },
               })}
               className={errors.repeatNewPassword ? "error-input" : ""}
               type={repeatNewPasswordToggle}
