@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Icon from "../../Icon/Icon";
@@ -43,7 +43,6 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
   const [newPasswordToggle, setNewPasswordToggle] = useState("password");
   const [repeatNewPasswordToggle, setRepeatNewPasswordToggle] =
     useState("password");
-  const [isFormDirty, setIsFormDirty] = useState(false);
 
   const user = useSelector(selectUser);
   const dispatch = useAppDispatch();
@@ -78,16 +77,6 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
       );
     }
   };
-
-  useEffect(() => {
-    setIsFormDirty(
-      user.gender !== getValues("gender") ||
-        user.name !== getValues("name") ||
-        !!file ||
-        !!getValues("newPassword") ||
-        !!getValues("repeatNewPassword")
-    );
-  }, [user, file, getValues]);
 
   const onSubmit: SubmitHandler<SettingForm> = async (data) => {
     let newData: Partial<SettingForm> = {};
@@ -268,7 +257,7 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
           </label>
         </FormUserPassword>
       </FormUserWrap>
-      <BtnSubmit disabled={isSubmitting || !isFormDirty} type="submit">
+      <BtnSubmit disabled={isSubmitting} type="submit">
         {isSubmitting ? "Saving..." : "Save"}
       </BtnSubmit>
     </FormSettingStyled>
