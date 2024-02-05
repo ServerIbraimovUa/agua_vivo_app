@@ -24,6 +24,7 @@ export const VerificationSection=styled.section`
 
 export const WrapperImg=styled.div`
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center; 
     padding-top: 130px;
@@ -31,6 +32,7 @@ export const WrapperImg=styled.div`
         padding-top: 50px;
     }
     @media ${device.desktop}{
+     
         padding-top: 0px;       
     }
   `
