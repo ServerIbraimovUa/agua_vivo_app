@@ -232,7 +232,7 @@ scrollbar {
 
 ::-webkit-scrollbar-track,
 scrollbar-track {
-  background-color: #ccc; 
+  background-color: var(--secondary-light-blue); 
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
@@ -240,7 +240,7 @@ scrollbar-track {
 
 ::-webkit-scrollbar-thumb,
 scrollbar-thumb {
-  background-color: #999; 
+  background-color:  var(--secondary-blue); 
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
@@ -248,7 +248,7 @@ scrollbar-thumb {
 
 ::-webkit-scrollbar-thumb:active,
 scrollbar-thumb:active {
-  background-color: #666; 
+  background-color: var(--primary-blue); 
 }
 
 scrollbar-thumb {
@@ -262,7 +262,7 @@ scrollbar-track {
 }
 
 ::-webkit-scrollbar-corner {
-  background-color: #f1f1f1;
+  background-color: var(--secondary-light-blue);
 }
 
 
