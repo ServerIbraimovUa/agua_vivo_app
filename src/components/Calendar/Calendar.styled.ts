@@ -4,9 +4,10 @@ import { device } from '../../css/deviceSize';
 export const CalendarContainer = styled.div`
   width: 264px;
   background-color: transparent;
-
+  height: 506px;
   @media ${device.tablet} {
     width: 646px;
+    height: 340px;
     .month {
       font-weight: var(--medium-font-weight);
     }
@@ -30,10 +31,10 @@ export const CalendarContainer = styled.div`
   .month-title {
     padding-left: 10px;
     padding-right: 10px;
-    color: #407bff;
+    color: var(--primary-blue);
   }
   .button {
-    color: #407bff;
+    color: var(--primary-blue);
     border: none;
     background-color: transparent;
     flex-shrink: 0;
@@ -44,7 +45,7 @@ export const CalendarContainer = styled.div`
   }
   .month {
     font-size: 26px;
-    color: #2f2f2f;
+    color: var(--primary-black);
   }
 `;
 
@@ -110,10 +111,10 @@ export const Modal = styled.div`
 export const ModalContent = styled.div`
   width: 292px;
   height: 188px;
-  background-color: #fff;
+  background-color: var(--primary-white);
   padding: 24px 16px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--btn-box-shadow);
   position: absolute;
 
   .close {
@@ -121,18 +122,18 @@ export const ModalContent = styled.div`
     top: 24px;
     right: 16px;
     font-size: 20px;
-    color: #407bff;
+    color: var(--primary-blue);
   }
   .title-modal {
     position: absolute;
     top: 24px;
-    color: #407bff;
+    color: var(--primary-blue);
     font-size: 16px;
     margin-bottom: 16px;
   }
   .modal-paragraf {
     font-size: 16px;
-    color: #2f2f2f;
+    color: var(--primary-black);
     line-height: 20px;
   }
   .modal-paragraf-one {
@@ -143,13 +144,13 @@ export const ModalContent = styled.div`
   }
   .span-modal {
     margin-left: 6px;
-    color: #407bff;
+    color: var(--primary-blue);
     font-size: 18px;
   }
 `;
 
 export const LowPercentageDay = styled(Day)`
-  border: #ff9d43 1px solid;
+  border: var(--secondary-orange) 1px solid;
   &.disabled {
     border: none;
   }
