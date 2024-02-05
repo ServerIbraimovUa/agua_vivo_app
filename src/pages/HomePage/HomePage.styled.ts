@@ -39,16 +39,12 @@ export const ContainerDailyNorma = styled.div`
   object-fit: contain;
   background-position-x: 10px;
   background-position-y: 90px;
-  padding: 24px 8px;
+  /* padding: 24px 8px; */
 
   @media ${device.tablet} {
     background-image: url("${BottleTabl}");
     background-position-y: 5px;
     background-position-x: 90px;
-    padding-top: 0px;
-    padding-bottom: 32px;
-    padding-left: 24px;
-    padding-right: 24px;
   }
   @media ${device.desktop} {
     background-image: url("${BottleDesk}");

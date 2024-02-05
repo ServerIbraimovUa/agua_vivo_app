@@ -3,6 +3,7 @@ import { device } from "../../../css/deviceSize";
 
 export const UserLogoStyled = styled.div`
   display: flex;
+  align-items: center;
   gap: 12px;
   @media ${device.desktop} {
     gap: 16px;
