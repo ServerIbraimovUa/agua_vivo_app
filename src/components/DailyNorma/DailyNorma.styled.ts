@@ -99,15 +99,14 @@ export const FormButton = styled.button`
 
 //Daily Norma
 export const WrapperImg = styled.div`
-  height: 208px;
-  margin-bottom: 30px;
+  margin-bottom: 232px;
   @media ${device.tablet} {
     height: 386px;
     margin-bottom: 16px;
   }
   @media ${device.desktop} {
     position: relative;
-    height: 548px;
+    height: 591px;
   }
 `;
 export const Wrapper = styled.div`
