@@ -46,13 +46,15 @@ const HomePage = () => {
                 </Link>
               </div>
               <Outlet />
+              <TeamContainerDiv>
+                <CopirightText>copyright © 2024 | </CopirightText>
+                <TeamForce onClick={() => setVisible(true)}>
+                  by TeamForce
+                </TeamForce>
+              </TeamContainerDiv>
             </ContainerCalendar>
           </ContainerWrapper>
         </div>
-        <TeamContainerDiv>
-          <CopirightText>copyright © 2024 | </CopirightText>
-          <TeamForce onClick={() => setVisible(true)}>by TeamForce</TeamForce>
-        </TeamContainerDiv>
       </StyledHomePageSection>
       {visible && (
         <Modal

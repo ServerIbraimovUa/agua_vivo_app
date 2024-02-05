@@ -24,6 +24,7 @@ export const StyledHomePageSection = styled.section`
 `;
 
 export const ContainerWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -31,7 +32,6 @@ export const ContainerWrapper = styled.div`
     flex-direction: row;
     justify-content: space-between;
     gap: 0px;
-    margin-bottom: 40px;
   }
 `;
 export const ContainerDailyNorma = styled.div`
@@ -115,21 +115,44 @@ export const ContainerCalendar = styled.div`
 `;
 
 export const TeamContainerDiv = styled.div`
+  position: absolute;
+  bottom: 47px;
+  right: 20px;
   display: flex;
   align-items: baseline;
   justify-content: center;
   gap: 7px;
+
+  @media ${device.tablet} {
+    position: absolute;
+    bottom: 60px;
+    right: 220px;
+  }
+
+  @media ${device.desktop} {
+    position: absolute;
+    bottom: 25px;
+    right: 163px;
+  }
 `;
 
 export const CopirightText = styled.p`
-  font-weight: var(--bold-font-weight);
   text-transform: uppercase;
+  font-size: 14px;
   color: var(--primary-blue);
+  font-weight: var(--bold-font-weight);
+  @media ${device.tablet} {
+    font-size: 16px;
+  }
 `;
 
 export const TeamForce = styled.button`
+  font-size: 14px;
   font-weight: var(--bold-font-weight);
   padding-bottom: 2px;
   border-bottom: 3px solid;
   color: var(--primary-blue);
+  @media ${device.tablet} {
+    font-size: 16px;
+  }
 `;
