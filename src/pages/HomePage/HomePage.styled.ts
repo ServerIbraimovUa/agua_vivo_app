@@ -24,6 +24,7 @@ export const StyledHomePageSection = styled.section`
 `;
 
 export const ContainerWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -31,7 +32,6 @@ export const ContainerWrapper = styled.div`
     flex-direction: row;
     justify-content: space-between;
     gap: 0px;
-    margin-bottom: 40px;
   }
 `;
 export const ContainerDailyNorma = styled.div`
@@ -115,10 +115,25 @@ export const ContainerCalendar = styled.div`
 `;
 
 export const TeamContainerDiv = styled.div`
+  position: absolute;
+  bottom: 0px;
+  right: 4px;
   display: flex;
   align-items: baseline;
   justify-content: center;
   gap: 7px;
+
+  @media ${device.tablet} {
+    position: absolute;
+    bottom: 60px;
+    right: 220px;
+  }
+
+  @media ${device.desktop} {
+    position: absolute;
+    bottom: 25px;
+    right: 163px;
+  }
 `;
 
 export const CopirightText = styled.p`
