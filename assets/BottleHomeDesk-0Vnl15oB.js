@@ -1,4 +1,4 @@
-import{u as p,d as a,j as o}from"./index-z7JQ_7Ms.js";const r=p.span`
+import{u as p,d as a,j as o}from"./index-cYpNeQcO.js";const r=p.span`
   position: absolute;
   display: flex;
   align-items: center;
@@ -19,8 +19,8 @@ import{u as p,d as a,j as o}from"./index-z7JQ_7Ms.js";const r=p.span`
   width: ${t=>t.$waterAmount&&"140px"};
   top: ${t=>t.$verify&&"320px"};
   left: ${t=>t.$verify&&"10px"};
-  top: ${t=>t.$advert&&"560px"};
-  left: ${t=>t.$advert&&"160px"};
+  top: ${t=>t.$advert&&"20px"};
+  left: ${t=>t.$advert&&"120px"};
  
   &::after {
     content: "";
@@ -41,10 +41,11 @@ import{u as p,d as a,j as o}from"./index-z7JQ_7Ms.js";const r=p.span`
     left: ${t=>t.$dailyNorma?"25px":"120px"};
     left: ${t=>t.$waterAmount&&"220px"};
     top: ${t=>t.$waterAmount&&"-70px"};
-    width: ${t=>t.$waterAmount&&"200px"};
+    width: ${t=>t.$waterAmount&&"300px"};
+    width: ${t=>t.$dailyNorma&&"300px"};
     top: ${t=>t.$verify&&"210px"};
     left: ${t=>t.$verify&&"140px"};
-    top: ${t=>t.$advert&&"520px"};
+    top: ${t=>t.$advert&&"-40px"};
     left: ${t=>t.$advert&&"500px"};
     &::before {
       content: "";
@@ -65,13 +66,15 @@ import{u as p,d as a,j as o}from"./index-z7JQ_7Ms.js";const r=p.span`
     top: ${t=>t.$dailyNorma?"-70px":"60px"};
     left: ${t=>t.$dailyNorma?"25px":"140px"};
     top: ${t=>t.$verify&&"300px"};
+    left: ${t=>t.$waterAmount&&"245px"};
+    top: ${t=>t.$waterAmount&&"-70px"};
     left: ${t=>t.$verify&&"150px"};
     width: ${t=>t.$verify&&"300px"};
     width: ${t=>t.$dailyNorma?"200px":"300px"};
-    top: ${t=>t.$advert&&"600px"};
-    left: ${t=>t.$advert&&"950px"};
+    top: ${t=>t.$advert&&"520px"};
+    left: ${t=>t.$advert&&"320px"};
   }
 `,s=p.span`
   color: var(--primary-blue);
   font-size: 18px;  
-`,n=({message:t,...e})=>o.jsx(o.Fragment,{children:o.jsx(r,{$dailyNorma:e.dailyNorma,$waterAmount:e.waterAmount,$verify:e.verify,$advert:e.advert,children:o.jsx(s,{children:t})})}),d="/agua_vivo_app/assets/BackgroundHomeMobile--bJS4c7V.png",l="/agua_vivo_app/assets/BackgroungHomeDesk-jfnsRM4P.png",$="/agua_vivo_app/assets/BackgroungHomeDesk-jfnsRM4P.png",x="/agua_vivo_app/assets/BottleHomeMobile-YibEMZyu.png",v="/agua_vivo_app/assets/BottleHomeTablet-obPHwKf-.png",m="/agua_vivo_app/assets/BottleHomeDesk-odvCWdoI.png";export{d as B,n as P,l as a,$ as b,x as c,v as d,m as e};
+`,n=({message:t,...e})=>o.jsx(o.Fragment,{children:o.jsx(r,{$dailyNorma:e.dailyNorma,$waterAmount:e.waterAmount,$verify:e.verify,$advert:e.advert,children:o.jsx(s,{children:t})})}),$="/agua_vivo_app/assets/BackgroundHomeMobile--bJS4c7V.png",d="/agua_vivo_app/assets/BackgroungHomeDesk-jfnsRM4P.png",l="/agua_vivo_app/assets/BackgroungHomeDesk-jfnsRM4P.png",x="/agua_vivo_app/assets/BottleHomeMobile-YibEMZyu.png",m="/agua_vivo_app/assets/BottleHomeTablet-obPHwKf-.png",v="/agua_vivo_app/assets/BottleHomeDesk-odvCWdoI.png";export{$ as B,n as P,d as a,l as b,x as c,m as d,v as e};
