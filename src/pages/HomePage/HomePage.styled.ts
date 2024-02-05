@@ -122,8 +122,7 @@ export const TeamContainerDiv = styled.div`
   display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: 20px;
-  padding-bottom: 20px;
+  gap: 7px;
 `;
 
 export const CopirightText = styled.p`
