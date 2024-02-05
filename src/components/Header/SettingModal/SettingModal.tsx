@@ -130,7 +130,6 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
               <label className="gender-label">
                 <input {...register("gender")} value="man" type="radio" />
                 <span className="gender-sub-title">Man</span>
-                {errors.gender && <p>{`${errors.gender.message}`}</p>}
               </label>
             </FormGenderContair>
           </FormGenderWrap>
@@ -154,9 +153,6 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
                 type="email"
                 placeholder="your e-mail"
               />
-              {errors.email && (
-                <p className="error-message">{`${errors.email.message}`}</p>
-              )}
             </label>
           </UserInfoWrap>
         </MainInfoWrap>
