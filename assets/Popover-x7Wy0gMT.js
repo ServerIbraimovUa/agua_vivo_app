@@ -1,4 +1,4 @@
-import{u as p,d as a,j as o}from"./index-6YeUu2yg.js";const r=p.span`
+import{u as p,d as o,j as r}from"./index-uRYpQ9l7.js";const a=p.span`
   position: absolute;
   display: flex;
   align-items: center;
@@ -34,7 +34,7 @@ import{u as p,d as a,j as o}from"./index-6YeUu2yg.js";const r=p.span`
     border-top: transparent;
   }
 
-  @media ${a.tablet} {
+  @media ${o.tablet} {
     top: -70px;
     left: 25px;
     top: ${t=>t.$dailyNorma?"-70px":"40px"};
@@ -62,7 +62,7 @@ import{u as p,d as a,j as o}from"./index-6YeUu2yg.js";const r=p.span`
       display: none;
     }
   }
-  @media ${a.desktop}{
+  @media ${o.desktop}{
     top: ${t=>t.$dailyNorma?"-70px":"60px"};
     left: ${t=>t.$dailyNorma?"25px":"140px"};
     top: ${t=>t.$verify&&"300px"};
@@ -74,7 +74,7 @@ import{u as p,d as a,j as o}from"./index-6YeUu2yg.js";const r=p.span`
     top: ${t=>t.$advert&&"520px"};
     left: ${t=>t.$advert&&"320px"};
   }
-`,s=p.span`
+`,i=p.span`
   color: var(--primary-blue);
   font-size: 18px;  
-`,n=({message:t,...e})=>o.jsx(o.Fragment,{children:o.jsx(r,{$dailyNorma:e.dailyNorma,$waterAmount:e.waterAmount,$verify:e.verify,$advert:e.advert,children:o.jsx(s,{children:t})})}),$="/agua_vivo_app/assets/BackgroundHomeMobile--bJS4c7V.png",d="/agua_vivo_app/assets/BackgroungHomeDesk-jfnsRM4P.png",l="/agua_vivo_app/assets/BackgroungHomeDesk-jfnsRM4P.png",x="/agua_vivo_app/assets/BottleHomeMobile-YibEMZyu.png",m="/agua_vivo_app/assets/BottleHomeTablet-obPHwKf-.png",v="/agua_vivo_app/assets/BottleHomeDesk-odvCWdoI.png";export{$ as B,n as P,d as a,l as b,x as c,m as d,v as e};
+`,d=({message:t,...e})=>r.jsx(r.Fragment,{children:r.jsx(a,{$dailyNorma:e.dailyNorma,$waterAmount:e.waterAmount,$verify:e.verify,$advert:e.advert,children:r.jsx(i,{children:t})})});export{d as P};
