@@ -1,6 +1,5 @@
 
-import styled from "styled-components";
-
+import styled from "styled-componen
 
 import BgImgHomeMob from "../../assets/images/homePage/BgHomeMob.png";
 import BgImgHomeTab from "../../assets/images/homePage/BgHomeTabl.png";
@@ -12,16 +11,12 @@ export const StyledHomePageSection = styled.section`
 
   background-repeat: no-repeat;
   background-position: 50% 115px;
-  /* object-fit: cover;
-  background-position-x: 70px;
-  background-position-y: 100px; */
+
   @media ${device.tablet} {
 
     background-image: url("${BgImgHomeTab}");
     background-position: 50% 60px;
 
-    background-position-x: 0px;
-    background-position-y: 80px; 
   }
   @media ${device.desktop} {
 
@@ -46,7 +41,7 @@ export const ContainerDailyNorma = styled.div`
 
   background-repeat: no-repeat;
   object-fit: contain;
- 
+
   padding: 24px 8px;
 
   @media ${device.tablet} {
