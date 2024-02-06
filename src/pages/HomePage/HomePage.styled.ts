@@ -1,25 +1,33 @@
-import styled from 'styled-components';
-import BgImgMob from '../../assets/images/homePage/BackgroundHomeMobile.png';
-import BgImgTabl from '../../assets/images/homePage/BackgroundHomeTablet.png';
-import BgImgDesk from '../../assets/images/homePage/BackgroungHomeDesk.png';
-import BottleMob from '../../assets/images/homePage/BottleHomeMobile.png';
-import BottleTabl from '../../assets/images/homePage/BottleHomeTablet.png';
-import BottleDesk from '../../assets/images/homePage/BottleHomeDesk.png';
-import { device } from '../../css/deviceSize';
+
+import styled from "styled-components";
+
+
+import BgImgHomeMob from "../../assets/images/homePage/BgHomeMob.png";
+import BgImgHomeTab from "../../assets/images/homePage/BgHomeTabl.png";
+import BgImgHomeDesk from "../../assets/images/homePage/BgHomeDesk.png";
+import { device } from "../../css/deviceSize";
 
 export const StyledHomePageSection = styled.section`
-  background-image: url('${BgImgMob}');
+  background-image: url("${BgImgHomeMob}");
+
   background-repeat: no-repeat;
-  object-fit: cover;
+  background-position: 50% 115px;
+  /* object-fit: cover;
   background-position-x: 70px;
-  background-position-y: 100px;
+  background-position-y: 100px; */
   @media ${device.tablet} {
-    background-image: url('${BgImgTabl}');
+
+    background-image: url("${BgImgHomeTab}");
+    background-position: 50% 60px;
+
     background-position-x: 0px;
-    background-position-y: 80px;
+    background-position-y: 80px; 
   }
   @media ${device.desktop} {
-    background-image: url('${BgImgDesk}');
+
+    background-image: url("${BgImgHomeDesk}");
+    background-position: 50% 65px;
+
   }
 `;
 
@@ -35,22 +43,22 @@ export const ContainerWrapper = styled.div`
   }
 `;
 export const ContainerDailyNorma = styled.div`
-  background-image: url('${BottleMob}');
+
   background-repeat: no-repeat;
   object-fit: contain;
-  background-position-x: 10px;
-  background-position-y: 90px;
-  /* padding: 24px 8px; */
+ 
+  padding: 24px 8px;
 
   @media ${device.tablet} {
-    background-image: url('${BottleTabl}');
-    background-position-y: 5px;
-    background-position-x: 90px;
+
+    padding-top: 0px;
+    padding-bottom: 32px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
+
   @media ${device.desktop} {
-    background-image: url('${BottleDesk}');
-    background-position-y: 0px;
-    background-position-x: -50px;
+
     height: 548px;
   }
 `;
@@ -64,7 +72,7 @@ export const ContainerCalendar = styled.div`
   height: auto;
 
   background-color: var(--secondary-white);
-  background-image: url('${BgImgMob}');
+
   background-repeat: no-repeat;
   object-fit: cover;
 
@@ -73,13 +81,13 @@ export const ContainerCalendar = styled.div`
 
   @media ${device.tablet} {
     padding: 32px 24px;
-    background-image: url('${BgImgTabl}');
+
   }
 
   @media ${device.desktop} {
     width: 592px;
     max-height: 688px;
-    background-image: url('${BgImgDesk}');
+
     margin-bottom: 0px;
   }
   .chart-container {
