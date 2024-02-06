@@ -1,5 +1,4 @@
-
-import styled from "styled-componen
+import styled from "styled-components";
 
 import BgImgHomeMob from "../../assets/images/homePage/BgHomeMob.png";
 import BgImgHomeTab from "../../assets/images/homePage/BgHomeTabl.png";
@@ -13,16 +12,12 @@ export const StyledHomePageSection = styled.section`
   background-position: 50% 115px;
 
   @media ${device.tablet} {
-
     background-image: url("${BgImgHomeTab}");
     background-position: 50% 60px;
-
   }
   @media ${device.desktop} {
-
     background-image: url("${BgImgHomeDesk}");
     background-position: 50% 65px;
-
   }
 `;
 
@@ -38,14 +33,12 @@ export const ContainerWrapper = styled.div`
   }
 `;
 export const ContainerDailyNorma = styled.div`
-
   background-repeat: no-repeat;
   object-fit: contain;
 
   padding: 24px 8px;
 
   @media ${device.tablet} {
-
     padding-top: 0px;
     padding-bottom: 32px;
     padding-left: 24px;
@@ -53,7 +46,6 @@ export const ContainerDailyNorma = styled.div`
   }
 
   @media ${device.desktop} {
-
     height: 548px;
   }
 `;
@@ -76,7 +68,6 @@ export const ContainerCalendar = styled.div`
 
   @media ${device.tablet} {
     padding: 32px 24px;
-
   }
 
   @media ${device.desktop} {
