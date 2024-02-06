@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, KeyboardEvent, useState } from "react";
+import { ChangeEvent, FC, KeyboardEvent, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
@@ -138,6 +138,20 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
 
   timeOptions.map((option) => arr.push({ value: option, label: option }));
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <AddWaterModalStyled>
       <h2 className="add-water-title">{title}</h2>
@@ -165,8 +179,10 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
         <label className="water-label">
           <span className="popover">Recording time:</span>
           {visible && <Popover message={message} waterAmount={true} />}
-
+          {/* <div className="select"> */}
           <Select
+            className="mySelect"
+            // {...IOptions}
             defaultValue={arr[0]}
             options={arr}
             onChange={changeSelect}
@@ -174,7 +190,9 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
               control: (baseStyles, { isFocused }) => ({
                 ...baseStyles,
                 height: "44px",
-                width: window.innerWidth >= 768 ? "100%" : "120px",
+                width: windowWidth > 767 ? "100%" : "120px",
+                // width: window.innerWidth > 767 ? "100%" : "120px",
+
                 border: `2px solid ${isFocused ? "#D7E3FF" : "#D7E3FF"}`,
                 "&:hover": {
                   borderColor: "#D7E3FF",
@@ -186,13 +204,14 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
               }),
               menu: (baseStyles) => ({
                 ...baseStyles,
-                maxHeight: "150px",
-                overflowY: "auto",
+                height: "150px",
+                overflowY: "hidden",
                 backgroundColor: "#D7E3FF",
                 color: "#407BFF",
               }),
             }}
-          />
+          />{" "}
+          {/* </div> */}
         </label>
         <label className="water-label">
           <span className="enter-water-span">
@@ -211,7 +230,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
             onBlur={handleInputBlur}
             onKeyPress={handleInputKeyPress}
             placeholder="0"
-            className="water-select"
+            className="water-input"
           />
         </label>
 

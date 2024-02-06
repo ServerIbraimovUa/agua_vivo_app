@@ -230,7 +230,7 @@ export const AddWaterModalStyled = styled.div`
     flex-direction: column;
   }
 
-  .water-select {
+  .water-input {
     color: var(--primary-blue);
     height: 44px;
     width: 120px;
@@ -293,7 +293,7 @@ export const AddWaterModalStyled = styled.div`
   @media ${device.tablet} {
     max-width: 744px;
 
-    .water-select {
+    .water-input {
       width: 100%;
     }
 

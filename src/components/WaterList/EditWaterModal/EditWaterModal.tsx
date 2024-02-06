@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, KeyboardEvent, useState } from "react";
+import { ChangeEvent, FC, KeyboardEvent, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { generateTimeOptions } from "../../../utils/timePicker";
 import { useSelector } from "react-redux";
@@ -51,6 +51,20 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
   const changeSelect = (e: SingleValue<IOptions>) => {
     setOption(e?.value);
   };
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleCountChange = (newCount: number) => {
     if (state.count + newCount >= 0) {
@@ -156,7 +170,7 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
               control: (baseStyles, { isFocused }) => ({
                 ...baseStyles,
                 height: "44px",
-                width: window.innerWidth >= 768 ? "100%" : "120px",
+                width: windowWidth > 767 ? "100%" : "120px",
                 border: `2px solid ${isFocused ? "#D7E3FF" : "#D7E3FF"}`,
                 "&:hover": {
                   borderColor: "#D7E3FF",
@@ -191,7 +205,7 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             onKeyPress={handleInputKeyPress}
-            className="water-select"
+            className="water-input"
           />
         </label>
         <div className="btn-container">
