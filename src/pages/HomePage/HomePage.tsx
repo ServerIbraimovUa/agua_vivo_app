@@ -13,7 +13,7 @@ import {
   TeamContainerDiv,
   TeamForce,
 } from './HomePage.styled';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import Icon from '../../components/Icon/Icon';
 import Modal from '../../components/Modal/Modal';
 import TeamModal from '../../components/TeamModal/TeamModal';
@@ -22,6 +22,7 @@ import { addScrollLock } from '../../components/Modal/services/services';
 const HomePage = () => {
   const [visible, setVisible] = useState(false);
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(getAmountDailyThunk());
@@ -40,10 +41,20 @@ const HomePage = () => {
               <WaterList />
               <div className="mont-box fifth-step">
                 <Link to="/home">
-                  <Icon className="month-icon" id="date" />
+                  <Icon
+                    className={`month-icon ${
+                      location.pathname === '/home' ? 'active' : ''
+                    }`}
+                    id="date"
+                  />
                 </Link>
                 <Link to="/home/graf">
-                  <Icon className="month-icon" id="chart" />
+                  <Icon
+                    className={`month-icon ${
+                      location.pathname === '/home/graf' ? 'active' : ''
+                    }`}
+                    id="chart"
+                  />
                 </Link>
               </div>
               <Outlet />
