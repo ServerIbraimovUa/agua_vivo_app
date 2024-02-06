@@ -10,12 +10,10 @@ export const StyledHomePageSection = styled.section`
 
   background-repeat: no-repeat;
   background-position: 50% 115px;
+
   @media ${device.tablet} {
     background-image: url('${BgImgHomeTab}');
     background-position: 50% 60px;
-
-    background-position-x: 0px;
-    background-position-y: 80px;
   }
   @media ${device.desktop} {
     background-image: url('${BgImgHomeDesk}');

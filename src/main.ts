@@ -70,6 +70,19 @@ export const GlobalStyle = createGlobalStyle`
       auto;
 
   }
+  body{
+    overflow-x: hidden;
+    
+    font-family: 'Roboto', sans-serif;
+    font-weight: var(--regular-font-weight);
+    font-style: normal;
+    font-size: var(--standart-font-size);
+    line-height: var(--standart-line-height);
+    
+    color: var(--primary-black);
+    background-color: var(--primary-white);
+    cursor: none;
+}
 
   a, button, textarea, input, label, .hover {
     
@@ -90,24 +103,7 @@ export const GlobalStyle = createGlobalStyle`
 
   
 
-  body{
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
 
-    height: 100vh;
-   
-    
-    font-family: 'Roboto', sans-serif;
-    font-weight: var(--regular-font-weight);
-    font-style: normal;
-    font-size: var(--standart-font-size);
-    line-height: var(--standart-line-height);
-    
-    color: var(--primary-black);
-    background-color: var(--primary-white);
-    cursor: none;
-}
 
   .is-hidden {
   opacity: 0;
