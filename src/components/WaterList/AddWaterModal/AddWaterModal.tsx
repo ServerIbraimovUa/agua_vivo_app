@@ -1,21 +1,21 @@
-import { ChangeEvent, FC, KeyboardEvent, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { generateTimeOptions } from "../utils/utils";
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "../../../redux/redux_ts/hook";
+import { ChangeEvent, FC, KeyboardEvent, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { generateTimeOptions } from '../utils/utils';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../../redux/redux_ts/hook';
 
-import { AddWaterModalStyled } from "../WaterList.styled";
+import { AddWaterModalStyled } from '../WaterList.styled';
 
-import Icon from "../../Icon/Icon";
+import Icon from '../../Icon/Icon';
 
-import { addWaterThunk } from "../../../redux/water/water.operations";
-import { selectAmountDaily } from "../../../redux/water/waterSelectors";
-import Popover from "../../Popover/Popover";
+import { addWaterThunk } from '../../../redux/water/water.operations';
+import { selectAmountDaily } from '../../../redux/water/waterSelectors';
+import Popover from '../../Popover/Popover';
 
 interface IProps {
   id?: string;
   title: string;
-  show: boolean;
+  show?: boolean;
   closeModal: () => void;
 }
 
@@ -32,7 +32,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
     getValues,
     formState: { errors },
   } = useForm<IWaterPortion>({
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const dispatch = useAppDispatch();
@@ -42,14 +42,14 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
   const [state, setState] = useState({
     count: entries.length > 0 ? entries[entries.length - 1].waterVolume : 0,
     inputValue:
-      entries.length > 0 ? entries[entries.length - 1].waterVolume : "0",
+      entries.length > 0 ? entries[entries.length - 1].waterVolume : '0',
   });
 
   const timeOptions = generateTimeOptions();
 
   const amountWater = state.inputValue;
-  const time = String(watch("time"));
-  const waterVolume = getValues("waterVolume");
+  const time = String(watch('time'));
+  const waterVolume = getValues('waterVolume');
   const chosenTime = time.slice(3, 5);
   const firstTime = timeOptions[0].slice(3, 5).toString();
 
@@ -65,7 +65,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
-    setState((prevState) => ({
+    setState(prevState => ({
       ...prevState,
       inputValue: value,
     }));
@@ -76,12 +76,12 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
   };
 
   const handleInputKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "-") {
+    if (event.key === '-') {
       event.preventDefault();
     }
   };
 
-  const onSubmit: SubmitHandler<IWaterPortion> = (data) => {
+  const onSubmit: SubmitHandler<IWaterPortion> = data => {
     const newData = {
       time: data.time,
       waterVolume: Number(state.inputValue),
@@ -112,11 +112,11 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
   ): string | undefined => {
     if (w === 0) {
       visible = true;
-      return "The amount of water cannot be 0!";
+      return 'The amount of water cannot be 0!';
     }
     if (Number(t) % 5 !== 0 && Number(f) % 5 !== 0) {
       visible = true;
-      return "Please choose a time that is divisible by 5";
+      return 'Please choose a time that is divisible by 5';
     }
   };
 
@@ -155,12 +155,12 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
           {visible && <Popover message={message} waterAmount={true} />}
 
           <select
-            {...register("time", { required: true })}
+            {...register('time', { required: true })}
             name="time"
             className="water-select"
             aria-label="Time"
           >
-            {timeOptions.map((option) => (
+            {timeOptions.map(option => (
               <option key={option} value={option}>
                 {option}
               </option>
@@ -173,7 +173,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
           </span>
 
           <input
-            {...register("waterVolume", { required: true })}
+            {...register('waterVolume', { required: true })}
             type="number"
             min={0}
             max={5000}
