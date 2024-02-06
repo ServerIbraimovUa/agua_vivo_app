@@ -1,15 +1,16 @@
 import { ChangeEvent, FC, KeyboardEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { generateTimeOptions } from "../utils/utils";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
-
-import { AddWaterModalStyled } from "../WaterList.styled";
-
-import Icon from "../../Icon/Icon";
+import Select, { SingleValue } from "react-select";
 
 import { addWaterThunk } from "../../../redux/water/water.operations";
 import { selectAmountDaily } from "../../../redux/water/waterSelectors";
+import { generateTimeOptions } from "../../../utils/timePicker";
+
+import Icon from "../../Icon/Icon";
+
+import { AddWaterModalStyled } from "../WaterList.styled";
 import Popover from "../../Popover/Popover";
 
 interface IProps {
@@ -18,17 +19,20 @@ interface IProps {
   show: boolean;
   closeModal: () => void;
 }
+export interface IOptions {
+  value: string | undefined;
+  label: string | undefined;
+}
 
-export type IWaterPortion = {
-  time: string;
+export interface IWaterPortion {
+  time: string | undefined;
   waterVolume: number;
-};
+}
 
 const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
   const {
     register,
     handleSubmit,
-    watch,
     getValues,
     formState: { errors },
   } = useForm<IWaterPortion>({
@@ -40,18 +44,22 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
   const { entries } = useSelector(selectAmountDaily);
 
   const [state, setState] = useState({
-    count: entries.length > 0 ? entries[entries.length - 1].waterVolume : 0,
-    inputValue:
-      entries.length > 0 ? entries[entries.length - 1].waterVolume : "0",
+    count: entries.length > 0 ? 250 : 0,
+    inputValue: entries.length > 0 ? "250" : "0",
   });
 
   const timeOptions = generateTimeOptions();
 
+  const [option, setOption] = useState<string | undefined>(timeOptions[0]);
+
   const amountWater = state.inputValue;
-  const time = String(watch("time"));
   const waterVolume = getValues("waterVolume");
-  const chosenTime = time.slice(3, 5);
+  const chosenTime = option?.slice(3, 5);
   const firstTime = timeOptions[0].slice(3, 5).toString();
+
+  const changeSelect = (e: SingleValue<IOptions>) => {
+    setOption(e?.value);
+  };
 
   const handleCountChange = (newCount: number) => {
     if (state.count + newCount >= 0) {
@@ -81,9 +89,9 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
     }
   };
 
-  const onSubmit: SubmitHandler<IWaterPortion> = (data) => {
+  const onSubmit: SubmitHandler<IWaterPortion> = () => {
     const newData = {
-      time: data.time,
+      time: option,
       waterVolume: Number(state.inputValue),
     };
 
@@ -98,7 +106,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
     if (Number(chosenTime) % 5 !== 0) {
       return;
     }
-    message = createPopoverMessage(chosenTime, waterVolume, firstTime);
+    message = createPopoverMessage(option, waterVolume, firstTime);
 
     dispatch(addWaterThunk(newData));
     closeModal();
@@ -106,7 +114,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
 
   let visible = false;
   const createPopoverMessage = (
-    t: string,
+    t: string | undefined,
     w: number,
     f: string
   ): string | undefined => {
@@ -125,6 +133,10 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
     Number(amountWater),
     firstTime
   );
+
+  const arr: IOptions[] = [];
+
+  timeOptions.map((option) => arr.push({ value: option, label: option }));
 
   return (
     <AddWaterModalStyled>
@@ -145,7 +157,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
             onClick={() => handleCountChange(state.count + 50)}
             type="button"
           >
-            <Icon className="icon-plus" id="plus"></Icon>
+            <Icon className="icon-plus" id="plus" />
           </button>
         </div>
       </div>
@@ -154,18 +166,33 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
           <span className="popover">Recording time:</span>
           {visible && <Popover message={message} waterAmount={true} />}
 
-          <select
-            {...register("time", { required: true })}
-            name="time"
-            className="water-select"
-            aria-label="Time"
-          >
-            {timeOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+          <Select
+            defaultValue={arr[0]}
+            options={arr}
+            onChange={changeSelect}
+            styles={{
+              control: (baseStyles, { isFocused }) => ({
+                ...baseStyles,
+                height: "44px",
+                width: window.innerWidth >= 768 ? "100%" : "120px",
+                border: `2px solid ${isFocused ? "#D7E3FF" : "#D7E3FF"}`,
+                "&:hover": {
+                  borderColor: "#D7E3FF",
+                },
+              }),
+              singleValue: (baseStyles) => ({
+                ...baseStyles,
+                color: "#407BFF",
+              }),
+              menu: (baseStyles) => ({
+                ...baseStyles,
+                maxHeight: "150px",
+                overflowY: "auto",
+                backgroundColor: "#D7E3FF",
+                color: "#407BFF",
+              }),
+            }}
+          />
         </label>
         <label className="water-label">
           <span className="enter-water-span">
@@ -180,7 +207,6 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
             step={50}
             name="waterVolume"
             value={state.inputValue}
-            // value={state.inputValue === "0" ? "" : state.inputValue}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             onKeyPress={handleInputKeyPress}

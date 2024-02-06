@@ -1,16 +1,19 @@
 import { ChangeEvent, FC, KeyboardEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { generateTimeOptions } from "../utils/utils";
+import { generateTimeOptions } from "../../../utils/timePicker";
 import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../../redux/redux_ts/hook";
+import Select, { SingleValue } from "react-select"; // { SingleValue }
+
+import { updateWaterVolumeThunk } from "../../../redux/water/water.operations";
+import { selectAmountDaily } from "../../../redux/water/waterSelectors";
+import { IUpdateWaterPayload } from "../../../redux/redux_ts/interfaces";
 
 import Icon from "../../Icon/Icon";
 
 import { AddWaterModalStyled } from "../WaterList.styled";
-import { useAppDispatch } from "../../../redux/redux_ts/hook";
-import { updateWaterVolumeThunk } from "../../../redux/water/water.operations";
-import { selectAmountDaily } from "../../../redux/water/waterSelectors";
-import { IUpdateWaterPayload } from "../../../redux/redux_ts/interfaces";
 import Popover from "../../Popover/Popover";
+import { IOptions, IWaterPortion } from "../AddWaterModal/AddWaterModal";
 
 interface IProps {
   id?: string;
@@ -18,11 +21,6 @@ interface IProps {
   handleUpdateWater?: (waterData: IUpdateWaterPayload) => void;
   closeModal: () => void;
 }
-
-export type IWaterPortion = {
-  time: string;
-  waterVolume: number;
-};
 
 const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
   const {
@@ -33,8 +31,10 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
   } = useForm<IWaterPortion>({ mode: "onChange" });
 
   const dispatch = useAppDispatch();
+
   const { entries } = useSelector(selectAmountDaily);
   const water = entries.find((entry) => entry._id === id);
+  const w = water?.time;
 
   const [state, setState] = useState({
     count: water ? water.waterVolume : 0,
@@ -43,8 +43,14 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
 
   const timeOptions = generateTimeOptions();
 
+  const [option, setOption] = useState<string | undefined>(timeOptions[0]);
+
   const amountWater = state.inputValue;
   const waterVolume = getValues("waterVolume");
+
+  const changeSelect = (e: SingleValue<IOptions>) => {
+    setOption(e?.value);
+  };
 
   const handleCountChange = (newCount: number) => {
     if (state.count + newCount >= 0) {
@@ -74,9 +80,9 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
     }
   };
 
-  const onSubmit: SubmitHandler<IWaterPortion> = (data) => {
+  const onSubmit: SubmitHandler<IWaterPortion> = () => {
     const newData = {
-      time: data.time,
+      time: option,
       waterVolume: Number(state.inputValue),
     };
     if (errors.waterVolume) {
@@ -105,6 +111,10 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
 
   let message = createPopoverMessage(Number(amountWater));
 
+  const arr: IOptions[] = [];
+
+  timeOptions.map((option) => arr.push({ value: option, label: option }));
+
   return (
     <AddWaterModalStyled>
       <div className="water-card">
@@ -130,7 +140,7 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
             onClick={() => handleCountChange(state.count + 50)}
             type="button"
           >
-            <Icon className="icon-plus" id="plus"></Icon>
+            <Icon className="icon-plus" id="plus" />
           </button>
         </div>
       </div>
@@ -138,22 +148,33 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
         <label className="water-label">
           <span>Recording time:</span>
           {visible && <Popover message={message} waterAmount={true} />}
-          <select
-            {...register("time", { required: true })}
-            name="time"
-            className="water-select"
-            aria-label="Time"
-          >
-            {timeOptions.map((option) => (
-              <option
-                key={option}
-                value={option}
-                selected={option === water?.time}
-              >
-                {option}
-              </option>
-            ))}
-          </select>
+          <Select
+            defaultValue={{ label: water?.time, value: w }}
+            options={arr}
+            onChange={changeSelect}
+            styles={{
+              control: (baseStyles, { isFocused }) => ({
+                ...baseStyles,
+                height: "44px",
+                width: window.innerWidth >= 768 ? "100%" : "120px",
+                border: `2px solid ${isFocused ? "#D7E3FF" : "#D7E3FF"}`,
+                "&:hover": {
+                  borderColor: "#D7E3FF",
+                },
+              }),
+              singleValue: (baseStyles) => ({
+                ...baseStyles,
+                color: "#407BFF",
+              }),
+              menu: (baseStyles) => ({
+                ...baseStyles,
+                maxHeight: "150px",
+                overflowY: "auto",
+                backgroundColor: "#D7E3FF",
+                color: "#407BFF",
+              }),
+            }}
+          />
         </label>
         <label className="water-label">
           <span className="enter-water-span">

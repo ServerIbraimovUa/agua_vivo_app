@@ -60,12 +60,12 @@ export interface IWaterPayload {
 export interface IUpdateWaterPayload {
   id: string;
   waterVolume: number;
-  time: string;
+  time: string | undefined;
 }
 
 export type IAddWaterPortion = {
   waterVolume: number;
-  time: string;
+  time: string | undefined;
 };
 
 export interface IAmountDaily {

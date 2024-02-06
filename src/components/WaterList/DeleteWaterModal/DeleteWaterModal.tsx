@@ -1,7 +1,8 @@
 import { FC } from "react";
+import { useAppDispatch } from "../../../redux/redux_ts/hook";
+
 import { DeleteWaterModalStyled } from "../WaterList.styled";
 import { deleteWaterThunk } from "../../../redux/water/water.operations";
-import { useAppDispatch } from "../../../redux/redux_ts/hook";
 
 interface IProps {
   title: string;

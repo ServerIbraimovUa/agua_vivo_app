@@ -138,13 +138,11 @@ export const WaterItemBoxStyled = styled.li`
     width: 16px;
     height: 1px;
     background-color: var(--secondary-red);
-    /* transition: width 1s ease-in; */
   }
 
   .edit-btn:hover::after,
   .edit-btn:focus::after {
     background-color: var(--secondary-blue);
-    /* width: 100%; */
   }
   .edit-delete-btn-box {
     display: flex;
@@ -313,9 +311,6 @@ export const AddWaterModalStyled = styled.div`
     .save-btn {
       width: 160px;
     }
-  }
-
-  @media ${device.desktop} {
   }
 `;
 
