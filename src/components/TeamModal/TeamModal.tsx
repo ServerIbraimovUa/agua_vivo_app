@@ -57,12 +57,20 @@ const TeamModal = () => {
               </TaskList>
               <IconList>
                 <li>
-                  <SwipeLink href="https://github.com/ServerIbraimovUa">
+                  <SwipeLink
+                    href="https://github.com/ServerIbraimovUa"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="github" className="swipe-icon" />
                   </SwipeLink>
                 </li>
                 <li>
-                  <SwipeLink href="https://www.linkedin.com/in/serveribraimov/">
+                  <SwipeLink
+                    href="https://www.linkedin.com/in/serveribraimov/"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="linkedin" className="swipe-icon" />
                   </SwipeLink>
                 </li>
@@ -79,20 +87,28 @@ const TeamModal = () => {
                   <p>Backend Water + Swagger</p>
                 </li>
                 <li>
-                  <p>ForgotPasswordPage</p>
+                  <p>ForgotPassword & UpdatePassword Page</p>
                 </li>
                 <li>
-                  <p>UpdatePasswordPage</p>
+                  <p>Translation</p>
                 </li>
               </TaskList>
               <IconList>
                 <li>
-                  <SwipeLink href="https://github.com/nightven">
+                  <SwipeLink
+                    href="https://github.com/nightven"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="github" className="swipe-icon" />
                   </SwipeLink>
                 </li>
                 <li>
-                  <SwipeLink href="https://www.linkedin.com/in/vitaliybeyar/">
+                  <SwipeLink
+                    href="https://www.linkedin.com/in/vitaliybeyar/"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="linkedin" className="swipe-icon" />
                   </SwipeLink>
                 </li>
@@ -117,12 +133,20 @@ const TeamModal = () => {
               </TaskList>
               <IconList>
                 <li>
-                  <SwipeLink href="https://github.com/Viktoriia-Ch08">
+                  <SwipeLink
+                    href="https://github.com/Viktoriia-Ch08"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="github" className="swipe-icon" />
                   </SwipeLink>
                 </li>
                 <li>
-                  <SwipeLink href="https://www.linkedin.com/in/viktoriia-cherkashyna/">
+                  <SwipeLink
+                    href="https://www.linkedin.com/in/viktoriia-cherkashyna/"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="linkedin" className="swipe-icon" />
                   </SwipeLink>
                 </li>
@@ -147,12 +171,20 @@ const TeamModal = () => {
               </TaskList>
               <IconList>
                 <li>
-                  <SwipeLink href="https://github.com/Tasha852209">
+                  <SwipeLink
+                    href="https://github.com/Tasha852209"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="github" className="swipe-icon" />
                   </SwipeLink>
                 </li>
                 <li>
-                  <SwipeLink href="https://www.linkedin.com/in/tetiana-dub/">
+                  <SwipeLink
+                    href="https://www.linkedin.com/in/tetiana-dub/"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="linkedin" className="swipe-icon" />
                   </SwipeLink>
                 </li>
@@ -174,12 +206,20 @@ const TeamModal = () => {
               </TaskList>
               <IconList>
                 <li>
-                  <SwipeLink href="https://github.com/AnastasiiaDia">
+                  <SwipeLink
+                    href="https://github.com/AnastasiiaDia"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="github" className="swipe-icon" />
                   </SwipeLink>
                 </li>
                 <li>
-                  <SwipeLink href="https://www.linkedin.com/in/anastasiia-diatchuk/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
+                  <SwipeLink
+                    href="https://www.linkedin.com/in/anastasiia-diatchuk/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="linkedin" className="swipe-icon" />
                   </SwipeLink>
                 </li>
@@ -201,12 +241,20 @@ const TeamModal = () => {
               </TaskList>
               <IconList>
                 <li>
-                  <SwipeLink href="https://github.com/LiudmylaHorobets">
+                  <SwipeLink
+                    href="https://github.com/LiudmylaHorobets"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="github" className="swipe-icon" />
                   </SwipeLink>
                 </li>
                 <li>
-                  <SwipeLink href="https://www.linkedin.com/in/liudmyla-horobets/">
+                  <SwipeLink
+                    href="https://www.linkedin.com/in/liudmyla-horobets/"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="linkedin" className="swipe-icon" />
                   </SwipeLink>
                 </li>
@@ -231,12 +279,20 @@ const TeamModal = () => {
               </TaskList>
               <IconList>
                 <li>
-                  <SwipeLink href="https://github.com/Oksana-Tnt">
+                  <SwipeLink
+                    href="https://github.com/Oksana-Tnt"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="github" className="swipe-icon" />
                   </SwipeLink>
                 </li>
                 <li>
-                  <SwipeLink href="https://www.linkedin.com/in/oksana-tantsiura/">
+                  <SwipeLink
+                    href="https://www.linkedin.com/in/oksana-tantsiura/"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="linkedin" className="swipe-icon" />
                   </SwipeLink>
                 </li>
@@ -258,12 +314,20 @@ const TeamModal = () => {
               </TaskList>
               <IconList>
                 <li>
-                  <SwipeLink href="https://github.com/hotgorod">
+                  <SwipeLink
+                    href="https://github.com/hotgorod"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="github" className="swipe-icon" />
                   </SwipeLink>
                 </li>
                 <li>
-                  <SwipeLink href="https://www.linkedin.com/in/maryna-aleksandrova-91591324/">
+                  <SwipeLink
+                    href="https://www.linkedin.com/in/maryna-aleksandrova-91591324/"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="linkedin" className="swipe-icon" />
                   </SwipeLink>
                 </li>
@@ -288,12 +352,20 @@ const TeamModal = () => {
               </TaskList>
               <IconList>
                 <li>
-                  <SwipeLink href="https://github.com/sofiialives">
+                  <SwipeLink
+                    href="https://github.com/sofiialives"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="github" className="swipe-icon" />
                   </SwipeLink>
                 </li>
                 <li>
-                  <SwipeLink href="https://www.linkedin.com/in/sofiiakarpova/">
+                  <SwipeLink
+                    href="https://www.linkedin.com/in/sofiiakarpova/"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="linkedin" className="swipe-icon" />
                   </SwipeLink>
                 </li>
@@ -322,12 +394,20 @@ const TeamModal = () => {
               </TaskList>
               <IconList>
                 <li>
-                  <SwipeLink href="https://github.com/NatashaKul7">
+                  <SwipeLink
+                    href="https://github.com/NatashaKul7"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="github" className="swipe-icon" />
                   </SwipeLink>
                 </li>
                 <li>
-                  <SwipeLink href="https://www.linkedin.com/in/natalia-kulibaba/">
+                  <SwipeLink
+                    href="https://www.linkedin.com/in/natalia-kulibaba/"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="linkedin" className="swipe-icon" />
                   </SwipeLink>
                 </li>
@@ -349,12 +429,20 @@ const TeamModal = () => {
               </TaskList>
               <IconList>
                 <li>
-                  <SwipeLink href="https://github.com/Ostap2">
+                  <SwipeLink
+                    href="https://github.com/Ostap2"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="github" className="swipe-icon" />
                   </SwipeLink>
                 </li>
                 <li>
-                  <SwipeLink href="https://www.linkedin.com/in/ostap-kryven/">
+                  <SwipeLink
+                    href="https://www.linkedin.com/in/ostap-kryven/"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
                     <Icon id="linkedin" className="swipe-icon" />
                   </SwipeLink>
                 </li>

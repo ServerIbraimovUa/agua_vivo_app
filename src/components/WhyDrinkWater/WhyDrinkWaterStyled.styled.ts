@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { device } from "../../css/deviceSize";
-import bgMobile from "../../assets/images/welcomeMob.png";
-import bgTablet from "../../assets/images/WelcomeTab.png";
-import bgDesk from "../../assets/images/WelcomeDesk.png";
+import styled from 'styled-components';
+import { device } from '../../css/deviceSize';
+import bgMobile from '../../assets/images/welcomeMob.png';
+import bgTablet from '../../assets/images/WelcomeTab.png';
+import bgDesk from '../../assets/images/WelcomeDesk.png';
 
 export const WelcomeSection = styled.section`
   &.welcome-section {
@@ -36,7 +36,7 @@ export const Ul = styled.ul`
     position: relative;
     &::before {
       left: 0;
-      content: "";
+      content: '';
       bottom: 43%;
       position: absolute;
       width: 8px;
@@ -47,16 +47,16 @@ export const Ul = styled.ul`
   }
 `;
 export const Div = styled.div`
-  padding: 24px 16px;
+  padding: 24px 16px 50px 16px;
   background-color: var(--secondary-white);
   border-radius: 10px;
   box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
   @media ${device.tablet} {
     width: 494px;
-    padding: 32px 24px;
+    padding: 32px 24px 50px 24px;
   }
   @media ${device.desktop} {
-    height: 332px;
+    min-height: 332px;
   }
 
   h3 {
