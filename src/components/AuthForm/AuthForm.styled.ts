@@ -9,7 +9,7 @@ export const StyledRegisterSection = styled.section`
   background-repeat: no-repeat;
   padding-top: 72px;
   background-image: url(${bgMobAuthImg});
-  background-position: 50% 101px;
+  background-position: 50% 151px;
 
   @media ${device.tablet} {
     padding-top: 88px;
