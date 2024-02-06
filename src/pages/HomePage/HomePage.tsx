@@ -17,6 +17,7 @@ import { Link, Outlet } from 'react-router-dom';
 import Icon from '../../components/Icon/Icon';
 import Modal from '../../components/Modal/Modal';
 import TeamModal from '../../components/TeamModal/TeamModal';
+import { addScrollLock } from '../../components/Modal/services/services';
 
 const HomePage = () => {
   const [visible, setVisible] = useState(false);
@@ -48,7 +49,12 @@ const HomePage = () => {
               <Outlet />
               <TeamContainerDiv>
                 <CopirightText>copyright © 2024 | </CopirightText>
-                <TeamForce onClick={() => setVisible(true)}>
+                <TeamForce
+                  onClick={() => {
+                    setVisible(true);
+                    addScrollLock();
+                  }}
+                >
                   by TeamForce
                 </TeamForce>
               </TeamContainerDiv>

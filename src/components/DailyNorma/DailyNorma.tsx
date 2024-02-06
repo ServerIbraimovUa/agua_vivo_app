@@ -1,6 +1,6 @@
-import { useState } from "react";
-import Modal from "../Modal/Modal";
-import DailyNormaModal from "./DailyNormaModal";
+import { useState } from 'react';
+import Modal from '../Modal/Modal';
+import DailyNormaModal from './DailyNormaModal';
 import {
   EditButton,
   SpanNorma,
@@ -8,16 +8,13 @@ import {
   Wrapper,
   WrapperButton,
   WrapperImg,
-} from "./DailyNorma.styled";
-import { useSelector } from "react-redux";
-import { selectDailyNorma } from "../../redux/auth/authSelectors";
+} from './DailyNorma.styled';
+import { useSelector } from 'react-redux';
+import { selectDailyNorma } from '../../redux/auth/authSelectors';
+import { addScrollLock, removeScrollLock } from '../Modal/services/services';
 
 const DailyNorma: React.FC = () => {
   const [visible, setVisible] = useState(false);
-
-  const toggleModal = () => {
-    setVisible(!visible);
-  };
 
   const waterRate = useSelector(selectDailyNorma);
 
@@ -30,14 +27,25 @@ const DailyNorma: React.FC = () => {
             <SpanNorma>{waterRate} L</SpanNorma>
             {visible && (
               <Modal
-                setVisible={toggleModal}
+                setVisible={setVisible}
                 title="My Daily Norma"
                 daily={true}
               >
-                <DailyNormaModal onClose={toggleModal} />
+                <DailyNormaModal
+                  onClose={() => {
+                    setVisible(false);
+                    removeScrollLock();
+                  }}
+                />
               </Modal>
             )}
-            <EditButton type="button" onClick={toggleModal}>
+            <EditButton
+              type="button"
+              onClick={() => {
+                setVisible(true);
+                addScrollLock();
+              }}
+            >
               Edit
             </EditButton>
           </WrapperButton>

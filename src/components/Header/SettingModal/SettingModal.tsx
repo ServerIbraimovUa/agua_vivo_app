@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { SubmitHandler, useForm } from "react-hook-form";
-import Icon from "../../Icon/Icon";
-import { selectUser } from "../../../redux/auth/authSelectors";
-import { useAppDispatch } from "../../../redux/redux_ts/hook";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import Icon from '../../Icon/Icon';
+import { selectUser } from '../../../redux/auth/authSelectors';
+import { useAppDispatch } from '../../../redux/redux_ts/hook';
 import {
   updateUserAvatarThunk,
   updateUserInfoThunk,
-} from "../../../redux/auth/auth.operations";
+} from '../../../redux/auth/auth.operations';
 import {
   FormGenderWrap,
   FormSettingStyled,
@@ -20,13 +20,14 @@ import {
   BtnSubmit,
   FormUserWrap,
   MainInfoWrap,
-} from "./SettingModal.styled";
-import { toast } from "react-toastify";
-import AvatarForm from "./Avatar/AvatarForm";
+} from './SettingModal.styled';
+import { toast } from 'react-toastify';
+import AvatarForm from './Avatar/AvatarForm';
+import { removeScrollLock } from '../../Modal/services/services';
 
 type SettingForm = {
   avatar: File | null;
-  gender: "woman" | "man";
+  gender: 'woman' | 'man';
   name: string;
   email: string;
   password?: string;
@@ -39,10 +40,10 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
 }) => {
   const [file, setFile] = useState<File | null>(null);
 
-  const [passwordToggle, setPasswordToggle] = useState("password");
-  const [newPasswordToggle, setNewPasswordToggle] = useState("password");
+  const [passwordToggle, setPasswordToggle] = useState('password');
+  const [newPasswordToggle, setNewPasswordToggle] = useState('password');
   const [repeatNewPasswordToggle, setRepeatNewPasswordToggle] =
-    useState("password");
+    useState('password');
 
   const user = useSelector(selectUser);
   const dispatch = useAppDispatch();
@@ -55,37 +56,35 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
     formState: { errors, isSubmitting },
   } = useForm<SettingForm>({
     defaultValues: {
-      gender: user.gender || "woman",
-      name: user.name || "",
+      gender: user.gender || 'woman',
+      name: user.name || '',
       email: user.email,
-      password: "",
-      newPassword: "",
-      repeatNewPassword: "",
+      password: '',
+      newPassword: '',
+      repeatNewPassword: '',
     },
   });
 
   const handleTogglePassword = (field: string) => {
-    if (field === "password") {
-      setPasswordToggle((prev) => (prev === "password" ? "text" : "password"));
-    } else if (field === "newPassword") {
-      setNewPasswordToggle((prev) =>
-        prev === "password" ? "text" : "password"
-      );
-    } else if (field === "repeatNewPassword") {
-      setRepeatNewPasswordToggle((prev) =>
-        prev === "password" ? "text" : "password"
+    if (field === 'password') {
+      setPasswordToggle(prev => (prev === 'password' ? 'text' : 'password'));
+    } else if (field === 'newPassword') {
+      setNewPasswordToggle(prev => (prev === 'password' ? 'text' : 'password'));
+    } else if (field === 'repeatNewPassword') {
+      setRepeatNewPasswordToggle(prev =>
+        prev === 'password' ? 'text' : 'password'
       );
     }
   };
 
-  const onSubmit: SubmitHandler<SettingForm> = async (data) => {
+  const onSubmit: SubmitHandler<SettingForm> = async data => {
     let newData: Partial<SettingForm> = {};
 
     if (file) {
       await dispatch(updateUserAvatarThunk(file))
         .unwrap()
-        .then(() => toast.success("Avatar updated successfully"))
-        .catch(() => toast.error("Something went wrong"));
+        .then(() => toast.success('Avatar updated successfully'))
+        .catch(() => toast.error('Something went wrong'));
     }
 
     if (data.gender !== user.gender || data.name !== user.name) {
@@ -103,15 +102,16 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
     if (Object.keys(newData).length > 0) {
       await dispatch(updateUserInfoThunk(newData))
         .unwrap()
-        .then(() => toast.success("Data updated successfully"))
-        .catch(() => toast.error("Something went wrong"));
+        .then(() => toast.success('Data updated successfully'))
+        .catch(() => toast.error('Something went wrong'));
     }
 
     setVisible(false);
+    removeScrollLock();
     reset({
-      password: "",
-      newPassword: "",
-      repeatNewPassword: "",
+      password: '',
+      newPassword: '',
+      repeatNewPassword: '',
     });
   };
 
@@ -124,11 +124,11 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
             <span className="user-gender-title">Your gender identity</span>
             <FormGenderContair>
               <label className="gender-label">
-                <input {...register("gender")} value="woman" type="radio" />
+                <input {...register('gender')} value="woman" type="radio" />
                 <span className="gender-sub-title">Woman</span>
               </label>
               <label className="gender-label">
-                <input {...register("gender")} value="man" type="radio" />
+                <input {...register('gender')} value="man" type="radio" />
                 <span className="gender-sub-title">Man</span>
               </label>
             </FormGenderContair>
@@ -137,8 +137,8 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
             <label className="label-name">
               <span className="user-info-title">Your name</span>
               <FormNameInput
-                {...register("name")}
-                className={errors.name ? "error-input" : ""}
+                {...register('name')}
+                className={errors.name ? 'error-input' : ''}
                 type="text"
                 placeholder="your name"
               />
@@ -148,8 +148,8 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
               <span className="user-info-title">E-mail</span>
               <FormEmailInput
                 disabled
-                {...register("email")}
-                className={errors.email ? "error-input" : ""}
+                {...register('email')}
+                className={errors.email ? 'error-input' : ''}
                 type="email"
                 placeholder="your e-mail"
               />
@@ -162,23 +162,23 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
           <label className="password-label">
             <span className="password-sub-title">Outdated password:</span>
             <FormPasswordInput
-              {...register("password", {
+              {...register('password', {
                 validate: (value, { newPassword }) => {
                   if (newPassword) {
-                    return !!value || "This field is required";
+                    return !!value || 'This field is required';
                   }
                   return true;
                 },
               })}
-              className={errors.password ? "error-input" : ""}
+              className={errors.password ? 'error-input' : ''}
               type={passwordToggle}
               placeholder="Password"
             />
             <span
               className="toggle-password"
-              onClick={() => handleTogglePassword("password")}
+              onClick={() => handleTogglePassword('password')}
             >
-              {passwordToggle === "text" ? (
+              {passwordToggle === 'text' ? (
                 <Icon className="password-eye-icon" id="eye" />
               ) : (
                 <Icon className="password-eye-outline-icon" id="eye-outline" />
@@ -192,34 +192,34 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
           <label className="password-label">
             <span className="password-sub-title">New Password:</span>
             <FormPasswordInput
-              {...register("newPassword", {
+              {...register('newPassword', {
                 validate: (value, { password }) => {
                   if (password && value === password) {
-                    return "The new password cannot be old one";
+                    return 'The new password cannot be old one';
                   }
                   if (password) {
-                    return !!value || "This field is required";
+                    return !!value || 'This field is required';
                   }
                   return true;
                 },
                 minLength: {
                   value: 8,
-                  message: "Password must be at least 8 characters",
+                  message: 'Password must be at least 8 characters',
                 },
                 maxLength: {
                   value: 64,
-                  message: "Password must be at most 64 characters",
+                  message: 'Password must be at most 64 characters',
                 },
               })}
-              className={errors.newPassword ? "error-input" : ""}
+              className={errors.newPassword ? 'error-input' : ''}
               type={newPasswordToggle}
               placeholder="Password"
             />
             <span
               className="toggle-password"
-              onClick={() => handleTogglePassword("newPassword")}
+              onClick={() => handleTogglePassword('newPassword')}
             >
-              {newPasswordToggle === "text" ? (
+              {newPasswordToggle === 'text' ? (
                 <Icon className="password-eye-icon" id="eye" />
               ) : (
                 <Icon className="password-eye-outline-icon" id="eye-outline" />
@@ -233,19 +233,19 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
           <label className="password-label">
             <span className="password-sub-title">Repeat new password:</span>
             <FormPasswordInput
-              {...register("repeatNewPassword", {
-                validate: (value) =>
-                  value === getValues("newPassword") || "Passwords must match",
+              {...register('repeatNewPassword', {
+                validate: value =>
+                  value === getValues('newPassword') || 'Passwords must match',
               })}
-              className={errors.repeatNewPassword ? "error-input" : ""}
+              className={errors.repeatNewPassword ? 'error-input' : ''}
               type={repeatNewPasswordToggle}
               placeholder="Password"
             />
             <span
               className="toggle-password"
-              onClick={() => handleTogglePassword("repeatNewPassword")}
+              onClick={() => handleTogglePassword('repeatNewPassword')}
             >
-              {repeatNewPasswordToggle === "text" ? (
+              {repeatNewPasswordToggle === 'text' ? (
                 <Icon className="password-eye-icon" id="eye" />
               ) : (
                 <Icon className="password-eye-outline-icon" id="eye-outline" />
@@ -258,7 +258,7 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
         </FormUserPassword>
       </FormUserWrap>
       <BtnSubmit disabled={isSubmitting} type="submit">
-        {isSubmitting ? "Saving..." : "Save"}
+        {isSubmitting ? 'Saving...' : 'Save'}
       </BtnSubmit>
     </FormSettingStyled>
   );

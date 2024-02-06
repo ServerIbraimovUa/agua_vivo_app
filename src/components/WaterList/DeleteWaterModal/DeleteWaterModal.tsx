@@ -1,7 +1,8 @@
-import { FC } from "react";
-import { DeleteWaterModalStyled } from "../WaterList.styled";
-import { deleteWaterThunk } from "../../../redux/water/water.operations";
-import { useAppDispatch } from "../../../redux/redux_ts/hook";
+import { FC } from 'react';
+import { DeleteWaterModalStyled } from '../WaterList.styled';
+import { deleteWaterThunk } from '../../../redux/water/water.operations';
+import { useAppDispatch } from '../../../redux/redux_ts/hook';
+import { removeScrollLock } from '../../Modal/services/services';
 
 interface IProps {
   title: string;
@@ -14,6 +15,7 @@ const DeleteWaterModal: FC<IProps> = ({ closeModal, _id }) => {
   const dispatch = useAppDispatch();
   const handleCancel = () => {
     closeModal();
+    removeScrollLock();
   };
 
   const handleDeleteWater = (waterID: string) => {
@@ -31,7 +33,10 @@ const DeleteWaterModal: FC<IProps> = ({ closeModal, _id }) => {
         <button
           className="delete-btn"
           type="button"
-          onClick={() => handleDeleteWater(_id)}
+          onClick={() => {
+            removeScrollLock();
+            handleDeleteWater(_id);
+          }}
         >
           Delete
         </button>

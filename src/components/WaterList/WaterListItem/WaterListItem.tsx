@@ -1,12 +1,13 @@
-import { FC, useState } from "react";
-import Icon from "../../Icon/Icon";
-import Modal from "../../Modal/Modal";
-import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
-import { updateWaterVolumeThunk } from "../../../redux/water/water.operations";
-import { useAppDispatch } from "../../../redux/redux_ts/hook";
-import { WaterItemBoxStyled } from "../WaterList.styled";
-import { IUpdateWaterPayload } from "../../../redux/redux_ts/interfaces";
-import EditWaterModal from "../EditWaterModal/EditWaterModal";
+import { FC, useState } from 'react';
+import Icon from '../../Icon/Icon';
+import Modal from '../../Modal/Modal';
+import DeleteWaterModal from '../DeleteWaterModal/DeleteWaterModal';
+import { updateWaterVolumeThunk } from '../../../redux/water/water.operations';
+import { useAppDispatch } from '../../../redux/redux_ts/hook';
+import { WaterItemBoxStyled } from '../WaterList.styled';
+import { IUpdateWaterPayload } from '../../../redux/redux_ts/interfaces';
+import EditWaterModal from '../EditWaterModal/EditWaterModal';
+import { addScrollLock, removeScrollLock } from '../../Modal/services/services';
 
 interface IProps {
   _id: string;
@@ -43,7 +44,10 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
         <button
           type="button"
           className="edit-btn"
-          onClick={() => setEditModalVisible(true)}
+          onClick={() => {
+            setEditModalVisible(true);
+            addScrollLock();
+          }}
         >
           <Icon className="edit-water-icon" id="pencil" />
         </button>
@@ -52,6 +56,7 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
           className="delete-btn-card"
           onClick={() => {
             setDeleteModalVisible(true);
+            addScrollLock();
           }}
         >
           <Icon className="delete-water-icon" id="delete" />
@@ -67,6 +72,7 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
             handleUpdateWater={handleUpdateWater}
             closeModal={() => {
               setEditModalVisible(false);
+              removeScrollLock();
             }}
             id={_id}
           />

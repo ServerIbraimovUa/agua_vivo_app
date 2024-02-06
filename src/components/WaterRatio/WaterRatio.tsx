@@ -19,6 +19,7 @@ import Icon from '../Icon/Icon';
 import Modal from '../Modal/Modal';
 import AddWaterModal from '../WaterList/AddWaterModal/AddWaterModal';
 import { useWaterPercentage } from '../../hooks/useWaterPercentage';
+import { addScrollLock, removeScrollLock } from '../Modal/services/services';
 
 const WaterRatio = () => {
   const [visible, setVisible] = useState(false);
@@ -28,6 +29,7 @@ const WaterRatio = () => {
 
   const closeModal = () => {
     setVisible(false);
+    removeScrollLock();
   };
 
   return (
@@ -84,7 +86,10 @@ const WaterRatio = () => {
           <WaterRatioBtnThumb className="hover">
             <WaterRatioBtn
               className="btn second-step"
-              onClick={() => setVisible(true)}
+              onClick={() => {
+                setVisible(true);
+                addScrollLock();
+              }}
             >
               <Icon className="water-ratio-plus" id="plus-circle" />
               Add Water

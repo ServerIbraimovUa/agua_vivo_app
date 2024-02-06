@@ -1,17 +1,18 @@
-import { useState } from "react";
-import Modal from "../Modal/Modal";
-import AddWaterModal from "./AddWaterModal/AddWaterModal";
+import { useState } from 'react';
+import Modal from '../Modal/Modal';
+import AddWaterModal from './AddWaterModal/AddWaterModal';
 import {
   selectAmountDaily,
   selectError,
   selectIsLoading,
-} from "../../redux/water/waterSelectors";
-import { useSelector } from "react-redux";
+} from '../../redux/water/waterSelectors';
+import { useSelector } from 'react-redux';
 
-import WaterListItem from "./WaterListItem/WaterListItem";
-import Loading from "../Loading/Loading";
-import { WaterContainerStyled } from "./WaterList.styled";
-import Icon from "../Icon/Icon";
+import WaterListItem from './WaterListItem/WaterListItem';
+import Loading from '../Loading/Loading';
+import { WaterContainerStyled } from './WaterList.styled';
+import Icon from '../Icon/Icon';
+import { addScrollLock, removeScrollLock } from '../Modal/services/services';
 
 export interface IWaterData {
   waterVolume: number;
@@ -28,6 +29,7 @@ const WaterList = () => {
   const error = useSelector(selectError);
   const closeModal = () => {
     setVisible(false);
+    removeScrollLock();
   };
 
   return (
@@ -50,7 +52,13 @@ const WaterList = () => {
         </ul>
       )}
 
-      <button className="add-water-btn" onClick={() => setVisible(true)}>
+      <button
+        className="add-water-btn"
+        onClick={() => {
+          setVisible(true);
+          addScrollLock();
+        }}
+      >
         <Icon className="water-plus-icon" id="plus" />
         Add water
       </button>

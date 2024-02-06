@@ -1,12 +1,13 @@
-import { useRef, useState } from "react";
-import SettingModal from "../SettingModal/SettingModal";
-import Modal from "../../Modal/Modal";
-import UserLogoutModal from "../UserLogoutModal/UserLogoutModal";
-import { LogoWrapper } from "./UserLogoModal.styled";
-import { useOutsideClick } from "../../../hooks/useOutsideClick";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../../redux/auth/authSelectors";
-import Icon from "../../Icon/Icon";
+import { useRef, useState } from 'react';
+import SettingModal from '../SettingModal/SettingModal';
+import Modal from '../../Modal/Modal';
+import UserLogoutModal from '../UserLogoutModal/UserLogoutModal';
+import { LogoWrapper } from './UserLogoModal.styled';
+import { useOutsideClick } from '../../../hooks/useOutsideClick';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../../redux/auth/authSelectors';
+import Icon from '../../Icon/Icon';
+import { addScrollLock } from '../../Modal/services/services';
 // import PrifileImageEmail from "./PrifileImageEmail";
 
 const UserLogoModal = () => {
@@ -40,10 +41,13 @@ const UserLogoModal = () => {
         ></img>
         <Icon className="arrow-down" id="arrow-down" />
       </button>
-      <div className={`btn-down ${anchorEl ? "open" : ""}`} ref={menuRef}>
+      <div className={`btn-down ${anchorEl ? 'open' : ''}`} ref={menuRef}>
         <button
           className="button-popover"
-          onClick={() => setSettingsVisible(true)}
+          onClick={() => {
+            setSettingsVisible(true);
+            addScrollLock();
+          }}
         >
           <div className="btn-container-setting">
             <Icon className="gear_settings" id="gear_settings" />
@@ -55,7 +59,12 @@ const UserLogoModal = () => {
             <SettingModal setVisible={setSettingsVisible} />
           </Modal>
         )}
-        <button onClick={() => setVisible(true)}>
+        <button
+          onClick={() => {
+            setVisible(true);
+            addScrollLock();
+          }}
+        >
           <div className="btn-container-logout">
             <Icon className="logout" id="logout" />
             <span className="button-popover-name">Log out</span>
