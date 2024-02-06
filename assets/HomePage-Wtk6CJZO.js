@@ -1,4 +1,4 @@
-import{u as L,d as _,a as fe,s as di,b as ot,c as Te,j as o,e as ci,r as F,f as At,M as Se,g as We,I as z,h as ui,i as fi,k as zt,l as pi,m as hi,L as mi,n as K,R as Y,o as gi,p as wt,O as vi}from"./index-uRYpQ9l7.js";import{P as lt}from"./Popover-x7Wy0gMT.js";const xi=L.div``,wi=L.form`
+import{u as L,d as _,a as fe,s as di,b as ot,c as Te,j as o,e as ci,r as F,f as At,M as Se,g as We,I as z,h as ui,i as fi,k as zt,l as pi,m as hi,L as mi,n as K,R as Y,o as gi,p as wt,O as vi}from"./index-0GFhhXdJ.js";import{P as lt}from"./Popover-OBMg91Jl.js";const xi=L.div``,wi=L.form`
   display: flex;
   gap: 24px;
   flex-direction: column;
@@ -662,22 +662,14 @@ import{u as L,d as _,a as fe,s as di,b as ot,c as Te,j as o,e as ci,r as F,f as 
 
   background-repeat: no-repeat;
   background-position: 50% 115px;
-  /* object-fit: cover;
-  background-position-x: 70px;
-  background-position-y: 100px; */
-  @media ${_.tablet} {
 
+  @media ${_.tablet} {
     background-image: url("${yr}");
     background-position: 50% 60px;
-
-    background-position-x: 0px;
-    background-position-y: 80px; 
   }
   @media ${_.desktop} {
-
     background-image: url("${Sr}");
     background-position: 50% 65px;
-
   }
 `,Er=L.div`
   position: relative;
@@ -690,14 +682,12 @@ import{u as L,d as _,a as fe,s as di,b as ot,c as Te,j as o,e as ci,r as F,f as 
     gap: 0px;
   }
 `,Mr=L.div`
-
   background-repeat: no-repeat;
   object-fit: contain;
- 
+
   padding: 24px 8px;
 
   @media ${_.tablet} {
-
     padding-top: 0px;
     padding-bottom: 32px;
     padding-left: 24px;
@@ -705,7 +695,6 @@ import{u as L,d as _,a as fe,s as di,b as ot,c as Te,j as o,e as ci,r as F,f as 
   }
 
   @media ${_.desktop} {
-
     height: 548px;
   }
 `,jr=L.div`
@@ -727,7 +716,6 @@ import{u as L,d as _,a as fe,s as di,b as ot,c as Te,j as o,e as ci,r as F,f as 
 
   @media ${_.tablet} {
     padding: 32px 24px;
-
   }
 
   @media ${_.desktop} {
