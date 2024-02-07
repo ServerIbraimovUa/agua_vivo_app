@@ -7,9 +7,12 @@ import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../redux/auth/authSelectors";
 import Icon from "../../Icon/Icon";
+import { useTranslation } from "react-i18next";
+import LanguageModal from "../Language/LanguageModal";
 // import PrifileImageEmail from "./PrifileImageEmail";
 
 const UserLogoModal = () => {
+  const [languagesVisible, setLanguagesVisible] = useState(false);
   const [anchorEl, setAnchorEl] = useState(false);
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -27,8 +30,9 @@ const UserLogoModal = () => {
     setAnchorEl(!anchorEl);
   };
 
+  const { t } = useTranslation();
   return (
-    <LogoWrapper className="seventh-step">
+    <LogoWrapper className="sixth-step">
       <button className="open-btn" onClick={handleClick}>
         <span className="name">{!name ? email?.substring(0, 8) : name}</span>
         <img
@@ -47,23 +51,42 @@ const UserLogoModal = () => {
         >
           <div className="btn-container-setting">
             <Icon className="gear_settings" id="gear_settings" />
-            <span className="button-popover-name">Setting</span>
+            <span className="button-popover-name">{t("header.setting")}</span>
           </div>
         </button>
         {settingsVisible && (
-          <Modal setVisible={setSettingsVisible} title="Setting" setting={true}>
+          <Modal
+            setVisible={setSettingsVisible}
+            title={t("header.setting")}
+            setting={true}
+          >
             <SettingModal setVisible={setSettingsVisible} />
           </Modal>
         )}
         <button onClick={() => setVisible(true)}>
           <div className="btn-container-logout">
             <Icon className="logout" id="logout" />
-            <span className="button-popover-name">Log out</span>
+            <span className="button-popover-name">{t("header.logout")}</span>
           </div>
         </button>
         {visible && (
-          <Modal setVisible={setVisible} title="Log out" logout={true}>
+          <Modal
+            setVisible={setVisible}
+            title={t("header.logout")}
+            logout={true}
+          >
             <UserLogoutModal setVisible={setVisible} />
+          </Modal>
+        )}
+        <button onClick={() => setLanguagesVisible(true)}>
+          <div className="btn-container-lang">
+            <Icon className="logout" id="global" />
+            <span className="button-popover-name">{t("header.languages")}</span>
+          </div>
+        </button>
+        {languagesVisible && (
+          <Modal setVisible={setLanguagesVisible} title={t("header.languages")}>
+            <LanguageModal />
           </Modal>
         )}
       </div>

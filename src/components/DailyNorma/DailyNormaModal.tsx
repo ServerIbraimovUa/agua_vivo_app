@@ -23,8 +23,8 @@ import { updateUserDailyNormaThunk } from "../../redux/auth/auth.operations";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelectors";
 import Popover from "../Popover/Popover";
-
-
+import { useTranslation } from "react-i18next";
+import i18n from "../../utils/i18n";
 
 interface Props {
   onClose: () => void;
@@ -38,10 +38,10 @@ type Inputs = {
 };
 
 const DailyNormaModal: FC<Props> = ({ onClose }) => {
-
+  const { t } = useTranslation();
   const user = useSelector(selectUser);
 
-   const {
+  const {
     register,
     handleSubmit,
     watch,
@@ -50,14 +50,13 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
     defaultValues: {
       weight: "",
       time: "",
-      sex:user.gender||"woman",
-      dailyNorma: user.dailyNorma||undefined,
+      sex: user.gender || "woman",
+      dailyNorma: user.dailyNorma || undefined,
     },
     mode: "onChange",
   });
 
   const dispatch = useAppDispatch();
- 
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const { dailyNorma } = data;
@@ -67,119 +66,107 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
   };
 
   let visible;
-  const weight = Number(watch("weight"))
+  const weight = Number(watch("weight"));
   const time = Number(watch("time"));
   const sex = String(watch("sex"));
 
   const calculateDailyNorma = (w: number, t: number, g: string): string => {
-  
     if (g === "man") {
-      return String((w * 0.04 + t * 0.6).toFixed(1))+"L";
+      return String((w * 0.04 + t * 0.6).toFixed(1)) + "L";
     } else {
-      return String((w * 0.03 + t * 0.4).toFixed(1))+"L";
+      return String((w * 0.03 + t * 0.4).toFixed(1)) + "L";
     }
   };
 
-  const createPopoverMessage = (w:number, t:number) : string|undefined=>{
-    if(w<20 && w!==0){
-    visible=true;
-    return "You couldn't be less than 20kg";
+  const createPopoverMessage = (w: number, t: number): string | undefined => {
+    if (w < 20 && w !== 0) {
+      visible = true;
+      return i18n.t("dailyModal.couldnt");
     }
-    if(t>24){
-      visible=true;
-      return "Day contains only 24H";
+    if (t > 24) {
+      visible = true;
+      return i18n.t("dailyModal.24h");
     }
-    if(t<0){
-      visible=true;
-      return "Time should be only positive integer";
+    if (t < 0) {
+      visible = true;
+      return i18n.t("dailyModal.positive");
     }
-   }
+  };
 
   const myDailyNorma = calculateDailyNorma(weight, time, sex);
   const message = createPopoverMessage(weight, time);
-  
- 
+
   return (
     <FormContainer>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormHeader>
           <FormSubHeader>
             <p>
-              For girl:<Span>V=(M*0,03) + (T*0,4)</Span>
+              {t("dailyModal.girl")}
+              <Span>
+                {t("dailyModal.volume")}=({t("dailyModal.masse")}*0,03) + (
+                {t("dailyModal.time")}*0,4)
+              </Span>
             </p>
             <p>
-              For man:<Span>V=(M*0,04) + (T*0,6)</Span>
+              {t("dailyModal.man")}
+              <Span>
+                {t("dailyModal.volume")}=({t("dailyModal.masse")}*0,04) + (
+                {t("dailyModal.time")}*0,6)
+              </Span>
             </p>
           </FormSubHeader>
-          <FormHeaderText>
-            * V is the volume of the water norm in liters per day, M is your
-            body weight, T is the time of active sports, or another type of
-            activity commensurate in terms of loads (in the absence of these,
-            you must set 0)
-          </FormHeaderText>
+          <FormHeaderText>{t("dailyModal.formule")}</FormHeaderText>
         </FormHeader>
         <FormBody>
-          <FormSubtitle>Calculate your rate:</FormSubtitle>
+          <FormSubtitle>{t("dailyModal.calculate")}</FormSubtitle>
           <FormSub>
             <label>
-              <FormRadioInput
-                {...register("sex")}
-                value="woman"
-                type="radio"
-              />
-              For woman
+              <FormRadioInput {...register("sex")} value="woman" type="radio" />
+              {t("dailyModal.forWoman")}
             </label>
             <label>
-              <FormRadioInput
-                {...register("sex")}
-                value="man"
-                type="radio"
-              />
-              For man
+              <FormRadioInput {...register("sex")} value="man" type="radio" />
+              {t("dailyModal.forMan")}
             </label>
           </FormSub>
           <Label>
-            <span>Your weight in kilograms:</span>
-            <Input
-              {...register("weight")}
-              type="number"
-              placeholder="0"           
-              
-            />
+            <span>{t("dailyModal.weight")}</span>
+            <Input {...register("weight")} type="number" placeholder="0" />
           </Label>
           <Label>
-            <span>
-              The time of active participation in sports or other activities
-              with a high physical. load in hours:
-            </span>
-            <Input
-              {...register("time")}
-              type="number"
-              placeholder="0"             
-            />
+            <span>{t("dailyModal.activeTime")}</span>
+            <Input {...register("time")} type="number" placeholder="0" />
           </Label>
           <LabelNorma>
-            <SpanText>The required amount of water in liters per day:</SpanText>
-            <Span>{visible?(<Popover message={message} dailyNorma={true}/>):myDailyNorma}</Span>
+            <SpanText>{t("dailyModal.required")}</SpanText>
+            <Span>
+              {visible ? (
+                <Popover message={message} dailyNorma={true} />
+              ) : (
+                `${myDailyNorma}${t("homepage.litres")}`
+              )}
+            </Span>
           </LabelNorma>
         </FormBody>
         <FormFooter>
           <Label>
-            <FormSubtitle>
-              Write down how much water you will drink:
-            </FormSubtitle>
-            <Input  {...register("dailyNorma", {
-                    required: true,
-                  })} 
-            type="number" step="any" 
-            min={0}
-            max={15}
-            placeholder="0"/>
-            {errors.dailyNorma && <span>This field is required</span>}
+            <FormSubtitle>{t("dailyModal.wanted")}</FormSubtitle>
+            <Input
+              {...register("dailyNorma", {
+                required: true,
+              })}
+              type="number"
+              step="any"
+              min={0}
+              max={15}
+              placeholder="0"
+            />
+            {errors.dailyNorma && <span>{t("dailyModal.field")}</span>}
           </Label>
         </FormFooter>
         <FormButton className="btn" type="submit">
-          Save
+          {t("addWater.save")}
         </FormButton>
       </Form>
     </FormContainer>

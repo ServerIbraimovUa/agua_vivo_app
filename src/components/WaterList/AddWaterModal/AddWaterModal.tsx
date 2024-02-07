@@ -1,16 +1,18 @@
-import { ChangeEvent, FC, KeyboardEvent, useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { generateTimeOptions } from '../utils/utils';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../../redux/redux_ts/hook';
+import { ChangeEvent, FC, KeyboardEvent, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { generateTimeOptions } from "../utils/utils";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../../redux/redux_ts/hook";
 
-import { AddWaterModalStyled } from '../WaterList.styled';
+import { AddWaterModalStyled } from "../WaterList.styled";
 
-import Icon from '../../Icon/Icon';
+import Icon from "../../Icon/Icon";
 
-import { addWaterThunk } from '../../../redux/water/water.operations';
-import { selectAmountDaily } from '../../../redux/water/waterSelectors';
-import Popover from '../../Popover/Popover';
+import { addWaterThunk } from "../../../redux/water/water.operations";
+import { selectAmountDaily } from "../../../redux/water/waterSelectors";
+import Popover from "../../Popover/Popover";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../utils/i18n";
 
 interface IProps {
   id?: string;
@@ -25,6 +27,7 @@ export type IWaterPortion = {
 };
 
 const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -32,7 +35,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
     getValues,
     formState: { errors },
   } = useForm<IWaterPortion>({
-    mode: 'onChange',
+    mode: "onChange",
   });
 
   const dispatch = useAppDispatch();
@@ -42,14 +45,14 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
   const [state, setState] = useState({
     count: entries.length > 0 ? entries[entries.length - 1].waterVolume : 0,
     inputValue:
-      entries.length > 0 ? entries[entries.length - 1].waterVolume : '0',
+      entries.length > 0 ? entries[entries.length - 1].waterVolume : "0",
   });
 
   const timeOptions = generateTimeOptions();
 
   const amountWater = state.inputValue;
-  const time = String(watch('time'));
-  const waterVolume = getValues('waterVolume');
+  const time = String(watch("time"));
+  const waterVolume = getValues("waterVolume");
   const chosenTime = time.slice(3, 5);
   const firstTime = timeOptions[0].slice(3, 5).toString();
 
@@ -65,7 +68,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
       inputValue: value,
     }));
@@ -76,12 +79,12 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
   };
 
   const handleInputKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === '-') {
+    if (event.key === "-") {
       event.preventDefault();
     }
   };
 
-  const onSubmit: SubmitHandler<IWaterPortion> = data => {
+  const onSubmit: SubmitHandler<IWaterPortion> = (data) => {
     const newData = {
       time: data.time,
       waterVolume: Number(state.inputValue),
@@ -112,11 +115,11 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
   ): string | undefined => {
     if (w === 0) {
       visible = true;
-      return 'The amount of water cannot be 0!';
+      return i18n.t("addWater.zero");
     }
     if (Number(t) % 5 !== 0 && Number(f) % 5 !== 0) {
       visible = true;
-      return 'Please choose a time that is divisible by 5';
+      return i18n.t("addWater.divide");
     }
   };
 
@@ -130,7 +133,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
     <AddWaterModalStyled>
       <h2 className="add-water-title">{title}</h2>
       <div className="counter-box">
-        <p className="">Amount of water:</p>
+        <p className="">{t("addWater.water")}</p>
         <div className="counter-btn-box">
           <button
             className="counter-btn"
@@ -139,7 +142,9 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
           >
             <Icon className="icon-minus" id="minus" />
           </button>
-          <span className="water-amount-span">{state.count}ml</span>
+          <span className="water-amount-span">
+            {state.count} {t("addWater.ml")}
+          </span>
           <button
             className="counter-btn"
             onClick={() => handleCountChange(state.count + 50)}
@@ -151,16 +156,16 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
       </div>
       <form className="add-water-form" onSubmit={handleSubmit(onSubmit)}>
         <label className="water-label">
-          <span className="popover">Recording time:</span>
+          <span className="popover">{t("addWater.time")}</span>
           {visible && <Popover message={message} waterAmount={true} />}
 
           <select
-            {...register('time', { required: true })}
+            {...register("time", { required: true })}
             name="time"
             className="water-select"
             aria-label="Time"
           >
-            {timeOptions.map(option => (
+            {timeOptions.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
@@ -168,12 +173,10 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
           </select>
         </label>
         <label className="water-label">
-          <span className="enter-water-span">
-            Enter the value of water used:
-          </span>
+          <span className="enter-water-span">{t("addWater.used")}</span>
 
           <input
-            {...register('waterVolume', { required: true })}
+            {...register("waterVolume", { required: true })}
             type="number"
             min={0}
             max={5000}
@@ -190,9 +193,11 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
         </label>
 
         <div className="btn-container">
-          <span className="water-amount">{`${state.count}ml`}</span>
+          <span className="water-amount">{`${state.count}${t(
+            "addWater.ml"
+          )}`}</span>
           <button type="submit" className="save-btn">
-            Save
+            {t("addWater.save")}
           </button>
         </div>
       </form>

@@ -110,7 +110,7 @@ export const WaterItemBoxStyled = styled.li`
   .water-amount-card {
     font-size: 18px;
     color: var(--primary-blue);
-    width: 65px;
+    width: 72px;
   }
 
   .time {

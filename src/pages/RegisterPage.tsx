@@ -5,13 +5,15 @@ import {
   StyledLoginDiv,
   StyledRegisterSection,
 } from "../components/AuthForm/AuthForm.styled";
+import { useTranslation } from "react-i18next";
 
 const RegisterPage = () => {
+  const { t } = useTranslation();
   return (
     <StyledRegisterSection>
       <div className="container">
         <StyledLoginDiv>
-          <h2 className="title">Sign Up</h2>
+          <h2 className="title">{t("signin.signup")}</h2>
           <AuthForm repeat={true} />
           <AuthFormLink
             className="btn btn-google"
@@ -20,7 +22,7 @@ const RegisterPage = () => {
             Google
           </AuthFormLink>
           <NavLink className="auth-link" to="/signin">
-            Sign in
+            {t("signin.title")}
           </NavLink>
         </StyledLoginDiv>
       </div>

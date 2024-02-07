@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Range, getTrackBackground } from 'react-range';
+import { useState } from "react";
+import { Range, getTrackBackground } from "react-range";
 import {
   Output,
   OutputThumb,
@@ -14,11 +14,12 @@ import {
   WaterRatioRangeThumb,
   WaterRatioThumb,
   WaterRatioTitle,
-} from './WaterRatio.styled';
-import Icon from '../Icon/Icon';
-import Modal from '../Modal/Modal';
-import AddWaterModal from '../WaterList/AddWaterModal/AddWaterModal';
-import { useWaterPercentage } from '../../hooks/useWaterPercentage';
+} from "./WaterRatio.styled";
+import Icon from "../Icon/Icon";
+import Modal from "../Modal/Modal";
+import AddWaterModal from "../WaterList/AddWaterModal/AddWaterModal";
+import { useWaterPercentage } from "../../hooks/useWaterPercentage";
+import { useTranslation } from "react-i18next";
 
 const WaterRatio = () => {
   const [visible, setVisible] = useState(false);
@@ -30,12 +31,13 @@ const WaterRatio = () => {
     setVisible(false);
   };
 
+  const { t } = useTranslation();
   return (
     <>
       <WaterRatioContainer>
         <WaterRatioThumb>
           <RangeContainer className="third-step">
-            <WaterRatioTitle>Today</WaterRatioTitle>
+            <WaterRatioTitle>{t("homepage.h2-3Today")}</WaterRatioTitle>
             <WaterRatioRangeThumb>
               <Range
                 disabled
@@ -50,7 +52,7 @@ const WaterRatio = () => {
                       ...props.style,
                       background: getTrackBackground({
                         values: [normalizedValue],
-                        colors: ['#9EBBFF', '#D7E3FF'],
+                        colors: ["#9EBBFF", "#D7E3FF"],
                         min: 0,
                         max: 100,
                       }),
@@ -87,14 +89,17 @@ const WaterRatio = () => {
               onClick={() => setVisible(true)}
             >
               <Icon className="water-ratio-plus" id="plus-circle" />
-              Add Water
+              {t("homepage.addWaterButton")}
             </WaterRatioBtn>
           </WaterRatioBtnThumb>
         </WaterRatioThumb>
       </WaterRatioContainer>
       {visible && (
-        <Modal setVisible={setVisible} title="Add water">
-          <AddWaterModal title="Choose a value" closeModal={closeModal} />
+        <Modal setVisible={setVisible} title={t("waterList.addTitle")}>
+          <AddWaterModal
+            title={t("waterList.addModal")}
+            closeModal={closeModal}
+          />
         </Modal>
       )}
     </>

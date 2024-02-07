@@ -2,6 +2,7 @@ import { FC } from "react";
 import { DeleteWaterModalStyled } from "../WaterList.styled";
 import { deleteWaterThunk } from "../../../redux/water/water.operations";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   title: string;
@@ -21,19 +22,20 @@ const DeleteWaterModal: FC<IProps> = ({ closeModal, _id }) => {
     closeModal();
   };
 
+  const { t } = useTranslation();
   return (
     <DeleteWaterModalStyled>
-      <p className="delete-title">Are you sure you want to delete the entry?</p>
+      <p className="delete-title">{t("deleteModal.sure")}</p>
       <div className="delete-btn-box">
         <button className="cancel-btn" type="button" onClick={handleCancel}>
-          Cancel
+          {t("deleteModal.cancel")}
         </button>
         <button
           className="delete-btn"
           type="button"
           onClick={() => handleDeleteWater(_id)}
         >
-          Delete
+          {t("deleteModal.delete")}
         </button>
       </div>
     </DeleteWaterModalStyled>

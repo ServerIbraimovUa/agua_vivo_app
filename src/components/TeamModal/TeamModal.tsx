@@ -1,12 +1,12 @@
 // import Swiper JS
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
 
 // import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import './style.css';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "./style.css";
 import {
   IconList,
   RoleText,
@@ -15,19 +15,19 @@ import {
   SwipeLink,
   SwipeTitle,
   TaskList,
-} from './TeamModal.styled';
-import vika from '../../assets/images/team/vika@1x.png';
-import server from '../../assets/images/team/server@1x.png';
-import vitalii from '../../assets/images/team/vitalii@1x.png';
-import anastasiia from '../../assets/images/team/anastasiia@1x.png';
-import tatiana from '../../assets/images/team/tatiana@1x.png';
-import ludmila from '../../assets/images/team/ludmila@1x.png';
-import oksana from '../../assets/images/team/oksana@1x.png';
-import marina from '../../assets/images/team/marina@1x.png';
-import sofiia from '../../assets/images/team/sofiia@1x.png';
-import natasha from '../../assets/images/team/natasha@1x.png';
-import ostap from '../../assets/images/team/ostap@1x.png';
-import Icon from '../Icon/Icon';
+} from "./TeamModal.styled";
+import vika from "../../assets/images/team/vika@1x.png";
+import server from "../../assets/images/team/server@1x.png";
+import vitalii from "../../assets/images/team/vitalii@1x.png";
+import anastasiia from "../../assets/images/team/anastasiia@1x.png";
+import tatiana from "../../assets/images/team/tatiana@1x.png";
+import ludmila from "../../assets/images/team/ludmila@1x.png";
+import oksana from "../../assets/images/team/oksana@1x.png";
+import marina from "../../assets/images/team/marina@1x.png";
+import sofiia from "../../assets/images/team/sofiia@1x.png";
+import natasha from "../../assets/images/team/natasha@1x.png";
+import ostap from "../../assets/images/team/ostap@1x.png";
+import Icon from "../Icon/Icon";
 
 const TeamModal = () => {
   return (
