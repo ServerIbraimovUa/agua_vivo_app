@@ -1,4 +1,4 @@
-## -------------------------------------------------- [UA](README.ua.md)
+## -------------------------------------------------------------- [UA](README.ua.md)
 
 ## About project:
 
@@ -22,18 +22,18 @@ If you want to help the development of Agua Vivo App, you can contact the develo
 
 ## Team:
 
-** [Server Ibraimov](https://github.com/ServerIbraimovUa) ** Team leader front-end.
-** [Vitalii Beyar](https://github.com/nightven) ** Team leader back-end.
-** [Victoria Cherkashyna](https://github.com/Viktoriia-Ch08) ** Scrum.
-** [Sofiia Karpova](https://github.com/sofiialives) ** Full-stack developer.
-** [Liudmyla Horobets](https://github.com/LiudmylaHorobets) ** Front-End.
-** [Maryna Aleksandrova](https://github.com/hotgorod) ** Front-End.
-** [Ostap Kryven](https://github.com/Ostap2) ** Front-End.
-** [Natasha Kulibaba](https://github.com/NatashaKul7) ** Front-End.
-** [Oksana Tantsiura](https://github.com/Oksana-Tnt) ** Front-End.
-** [Anastasia Diatchuk](https://github.com/AnastasiiaDia) ** Front-End.
-** [Tetiana Dub](https://github.com/Tasha852209) ** Front-End.
+1. **[Server Ibraimov](https://github.com/ServerIbraimovUa)** Team leader front-end.
+2. **[Vitalii Beyar](https://github.com/nightven)** Team leader back-end.
+3. **[Victoria Cherkashyna](https://github.com/Viktoriia-Ch08)** Scrum.
+4. **[Sofiia Karpova](https://github.com/sofiialives)** Full-stack developer.
+5. **[Liudmyla Horobets](https://github.com/LiudmylaHorobets)** Front-End.
+6. **[Maryna Aleksandrova](https://github.com/hotgorod)** Front-End.
+7. **[Ostap Kryven](https://github.com/Ostap2)** Front-End.
+8. **[Natasha Kulibaba](https://github.com/NatashaKul7)** Front-End.
+9. **[Oksana Tantsiura](https://github.com/Oksana-Tnt)** Front-End.
+10. **[Anastasia Diatchuk](https://github.com/AnastasiiaDia)** Front-End.
+11. **[Tetiana Dub](https://github.com/Tasha852209)** Front-End.
 
-## \*\*[Back-End](https://github.com/nightven/agua_vivo_app_backend)
+## **[Back-End](https://github.com/nightven/agua_vivo_app_backend)**
 
-## \*\*[Swagger](https://agua-vivo-app-backend.onrender.com/api-docs/)
+## **[Swagger](https://agua-vivo-app-backend.onrender.com/api-docs/)**
