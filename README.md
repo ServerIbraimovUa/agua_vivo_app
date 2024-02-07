@@ -1,4 +1,4 @@
-## -------------------------------------------------------------- [UA](README.ua.md)
+## ------------------------------------------------------------------------- [UA](README.ua.md)
 
 ## About project:
 
@@ -19,6 +19,9 @@ The app also shows you statistics on how much water you drank in a day, week or 
 ### Assistance
 
 If you want to help the development of Agua Vivo App, you can contact the developer via [Email](serveribraimov7@gmail.com) or [GitHub](https://github.com/ServerIbraimovUa). You can report bugs, suggest new features, or submit your code.
+
+## Technologies used:
+`HTML` `React` `Redux-tolkit` `styled-components` `axios` `typescript` `Swiper` `Chart.js` `react-hook-form` `i18next`
 
 ## Team:
 
