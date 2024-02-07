@@ -1,13 +1,14 @@
+import { useSelector } from "react-redux";
 import { useState } from "react";
-import Modal from "../Modal/Modal";
-import AddWaterModal from "./AddWaterModal/AddWaterModal";
+
 import {
   selectAmountDaily,
   selectError,
   selectIsLoading,
 } from "../../redux/water/waterSelectors";
-import { useSelector } from "react-redux";
 
+import AddWaterModal from "./AddWaterModal/AddWaterModal";
+import Modal from "../Modal/Modal";
 import WaterListItem from "./WaterListItem/WaterListItem";
 import Loading from "../Loading/Loading";
 import { WaterContainerStyled } from "./WaterList.styled";

@@ -1,11 +1,13 @@
 import { FC, useState } from "react";
+import { useAppDispatch } from "../../../redux/redux_ts/hook";
+
+import { updateWaterVolumeThunk } from "../../../redux/water/water.operations";
+import { WaterItemBoxStyled } from "../WaterList.styled";
+import { IUpdateWaterPayload } from "../../../redux/redux_ts/interfaces";
+
 import Icon from "../../Icon/Icon";
 import Modal from "../../Modal/Modal";
 import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
-import { updateWaterVolumeThunk } from "../../../redux/water/water.operations";
-import { useAppDispatch } from "../../../redux/redux_ts/hook";
-import { WaterItemBoxStyled } from "../WaterList.styled";
-import { IUpdateWaterPayload } from "../../../redux/redux_ts/interfaces";
 import EditWaterModal from "../EditWaterModal/EditWaterModal";
 import { useTranslation } from "react-i18next";
 import { waterIcon } from "../../../utils/waterIcon";
@@ -20,10 +22,22 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
   const { t } = useTranslation();
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const handleUpdateWater = (waterData: IUpdateWaterPayload) => {
     dispatch(updateWaterVolumeThunk(waterData));
+  };
+
+
+  const waterIcon = (volume: number) => {
+    if (volume >= 1500) {
+      return <Icon className="water-bottle-icon" id="barrel" />;
+    } else if (volume >= 500) {
+      return <Icon className="water-bottle-icon" id="bottle" />;
+    } else {
+      return <Icon className="water-glass-icon" id="water" />;
+    }
   };
 
 

@@ -57,6 +57,7 @@ const VerificationPage = () => {
       <VerificationSection className="section">
         <WrapperContainer>
           <ContainerLink className="container">
+
             <Popover message={t("verifyEmail.title1")} />
             <Popover message={t("verifyEmail.link")} verify={true} />
 
@@ -66,6 +67,7 @@ const VerificationPage = () => {
           </ContainerLink>
           <WrapperImg className="container">
             <Popover message={t("verifyEmail.title2")} advert={true} />
+
             <ImgGarage src={Img} alt="advertisment" />
           </WrapperImg>
         </WrapperContainer>
