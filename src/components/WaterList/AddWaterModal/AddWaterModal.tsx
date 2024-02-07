@@ -48,6 +48,22 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
     inputValue: entries.length > 0 ? "250" : "0",
   });
 
+  const arr: IOptions[] = [];
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const timeOptions = generateTimeOptions();
 
   const [option, setOption] = useState<string | undefined>(timeOptions[0]);
@@ -134,23 +150,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
     firstTime
   );
 
-  const arr: IOptions[] = [];
-
   timeOptions.map((option) => arr.push({ value: option, label: option }));
-
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <AddWaterModalStyled>
@@ -179,10 +179,8 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
         <label className="water-label">
           <span className="popover">Recording time:</span>
           {visible && <Popover message={message} waterAmount={true} />}
-          {/* <div className="select"> */}
           <Select
             className="mySelect"
-            // {...IOptions}
             defaultValue={arr[0]}
             options={arr}
             onChange={changeSelect}
@@ -191,8 +189,6 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
                 ...baseStyles,
                 height: "44px",
                 width: windowWidth > 767 ? "100%" : "120px",
-                // width: window.innerWidth > 767 ? "100%" : "120px",
-
                 border: `2px solid ${isFocused ? "#D7E3FF" : "#D7E3FF"}`,
                 "&:hover": {
                   borderColor: "#D7E3FF",
@@ -210,8 +206,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
                 color: "#407BFF",
               }),
             }}
-          />{" "}
-          {/* </div> */}
+          />
         </label>
         <label className="water-label">
           <span className="enter-water-span">

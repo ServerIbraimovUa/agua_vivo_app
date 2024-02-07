@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { generateTimeOptions } from "../../../utils/timePicker";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
-import Select, { SingleValue } from "react-select"; // { SingleValue }
+import Select, { SingleValue } from "react-select";
 
 import { updateWaterVolumeThunk } from "../../../redux/water/water.operations";
 import { selectAmountDaily } from "../../../redux/water/waterSelectors";
@@ -35,6 +35,8 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
   const { entries } = useSelector(selectAmountDaily);
   const water = entries.find((entry) => entry._id === id);
   const w = water?.time;
+
+  const arr: IOptions[] = [];
 
   const [state, setState] = useState({
     count: water ? water.waterVolume : 0,
@@ -124,8 +126,6 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
   };
 
   let message = createPopoverMessage(Number(amountWater));
-
-  const arr: IOptions[] = [];
 
   timeOptions.map((option) => arr.push({ value: option, label: option }));
 
