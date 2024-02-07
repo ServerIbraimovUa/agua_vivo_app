@@ -1,19 +1,17 @@
 
-import { ChangeEvent, FC, KeyboardEvent, useState } from "react";
+import { ChangeEvent, FC, KeyboardEvent, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { generateTimeOptions } from "../utils/utils";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
-
 import { AddWaterModalStyled } from "../WaterList.styled";
-
 import Icon from "../../Icon/Icon";
-
 import { addWaterThunk } from "../../../redux/water/water.operations";
 import { selectAmountDaily } from "../../../redux/water/waterSelectors";
 import Popover from "../../Popover/Popover";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../utils/i18n";
+import { generateTimeOptions } from "../../../utils/timePicker";
+import Select,{ SingleValue } from "react-select";
 
 
 interface IProps {
