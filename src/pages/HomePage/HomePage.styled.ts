@@ -1,29 +1,28 @@
 import styled from "styled-components";
-import BgImgMob from "../../assets/images/homePage/BackgroundHomeMobile.png";
-import BgImgTabl from "../../assets/images/homePage/BackgroundHomeTablet.png";
-import BgImgDesk from "../../assets/images/homePage/BackgroungHomeDesk.png";
-import BottleMob from "../../assets/images/homePage/BottleHomeMobile.png";
-import BottleTabl from "../../assets/images/homePage/BottleHomeTablet.png";
-import BottleDesk from "../../assets/images/homePage/BottleHomeDesk.png";
+
+import BgImgHomeMob from "../../assets/images/homePage/BgHomeMob.png";
+import BgImgHomeTab from "../../assets/images/homePage/BgHomeTabl.png";
+import BgImgHomeDesk from "../../assets/images/homePage/BgHomeDesk.png";
 import { device } from "../../css/deviceSize";
 
 export const StyledHomePageSection = styled.section`
-  background-image: url("${BgImgMob}");
+  background-image: url("${BgImgHomeMob}");
+
   background-repeat: no-repeat;
-  object-fit: cover;
-  background-position-x: 70px;
-  background-position-y: 100px;
+  background-position: 50% 115px;
+
   @media ${device.tablet} {
-    background-image: url("${BgImgTabl}");
-    background-position-x: 0px;
-    background-position-y: 80px;
+    background-image: url("${BgImgHomeTab}");
+    background-position: 50% 60px;
   }
   @media ${device.desktop} {
-    background-image: url("${BgImgDesk}");
+    background-image: url("${BgImgHomeDesk}");
+    background-position: 50% 65px;
   }
 `;
 
 export const ContainerWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -34,26 +33,19 @@ export const ContainerWrapper = styled.div`
   }
 `;
 export const ContainerDailyNorma = styled.div`
-  background-image: url("${BottleMob}");
   background-repeat: no-repeat;
   object-fit: contain;
-  background-position-x: 10px;
-  background-position-y: 90px;
+
   padding: 24px 8px;
 
   @media ${device.tablet} {
-    background-image: url("${BottleTabl}");
-    background-position-y: 5px;
-    background-position-x: 90px;
     padding-top: 0px;
     padding-bottom: 32px;
     padding-left: 24px;
     padding-right: 24px;
   }
+
   @media ${device.desktop} {
-    background-image: url("${BottleDesk}");
-    background-position-y: 0px;
-    background-position-x: -50px;
     height: 548px;
   }
 `;
@@ -67,7 +59,7 @@ export const ContainerCalendar = styled.div`
   height: auto;
 
   background-color: var(--secondary-white);
-  background-image: url("${BgImgMob}");
+
   background-repeat: no-repeat;
   object-fit: cover;
 
@@ -76,13 +68,12 @@ export const ContainerCalendar = styled.div`
 
   @media ${device.tablet} {
     padding: 32px 24px;
-    background-image: url("${BgImgTabl}");
   }
 
   @media ${device.desktop} {
     width: 592px;
     max-height: 688px;
-    background-image: url("${BgImgDesk}");
+
     margin-bottom: 0px;
   }
   .chart-container {
@@ -114,5 +105,48 @@ export const ContainerCalendar = styled.div`
     &:hover {
       fill: var(--secondary-orange);
     }
+  }
+`;
+
+export const TeamContainerDiv = styled.div`
+  position: absolute;
+  bottom: 47px;
+  right: 20px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 7px;
+
+  @media ${device.tablet} {
+    position: absolute;
+    bottom: 60px;
+    right: 220px;
+  }
+
+  @media ${device.desktop} {
+    position: absolute;
+    bottom: 25px;
+    right: 163px;
+  }
+`;
+
+export const CopirightText = styled.p`
+  text-transform: uppercase;
+  font-size: 14px;
+  color: var(--primary-blue);
+  font-weight: var(--bold-font-weight);
+  @media ${device.tablet} {
+    font-size: 16px;
+  }
+`;
+
+export const TeamForce = styled.button`
+  font-size: 14px;
+  font-weight: var(--bold-font-weight);
+  padding-bottom: 2px;
+  border-bottom: 3px solid;
+  color: var(--primary-blue);
+  @media ${device.tablet} {
+    font-size: 16px;
   }
 `;

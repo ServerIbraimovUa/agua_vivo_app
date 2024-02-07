@@ -1,11 +1,11 @@
-import styled from 'styled-components';
-import { device } from '../../css/deviceSize';
+import styled from "styled-components";
+import { device } from "../../css/deviceSize";
 
 export const WaterRatioContainer = styled.div`
-  width: 280px;
+  /* width: 280px;
   @media ${device.tablet} {
     width: 704px;
-  }
+  } */
   @media ${device.desktop} {
     width: 592px;
   }
@@ -81,7 +81,7 @@ export const OutputThumb = styled.div`
 
 export const Output = styled.output`
   position: absolute;
-  left: -3px;
+  left: -10px;
   font-weight: var(--medium-font-weight);
   color: var(--primary-blue);
 `;
@@ -116,7 +116,7 @@ export const WaterRatioBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 336px;
   height: 36px;
   gap: 5px;
   font-weight: var(--medium-font-weight);

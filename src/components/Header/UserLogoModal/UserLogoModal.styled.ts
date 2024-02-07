@@ -49,6 +49,7 @@ export const LogoWrapper = styled.div`
     border-radius: 10px;
     display: none;
     box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
+    z-index: 10;
 
     &.open {
       display: flex;
@@ -74,7 +75,7 @@ export const LogoWrapper = styled.div`
     }
     .button-popover-name {
       display: flex;
-      
+
       width: 62px;
       margin-left: 8px;
       font-size: 16px;

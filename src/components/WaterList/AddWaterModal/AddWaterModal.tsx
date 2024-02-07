@@ -3,7 +3,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../redux/redux_ts/hook";
 import Select, { SingleValue } from "react-select";
-
 import { addWaterThunk } from "../../../redux/water/water.operations";
 import { selectAmountDaily } from "../../../redux/water/waterSelectors";
 import { generateTimeOptions } from "../../../utils/timePicker";
@@ -16,7 +15,7 @@ import Popover from "../../Popover/Popover";
 interface IProps {
   id?: string;
   title: string;
-  show: boolean;
+  show?: boolean;
   closeModal: () => void;
 }
 export interface IOptions {
@@ -71,6 +70,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
   const amountWater = state.inputValue;
   const waterVolume = getValues("waterVolume");
   const chosenTime = option?.slice(3, 5);
+
   const firstTime = timeOptions[0].slice(3, 5).toString();
 
   const changeSelect = (e: SingleValue<IOptions>) => {
@@ -180,7 +180,6 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
           <span className="popover">Recording time:</span>
           {visible && <Popover message={message} waterAmount={true} />}
           <Select
-            className="mySelect"
             defaultValue={arr[0]}
             options={arr}
             onChange={changeSelect}

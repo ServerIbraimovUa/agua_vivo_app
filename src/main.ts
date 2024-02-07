@@ -68,9 +68,21 @@ export const GlobalStyle = createGlobalStyle`
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" height="72px" width="72px" stroke="black" fill="black" stroke-width="3"><g><path d="M10.756 29.167l-2.897-10.82M7.859 18.347l-5.355 4.747 1.214-20.203 11.151 16.89-7.010-1.434z"/></g></svg>')
       1 1,
       auto;
-    overflow-x: hidden;
 
   }
+  body{
+    overflow-x: hidden;
+    
+    font-family: 'Roboto', sans-serif;
+    font-weight: var(--regular-font-weight);
+    font-style: normal;
+    font-size: var(--standart-font-size);
+    line-height: var(--standart-line-height);
+    
+    color: var(--primary-black);
+    background-color: var(--primary-white);
+    cursor: none;
+}
 
   a, button, textarea, input, label, .hover {
     
@@ -89,24 +101,9 @@ export const GlobalStyle = createGlobalStyle`
       }
   }
 
-  body{
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
+  
 
-    height: 100vh;
-   
-    
-    font-family: 'Roboto', sans-serif;
-    font-weight: var(--regular-font-weight);
-    font-style: normal;
-    font-size: var(--standart-font-size);
-    line-height: var(--standart-line-height);
-    
-    color: var(--primary-black);
-    background-color: var(--primary-white);
-    cursor: none;
-}
+
 
   .is-hidden {
   opacity: 0;
@@ -217,4 +214,52 @@ input:focus{
     
   }
 }
+
+
+/* SCROLL */
+
+::-webkit-scrollbar,
+scrollbar {
+  width: 10px; 
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+
+::-webkit-scrollbar-track,
+scrollbar-track {
+  background-color: var(--secondary-light-blue); 
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb,
+scrollbar-thumb {
+  background-color:  var(--secondary-blue); 
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb:active,
+scrollbar-thumb:active {
+  background-color: var(--primary-blue); 
+}
+
+scrollbar-thumb {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+scrollbar-track {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: var(--secondary-light-blue);
+}
+
+
 `;
