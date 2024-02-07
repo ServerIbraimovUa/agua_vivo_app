@@ -9,6 +9,7 @@ import {
 } from "../../redux/water/waterSelectors";
 import CalendarModal from "./CalendarModal";
 import { useTranslation } from "react-i18next";
+import { selectDailyNorma } from "../../redux/auth/authSelectors";
 
 export interface Day {
   day: number;
@@ -27,6 +28,7 @@ const Calendar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<Day | null>(null);
   const amountMonth = useSelector(selectAmountMonthly);
+  const dailyNorma = useSelector(selectDailyNorma);
   const data = useSelector(selectAmountDaily);
   const id = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
     .toString()
@@ -35,7 +37,7 @@ const Calendar: React.FC = () => {
 
   useEffect(() => {
     dispatch(getAmountMonthlyThunk(id));
-  }, [dispatch, id, data.entries.length]);
+  }, [dispatch, id, data.entries, dailyNorma]);
 
   const getDaysInMonth = (date: Date): Day[] => {
     const year = date.getFullYear();

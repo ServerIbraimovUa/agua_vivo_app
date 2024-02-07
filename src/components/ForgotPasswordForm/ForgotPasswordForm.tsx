@@ -33,7 +33,7 @@ const ForgotPasswordForm = () => {
         toast.success(`${t("forgot.notify")}`);
       })
       .catch((e) => {
-        if (e.includes("409")) {
+        if (e.includes("404")) {
           toast.error(`${t("forgot.notifyError")}`);
         }
       });

@@ -7,6 +7,7 @@ import {
   updateWaterVolumeThunk,
 } from "./water.operations";
 import { IWater } from "../redux_ts/interfaces";
+import { logOutThunk } from "../auth/auth.operations";
 
 const waterInitState: IWater = {
   amountDaily: {
@@ -27,6 +28,10 @@ const waterSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(logOutThunk.fulfilled, (state) => {
+        state.amountDaily = waterInitState.amountDaily;
+        state.amountMonthly = waterInitState.amountMonthly;
+      })
       .addCase(addWaterThunk.fulfilled, (state, action) => {
         state.amountDaily.entries.push(action.payload);
         state.isLoading = false;

@@ -1,4 +1,3 @@
-
 import { ChangeEvent, FC, KeyboardEvent, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
@@ -11,8 +10,7 @@ import Popover from "../../Popover/Popover";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../utils/i18n";
 import { generateTimeOptions } from "../../../utils/timePicker";
-import Select,{ SingleValue } from "react-select";
-
+import Select, { SingleValue } from "react-select";
 
 interface IProps {
   id?: string;
@@ -46,10 +44,8 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
   const { entries } = useSelector(selectAmountDaily);
 
   const [state, setState] = useState({
-
     count: entries.length > 0 ? 250 : 0,
     inputValue: entries.length > 0 ? "250" : "0",
-
   });
 
   const arr: IOptions[] = [];
@@ -76,7 +72,6 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
 
   const waterVolume = getValues("waterVolume");
   const chosenTime = option?.slice(3, 5);
-
 
   const firstTime = timeOptions[0].slice(3, 5).toString();
 
@@ -112,9 +107,7 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
     }
   };
 
-
   const onSubmit: SubmitHandler<IWaterPortion> = () => {
-
     const newData = {
       time: option,
       waterVolume: Number(state.inputValue),
@@ -151,7 +144,6 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
     if (Number(t) % 5 !== 0 && Number(f) % 5 !== 0) {
       visible = true;
       return i18n.t("addWater.divide");
-
     }
   };
 
@@ -219,7 +211,6 @@ const AddWaterModal: FC<IProps> = ({ title, closeModal }) => {
               }),
             }}
           />
-
         </label>
         <label className="water-label">
           <span className="enter-water-span">{t("addWater.used")}</span>
