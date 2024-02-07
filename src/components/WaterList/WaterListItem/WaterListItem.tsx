@@ -10,7 +10,7 @@ import Modal from "../../Modal/Modal";
 import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 import EditWaterModal from "../EditWaterModal/EditWaterModal";
 import { useTranslation } from "react-i18next";
-import { waterIcon } from "../../../utils/waterIcon";
+
 
 interface IProps {
   _id: string;
