@@ -72,9 +72,9 @@ const DailyNormaModal: FC<Props> = ({ onClose }) => {
 
   const calculateDailyNorma = (w: number, t: number, g: string): string => {
     if (g === "man") {
-      return String((w * 0.04 + t * 0.6).toFixed(1)) + "L";
+      return String((w * 0.04 + t * 0.6).toFixed(1));
     } else {
-      return String((w * 0.03 + t * 0.4).toFixed(1)) + "L";
+      return String((w * 0.03 + t * 0.4).toFixed(1));
     }
   };
 

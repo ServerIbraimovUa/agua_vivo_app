@@ -21,12 +21,14 @@ const LoginPage = () => {
           >
             Google
           </AuthFormLink>
-          <NavLink className="auth-link" to="/signup">
-            {t("signin.signup")}
-          </NavLink>
-          <NavLink className="auth-link" to="/forgot-password">
-            {t("signin.forgot")}
-          </NavLink>
+          <div className="forgot-container">
+            <NavLink className="auth-link" to="/signup">
+              {t("signin.signup")}
+            </NavLink>
+            <NavLink className="auth-link" to="/forgot-password">
+              {t("signin.forgot")}
+            </NavLink>
+          </div>
         </StyledLoginDiv>
       </div>
     </StyledLoginSection>

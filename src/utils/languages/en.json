@@ -56,7 +56,7 @@
     "label1": "Enter your email",
     "sendButton": "Send",
     "notify": "Email was successfully sent",
-    "notifyError": "Email wasn't sent"
+    "notifyError": "Email doesn't exist."
   },
   "resetPass": {
     "title": "Reset password",

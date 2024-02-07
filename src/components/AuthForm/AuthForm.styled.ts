@@ -140,6 +140,11 @@ export const StyledLoginDiv = styled.div`
     align-items: center;
     justify-content: center;
   }
+
+  .forgot-container {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 export const StyledAuthFormSpan = styled.span`
