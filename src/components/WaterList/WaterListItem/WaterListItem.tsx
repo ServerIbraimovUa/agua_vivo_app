@@ -9,6 +9,8 @@ import Icon from "../../Icon/Icon";
 import Modal from "../../Modal/Modal";
 import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 import EditWaterModal from "../EditWaterModal/EditWaterModal";
+import { useTranslation } from "react-i18next";
+import { waterIcon } from "../../../utils/waterIcon";
 
 interface IProps {
   _id: string;
@@ -17,6 +19,7 @@ interface IProps {
 }
 
 const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
+  const { t } = useTranslation();
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
@@ -25,6 +28,7 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
   const handleUpdateWater = (waterData: IUpdateWaterPayload) => {
     dispatch(updateWaterVolumeThunk(waterData));
   };
+
 
   const waterIcon = (volume: number) => {
     if (volume >= 1500) {
@@ -36,11 +40,14 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
     }
   };
 
+
   return (
     <WaterItemBoxStyled>
       <div className="water-info">
         {waterIcon(waterVolume)}
-        <p className="water-amount-card">{waterVolume} ml</p>
+        <p className="water-amount-card">
+          {waterVolume} {t("addWater.ml")}
+        </p>
         <p className="time">{time}</p>
       </div>
       <div className="edit-delete-btn-box">
@@ -64,10 +71,10 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
       {editModalVisible && (
         <Modal
           setVisible={setEditModalVisible}
-          title="Edit the entered amount of water"
+          title={t("waterList.editTitle")}
         >
           <EditWaterModal
-            title="Correct entered data:"
+            title={t("waterList.editModal")}
             handleUpdateWater={handleUpdateWater}
             closeModal={() => {
               setEditModalVisible(false);
@@ -79,11 +86,11 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
       {deleteModalVisible && (
         <Modal
           setVisible={setDeleteModalVisible}
-          title="Delete water"
+          title={t("waterList.deleteTitle")}
           delete={true}
         >
           <DeleteWaterModal
-            title="Delete entry?"
+            title={t("waterList.deleteModal")}
             show={false}
             closeModal={() => {
               setDeleteModalVisible(false);

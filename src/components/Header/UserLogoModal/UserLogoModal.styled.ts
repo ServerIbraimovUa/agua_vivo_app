@@ -44,12 +44,12 @@ export const LogoWrapper = styled.div`
     justify-content: center;
 
     width: 118px;
-    height: 88px;
+    height: 120px;
     background-color: #fff;
     border-radius: 10px;
     display: none;
     box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
-    z-index: 10;
+    z-index: 10000;
 
     &.open {
       display: flex;
@@ -73,9 +73,15 @@ export const LogoWrapper = styled.div`
       justify-content: center;
       padding: 16px 16px 8px 16px;
     }
+    .btn-container-lang {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px 8px 16px;
+    }
     .button-popover-name {
       display: flex;
-
+      
       width: 62px;
       margin-left: 8px;
       font-size: 16px;

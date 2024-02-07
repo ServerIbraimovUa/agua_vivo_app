@@ -17,6 +17,7 @@ import { Link, Outlet } from 'react-router-dom';
 import Icon from '../../components/Icon/Icon';
 import Modal from '../../components/Modal/Modal';
 import TeamModal from '../../components/TeamModal/TeamModal';
+import { useTranslation } from 'react-i18next';
 
 const HomePage = () => {
   const [visible, setVisible] = useState(false);
@@ -26,6 +27,7 @@ const HomePage = () => {
     dispatch(getAmountDailyThunk());
   }, [dispatch]);
 
+  const {t} = useTranslation()
   return (
     <>
       <StyledHomePageSection>
@@ -60,7 +62,7 @@ const HomePage = () => {
         <Modal
           setVisible={setVisible}
           isTeamModal={true}
-          title="Force in a team"
+          title={t("team.title")}
         >
           <TeamModal />
         </Modal>

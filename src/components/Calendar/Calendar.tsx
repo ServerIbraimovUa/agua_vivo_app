@@ -8,6 +8,7 @@ import {
   selectAmountMonthly,
 } from "../../redux/water/waterSelectors";
 import CalendarModal from "./CalendarModal";
+import { useTranslation } from "react-i18next";
 
 export interface Day {
   day: number;
@@ -168,11 +169,11 @@ const Calendar: React.FC = () => {
     const nextDay = getCurrentDate().getDate() + 1;
     return day >= nextDay;
   };
-
+  const { t } = useTranslation();
   return (
     <Styled.CalendarContainer>
       <div className="right-align">
-        <h1 className="month">Month</h1>
+        <h1 className="month">{t("homepage.h2Month")}</h1>
         <div className="header">
           <button
             className={`button ${isJanuary2024 ? "disabled" : ""}`}

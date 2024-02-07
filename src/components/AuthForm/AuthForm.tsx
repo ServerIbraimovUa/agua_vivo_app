@@ -13,6 +13,7 @@ import {
 } from "./AuthForm.styled";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 export interface Data {
   email: string;
   password: string;
@@ -23,6 +24,7 @@ interface Props {
 }
 
 const AuthForm: FC<Props> = ({ repeat }) => {
+  const { t } = useTranslation();
   const [passwordToggleInput, setPasswordToggleInput] = useState("password");
   const [passwordToggleIcon, setPasswordToggleIcon] = useState(false);
 
@@ -59,36 +61,36 @@ const AuthForm: FC<Props> = ({ repeat }) => {
                 `/verify/${data.user.verificationToken}?email=${data.user.email}`
               );
             } else {
-              toast.success("Registration successful!");
+              toast.success(`${t("signup.notifySuccess")}`);
               navigate("/home");
             }
           })
           .catch((e) => {
             if (e.includes("409")) {
-              toast.error("Email in use.");
+              toast.error(`${t("signup.notifyError")}`);
             }
           })
       : dispatch(logInThunk(newData))
           .unwrap()
           .then(() => {
-            toast.success("Welcome to your account!");
+            toast.success(`${t("signin.notifySuccess")}`);
             reset();
           })
           .catch(() => {
-            toast.error("Please write the correct Email or Password");
+            toast.error(`${t("signin.notifyError")}`);
           });
   };
 
   return (
     <StyledAuthForm onSubmit={handleSubmit(onSubmit)}>
       <label>
-        <span>Enter your email</span>
+        <span>{t("signin.label1")}</span>
         <span className={errors.email ? "gap-error" : "gap-normal"}>
           <input
             className={errors.email ? "input-red input" : "input-blue input"}
             {...register("email", { required: true })}
             type="email"
-            placeholder="E-mail"
+            placeholder={t("authPlaceholders.email")}
           />
           <span className="error">
             {errors.email && <span>{errors.email?.message}</span>}
@@ -97,7 +99,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
       </label>
 
       <label className={errors.password ? "gap-error" : "gap-label-normal"}>
-        <span>Enter your password</span>
+        <span>{t("signin.label2")}</span>
         <span className={errors.password ? "gap-error" : "gap-normal"}>
           <div className="eye-input">
             <input
@@ -106,7 +108,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
               }
               {...register("password", { required: true })}
               type={passwordToggleInput}
-              placeholder="Password"
+              placeholder={t("authPlaceholders.password")}
             />
             <StyledAuthFormSpan
               onClick={() =>
@@ -131,7 +133,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
       {repeat && (
         <>
           <label className={errors.password ? "gap-error" : "gap-label-normal"}>
-            <span>Repeat password</span>
+            <span>{t("signin.label3")}</span>
             <span className={errors.password ? "gap-error" : "gap-normal"}>
               <div className="eye-input">
                 <input
@@ -142,7 +144,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
                     required: true,
                   })}
                   type={repeatPasswordToggleInput}
-                  placeholder="Repeat password"
+                  placeholder={t("signin.label3")}
                 />
                 <StyledAuthFormSpan
                   onClick={() =>
@@ -167,7 +169,7 @@ const AuthForm: FC<Props> = ({ repeat }) => {
       )}
 
       <AuthFormButton className="btn" type="submit">
-        {repeat ? "Sign Up" : "Sign In"}
+        {repeat ? `${t("signin.signup")}` : `${t("signin.title")}`}
       </AuthFormButton>
     </StyledAuthForm>
   );

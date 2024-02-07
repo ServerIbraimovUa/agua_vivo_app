@@ -13,7 +13,13 @@ import Icon from "../../Icon/Icon";
 
 import { AddWaterModalStyled } from "../WaterList.styled";
 import Popover from "../../Popover/Popover";
+
+import { useTranslation } from "react-i18next";
+import i18n from "../../../utils/i18n";
+import { waterIcon } from "../../../utils/waterIcon";
+
 import { IOptions, IWaterPortion } from "../AddWaterModal/AddWaterModal";
+
 
 interface IProps {
   id?: string;
@@ -121,25 +127,31 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
   const createPopoverMessage = (w: number): string | undefined => {
     if (w === 0) {
       visible = true;
-      return "The amount of water cannot be 0!";
+      return i18n.t("addWater.zero");
     }
   };
 
   let message = createPopoverMessage(Number(amountWater));
 
+
+  const { t } = useTranslation();
+
   timeOptions.map((option) => arr.push({ value: option, label: option }));
+
 
   return (
     <AddWaterModalStyled>
       <div className="water-card">
-        <Icon className="water-glass-icon" id="water" />
-        <p className="water-amount-card">{water?.waterVolume} ml</p>
+        {waterIcon(water?.waterVolume)}
+        <p className="water-amount-card">
+          {water?.waterVolume} {t("addWater.ml")}
+        </p>
         <p className="time">{water?.time}</p>
       </div>
 
       <h2 className="add-water-title">{title}</h2>
       <div className="counter-box">
-        <p className="">Amount of water:</p>
+        <p className="">{t("editModal.amount")}</p>
         <div className="counter-btn-box">
           <button
             className="counter-btn"
@@ -148,7 +160,10 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
           >
             <Icon className="icon-minus" id="minus" />
           </button>
-          <span className="water-amount-span">{state.count}ml</span>
+          <span className="water-amount-span">
+            {state.count}
+            {t("addWater.ml")}
+          </span>
           <button
             className="counter-btn"
             onClick={() => handleCountChange(state.count + 50)}
@@ -160,7 +175,7 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
       </div>
       <form className="add-water-form" onSubmit={handleSubmit(onSubmit)}>
         <label className="water-label">
-          <span>Recording time:</span>
+          <span>{t("addWater.time")}</span>
           {visible && <Popover message={message} waterAmount={true} />}
           <Select
             defaultValue={{ label: water?.time, value: w }}
@@ -191,9 +206,7 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
           />
         </label>
         <label className="water-label">
-          <span className="enter-water-span">
-            Enter the value of water used:
-          </span>
+          <span className="enter-water-span">{t("editModal.value")}</span>
           <input
             {...register("waterVolume", { required: true })}
             type="number"
@@ -209,9 +222,12 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
           />
         </label>
         <div className="btn-container">
-          <span className="water-amount">{water?.waterVolume}ml</span>
+          <span className="water-amount">
+            {water?.waterVolume}
+            {t("addWater.ml")}
+          </span>
           <button type="submit" className="save-btn">
-            Save
+            {t("addWater.save")}
           </button>
         </div>
       </form>

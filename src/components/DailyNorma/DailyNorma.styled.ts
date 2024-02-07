@@ -133,13 +133,12 @@ export const EditButton = styled.button`
     text-decoration: underline;
     text-decoration-color: var(--secondary-orange);
     text-decoration-thickness: 2px;
-    font-size: 18px;
     color: var(--secondary-orange);
   }
 `;
 export const WrapperButton = styled.div`
   display: flex;
-  gap: 12px;
+  gap: 8px;
   flex-direction: row;
 `;
 export const SpanNorma = styled.span`

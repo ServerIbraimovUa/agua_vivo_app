@@ -8,11 +8,13 @@ import {
 import { forgotPasswordThunk } from "../../redux/auth/auth.operations";
 import { useAppDispatch } from "../../redux/redux_ts/hook";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 export interface Data {
   email: string;
 }
 
 const ForgotPasswordForm = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -28,11 +30,11 @@ const ForgotPasswordForm = () => {
     dispatch(forgotPasswordThunk(data))
       .unwrap()
       .then(() => {
-        toast.success("Email was successfully sent");
+        toast.success(`${t("forgot.notify")}`);
       })
       .catch((e) => {
         if (e.includes("409")) {
-          toast.error("Email wasn't sent");
+          toast.error(`${t("forgot.notifyError")}`);
         }
       });
   };
@@ -40,13 +42,13 @@ const ForgotPasswordForm = () => {
   return (
     <StyledForgotPasswordForm onSubmit={handleSubmit(onSubmit)}>
       <label>
-        <span>Enter your email</span>
+        <span>{t("forgot.label1")}</span>
         <span className={errors.email ? "gap-error" : "gap-normal"}>
           <input
             className={errors.email ? "input-red input" : "input-blue input"}
             {...register("email", { required: true })}
             type="email"
-            placeholder="E-mail"
+            placeholder={t("authPlaceholders.email")}
           />
           <span className="error">
             {errors.email && <span>{errors.email?.message}</span>}
@@ -55,7 +57,7 @@ const ForgotPasswordForm = () => {
       </label>
 
       <ForgotPassFormButton className="btn" type="submit">
-        Send
+        {t("forgot.sendButton")}
       </ForgotPassFormButton>
     </StyledForgotPasswordForm>
   );

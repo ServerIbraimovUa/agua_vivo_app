@@ -13,6 +13,7 @@ import WaterListItem from "./WaterListItem/WaterListItem";
 import Loading from "../Loading/Loading";
 import { WaterContainerStyled } from "./WaterList.styled";
 import Icon from "../Icon/Icon";
+import { useTranslation } from "react-i18next";
 
 export interface IWaterData {
   waterVolume: number;
@@ -21,6 +22,7 @@ export interface IWaterData {
 }
 
 const WaterList = () => {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   const { entries } = useSelector(selectAmountDaily);
@@ -33,10 +35,10 @@ const WaterList = () => {
 
   return (
     <WaterContainerStyled>
-      <h2 className="water-title">Today</h2>
+      <h2 className="water-title">{t("homepage.h2-3Today")}</h2>
       {loading && !error && <Loading />}
       {entries.length === 0 ? (
-        <p className="water-empty">No notes yet</p>
+        <p className="water-empty">{t("homepage.pEmpty")}</p>
       ) : (
         <ul className="water-list">
           {entries.length > 0 &&
@@ -53,13 +55,13 @@ const WaterList = () => {
 
       <button className="add-water-btn" onClick={() => setVisible(true)}>
         <Icon className="water-plus-icon" id="plus" />
-        Add water
+        {t("homepage.addWaterButton")}
       </button>
 
       {visible && (
-        <Modal setVisible={setVisible} title="Add water">
+        <Modal setVisible={setVisible} title={t("waterList.addModal")}>
           <AddWaterModal
-            title="Choose a value:"
+            title={t("waterList.addModal")}
             show={false}
             closeModal={closeModal}
           />
