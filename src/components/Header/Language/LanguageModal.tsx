@@ -12,9 +12,7 @@ const LanguageModal: FC = () => {
   ];
 
   const changeLanguage = (code: string) => {
-    i18n.changeLanguage(code).then(() => {
-      console.log(`Language changed to ${code}`);
-    });
+    i18n.changeLanguage(code);
   };
 
   return (

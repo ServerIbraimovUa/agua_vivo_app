@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { device } from '../../css/deviceSize';
+import styled from "styled-components";
+import { device } from "../../css/deviceSize";
 
 export const SwipeImg = styled.img`
   display: block;
@@ -25,6 +25,8 @@ export const SwipeInfo = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  width: 210px;
+  text-align: center;
 
   @media ${device.tablet} {
     gap: 15px;
