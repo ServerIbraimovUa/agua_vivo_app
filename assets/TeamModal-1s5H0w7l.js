@@ -1,4 +1,4 @@
-import{u as G,d as D,r as _,P as N,j as c,I as z}from"./index-0oTyAdvf.js";const Ze="/agua_vivo_app/assets/BgHomeMob-gTMr7R_3.png",Qe="/agua_vivo_app/assets/BgHomeTabl-zTY3vu-k.png",Je="/agua_vivo_app/assets/BgHomeDesk-KfymPvKf.png",Vi=G.section`
+import{u as G,d as D,r as _,P as N,j as c,I as z}from"./index-_zWkHgDS.js";const Ze="/agua_vivo_app/assets/BgHomeMob-gTMr7R_3.png",Qe="/agua_vivo_app/assets/BgHomeTabl-zTY3vu-k.png",Je="/agua_vivo_app/assets/BgHomeDesk-KfymPvKf.png",Vi=G.section`
   background-image: url("${Ze}");
 
   background-repeat: no-repeat;
@@ -154,6 +154,8 @@ import{u as G,d as D,r as _,P as N,j as c,I as z}from"./index-0oTyAdvf.js";const
   justify-content: center;
   align-items: center;
   gap: 10px;
+  width: 210px;
+  text-align: center;
 
   @media ${D.tablet} {
     gap: 15px;

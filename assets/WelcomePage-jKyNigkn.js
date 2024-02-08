@@ -1,4 +1,4 @@
-import{u as s,d as i,a as l,j as e,I as n,r,F as d,M as p}from"./index-0oTyAdvf.js";import{c as x,d as h,e as m}from"./TeamModal-itM_6fXd.js";const g="/agua_vivo_app/assets/welcomeMob-9xutC1rA.png",b="/agua_vivo_app/assets/WelcomeTab-KNRMQHDm.png",u="/agua_vivo_app/assets/WelcomeDesk-FJOaIO84.png",j=s.section`
+import{u as s,d as i,a as l,j as e,I as n,r,F as d,M as p}from"./index-_zWkHgDS.js";import{c as x,d as h,e as m}from"./TeamModal-1s5H0w7l.js";const g="/agua_vivo_app/assets/welcomeMob-9xutC1rA.png",b="/agua_vivo_app/assets/WelcomeTab-KNRMQHDm.png",u="/agua_vivo_app/assets/WelcomeDesk-FJOaIO84.png",j=s.section`
   &.welcome-section {
     background-image: url(${g});
     background-position: center;
