@@ -15,11 +15,10 @@ import { AddWaterModalStyled } from "../WaterList.styled";
 import Popover from "../../Popover/Popover";
 
 import { useTranslation } from "react-i18next";
-import i18n from "../../../utils/i18n";
+import i18n from "../../../i18n/i18n";
 import { waterIcon } from "../../../utils/waterIcon";
 
 import { IOptions, IWaterPortion } from "../AddWaterModal/AddWaterModal";
-
 
 interface IProps {
   id?: string;
@@ -133,11 +132,9 @@ const EditWaterModal: FC<IProps> = ({ title, closeModal, id }) => {
 
   let message = createPopoverMessage(Number(amountWater));
 
-
   const { t } = useTranslation();
 
   timeOptions.map((option) => arr.push({ value: option, label: option }));
-
 
   return (
     <AddWaterModalStyled>

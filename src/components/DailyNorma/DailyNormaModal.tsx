@@ -24,7 +24,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelectors";
 import Popover from "../Popover/Popover";
 import { useTranslation } from "react-i18next";
-import i18n from "../../utils/i18n";
+import i18n from "../../i18n/i18n";
 
 interface Props {
   onClose: () => void;
