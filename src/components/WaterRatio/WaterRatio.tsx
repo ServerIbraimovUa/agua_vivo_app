@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Range, getTrackBackground } from "react-range";
+import { useState } from 'react';
+import { Range, getTrackBackground } from 'react-range';
 import {
   Output,
   OutputThumb,
@@ -14,12 +14,13 @@ import {
   WaterRatioRangeThumb,
   WaterRatioThumb,
   WaterRatioTitle,
-} from "./WaterRatio.styled";
-import Icon from "../Icon/Icon";
-import Modal from "../Modal/Modal";
-import AddWaterModal from "../WaterList/AddWaterModal/AddWaterModal";
-import { useWaterPercentage } from "../../hooks/useWaterPercentage";
-import { useTranslation } from "react-i18next";
+} from './WaterRatio.styled';
+import Icon from '../Icon/Icon';
+import Modal from '../Modal/Modal';
+import AddWaterModal from '../WaterList/AddWaterModal/AddWaterModal';
+import { useWaterPercentage } from '../../hooks/useWaterPercentage';
+import { useTranslation } from 'react-i18next';
+import { addScrollLock, removeScrollLock } from '../Modal/services/services';
 
 const WaterRatio = () => {
   const [visible, setVisible] = useState(false);
@@ -29,6 +30,7 @@ const WaterRatio = () => {
 
   const closeModal = () => {
     setVisible(false);
+    removeScrollLock();
   };
 
   const { t } = useTranslation();
@@ -37,7 +39,7 @@ const WaterRatio = () => {
       <WaterRatioContainer>
         <WaterRatioThumb>
           <RangeContainer className="third-step">
-            <WaterRatioTitle>{t("homepage.h2-3Today")}</WaterRatioTitle>
+            <WaterRatioTitle>{t('homepage.h2-3Today')}</WaterRatioTitle>
             <WaterRatioRangeThumb>
               <Range
                 disabled
@@ -52,7 +54,7 @@ const WaterRatio = () => {
                       ...props.style,
                       background: getTrackBackground({
                         values: [normalizedValue],
-                        colors: ["#9EBBFF", "#D7E3FF"],
+                        colors: ['#9EBBFF', '#D7E3FF'],
                         min: 0,
                         max: 100,
                       }),
@@ -86,18 +88,21 @@ const WaterRatio = () => {
           <WaterRatioBtnThumb className="hover">
             <WaterRatioBtn
               className="btn second-step"
-              onClick={() => setVisible(true)}
+              onClick={() => {
+                setVisible(true);
+                addScrollLock();
+              }}
             >
               <Icon className="water-ratio-plus" id="plus-circle" />
-              {t("homepage.addWaterButton")}
+              {t('homepage.addWaterButton')}
             </WaterRatioBtn>
           </WaterRatioBtnThumb>
         </WaterRatioThumb>
       </WaterRatioContainer>
       {visible && (
-        <Modal setVisible={setVisible} title={t("waterList.addTitle")}>
+        <Modal setVisible={setVisible} title={t('waterList.addTitle')}>
           <AddWaterModal
-            title={t("waterList.addModal")}
+            title={t('waterList.addModal')}
             closeModal={closeModal}
           />
         </Modal>

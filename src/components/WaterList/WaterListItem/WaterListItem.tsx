@@ -1,17 +1,17 @@
-import { FC, useState } from "react";
-import { useAppDispatch } from "../../../redux/redux_ts/hook";
+import { FC, useState } from 'react';
+import { useAppDispatch } from '../../../redux/redux_ts/hook';
 
-import { updateWaterVolumeThunk } from "../../../redux/water/water.operations";
-import { WaterItemBoxStyled } from "../WaterList.styled";
-import { IUpdateWaterPayload } from "../../../redux/redux_ts/interfaces";
+import { updateWaterVolumeThunk } from '../../../redux/water/water.operations';
+import { WaterItemBoxStyled } from '../WaterList.styled';
+import { IUpdateWaterPayload } from '../../../redux/redux_ts/interfaces';
 
-import Icon from "../../Icon/Icon";
-import Modal from "../../Modal/Modal";
+import Icon from '../../Icon/Icon';
+import Modal from '../../Modal/Modal';
 
-import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
-import EditWaterModal from "../EditWaterModal/EditWaterModal";
-import { useTranslation } from "react-i18next";
-
+import DeleteWaterModal from '../DeleteWaterModal/DeleteWaterModal';
+import EditWaterModal from '../EditWaterModal/EditWaterModal';
+import { useTranslation } from 'react-i18next';
+import { addScrollLock, removeScrollLock } from '../../Modal/services/services';
 
 interface IProps {
   _id: string;
@@ -30,7 +30,6 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
     dispatch(updateWaterVolumeThunk(waterData));
   };
 
-
   const waterIcon = (volume: number) => {
     if (volume >= 1500) {
       return <Icon className="water-bottle-icon" id="barrel" />;
@@ -41,13 +40,12 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
     }
   };
 
-
   return (
     <WaterItemBoxStyled>
       <div className="water-info">
         {waterIcon(waterVolume)}
         <p className="water-amount-card">
-          {waterVolume} {t("addWater.ml")}
+          {waterVolume} {t('addWater.ml')}
         </p>
         <p className="time">{time}</p>
       </div>
@@ -55,7 +53,10 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
         <button
           type="button"
           className="edit-btn"
-          onClick={() => setEditModalVisible(true)}
+          onClick={() => {
+            setEditModalVisible(true);
+            addScrollLock();
+          }}
         >
           <Icon className="edit-water-icon" id="pencil" />
         </button>
@@ -64,6 +65,7 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
           className="delete-btn-card"
           onClick={() => {
             setDeleteModalVisible(true);
+            addScrollLock();
           }}
         >
           <Icon className="delete-water-icon" id="delete" />
@@ -72,13 +74,14 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
       {editModalVisible && (
         <Modal
           setVisible={setEditModalVisible}
-          title={t("waterList.editTitle")}
+          title={t('waterList.editTitle')}
         >
           <EditWaterModal
-            title={t("waterList.editModal")}
+            title={t('waterList.editModal')}
             handleUpdateWater={handleUpdateWater}
             closeModal={() => {
               setEditModalVisible(false);
+              removeScrollLock();
             }}
             id={_id}
           />
@@ -87,11 +90,11 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
       {deleteModalVisible && (
         <Modal
           setVisible={setDeleteModalVisible}
-          title={t("waterList.deleteTitle")}
+          title={t('waterList.deleteTitle')}
           delete={true}
         >
           <DeleteWaterModal
-            title={t("waterList.deleteModal")}
+            title={t('waterList.deleteModal')}
             show={false}
             closeModal={() => {
               setDeleteModalVisible(false);

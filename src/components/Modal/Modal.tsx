@@ -1,6 +1,7 @@
 import { FC, ReactNode, useEffect } from 'react';
 import { Overlay } from './Modal.styled';
 import Icon from '../Icon/Icon';
+import { removeScrollLock } from './services/services';
 
 interface Props {
   setVisible: (boolean: boolean) => void;
@@ -24,6 +25,7 @@ const Modal: FC<Props> = ({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === 'Escape') {
         setVisible(false);
+        removeScrollLock();
       }
     };
 
@@ -36,6 +38,7 @@ const Modal: FC<Props> = ({
   const handleBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
     if (e.currentTarget === e.target) {
       setVisible(false);
+      removeScrollLock();
     }
   };
 
@@ -68,7 +71,12 @@ const Modal: FC<Props> = ({
           }
         >
           <p>{title}</p>
-          <button onClick={() => setVisible(false)}>
+          <button
+            onClick={() => {
+              setVisible(false);
+              removeScrollLock();
+            }}
+          >
             <Icon className="modal-icon" id="close" />
           </button>
         </div>

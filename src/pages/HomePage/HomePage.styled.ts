@@ -1,22 +1,22 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import BgImgHomeMob from "../../assets/images/homePage/BgHomeMob.png";
-import BgImgHomeTab from "../../assets/images/homePage/BgHomeTabl.png";
-import BgImgHomeDesk from "../../assets/images/homePage/BgHomeDesk.png";
-import { device } from "../../css/deviceSize";
+import BgImgHomeMob from '../../assets/images/homePage/BgHomeMob.png';
+import BgImgHomeTab from '../../assets/images/homePage/BgHomeTabl.png';
+import BgImgHomeDesk from '../../assets/images/homePage/BgHomeDesk.png';
+import { device } from '../../css/deviceSize';
 
 export const StyledHomePageSection = styled.section`
-  background-image: url("${BgImgHomeMob}");
+  background-image: url('${BgImgHomeMob}');
 
   background-repeat: no-repeat;
   background-position: 50% 115px;
 
   @media ${device.tablet} {
-    background-image: url("${BgImgHomeTab}");
+    background-image: url('${BgImgHomeTab}');
     background-position: 50% 60px;
   }
   @media ${device.desktop} {
-    background-image: url("${BgImgHomeDesk}");
+    background-image: url('${BgImgHomeDesk}');
     background-position: 50% 65px;
   }
 `;
@@ -102,6 +102,9 @@ export const ContainerCalendar = styled.div`
     height: 32px;
     fill: var(--primary-blue);
 
+    &.active {
+      fill: var(--secondary-orange);
+    }
     &:hover {
       fill: var(--secondary-orange);
     }

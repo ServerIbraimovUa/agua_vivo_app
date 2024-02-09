@@ -1,11 +1,11 @@
-import { FC } from "react";
-import { useAppDispatch } from "../../../redux/redux_ts/hook";
+import { FC } from 'react';
+import { useAppDispatch } from '../../../redux/redux_ts/hook';
 
-import { DeleteWaterModalStyled } from "../WaterList.styled";
-import { deleteWaterThunk } from "../../../redux/water/water.operations";
+import { DeleteWaterModalStyled } from '../WaterList.styled';
+import { deleteWaterThunk } from '../../../redux/water/water.operations';
 
-import { useTranslation } from "react-i18next";
-
+import { useTranslation } from 'react-i18next';
+import { removeScrollLock } from '../../Modal/services/services';
 
 interface IProps {
   title: string;
@@ -18,6 +18,7 @@ const DeleteWaterModal: FC<IProps> = ({ closeModal, _id }) => {
   const dispatch = useAppDispatch();
   const handleCancel = () => {
     closeModal();
+    removeScrollLock();
   };
 
   const handleDeleteWater = (waterID: string) => {
@@ -28,17 +29,20 @@ const DeleteWaterModal: FC<IProps> = ({ closeModal, _id }) => {
   const { t } = useTranslation();
   return (
     <DeleteWaterModalStyled>
-      <p className="delete-title">{t("deleteModal.sure")}</p>
+      <p className="delete-title">{t('deleteModal.sure')}</p>
       <div className="delete-btn-box">
         <button className="cancel-btn" type="button" onClick={handleCancel}>
-          {t("deleteModal.cancel")}
+          {t('deleteModal.cancel')}
         </button>
         <button
           className="delete-btn"
           type="button"
-          onClick={() => handleDeleteWater(_id)}
+          onClick={() => {
+            removeScrollLock();
+            handleDeleteWater(_id);
+          }}
         >
-          {t("deleteModal.delete")}
+          {t('deleteModal.delete')}
         </button>
       </div>
     </DeleteWaterModalStyled>

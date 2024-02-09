@@ -1,19 +1,20 @@
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 import {
   selectAmountDaily,
   selectError,
   selectIsLoading,
-} from "../../redux/water/waterSelectors";
+} from '../../redux/water/waterSelectors';
 
-import AddWaterModal from "./AddWaterModal/AddWaterModal";
-import Modal from "../Modal/Modal";
-import WaterListItem from "./WaterListItem/WaterListItem";
-import Loading from "../Loading/Loading";
-import { WaterContainerStyled } from "./WaterList.styled";
-import Icon from "../Icon/Icon";
-import { useTranslation } from "react-i18next";
+import AddWaterModal from './AddWaterModal/AddWaterModal';
+import Modal from '../Modal/Modal';
+import WaterListItem from './WaterListItem/WaterListItem';
+import Loading from '../Loading/Loading';
+import { WaterContainerStyled } from './WaterList.styled';
+import Icon from '../Icon/Icon';
+import { useTranslation } from 'react-i18next';
+import { addScrollLock, removeScrollLock } from '../Modal/services/services';
 
 export interface IWaterData {
   waterVolume: number;
@@ -31,14 +32,15 @@ const WaterList = () => {
   const error = useSelector(selectError);
   const closeModal = () => {
     setVisible(false);
+    removeScrollLock();
   };
 
   return (
     <WaterContainerStyled>
-      <h2 className="water-title">{t("homepage.h2-3Today")}</h2>
+      <h2 className="water-title">{t('homepage.h2-3Today')}</h2>
       {loading && !error && <Loading />}
       {entries.length === 0 ? (
-        <p className="water-empty">{t("homepage.pEmpty")}</p>
+        <p className="water-empty">{t('homepage.pEmpty')}</p>
       ) : (
         <ul className="water-list">
           {entries.length > 0 &&
@@ -53,15 +55,21 @@ const WaterList = () => {
         </ul>
       )}
 
-      <button className="add-water-btn" onClick={() => setVisible(true)}>
+      <button
+        className="add-water-btn"
+        onClick={() => {
+          setVisible(true);
+          addScrollLock();
+        }}
+      >
         <Icon className="water-plus-icon" id="plus" />
-        {t("homepage.addWaterButton")}
+        {t('homepage.addWaterButton')}
       </button>
 
       {visible && (
-        <Modal setVisible={setVisible} title={t("waterList.addModal")}>
+        <Modal setVisible={setVisible} title={t('waterList.addModal')}>
           <AddWaterModal
-            title={t("waterList.addModal")}
+            title={t('waterList.addModal')}
             show={false}
             closeModal={closeModal}
           />

@@ -1,8 +1,9 @@
-import { FC, useEffect, useRef } from "react";
-import * as Styled from "./Calendar.styled";
-import { useOutsideClick } from "../../hooks/useOutsideClick";
-import { Day } from "./Calendar";
-import { useTranslation } from "react-i18next";
+import { FC, useEffect, useRef } from 'react';
+import * as Styled from './Calendar.styled';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { Day } from './Calendar';
+import { useTranslation } from 'react-i18next';
+import { removeScrollLock } from '../Modal/services/services';
 
 interface ICalendarModal {
   setIsModalOpen(state: boolean): void;
@@ -21,37 +22,38 @@ const CalendarModal: FC<ICalendarModal> = ({
   const modalRef = useRef(null);
   useEffect(() => {
     const handleEscapeKey = (event: Event): void => {
-      if (event instanceof KeyboardEvent && event.key === "Escape") {
+      if (event instanceof KeyboardEvent && event.key === 'Escape') {
         closeModal();
       }
     };
 
-    window.addEventListener("keydown", handleEscapeKey);
+    window.addEventListener('keydown', handleEscapeKey);
 
     return () => {
-      window.removeEventListener("keydown", handleEscapeKey);
+      window.removeEventListener('keydown', handleEscapeKey);
     };
   }, [closeModal]);
 
   useOutsideClick(modalRef, () => {
     if (isModalOpen) {
       setIsModalOpen(false);
+      removeScrollLock();
     }
   });
 
   return (
-    <Styled.Modal ref={modalRef} className={isModalOpen ? "open" : ""}>
+    <Styled.Modal ref={modalRef} className={isModalOpen ? 'open' : ''}>
       <Styled.ModalContent>
         <button className="close hover active" onClick={() => closeModal()}>
           &times;
         </button>
         <h3 className="title-modal">{`${modalContent?.day}, ${modalContent?.month}`}</h3>
         <p className="modal-paragraf modal-paragraf-one">
-          {t("calendarModal.daily")}
+          {t('calendarModal.daily')}
           <span className="span-modal">{modalContent?.dailyNorma}</span>
         </p>
         <p className="modal-paragraf modal-paragraf-two-three">
-          {t("calendarModal.fulfill")}
+          {t('calendarModal.fulfill')}
           <span className="span-modal">
             {modalContent?.percent !== undefined && modalContent?.percent >= 100
               ? 100
@@ -60,7 +62,7 @@ const CalendarModal: FC<ICalendarModal> = ({
           </span>
         </p>
         <p className="modal-paragraf modal-paragraf-two-three">
-          {t("calendarModal.serve")}
+          {t('calendarModal.serve')}
           <span className="span-modal">{modalContent?.amountOfWater}</span>
         </p>
       </Styled.ModalContent>

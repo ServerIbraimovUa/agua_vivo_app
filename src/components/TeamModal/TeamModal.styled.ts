@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { device } from "../../css/deviceSize";
+import styled from 'styled-components';
+import { device } from '../../css/deviceSize';
 
 export const SwipeImg = styled.img`
   display: block;
@@ -26,19 +26,23 @@ export const SwipeInfo = styled.div`
   align-items: center;
   gap: 10px;
   width: 210px;
-  text-align: center;
+  margin: 0 auto;
 
   @media ${device.tablet} {
+    margin: 0;
     gap: 15px;
   }
 `;
 
 export const SwipeTitle = styled.h2`
+  width: 150px;
+  text-align: center;
   font-size: 20px;
   line-height: 1.33;
   font-weight: var(--bold-font-weight);
 
   @media ${device.tablet} {
+    width: 100%;
     font-size: 24px;
   }
 `;
