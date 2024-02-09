@@ -23,6 +23,8 @@ import {
 } from './SettingModal.styled';
 import { toast } from 'react-toastify';
 import AvatarForm from './Avatar/AvatarForm';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../../i18n/i18n';
 import { removeScrollLock } from '../../Modal/services/services';
 
 type SettingForm = {
@@ -45,6 +47,7 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
   const [repeatNewPasswordToggle, setRepeatNewPasswordToggle] =
     useState('password');
 
+  const { t } = useTranslation();
   const user = useSelector(selectUser);
   const dispatch = useAppDispatch();
 
@@ -83,8 +86,8 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
     if (file) {
       await dispatch(updateUserAvatarThunk(file))
         .unwrap()
-        .then(() => toast.success('Avatar updated successfully'))
-        .catch(() => toast.error('Something went wrong'));
+        .then(() => toast.success(`${t('settingModal.avatar')}`))
+        .catch(() => toast.error(`${t('settingModal.notifyError')}`));
     }
 
     if (data.gender !== user.gender || data.name !== user.name) {
@@ -102,8 +105,8 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
     if (Object.keys(newData).length > 0) {
       await dispatch(updateUserInfoThunk(newData))
         .unwrap()
-        .then(() => toast.success('Data updated successfully'))
-        .catch(() => toast.error('Something went wrong'));
+        .then(() => toast.success(`${t('settingModal.notify')}`))
+        .catch(() => toast.error(`${t('settingModal.notifyError')}`));
     }
 
     setVisible(false);
@@ -121,58 +124,67 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
       <FormUserWrap>
         <MainInfoWrap>
           <FormGenderWrap>
-            <span className="user-gender-title">Your gender identity</span>
+            <span className="user-gender-title">
+              {t('settingModal.gender')}
+            </span>
             <FormGenderContair>
               <label className="gender-label">
                 <input {...register('gender')} value="woman" type="radio" />
-                <span className="gender-sub-title">Woman</span>
+                <span className="gender-sub-title">{t('settingModal.w')}</span>
               </label>
               <label className="gender-label">
                 <input {...register('gender')} value="man" type="radio" />
-                <span className="gender-sub-title">Man</span>
+                <span className="gender-sub-title">{t('settingModal.m')}</span>
               </label>
             </FormGenderContair>
           </FormGenderWrap>
           <UserInfoWrap>
             <label className="label-name">
-              <span className="user-info-title">Your name</span>
+              <span className="user-info-title">{t('settingModal.name')}</span>
               <FormNameInput
                 {...register('name')}
                 className={errors.name ? 'error-input' : ''}
                 type="text"
-                placeholder="your name"
+                placeholder={t('authPlaceholders.name')}
               />
             </label>
 
             <label className="label-email disabled-label">
-              <span className="user-info-title">E-mail</span>
+              <span className="user-info-title">
+                {t('authPlaceholders.email')}
+              </span>
               <FormEmailInput
                 disabled
                 {...register('email')}
                 className={errors.email ? 'error-input' : ''}
                 type="email"
-                placeholder="your e-mail"
+                placeholder={t('authPlaceholders.yourEmail')}
               />
             </label>
           </UserInfoWrap>
         </MainInfoWrap>
         <FormUserPassword>
-          <span className="password-title">Password</span>
+          <span className="password-title">
+            {t('authPlaceholders.password')}
+          </span>
 
           <label className="password-label">
-            <span className="password-sub-title">Outdated password:</span>
+            <span className="password-sub-title">
+              {' '}
+              {t('settingModal.outdated')}
+            </span>
             <FormPasswordInput
               {...register('password', {
                 validate: (value, { newPassword }) => {
                   if (newPassword) {
-                    return !!value || 'This field is required';
+                    return !!value || `${t('dailyModal.field')}`;
                   }
                   return true;
                 },
               })}
               className={errors.password ? 'error-input' : ''}
               type={passwordToggle}
-              placeholder="Password"
+              placeholder={t('authPlaceholders.password')}
             />
             <span
               className="toggle-password"
@@ -190,30 +202,30 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
           </label>
 
           <label className="password-label">
-            <span className="password-sub-title">New Password:</span>
+            <span className="password-sub-title">{t('settingModal.new')}</span>
             <FormPasswordInput
               {...register('newPassword', {
                 validate: (value, { password }) => {
                   if (password && value === password) {
-                    return 'The new password cannot be old one';
+                    return i18n.t('settingModal.newError');
                   }
                   if (password) {
-                    return !!value || 'This field is required';
+                    return !!value || `${t('dailyModal.field')}`;
                   }
                   return true;
                 },
                 minLength: {
                   value: 8,
-                  message: 'Password must be at least 8 characters',
+                  message: `${t('settingModal.atLeast')}`,
                 },
                 maxLength: {
                   value: 64,
-                  message: 'Password must be at most 64 characters',
+                  message: `${t('settingModal.max')}`,
                 },
               })}
               className={errors.newPassword ? 'error-input' : ''}
               type={newPasswordToggle}
-              placeholder="Password"
+              placeholder={t('authPlaceholders.password')}
             />
             <span
               className="toggle-password"
@@ -231,15 +243,18 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
           </label>
 
           <label className="password-label">
-            <span className="password-sub-title">Repeat new password:</span>
+            <span className="password-sub-title">
+              {t('settingModal.repeat')}
+            </span>
             <FormPasswordInput
               {...register('repeatNewPassword', {
                 validate: value =>
-                  value === getValues('newPassword') || 'Passwords must match',
+                  value === getValues('newPassword') ||
+                  `${t('settingModal.match')}`,
               })}
               className={errors.repeatNewPassword ? 'error-input' : ''}
               type={repeatNewPasswordToggle}
-              placeholder="Password"
+              placeholder={t('authPlaceholders.password')}
             />
             <span
               className="toggle-password"
@@ -258,7 +273,7 @@ const SettingModal: React.FC<{ setVisible: (boolean: boolean) => void }> = ({
         </FormUserPassword>
       </FormUserWrap>
       <BtnSubmit disabled={isSubmitting} type="submit">
-        {isSubmitting ? 'Saving...' : 'Save'}
+        {isSubmitting ? `${t('settingModal.saving')}` : `${t('addWater.save')}`}
       </BtnSubmit>
     </FormSettingStyled>
   );

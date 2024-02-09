@@ -7,6 +7,7 @@ import {
   BtnWrapper,
   TextModal,
 } from './UserLogautModal.styled';
+import { useTranslation } from 'react-i18next';
 import { removeScrollLock } from '../../Modal/services/services';
 
 interface Props {
@@ -15,9 +16,10 @@ interface Props {
 
 const UserLogoutModal: FC<Props> = ({ setVisible }) => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   return (
     <div>
-      <TextModal>Do you really want to leave?</TextModal>
+      <TextModal>{t('logoutModal.really')}</TextModal>
 
       <BtnWrapper>
         <BtnCancel
@@ -27,7 +29,7 @@ const UserLogoutModal: FC<Props> = ({ setVisible }) => {
             removeScrollLock();
           }}
         >
-          Cancel
+          {t('deleteModal.cancel')}
         </BtnCancel>
         <BtnLogout
           type="button"
@@ -36,7 +38,7 @@ const UserLogoutModal: FC<Props> = ({ setVisible }) => {
             removeScrollLock();
           }}
         >
-          Log out
+          {t('header.logout')}
         </BtnLogout>
       </BtnWrapper>
     </div>

@@ -1,12 +1,16 @@
 import { FC, useState } from 'react';
-import Icon from '../../Icon/Icon';
-import Modal from '../../Modal/Modal';
-import DeleteWaterModal from '../DeleteWaterModal/DeleteWaterModal';
-import { updateWaterVolumeThunk } from '../../../redux/water/water.operations';
 import { useAppDispatch } from '../../../redux/redux_ts/hook';
+
+import { updateWaterVolumeThunk } from '../../../redux/water/water.operations';
 import { WaterItemBoxStyled } from '../WaterList.styled';
 import { IUpdateWaterPayload } from '../../../redux/redux_ts/interfaces';
+
+import Icon from '../../Icon/Icon';
+import Modal from '../../Modal/Modal';
+
+import DeleteWaterModal from '../DeleteWaterModal/DeleteWaterModal';
 import EditWaterModal from '../EditWaterModal/EditWaterModal';
+import { useTranslation } from 'react-i18next';
 import { addScrollLock, removeScrollLock } from '../../Modal/services/services';
 
 interface IProps {
@@ -16,13 +20,16 @@ interface IProps {
 }
 
 const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
+  const { t } = useTranslation();
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const handleUpdateWater = (waterData: IUpdateWaterPayload) => {
     dispatch(updateWaterVolumeThunk(waterData));
   };
+
   const waterIcon = (volume: number) => {
     if (volume >= 1500) {
       return <Icon className="water-bottle-icon" id="barrel" />;
@@ -37,7 +44,9 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
     <WaterItemBoxStyled>
       <div className="water-info">
         {waterIcon(waterVolume)}
-        <p className="water-amount-card">{waterVolume} ml</p>
+        <p className="water-amount-card">
+          {waterVolume} {t('addWater.ml')}
+        </p>
         <p className="time">{time}</p>
       </div>
       <div className="edit-delete-btn-box">
@@ -65,10 +74,10 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
       {editModalVisible && (
         <Modal
           setVisible={setEditModalVisible}
-          title="Edit the entered amount of water"
+          title={t('waterList.editTitle')}
         >
           <EditWaterModal
-            title="Correct entered data:"
+            title={t('waterList.editModal')}
             handleUpdateWater={handleUpdateWater}
             closeModal={() => {
               setEditModalVisible(false);
@@ -81,11 +90,11 @@ const WaterListItem: FC<IProps> = ({ _id, waterVolume, time }) => {
       {deleteModalVisible && (
         <Modal
           setVisible={setDeleteModalVisible}
-          title="Delete water"
+          title={t('waterList.deleteTitle')}
           delete={true}
         >
           <DeleteWaterModal
-            title="Delete entry?"
+            title={t('waterList.deleteModal')}
             show={false}
             closeModal={() => {
               setDeleteModalVisible(false);

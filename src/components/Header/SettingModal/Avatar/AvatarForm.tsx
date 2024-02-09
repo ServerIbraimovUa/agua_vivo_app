@@ -2,14 +2,20 @@ import { ChangeEvent, FC, useState } from "react";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../redux/auth/authSelectors";
-import { FormAvatar, FormAvatarLabel, FormAvatarTitle } from "./AvatarForm.styled";
+import {
+  FormAvatar,
+  FormAvatarLabel,
+  FormAvatarTitle,
+} from "./AvatarForm.styled";
 import Icon from "../../../Icon/Icon";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   setFile: (file: File) => void;
 };
 
 const AvatarForm: FC<Props> = ({ setFile }) => {
+  const { t } = useTranslation();
   const user = useSelector(selectUser);
   const [previewURL, setpreviewURL] = useState<string | null>(null);
   const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +44,7 @@ const AvatarForm: FC<Props> = ({ setFile }) => {
   };
   return (
     <FormAvatar>
-      <FormAvatarTitle>Your photo</FormAvatarTitle>
+      <FormAvatarTitle>{t("settingModal.photo")}</FormAvatarTitle>
       <FormAvatarLabel>
         {previewURL ? (
           <img className="avatar-setting" src={previewURL} alt="User avatar" />
@@ -53,7 +59,7 @@ const AvatarForm: FC<Props> = ({ setFile }) => {
           onChange={onChangeFile}
         />
         <Icon className="setting-modal-icon" id="arow-up" />
-        <span className="text-loading">Upload a photo</span>
+        <span className="text-loading">{t("settingModal.upload")}</span>
       </FormAvatarLabel>
     </FormAvatar>
   );

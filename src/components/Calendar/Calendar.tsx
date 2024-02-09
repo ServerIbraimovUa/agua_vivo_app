@@ -7,8 +7,10 @@ import {
   selectAmountDaily,
   selectAmountMonthly,
 } from '../../redux/water/waterSelectors';
-import CalendarModal from './CalendarModal';
 import { addScrollLock, removeScrollLock } from '../Modal/services/services';
+import CalendarModal from './CalendarModal';
+import { useTranslation } from 'react-i18next';
+import { selectDailyNorma } from '../../redux/auth/authSelectors';
 
 export interface Day {
   day: number;
@@ -27,6 +29,7 @@ const Calendar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<Day | null>(null);
   const amountMonth = useSelector(selectAmountMonthly);
+  const dailyNorma = useSelector(selectDailyNorma);
   const data = useSelector(selectAmountDaily);
   const id = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
     .toString()
@@ -35,7 +38,7 @@ const Calendar: React.FC = () => {
 
   useEffect(() => {
     dispatch(getAmountMonthlyThunk(id));
-  }, [dispatch, id, data.entries.length]);
+  }, [dispatch, id, data.entries, dailyNorma]);
 
   const getDaysInMonth = (date: Date): Day[] => {
     const year = date.getFullYear();
@@ -172,11 +175,11 @@ const Calendar: React.FC = () => {
     const nextDay = getCurrentDate().getDate() + 1;
     return day >= nextDay;
   };
-
+  const { t } = useTranslation();
   return (
     <Styled.CalendarContainer>
       <div className="right-align">
-        <h1 className="month">Month</h1>
+        <h1 className="month">{t('homepage.h2Month')}</h1>
         <div className="header">
           <button
             className={`button ${isJanuary2024 ? 'disabled' : ''}`}

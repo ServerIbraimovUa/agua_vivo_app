@@ -1,0 +1,180 @@
+{
+  "topology": "topology",
+  "header": {
+    "signin": "signin",
+    "signup": "signup",
+    "logout": "Log out",
+    "setting": "Setting",
+    "languages": "Language"
+  },
+  "welcome": {
+    "title": "Water consumption tracker",
+    "subtitle": "Record daily water intake and track",
+    "subtitle3": "Tracker Benefits",
+    "trackerLi1": "Habit drive",
+    "trackerLi2": "View statistics",
+    "trackerLi3": "Personal rate setting",
+    "button": "Try tracker",
+    "subtitle3Why": "Why Drink Water",
+    "subtitle3WhyLI1": "Supply of nutrients to all organs",
+    "subtitle3WhyLI2": "Providing oxygen to the lungs",
+    "subtitle3WhyLI3": "Maintaining the work of the heart",
+    "subtitle3WhyLI4": "Release of processed substances",
+    "subtitle3WhyLI5": "Ensuring the stability of the internal environment",
+    "subtitle3WhyLI6": "Maintaining within the normal temperature",
+    "subtitle3WhyLI7": "Maintaining an immune system capable of resisting disease"
+  },
+  "authPlaceholders": {
+    "email": "E-mail",
+    "password": "Password",
+    "name": "your name",
+    "yourEmail": "your email"
+  },
+  "signin": {
+    "title": "Sign In",
+    "label1": "Enter your email",
+    "label2": "Enter your password",
+    "label3": "Repeat password",
+    "signinButton": "Sign In",
+    "signup": "Sign up",
+    "forgot": "Forgot your password?",
+    "notifySuccess": "Welcome to your account!",
+    "notifyError": "Please write the correct Email or Password"
+  },
+  "signup": {
+    "title": "Sign Up",
+    "label1": "Enter your email",
+    "label2": "Enter your password",
+    "label3": "Repeat password",
+    "signupButton": "Sign In",
+    "signin": "Sign in",
+    "notifySuccess": "Registration successful!",
+    "notifyError": "Email in use."
+  },
+  "forgot": {
+    "title": "Forgot password",
+    "label1": "Enter your email",
+    "sendButton": "Send",
+    "notify": "Email was successfully sent",
+    "notifyError": "Email doesn't exist."
+  },
+  "resetPass": {
+    "title": "Reset password",
+    "label1": "Enter your password",
+    "label2": "Repeat password",
+    "updateButton": "Update",
+    "notify": "Password was changed successfully",
+    "notifyError": "Password  wasn't changed"
+  },
+  "verifyEmail": {
+    "title1": "Check your email to verify your account",
+    "link": "If you didn't receive an email click this link to resend",
+    "title2": "Your advertisement could be here!",
+    "notify": "Email was resended successfully",
+    "resend": "Resend"
+  },
+  "homepage": {
+    "h3DailyNorma": "My daily norma",
+    "editButton": "Edit",
+    "litres": "L",
+    "h2-3Today": "Today",
+    "addWaterButton": "Add Water",
+    "h2Month": "Month",
+    "pEmpty": "No notes yet"
+  },
+  "addWater": {
+    "water": "Amount of water:",
+    "time": "Recording time:",
+    "used": "Enter the value of water used:",
+    "save": "Save",
+    "ml": "ml",
+    "divide": "Please choose a time that is divisible by 5",
+    "zero": "The amount of water cannot be 0!"
+  },
+  "waterList": {
+    "editTitle": "Edit the entered amount of water",
+    "editModal": "Correct entered data:",
+    "deleteTitle": "Delete water",
+    "deleteModal": "Delete entry?",
+    "addTitle": "Add water",
+    "addModal": "Choose a value:"
+  },
+  "dailyModal": {
+    "girl": "For girl:",
+    "man": "For man:",
+    "formule": "* V is the volume of the water norm in liters per day, M is your  body weight, T is the time of active sports, or another type of activity commensurate in terms of loads (in the absence of these, you must set 0)",
+    "volume": "V",
+    "masse": "M",
+    "time": "T",
+    "calculate": "Calculate your rate:",
+    "forMan": "For Man",
+    "forWoman": "For Woman",
+    "weight": "Your weight in kilograms:",
+    "activeTime": "The time of active participation in sports or other activities with a high physical. load in hours:",
+    "required": "The required amount of water in liters per day:",
+    "wanted": "Write down how much water you will drink:",
+    "couldnt": "You couldn't be less than 20kg",
+    "24h": "Day contains only 24H",
+    "positive": "Time should be only positive integer",
+    "field": "This field is required"
+  },
+  "deleteModal": {
+    "sure": "Are you sure you want to delete the entry?",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "editModal": {
+    "amount": "Amount of water:",
+    "value": "Enter the value of water used:"
+  },
+  "settingModal": {
+    "photo": "Your photo",
+    "upload": "Upload a photo",
+    "gender": "Your gender identity",
+    "w": "Woman",
+    "m": "Mam",
+    "name": "Your name",
+    "outdated": "Outdated password:",
+    "new": "New Password:",
+    "repeat": "Repeat new password:",
+    "saving": "Saving...",
+    "notify": "Data updated successfully",
+    "notifyError": "Something went wrong",
+    "avatar": "Avatar updated successfully",
+    "avatarLarge": "The file is too large. Maximum allowed size is 10MB.",
+    "atLeast": "Password must be at least 8 characters",
+    "max": "Password must be at most 64 characters",
+    "match": "Passwords must match",
+    "newError": "The new password cannot be old one"
+  },
+  "calendarModal": {
+    "daily": "Daily norm:",
+    "fulfill": "Fulfillment of the daily norm:",
+    "serve": "How many servings of water:"
+  },
+  "logoutModal": {
+    "really": "Do you really want to leave?"
+  },
+  "chart": {
+    "amount": "Amount of Water",
+    "percentage": "Daily Percentages"
+  },
+  "lang": {
+    "uk": "Ukrainian",
+    "en": "English",
+    "choice": "Select the interface language"
+  },
+  "tour": {
+    "welcome": "Hi there! 😊 Happy to welcome you. This is a short guide on how you can use this app 📚",
+    "calculate": "Here you can calculate your daily norm of water consumption according to your personal data 💧📊",
+    "add": "To add a water portion, simply click the button below, choose the amount of water, and the time when you want to drink it 🥤⏰",
+    "percentage": "Here you can see the percentage of your daily need 📊💦",
+    "calendar": "In the calendar, you can see information about water consumption. Just click on the day you need to check if you've fulfilled your daily norm 📅💧",
+    "stats": "In this section, you can see all the water consumption statistics for any month 😊🚰",
+    "setting": "In settings, you can easily configure your account by adding more information 🛠️💻",
+    "cheers": "Hope you'll find this app useful. Cheers! 🥂"
+  },
+  "team": {
+    "title": "Force in a team"
+  }
+}

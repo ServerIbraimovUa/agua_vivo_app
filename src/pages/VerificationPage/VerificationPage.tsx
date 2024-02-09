@@ -6,11 +6,10 @@ import Logo from "../../components/Header/Logo/Logo";
 import {
   Button,
   ContainerLink,
-  ImgGarage, 
+  ImgGarage,
   VerificationSection,
   WrapperContainer,
-  WrapperImg, 
-  
+  WrapperImg,
 } from "./VerificationPagestyled";
 import Img from "../../assets/images/garage.jpg";
 import { useParams } from "react-router";
@@ -22,8 +21,10 @@ import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Popover from "../../components/Popover/Popover";
 import Icon from "../../components/Icon/Icon";
+import { useTranslation } from "react-i18next";
 
 const VerificationPage = () => {
+  const { t } = useTranslation();
   const { token } = useParams();
   const [searchParams] = useSearchParams();
   const email = searchParams.get("email");
@@ -40,7 +41,7 @@ const VerificationPage = () => {
     if (email) {
       dispatch(resendVerifyEmail({ email }))
         .unwrap()
-        .then(() => toast.success("Email was resended successfully"));
+        .then(() => toast.success(`${t("verifyEmail.notify")}`));
     }
   };
   return (
@@ -52,26 +53,26 @@ const VerificationPage = () => {
           </NavbarContainer>
         </div>
       </HeaderStyle>
-    
+
       <VerificationSection className="section">
         <WrapperContainer>
-        <ContainerLink className="container">
-       
-          <Popover message="Check your email to verify your account"/>
-          <Popover message="If you didn't receive an email, click this link to resend" verify={true}/>
-            
-          <Icon className="icon-mail" id="mail" />
+          <ContainerLink className="container">
 
-          <Button onClick={handleClick}>Resend</Button>        
-              
-        </ContainerLink>
-        <WrapperImg className="container">
-          <Popover message="Here you could be your advertisment!" advert={true}/>
-          <ImgGarage src={Img} alt="advertisment" />
-        </WrapperImg>
+            <Popover message={t("verifyEmail.title1")} />
+            <Popover message={t("verifyEmail.link")} verify={true} />
+
+            <Icon className="icon-mail" id="mail" />
+
+            <Button onClick={handleClick}>{t("verifyEmail.resend")}</Button>
+          </ContainerLink>
+          <WrapperImg className="container">
+            <Popover message={t("verifyEmail.title2")} advert={true} />
+
+            <ImgGarage src={Img} alt="advertisment" />
+          </WrapperImg>
         </WrapperContainer>
       </VerificationSection>
-        </>
+    </>
   );
 };
 

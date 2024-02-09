@@ -19,7 +19,8 @@ import Icon from '../Icon/Icon';
 import Modal from '../Modal/Modal';
 import AddWaterModal from '../WaterList/AddWaterModal/AddWaterModal';
 import { useWaterPercentage } from '../../hooks/useWaterPercentage';
-import { addScrollLock, removeScrollLock } from '../Modal/services/services';
+import { useTranslation } from 'react-i18next';
+import { addScrollLock, removeScrollLock } from '../../Modal/services/services';
 
 const WaterRatio = () => {
   const [visible, setVisible] = useState(false);
@@ -32,12 +33,13 @@ const WaterRatio = () => {
     removeScrollLock();
   };
 
+  const { t } = useTranslation();
   return (
     <>
       <WaterRatioContainer>
         <WaterRatioThumb>
           <RangeContainer className="third-step">
-            <WaterRatioTitle>Today</WaterRatioTitle>
+            <WaterRatioTitle>{t('homepage.h2-3Today')}</WaterRatioTitle>
             <WaterRatioRangeThumb>
               <Range
                 disabled
@@ -92,14 +94,17 @@ const WaterRatio = () => {
               }}
             >
               <Icon className="water-ratio-plus" id="plus-circle" />
-              Add Water
+              {t('homepage.addWaterButton')}
             </WaterRatioBtn>
           </WaterRatioBtnThumb>
         </WaterRatioThumb>
       </WaterRatioContainer>
       {visible && (
-        <Modal setVisible={setVisible} title="Add water">
-          <AddWaterModal title="Choose a value" closeModal={closeModal} />
+        <Modal setVisible={setVisible} title={t('waterList.addTitle')}>
+          <AddWaterModal
+            title={t('waterList.addModal')}
+            closeModal={closeModal}
+          />
         </Modal>
       )}
     </>

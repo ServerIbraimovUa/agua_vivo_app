@@ -110,7 +110,7 @@ export const WaterItemBoxStyled = styled.li`
   .water-amount-card {
     font-size: 18px;
     color: var(--primary-blue);
-    width: 65px;
+    width: 72px;
   }
 
   .time {
@@ -138,13 +138,11 @@ export const WaterItemBoxStyled = styled.li`
     width: 16px;
     height: 1px;
     background-color: var(--secondary-red);
-    /* transition: width 1s ease-in; */
   }
 
   .edit-btn:hover::after,
   .edit-btn:focus::after {
     background-color: var(--secondary-blue);
-    /* width: 100%; */
   }
   .edit-delete-btn-box {
     display: flex;
@@ -232,7 +230,7 @@ export const AddWaterModalStyled = styled.div`
     flex-direction: column;
   }
 
-  .water-select {
+  .water-input {
     color: var(--primary-blue);
     height: 44px;
     width: 120px;
@@ -295,7 +293,7 @@ export const AddWaterModalStyled = styled.div`
   @media ${device.tablet} {
     max-width: 744px;
 
-    .water-select {
+    .water-input {
       width: 100%;
     }
 
@@ -313,9 +311,6 @@ export const AddWaterModalStyled = styled.div`
     .save-btn {
       width: 160px;
     }
-  }
-
-  @media ${device.desktop} {
   }
 `;
 

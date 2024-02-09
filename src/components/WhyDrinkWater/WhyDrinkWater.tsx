@@ -1,30 +1,32 @@
+import { useTranslation } from "react-i18next";
 import { Div, Ul } from "./WhyDrinkWaterStyled.styled";
 
 const WhyDrinkWater = () => {
+  const { t } = useTranslation();
   return (
     <Div>
-      <h3>Why Drink Water</h3>
+      <h3>{t("welcome.subtitle3Why")}</h3>
       <Ul>
         <li>
-          <p>Supply of nutrients to all organs</p>
+          <p>{t("welcome.subtitle3WhyLI1")}</p>
         </li>
         <li>
-          <p>Providing oxygen to the lungs</p>
+          <p>{t("welcome.subtitle3WhyLI2")}</p>
         </li>
         <li>
-          <p>Maintaining the work of the heart</p>
+          <p>{t("welcome.subtitle3WhyLI3")}</p>
         </li>
         <li>
-          <p>Release of processed substances</p>
+          <p>{t("welcome.subtitle3WhyLI4")}</p>
         </li>
         <li>
-          <p>Ensuring the stability of the internal environment</p>
+          <p>{t("welcome.subtitle3WhyLI5")}</p>
         </li>
         <li>
-          <p>Maintaining within the normal temperature</p>
+          <p>{t("welcome.subtitle3WhyLI6")}</p>
         </li>
         <li>
-          <p>Maintaining an immune system capable of resisting disease</p>
+          <p>{t("welcome.subtitle3WhyLI7")}</p>
         </li>
       </Ul>
     </Div>

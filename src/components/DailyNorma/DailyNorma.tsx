@@ -11,24 +11,27 @@ import {
 } from './DailyNorma.styled';
 import { useSelector } from 'react-redux';
 import { selectDailyNorma } from '../../redux/auth/authSelectors';
+import { useTranslation } from 'react-i18next';
 import { addScrollLock, removeScrollLock } from '../Modal/services/services';
 
 const DailyNorma: React.FC = () => {
   const [visible, setVisible] = useState(false);
 
   const waterRate = useSelector(selectDailyNorma);
-
+  const { t } = useTranslation();
   return (
     <>
       <WrapperImg>
         <Wrapper className="first-step">
-          <Title>My daily norma</Title>
+          <Title>{t('homepage.h3DailyNorma')}</Title>
           <WrapperButton>
-            <SpanNorma>{waterRate} L</SpanNorma>
+            <SpanNorma>
+              {waterRate} {t('homepage.litres')}
+            </SpanNorma>
             {visible && (
               <Modal
                 setVisible={setVisible}
-                title="My Daily Norma"
+                title={t('homepage.h3DailyNorma')}
                 daily={true}
               >
                 <DailyNormaModal
@@ -46,7 +49,7 @@ const DailyNorma: React.FC = () => {
                 addScrollLock();
               }}
             >
-              Edit
+              {t('homepage.editButton')}
             </EditButton>
           </WrapperButton>
         </Wrapper>

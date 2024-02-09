@@ -3,21 +3,22 @@ import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, LinearScale } from "chart.js/auto";
 import { useSelector } from "react-redux";
 import { selectAmountMonthly } from "../../redux/water/waterSelectors";
+import { useTranslation } from "react-i18next";
 
 ChartJS.register(LinearScale);
-
 const ChartWater = () => {
+  const { t } = useTranslation();
   const amountDate = useSelector(selectAmountMonthly);
   const [chartData, setChartData] = useState({
     labels: [] as string[],
     datasets: [
       {
-        label: "Amount of Water",
+        label: `${t("chart.amount")}`,
         data: [] as number[],
         borderColor: "rgb(75, 192, 192)",
       },
       {
-        label: "Daily Percentages",
+        label: `${t("chart.percentage")}`,
         data: [] as number[],
         borderColor: "rgb(255, 99, 132)",
       },

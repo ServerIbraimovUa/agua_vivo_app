@@ -1,29 +1,29 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import { lazy, useEffect } from "react";
-import { PrivateRoute } from "./components/PrivateRoute/PrivateRote.jsx";
-import { PublicRoute } from "./components/PublicRoute/PublicRoute";
-import { useAppDispatch } from "./redux/redux_ts/hook.js";
-import { getCurrentUserThunk } from "./redux/auth/auth.operations.js";
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { lazy, useEffect } from 'react';
+import { PrivateRoute } from './components/PrivateRoute/PrivateRote.jsx';
+import { PublicRoute } from './components/PublicRoute/PublicRoute';
+import { useAppDispatch } from './redux/redux_ts/hook.js';
+import { getCurrentUserThunk } from './redux/auth/auth.operations.js';
 import {
   selectIsAuthorized,
   selectRefresh,
-} from "./redux/auth/authSelectors.js";
-import { useSelector } from "react-redux";
-import Layout from "./components/Layout/Layout.js";
-import Loading from "./components/Loading/Loading.js";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage.js";
-import ResetPasswordPage from "./pages/ResetPasswordPage.js";
-import { AuthGoogle } from "./components/AuthGoogle/AuthGoogle.js";
-import Calendar from "./components/Calendar/Calendar.js";
+} from './redux/auth/authSelectors.js';
+import { useSelector } from 'react-redux';
+import Layout from './components/Layout/Layout.js';
+import Loading from './components/Loading/Loading.js';
+import ForgotPasswordPage from './pages/ForgotPasswordPage.js';
+import ResetPasswordPage from './pages/ResetPasswordPage.js';
+import { AuthGoogle } from './components/AuthGoogle/AuthGoogle.js';
+import Calendar from './components/Calendar/Calendar.js';
 
-import ChartWater from "./components/Chart/Chart.js";
+import ChartWater from './components/Chart/Chart.js';
 
-const HomePage = lazy(() => import("./pages/HomePage/HomePage.js"));
-const RegisterPage = lazy(() => import("./pages/RegisterPage"));
-const LoginPage = lazy(() => import("./pages/LoginPage"));
-const WelcomePage = lazy(() => import("./pages/WelcomePage.js"));
+const HomePage = lazy(() => import('./pages/HomePage/HomePage.js'));
+const RegisterPage = lazy(() => import('./pages/RegisterPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const WelcomePage = lazy(() => import('./pages/WelcomePage/WelcomePage.js'));
 const VerificationPage = lazy(
-  () => import("./pages/VerificationPage/VerificationPage.js")
+  () => import('./pages/VerificationPage/VerificationPage.js')
 );
 
 export default function App() {
