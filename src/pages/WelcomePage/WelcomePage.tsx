@@ -7,6 +7,7 @@ import { useState } from 'react';
 import Modal from '../../components/Modal/Modal';
 import TeamModal from '../../components/TeamModal/TeamModal';
 import { DivStyled, TeamContainerDiv } from './WelcomePage.styled';
+import { addScrollLock } from '../../components/Modal/services/services';
 
 const WelcomePage = () => {
   const [visible, setVisible] = useState(false);
@@ -23,7 +24,14 @@ const WelcomePage = () => {
           <WhyDrinkWater />
           <TeamContainerDiv>
             <CopirightText>copyright © 2024 | </CopirightText>
-            <TeamForce onClick={() => setVisible(true)}>by TeamForce</TeamForce>
+            <TeamForce
+              onClick={() => {
+                setVisible(true);
+                addScrollLock();
+              }}
+            >
+              by TeamForce
+            </TeamForce>
           </TeamContainerDiv>
         </DivStyled>
       </WelcomeSection>

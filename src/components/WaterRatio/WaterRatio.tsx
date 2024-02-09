@@ -20,7 +20,7 @@ import Modal from '../Modal/Modal';
 import AddWaterModal from '../WaterList/AddWaterModal/AddWaterModal';
 import { useWaterPercentage } from '../../hooks/useWaterPercentage';
 import { useTranslation } from 'react-i18next';
-import { addScrollLock, removeScrollLock } from '../../Modal/services/services';
+import { addScrollLock, removeScrollLock } from '../Modal/services/services';
 
 const WaterRatio = () => {
   const [visible, setVisible] = useState(false);

@@ -87,7 +87,12 @@ const UserLogoModal = () => {
             <UserLogoutModal setVisible={setVisible} />
           </Modal>
         )}
-        <button onClick={() => setLanguagesVisible(true)}>
+        <button
+          onClick={() => {
+            setLanguagesVisible(true);
+            addScrollLock();
+          }}
+        >
           <div className="btn-container-lang">
             <Icon className="logout" id="global" />
             <span className="button-popover-name">{t('header.languages')}</span>
