@@ -5,7 +5,10 @@ import { selectAmountDaily } from "../redux/water/waterSelectors";
 export const useWaterPercentage = () => {
   const dailyNorma = useSelector(selectDailyNorma);
   const { entries } = useSelector(selectAmountDaily);
-  const total = entries.reduce(
+  if (entries.length === 0) {
+    return 0;
+  }
+  const total = entries?.reduce(
     (acc, { waterVolume }) => (acc += waterVolume),
     0
   );
